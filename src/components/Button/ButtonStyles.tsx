@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ButtonComponent = styled.button`
+type ButtonProps = {
+  $secondaryColor?: boolean;
+};
+
+export const ButtonComponent = styled.button<ButtonProps>`
   width: 23rem;
   padding: 0.625rem 1rem;
   border-radius: 0.5rem;
@@ -12,4 +16,10 @@ export const ButtonComponent = styled.button`
   line-height: 1.25rem;
   letter-spacing: 0.00625rem;
   cursor: pointer;
+
+  ${({ $secondaryColor }) =>
+    $secondaryColor &&
+    css`
+      background-color: #8F8CE7;
+    `}
 `;
