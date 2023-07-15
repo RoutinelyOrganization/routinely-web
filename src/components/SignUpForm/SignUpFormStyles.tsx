@@ -9,7 +9,7 @@ export const SignUpFormStyle = styled.form`
   gap: 1.5rem;
 `;
 
-export const ErrorMessageStyle = styled.form`
+export const ErrorMessageStyle = styled.span`
   color: red;
   font-size: 0.9rem;
 `;
