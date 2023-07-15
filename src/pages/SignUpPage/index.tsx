@@ -2,7 +2,7 @@ import ButtonSocialComponent from "../../components/ButtonSocial";
 import HeaderComponent from "../../components/Header";
 import ImageAuthComponent from "../../components/ImageAuth";
 import LinkAuthComponent from "../../components/LinkAuth";
-import LogoComponent from "../../components/Logo";
+import LogoSharedComponent from "../../components/LogoShared";
 import SignUpFormComponent from "../../components/SignUpForm";
 import TitleAuthComponent from "../../components/TitleAuth";
 import { SignUpPageStyle, SignUpPageWrapper } from "./SignUpPageStyles";
@@ -13,7 +13,7 @@ export default function SignUpPage() {
       <HeaderComponent />
       <SignUpPageStyle>
         <SignUpPageWrapper>
-          <LogoComponent />
+          <LogoSharedComponent />
           <TitleAuthComponent />
           <SignUpFormComponent />
           <ButtonSocialComponent>Continuar com Google</ButtonSocialComponent>

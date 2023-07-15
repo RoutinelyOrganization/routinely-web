@@ -13,4 +13,8 @@ export const InputStyle = styled.input`
   &::placeholder {
     color: #171A21;
   }
+
+  &::-ms-reveal, ::-ms-clear {
+    display: none;
+  }
 `;
