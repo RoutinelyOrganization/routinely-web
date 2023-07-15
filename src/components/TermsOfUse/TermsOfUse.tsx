@@ -5,7 +5,7 @@ export const TermsOfUseCheckbox = styled.input`
   height: 1.5rem;
 `;
 
-export const TermsOfUseComponent = styled.div`
+export const TermsOfUseStyle = styled.div`
   display: flex;
   width: 23rem;
   align-items: center;

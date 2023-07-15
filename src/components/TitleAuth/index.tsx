@@ -1,9 +1,9 @@
-import { TitleAuthComponent } from "./TitleAuthStyles";
+import { TitleAuthStyle } from "./TitleAuthStyles";
 
-export default function TitleAuth() {
+export default function TitleAuthComponent() {
     return (
-        <TitleAuthComponent>
+        <TitleAuthStyle>
             Crie sua conta
-        </TitleAuthComponent>
+        </TitleAuthStyle>
     )
 }

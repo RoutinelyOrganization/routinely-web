@@ -1,9 +1,9 @@
-import { LinkAuthComponent } from "./LinkAuthStyles";
+import { LinkAuthStyle } from "./LinkAuthStyles";
 
-export default function LinkAuth() {
+export default function LinkAuthComponent() {
     return (
-        <LinkAuthComponent>
+        <LinkAuthStyle>
             Já possui uma conta? <a href="#">Entrar</a>
-        </LinkAuthComponent>
+        </LinkAuthStyle>
     )
 }

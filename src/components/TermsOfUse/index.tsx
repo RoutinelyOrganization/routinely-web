@@ -1,12 +1,12 @@
-import { TermsOfUseCheckbox, TermsOfUseComponent } from "./TermsOfUse";
+import { TermsOfUseCheckbox, TermsOfUseStyle } from "./TermsOfUse";
 
-export default function TermsOfUse() {
+export default function TermsOfUseComponent() {
   return (
-    <TermsOfUseComponent>
+    <TermsOfUseStyle>
       <TermsOfUseCheckbox type="checkbox" />
       <span>
         Declaro que li e concordo com os <a href="#">termos de uso e política de privacidade.</a>
       </span>
-    </TermsOfUseComponent>
+    </TermsOfUseStyle>
   );
 }

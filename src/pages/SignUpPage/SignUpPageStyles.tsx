@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignUpPageComponent = styled.main`
+export const SignUpPageStyle = styled.main`
   display: flex;
   justify-content: space-around;
   align-items: center;

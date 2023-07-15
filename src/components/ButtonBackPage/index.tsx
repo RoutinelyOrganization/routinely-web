@@ -1,8 +1,8 @@
-import { ButtonBackPageComponent } from "./ButtonBackPageStyles";
+import { ButtonBackPageStyle } from "./ButtonBackPageStyles";
 
-export default function ButtonBackPage() {
+export default function ButtonBackPageComponent() {
   return (
-    <ButtonBackPageComponent>
+    <ButtonBackPageStyle>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -16,6 +16,6 @@ export default function ButtonBackPage() {
         />
       </svg>
       Voltar
-    </ButtonBackPageComponent>
+    </ButtonBackPageStyle>
   );
 }
