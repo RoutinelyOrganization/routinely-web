@@ -21,6 +21,7 @@ export const TitleHomePageComponent = styled.h1`
   text-align: center;
   word-break: break-all;
   width: 992px;
+  padding: 0 40px;
   margin-bottom: 40px;
 `;
 export const CaptionHomePageComponent = styled.p`
@@ -30,6 +31,7 @@ export const CaptionHomePageComponent = styled.p`
   text-align: center;
   word-break: break-all;
   width: 860px;
+  padding: 0 45px;
   margin-bottom: 48px;
 `;
 export const ButtonHomePageComponent = styled.button`
