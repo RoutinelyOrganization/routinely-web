@@ -1,4 +1,4 @@
-import { ButtonComponent } from "../../components/Button/ButtonStyles";
+import { ButtonStyle } from "../../components/Button/ButtonStyles";
 import Logo from "../../components/Logo";
 import {
   ButtonHomePageComponent,
@@ -14,9 +14,9 @@ export default function HomePage() {
     <>
       <HeaderHomePageComponent>
         <Logo />
-        <ButtonComponent children="Recursos" />
-        <ButtonComponent children="Planos" />
-        <ButtonComponent children="Acesse" $secondaryColor />
+        <ButtonStyle children="Recursos" />
+        <ButtonStyle children="Planos" />
+        <ButtonStyle children="Acesse" $secondaryColor />
       </HeaderHomePageComponent>
 
       <MainHomePageComponent>

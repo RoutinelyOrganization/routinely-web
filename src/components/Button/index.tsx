@@ -1,12 +1,12 @@
 import React from "react";
-import { ButtonComponent } from "./ButtonStyles";
+import { ButtonStyle } from "./ButtonStyles";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     children: string
 }
 
-export default function Button({ children }: ButtonProps) {
+export default function ButtonComponent({ children }: ButtonProps) {
     return (
-        <ButtonComponent type="button">{children}</ButtonComponent>
+        <ButtonStyle>{children}</ButtonStyle>
     )
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonSocialComponent = styled.button`
+export const ButtonSocialStyle = styled.button`
   display: flex;
   width: 23rem;
   height: 2.5rem;

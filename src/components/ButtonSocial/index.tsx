@@ -1,16 +1,16 @@
 import React from 'react';
 import IconGoogle from '../../assets/IconGoogle'
-import { ButtonSocialComponent } from "./ButtonSocialStyles";
+import { ButtonSocialStyle } from "./ButtonSocialStyles";
 
 type ButtonSocialProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     children: string
 }
 
-export default function ButtonSocial({ children }: ButtonSocialProps) {
+export default function ButtonSocialComponent({ children }: ButtonSocialProps) {
     return (
-        <ButtonSocialComponent type='button'>
+        <ButtonSocialStyle type='button'>
             <IconGoogle />
             {children}
-        </ButtonSocialComponent>
+        </ButtonSocialStyle>
     )
 }

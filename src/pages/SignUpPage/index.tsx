@@ -1,26 +1,26 @@
-import Button from "../../components/Button";
-import ButtonSocial from "../../components/ButtonSocial";
-import ImageAuth from "../../components/ImageAuth";
-import LinkAuth from "../../components/LinkAuth";
-import Logo from "../../components/Logo";
-import SignUpForm from "../../components/SignUpForm";
-import TermsOfUse from "../../components/TermsOfUse";
-import TitleAuth from "../../components/TitleAuth";
-import { SignUpPageComponent, SignUpPageWrapper } from "./SignUpPageStyles";
+import ButtonSocialComponent from "../../components/ButtonSocial";
+import HeaderComponent from "../../components/Header";
+import ImageAuthComponent from "../../components/ImageAuth";
+import LinkAuthComponent from "../../components/LinkAuth";
+import LogoSharedComponent from "../../components/LogoShared";
+import SignUpFormComponent from "../../components/SignUpForm";
+import TitleAuthComponent from "../../components/TitleAuth";
+import { SignUpPageStyle, SignUpPageWrapper } from "./SignUpPageStyles";
 
 export default function SignUpPage() {
   return (
-    <SignUpPageComponent>
-      <SignUpPageWrapper>
-        <Logo />
-        <TitleAuth />
-        <SignUpForm />
-        <TermsOfUse />
-        <Button>Redefinir senha</Button>
-        <ButtonSocial>Continuar com Google</ButtonSocial>
-        <LinkAuth />
-      </SignUpPageWrapper>
-      <ImageAuth />
-    </SignUpPageComponent>
+    <>
+      <HeaderComponent />
+      <SignUpPageStyle>
+        <SignUpPageWrapper>
+          <LogoSharedComponent />
+          <TitleAuthComponent />
+          <SignUpFormComponent />
+          <ButtonSocialComponent>Continuar com Google</ButtonSocialComponent>
+          <LinkAuthComponent />
+        </SignUpPageWrapper>
+        <ImageAuthComponent />
+      </SignUpPageStyle>
+    </>
   );
 }

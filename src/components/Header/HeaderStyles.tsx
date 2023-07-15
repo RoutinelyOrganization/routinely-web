@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderComponent = styled.header`
+export const HeaderStyle = styled.header`
   display: flex;
   padding: 2rem 7.5rem;
   align-items: center;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputComponent = styled.input`
+export const InputStyle = styled.input`
   border: 1px solid #D8DCD6;
   border-radius: 0.5rem;
   width: 23rem;
@@ -12,5 +12,9 @@ export const InputComponent = styled.input`
 
   &::placeholder {
     color: #171A21;
+  }
+
+  &::-ms-reveal, ::-ms-clear {
+    display: none;
   }
 `;

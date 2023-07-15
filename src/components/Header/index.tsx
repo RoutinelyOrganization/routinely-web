@@ -1,10 +1,10 @@
 import ButtonBackPage from "../ButtonBackPage";
-import { HeaderComponent } from "./HeaderStyles";
+import { HeaderStyle } from "./HeaderStyles";
 
-export default function Header() {
+export default function HeaderComponent() {
     return (
-        <HeaderComponent>
+        <HeaderStyle>
             <ButtonBackPage />
-        </HeaderComponent>
+        </HeaderStyle>
     )
 }

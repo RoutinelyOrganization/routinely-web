@@ -1,10 +1,10 @@
-import { ImageAuthComponent } from "./ImageAuthStyles";
+import { ImageAuthStyle } from "./ImageAuthStyles";
 
-export default function ImageAuth() {
+export default function ImageAuthComponent() {
   return (
-    <ImageAuthComponent>
+    <ImageAuthStyle>
       <svg width="650" height="467" viewBox="0 0 650 467" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_245_3425)">
+        <g clipPath="url(#clip0_245_3425)">
           <path
             d="M17.2107 465.97C17.2107 466.541 17.6691 467 18.2399 467H648.971C649.542 467 650 466.541 650 465.97C650 465.398 649.542 464.939 648.971 464.939H18.2399C17.6691 464.939 17.2107 465.398 17.2107 465.97Z"
             fill="#3B719F"
@@ -92,6 +92,6 @@ export default function ImageAuth() {
           </clipPath>
         </defs>
       </svg>
-    </ImageAuthComponent>
+    </ImageAuthStyle>
   );
 }
