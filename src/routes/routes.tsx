@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, Outlet } from "re
 import HomePage from "../pages/HomePage";
 import SignUpPage from "../pages/SignUpPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import RedefinePasswordPage from "../pages/RedefinePasswordPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -9,6 +10,7 @@ export const router = createBrowserRouter(
       <Route  path="/" element={<HomePage />} />
       <Route path="/signUpPage" element={<SignUpPage />} />
       <Route path="/forgotPasswordPage" element={<ForgotPasswordPage />} />
+      <Route path="/redefinePasswordPage" element={<RedefinePasswordPage />} />
     </Route>,
   ),
 );
