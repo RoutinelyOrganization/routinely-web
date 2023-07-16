@@ -1,9 +1,16 @@
 import { LinkAuthStyle } from "./LinkAuthStyles";
 
-export default function LinkAuthComponent() {
+interface LinkAuthProps {
+    children: string,
+    path: string,
+    linkText: string
+}
+
+export default function LinkAuthComponent({ children, path, linkText }: LinkAuthProps) {
     return (
         <LinkAuthStyle>
-            Já possui uma conta? <a href="#">Entrar</a>
+            {children}
+            <a href={path}>{linkText}</a>
         </LinkAuthStyle>
     )
 }

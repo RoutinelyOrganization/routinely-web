@@ -9,5 +9,6 @@ export const LinkAuthStyle = styled.p`
     color: #171a21;
     text-decoration: none;
     font-weight: 700;
+    margin-left: 0.3rem;
   }
 `;
