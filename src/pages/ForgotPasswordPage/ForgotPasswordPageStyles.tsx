@@ -7,9 +7,16 @@ export const ForgotPasswordPageStyle = styled.main`
 `;
 
 export const ForgotPasswordPageWrapper = styled.div`
-  padding: 2rem 0;
+  padding: 4rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
+`;
+
+export const ForgotPasswordImageContainer = styled.div`
+  width: 40.8125rem;
+  height: 27.125rem;
+  align-self: flex-end;
+  padding-top: 3rem;
 `;
