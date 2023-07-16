@@ -14,7 +14,7 @@ export default function SignUpPage() {
       <SignUpPageStyle>
         <SignUpPageWrapper>
           <LogoSharedComponent />
-          <TitleAuthComponent />
+          <TitleAuthComponent>Crie sua conta</TitleAuthComponent>
           <SignUpFormComponent />
           <ButtonSocialComponent>Continuar com Google</ButtonSocialComponent>
           <LinkAuthComponent />

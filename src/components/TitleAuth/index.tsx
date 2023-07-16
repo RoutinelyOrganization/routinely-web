@@ -1,9 +1,13 @@
 import { TitleAuthStyle } from "./TitleAuthStyles";
 
-export default function TitleAuthComponent() {
+interface TitleAuthProps {
+    children: string
+}
+
+export default function TitleAuthComponent({ children }: TitleAuthProps) {
     return (
         <TitleAuthStyle>
-            Crie sua conta
+            {children}
         </TitleAuthStyle>
     )
 }
