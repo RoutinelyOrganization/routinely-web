@@ -7,7 +7,7 @@ export const SignUpPageStyle = styled.main`
 `;
 
 export const SignUpPageWrapper = styled.div`
-  padding: 2rem 0;
+  padding: 4rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

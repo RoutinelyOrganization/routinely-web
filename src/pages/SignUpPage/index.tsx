@@ -5,7 +5,7 @@ import LogoSharedComponent from "../../components/LogoShared";
 import SignUpFormComponent from "../../components/SignUpForm";
 import TitleAuthComponent from "../../components/TitleAuth";
 import { SignUpPageStyle, SignUpPageWrapper } from "./SignUpPageStyles";
-import signUpPageImage from '../../assets/imagens/signUpPageImage.svg'
+import signUpPageImage from "../../assets/imagens/signUpPageImage.svg";
 
 export default function SignUpPage() {
   return (
@@ -14,10 +14,12 @@ export default function SignUpPage() {
       <SignUpPageStyle>
         <SignUpPageWrapper>
           <LogoSharedComponent />
-          <TitleAuthComponent />
+          <TitleAuthComponent>Crie sua conta</TitleAuthComponent>
           <SignUpFormComponent />
           <ButtonSocialComponent>Continuar com Google</ButtonSocialComponent>
-          <LinkAuthComponent />
+          <LinkAuthComponent path="#" linkText="Entrar">
+            Já possui uma conta?
+          </LinkAuthComponent>
         </SignUpPageWrapper>
         <img src={signUpPageImage} alt="Imagem da página de criar conta" />
       </SignUpPageStyle>
