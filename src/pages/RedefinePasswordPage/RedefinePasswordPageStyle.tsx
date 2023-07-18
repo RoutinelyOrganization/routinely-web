@@ -12,6 +12,16 @@ export const RedefinePasswordPageWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
+
+  & > form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & > button {
+      margin-top: 2rem;
+    }
+  }
 `;
 
 export const RedefinePasswordPageImage = styled.div`
