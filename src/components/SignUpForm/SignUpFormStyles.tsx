@@ -12,6 +12,8 @@ export const SignUpFormStyle = styled.form`
 export const ErrorMessageStyle = styled.span`
   color: red;
   font-size: 0.9rem;
+  max-width: 368px;
+  text-align: justify;
 `;
 
 export const PasswordContainerStyle = styled.div`
