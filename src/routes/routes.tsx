@@ -5,6 +5,7 @@ import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import RedefinePasswordPage from "../pages/RedefinePasswordPage";
 import { WelcomePage } from "../pages/WelcomePage";
 import { SignInPage } from "../pages/SignInPage/Index";
+import { NewPasswordPage } from "../pages/NewPasswordPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ export const router = createBrowserRouter(
       <Route path="/signInPage" element={<SignInPage />} />
       <Route path="/forgotPasswordPage" element={<ForgotPasswordPage />} />
       <Route path="/redefinePasswordPage" element={<RedefinePasswordPage />} />
+      <Route path="/newPasswordPage" element={<NewPasswordPage/>} />
     </Route>,
   ),
 );
