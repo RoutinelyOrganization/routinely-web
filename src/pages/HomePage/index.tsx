@@ -9,17 +9,19 @@ import {
 } from "./HomePageStyles";
 import homePageImage from "../../assets/imagens/homePageImage.svg";
 import { useNavigate } from "react-router-dom";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 export default function HomePage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
+      <ScrollToTop />
       <HeaderHomePageComponent>
         <Logo />
         <ButtonStyle children="Recursos" />
         <ButtonStyle children="Planos" />
-        <ButtonStyle children="Acesse" $secondaryColor  onClick={()=> navigate('/signInPage')}/>
+        <ButtonStyle children="Acesse" $secondaryColor onClick={() => navigate("/signInPage")} />
       </HeaderHomePageComponent>
 
       <MainHomePageComponent>

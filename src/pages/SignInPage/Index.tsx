@@ -21,6 +21,7 @@ import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
 import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInpageImage.svg";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 interface ISingInProps {
   email: string;
@@ -43,6 +44,7 @@ export function SignInPage() {
 
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
       <SignInPageWrapperStyle>
         <SingInPageFormStyle onSubmit={handleSubmit(handleSubmitSignIn)}>
