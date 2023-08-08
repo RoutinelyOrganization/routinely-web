@@ -8,15 +8,18 @@ import {
   TitleHomePageComponent,
 } from "./HomePageStyles";
 import homePageImage from "../../assets/imagens/homePageImage.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  const navigate = useNavigate()
+
   return (
     <>
       <HeaderHomePageComponent>
         <Logo />
         <ButtonStyle children="Recursos" />
         <ButtonStyle children="Planos" />
-        <ButtonStyle children="Acesse" $secondaryColor />
+        <ButtonStyle children="Acesse" $secondaryColor  onClick={()=> navigate('/signInPage')}/>
       </HeaderHomePageComponent>
 
       <MainHomePageComponent>
