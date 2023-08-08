@@ -10,12 +10,14 @@ import {
 } from "./WelcomePageStyles";
 import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
 import { useNavigate } from "react-router-dom";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 export function WelcomePage() {
   const navigate = useNavigate();
 
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
       <WelcomePageWrapper>
         <form>

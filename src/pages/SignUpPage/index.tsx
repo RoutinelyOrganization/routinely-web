@@ -6,10 +6,12 @@ import SignUpFormComponent from "../../components/SignUpForm";
 import TitleAuthComponent from "../../components/TitleAuth";
 import { SignUpPageStyle, SignUpPageWrapper } from "./SignUpPageStyles";
 import signUpPageImage from "../../assets/imagens/signUpPageImage.svg";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 export default function SignUpPage() {
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
       <SignUpPageStyle>
         <SignUpPageWrapper>

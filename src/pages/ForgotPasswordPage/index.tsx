@@ -13,6 +13,7 @@ import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
 import { InputStyle } from "../../components/Input/InputStyles";
 import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { useForm } from "react-hook-form";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 interface ForgotPasswordProps {
   email: string;
@@ -31,6 +32,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
       <ForgotPasswordPageStyle>
         <ForgotPasswordPageWrapper>

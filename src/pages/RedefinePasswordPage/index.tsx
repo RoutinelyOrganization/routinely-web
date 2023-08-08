@@ -8,10 +8,12 @@ import { ForgotPasswordImageContainer } from "../ForgotPasswordPage/ForgotPasswo
 import { RedefinePasswordPageStyle, RedefinePasswordPageWrapper } from "./RedefinePasswordPageStyle";
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
 import { InputStyle } from "../../components/Input/InputStyles";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 export default function RedefinePasswordPage() {
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
       <RedefinePasswordPageStyle>
         <RedefinePasswordPageWrapper>

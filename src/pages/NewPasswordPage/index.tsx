@@ -8,7 +8,6 @@ import {
   NewPasswordPageWrapperStyle,
   InputContainerNewPasswordPageStyle,
   TitleNewPasswordPageStyle,
-  Teste,
 } from "./NewPasswordPageStyles";
 import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg";
 import { InputStyle } from "../../components/Input/InputStyles";
@@ -16,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { ShowPasswordSignInPageStyle } from "../SignInPage/SignInPageStyles";
 import ButtonComponent from "../../components/Button";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 interface INewPasswordProps {
   password: string;
@@ -37,6 +37,7 @@ export function NewPasswordPage() {
   }
   return (
     <>
+      <ScrollToTop />
       <HeaderComponent />
 
       <NewPasswordPageWrapperStyle>

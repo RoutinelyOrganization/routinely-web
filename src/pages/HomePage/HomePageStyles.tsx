@@ -19,9 +19,7 @@ export const TitleHomePageComponent = styled.h1`
   font-weight: 700;
   line-height: 3.25rem;
   text-align: center;
-  word-break: break-all;
   width: 992px;
-  padding: 0 40px;
   margin-bottom: 40px;
 `;
 export const CaptionHomePageComponent = styled.p`
@@ -29,9 +27,7 @@ export const CaptionHomePageComponent = styled.p`
   font-weight: 700;
   line-height: 1.75rem;
   text-align: center;
-  word-break: break-all;
   width: 860px;
-  padding: 0 45px;
   margin-bottom: 48px;
 `;
 export const ButtonHomePageComponent = styled.button`
