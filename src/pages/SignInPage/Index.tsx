@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
 import LinkAuthComponent from "../../components/LinkAuth";
-import signInPageImage from "../../assets/imagens/signInpageImage.svg";
+import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 
 interface ISingInProps {
