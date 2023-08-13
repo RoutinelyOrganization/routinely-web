@@ -15,7 +15,7 @@ import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles"
 import { useForm } from "react-hook-form";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 
-interface ForgotPasswordProps {
+interface IForgotPassword {
   email: string;
 }
 
@@ -24,9 +24,9 @@ export default function ForgotPasswordPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ForgotPasswordProps>();
+  } = useForm<IForgotPassword>();
 
-  const submitForm = (data: ForgotPasswordProps) => {
+  const submitForm = (data: IForgotPassword) => {
     console.log(data);
   };
 

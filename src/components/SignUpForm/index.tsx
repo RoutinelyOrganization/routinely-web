@@ -11,7 +11,7 @@ import {
 import { InputStyle } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
 
-interface SignUpInputProps {
+interface ISignUpInput {
   name: string;
   email: string;
   password: string;
@@ -29,9 +29,9 @@ export default function SignUpFormComponent() {
     handleSubmit,
     formState: { errors },
     watch
-  } = useForm<SignUpInputProps>();
+  } = useForm<ISignUpInput>();
 
-  const submitSignUpForm = (data: SignUpInputProps) => {
+  const submitSignUpForm = (data: ISignUpInput) => {
     console.log(data);
   };
 

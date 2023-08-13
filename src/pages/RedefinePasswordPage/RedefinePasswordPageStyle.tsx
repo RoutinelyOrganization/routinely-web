@@ -7,26 +7,26 @@ export const RedefinePasswordPageStyle = styled.main`
 `;
 
 export const RedefinePasswordPageWrapper = styled.div`
-  padding: 4rem 0;
+  padding: 64px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 32px;
 
   & > form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 16px;
 
     & > button {
-      margin-top: 2rem;
+      margin-top: 32px;
     }
   }
 `;
 
 export const RedefinePasswordPageImage = styled.div`
-  width: 40.8125rem;
-  height: 27.125rem;
+  width: 653px;
+  height: 434px;
   align-self: flex-end;
-  padding-top: 3rem;
+  padding-top: 48px;
 `;

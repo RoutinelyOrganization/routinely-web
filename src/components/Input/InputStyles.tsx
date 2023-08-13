@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const InputStyle = styled.input`
   border: 1px solid #D8DCD6;
-  border-radius: 0.5rem;
-  width: 23rem;
-  height: 3.5rem;
-  padding: 0.5rem 0 0.5rem 1rem;
+  border-radius: 8px;
+  width: 368px;
+  height: 56px;
+  padding: 8px 0 8px 16px;
   font-size: 1rem;
-  line-height: 1.5rem;
-  letter-spacing: 0.03125rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
 
   &::placeholder {
     color: #171A21;

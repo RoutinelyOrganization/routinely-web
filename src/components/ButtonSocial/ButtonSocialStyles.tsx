@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 export const ButtonSocialStyle = styled.button`
   display: flex;
-  width: 23rem;
-  height: 2.5rem;
-  padding: 0.6875rem 0.625rem;
+  width: 368px;
+  height: 40px;
+  padding: 11px 10px;
   justify-content: center;
   align-items: center;
-  gap: 1.3125rem;
-  border-radius: 0.5rem;
+  gap: 21px;
+  border-radius: 8px;
   border: 1px solid #5c59bb;
   background: #fff;
   color: rgba(0, 0, 0, 0.54);
   font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.01369rem;
+  letter-spacing: 0.219px;
   cursor: pointer;
 `;
