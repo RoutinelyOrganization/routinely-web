@@ -1,8 +1,8 @@
 import React from "react";
 import { InputStyle } from "./InputStyles";
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement>
+type IInput = React.InputHTMLAttributes<HTMLInputElement>
 
-export default function InputComponent({ type, placeholder }: InputProps) {
+export default function InputComponent({ type, placeholder }: IInput) {
   return <InputStyle type={type} placeholder={placeholder} />;
 }

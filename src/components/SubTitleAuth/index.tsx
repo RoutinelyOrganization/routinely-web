@@ -1,9 +1,9 @@
 import { SubTitleAuthStyle } from "./SubTitleAuthStyles";
 
-interface SubTitleAuthProps {
+interface ISubTitleAuth {
   children: string;
 }
 
-export default function SubTitleAuthComponent({ children }: SubTitleAuthProps) {
+export default function SubTitleAuthComponent({ children }: ISubTitleAuth) {
   return <SubTitleAuthStyle>{children}</SubTitleAuthStyle>;
 }

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { LinkAuthStyle } from "./LinkAuthStyles";
 
-interface LinkAuthProps {
+interface ILinkAuth {
   children: string;
   path: string;
   linkText: string;
 }
 
-export default function LinkAuthComponent({ children, path, linkText }: LinkAuthProps) {
+export default function LinkAuthComponent({ children, path, linkText }: ILinkAuth) {
   return (
     <LinkAuthStyle>
       {children}

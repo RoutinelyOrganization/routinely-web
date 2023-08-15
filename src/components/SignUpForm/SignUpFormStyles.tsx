@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const SignUpFormStyle = styled.form`
   display: flex;
-  width: 23rem;
+  width: 368px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 24px;
 `;
 
 export const ErrorMessageStyle = styled.span`
@@ -23,8 +23,8 @@ export const PasswordContainerStyle = styled.div`
 export const ShowPasswordButtonStyle = styled.button`
   color: #171a21;
   font-size: 0.75rem;
-  line-height: 1rem;
-  letter-spacing: 0.03125rem;
+  line-height: 16px;
+  letter-spacing: 0.5px;
   background: none;
   border: none;
   cursor: pointer;
@@ -35,21 +35,21 @@ export const ShowPasswordButtonStyle = styled.button`
 `;
 
 export const TermsOfUseCheckbox = styled.input`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 24px;
+  height: 24px;
 `;
 
 export const TermsOfUseStyle = styled.div`
   display: flex;
-  width: 23rem;
+  width: 368px;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 
   & > span {
     color: #171a21;
     font-size: 0.75rem;
-    line-height: 1rem;
-    letter-spacing: 0.03125rem;
+    line-height: 16px;
+    letter-spacing: 0.5px;
     
     & > a {
       color: #171a21;

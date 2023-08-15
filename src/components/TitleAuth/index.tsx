@@ -1,10 +1,10 @@
 import { TitleAuthStyle } from "./TitleAuthStyles";
 
-interface TitleAuthProps {
+interface ITitleAuth {
     children: string
 }
 
-export default function TitleAuthComponent({ children }: TitleAuthProps) {
+export default function TitleAuthComponent({ children }: ITitleAuth) {
     return (
         <TitleAuthStyle>
             {children}
