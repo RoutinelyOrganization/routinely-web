@@ -56,7 +56,7 @@ export default function PopUpAddTaskComponent({ setIsAddTaskOpen }: IPopUpAddTas
           {...register("nameTask", {
             required: "campo obrigatório",
             maxLength: {
-              value: 5,
+              value: 50,
               message: "Quantidade de caracteres máximo, 50!",
             },
           })}
@@ -137,7 +137,7 @@ export default function PopUpAddTaskComponent({ setIsAddTaskOpen }: IPopUpAddTas
           {...register("descriptionTask", {
             required: "campo obrigatório",
             maxLength: {
-              value: 4,
+              value: 1000,
               message: "Quantidade máxima de caracteres, 1000!",
             },
           })}

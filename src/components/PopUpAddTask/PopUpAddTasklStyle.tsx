@@ -1,4 +1,11 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const FadeUp = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to { transform: scale(1)}
+`;
 
 export const FormPopuPStyle = styled.form`
   width: 512px;
@@ -12,8 +19,8 @@ export const FormPopuPStyle = styled.form`
   flex-direction: column;
   gap: 1rem;
   margin-top: 150px;
+  animation: ${FadeUp} 0.4s ease;
 `;
-
 export const FormInputContainerStyle = styled.div`
   display: flex;
   justify-content: space-between;
