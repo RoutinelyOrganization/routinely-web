@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormPopuPStyle = styled.form`
   width: 512px;
-  height: 436px;
+  height: max-content;
   padding: 24px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.719);
   border-radius: 5px;
