@@ -3,9 +3,13 @@ import { ButtonAddTaskStyle, ToDoTasksStyle } from "./ToDoTasksStyle";
 
 interface ITodoTasksProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAddTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ToDoTasksComponent({ setIsEditTaskOpen }: ITodoTasksProps) {
+export default function ToDoTasksComponent({ setIsEditTaskOpen, setIsAddTaskOpen }: ITodoTasksProps) {
+  const handleAddTask = () => {
+    setIsAddTaskOpen(true);
+  };
   return (
     <ToDoTasksStyle>
       <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
@@ -13,7 +17,7 @@ export default function ToDoTasksComponent({ setIsEditTaskOpen }: ITodoTasksProp
       <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
       <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
       <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ButtonAddTaskStyle>Adicionar nova tarefa</ButtonAddTaskStyle>
+      <ButtonAddTaskStyle onClick={handleAddTask}>Adicionar nova tarefa</ButtonAddTaskStyle>
       <hr />
     </ToDoTasksStyle>
   );

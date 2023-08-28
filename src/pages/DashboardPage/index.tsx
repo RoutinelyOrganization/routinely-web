@@ -42,7 +42,7 @@ export default function DashboardPage() {
         <ContainerTasksStyle>
           <ButtonEditTask onClick={handleIsAddTask}>+</ButtonEditTask>
           <TaskTitle title="Visualizador de tarefas" />
-          <ToDoTasksComponent setIsEditTaskOpen={setIsEditTaskOpen} />
+          <ToDoTasksComponent setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsAddTaskOpen} />
           <TaskTitle title="Tarefas concluídas" />
           <DoneTasksComponent />
         </ContainerTasksStyle>
