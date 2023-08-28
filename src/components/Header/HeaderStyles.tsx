@@ -7,4 +7,5 @@ export const HeaderStyle = styled.header`
   align-items: center;
   gap: 80px;
   background-color: #5c59bb;
+  position: relative;
 `;
