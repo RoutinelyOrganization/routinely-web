@@ -18,4 +18,6 @@ export const PopupButtonStyle = styled.button`
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.1px;
+  cursor: pointer;
+  align-self: flex-end;
 `;

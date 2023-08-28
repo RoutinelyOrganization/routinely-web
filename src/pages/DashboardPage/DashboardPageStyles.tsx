@@ -15,22 +15,21 @@ export const ContainerTasksStyle = styled.section`
   padding: 1rem;
   gap: 1rem;
   position: relative;
+  `;
 
-  &::after {
-    content: "+";
-    display: block;
+export const ButtonEditTask = styled.button`
     position: absolute;
     top: -20px;
     right: -20px;
     width: 64px;
     height: 64px;
+    border:none;
     border-radius: 100px;
     background-color: #5fbe2f;
     font-size: 3.3rem;
     text-align: center;
     cursor: pointer;
-  }
-`;
+  ` 
 
 export const ContainerCalendarStyle = styled.section`
   display: flex;

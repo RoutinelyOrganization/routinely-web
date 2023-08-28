@@ -11,7 +11,10 @@ import {
   ContainerTaskWrapper,
 } from "./ContainerTaskStyle";
 
-export default function ContainerTaskComponent() {
+interface IContainerTaskProps {
+  setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function ContainerTaskComponent({ setIsEditTaskOpen }: IContainerTaskProps) {
   return (
     <ContainerTaskWrapper>
       <ContainerTaskStyle>
@@ -22,7 +25,7 @@ export default function ContainerTaskComponent() {
         <ContainerTaskPriorityStyle>
           <PriorityFlag />
         </ContainerTaskPriorityStyle>
-        <EditButtonComponent />
+        <EditButtonComponent setIsEditTaskOpen={setIsEditTaskOpen} />
         <DeleteButtonComponent />
       </ContainerTaskStyle>
     </ContainerTaskWrapper>
