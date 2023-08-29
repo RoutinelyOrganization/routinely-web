@@ -17,19 +17,55 @@ import {
   DeleteButtonPopUpStyle,
   ButtonsContainerStyle,
 } from "./PopUpEditTaskStyle";
+import { useForm } from "react-hook-form";
+import { ErrorMessageStyle } from "../SignUpForm/SignUpFormStyles";
 
 interface IPopUpEditTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+interface IEditTaskForm {
+  nameTask?: string;
+  dateTask?: Date;
+  timeTask?: string;
+  priorityTask?: string;
+  categoryTask?: string;
+  tagTask?: string;
+  descriptionTask?: string;
+}
+
 export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEditTaskProps) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IEditTaskForm>();
+
+  const handleSubmitEditTask = (data: IEditTaskForm) => {
+    console.log(data);
+    reset();
+  };
+
   return (
-    <FormPopuPStyle>
+    <FormPopuPStyle onSubmit={handleSubmit(handleSubmitEditTask)}>
       <PopupTitleComponent>Editar tarefa</PopupTitleComponent>
       <PopUpCloseButtonComponent setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsEditTaskOpen} />
 
       <ContainerInputPopUpStyle>
-        <InputPopUpStyle type="text" id="name" required />
+        <InputPopUpStyle
+          type="text"
+          id="name"
+          required
+          {...register("nameTask", {
+            maxLength: {
+              value: 50,
+              message: "Quantidade de caracteres máximo, 50!",
+            },
+          })}
+        />
         <InputPopUpLabelStyle htmlFor="name"> Nome da tarefa</InputPopUpLabelStyle>
+        {errors.nameTask && <ErrorMessageStyle>{errors.nameTask.message}</ErrorMessageStyle>}
       </ContainerInputPopUpStyle>
       <FormInputContainerStyle>
         <ContainerInputDateTimePopUpstyle>
@@ -38,8 +74,14 @@ export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEdit
         </ContainerInputDateTimePopUpstyle>
 
         <ContainerInputDateTimePopUpstyle>
-          <InputDateTimePopUpstyle type="time" id="time" required />
+          <InputDateTimePopUpstyle
+            type="time"
+            id="time"
+            required
+            {...register("timeTask", { required: "Formato inválido" })}
+          />
           <LabelInputDateTimePopUpstyle htmlFor="time">Hora</LabelInputDateTimePopUpstyle>
+          {errors.timeTask && <ErrorMessageStyle>{errors.timeTask.message}</ErrorMessageStyle>}
         </ContainerInputDateTimePopUpstyle>
       </FormInputContainerStyle>
 
@@ -81,8 +123,19 @@ export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEdit
       </FormInputContainerStyle>
 
       <ContainerInputPopUpStyle>
-        <InputPopUpStyle type="text" id="descricao" required />
+        <InputPopUpStyle
+          type="text"
+          id="descricao"
+          required
+          {...register("descriptionTask", {
+            maxLength: {
+              value: 1000,
+              message: "Quantidade máxima de caracteres, 1000!",
+            },
+          })}
+        />
         <InputPopUpLabelStyle htmlFor="descricao"> Descrição</InputPopUpLabelStyle>
+        {errors.descriptionTask && <ErrorMessageStyle>{errors.descriptionTask.message}</ErrorMessageStyle>}
       </ContainerInputPopUpStyle>
       <ButtonsContainerStyle>
         <DeleteButtonPopUpStyle>Excluir tarefa</DeleteButtonPopUpStyle>
