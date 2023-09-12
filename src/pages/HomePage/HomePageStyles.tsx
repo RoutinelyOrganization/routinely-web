@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const HeaderHomePageComponent = styled.header`
   display: flex;
-  padding: 1.62rem 6.7rem;
+  padding: .92rem 6.7rem;
   align-items: center;
   gap: 10.375rem;
   background-color: #5c59bb;
