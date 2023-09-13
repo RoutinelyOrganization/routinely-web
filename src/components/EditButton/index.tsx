@@ -1,8 +1,14 @@
 import { EditButtonStyles } from "./EditButtonStyle";
+interface IEditButtonProps {
+  setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function EditButtonComponent({ setIsEditTaskOpen }: IEditButtonProps) {
+  const handleEditTaskOpen = () => {
+    setIsEditTaskOpen(true);
+  };
 
-export default function EditButtonComponent() {
   return (
-    <EditButtonStyles>
+    <EditButtonStyles onClick={handleEditTaskOpen}>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
         <mask id="mask0_563_4118" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
           <rect width="30" height="30" fill="#D9D9D9" />

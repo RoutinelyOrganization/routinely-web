@@ -1,5 +1,3 @@
-import DeleteButtonComponent from "../DeleteButton";
-import EditButtonComponent from "../EditButton";
 import PriorityFlag from "../PriorityFlag";
 import {
   ContainerTaskCategoryStyle,
@@ -9,12 +7,9 @@ import {
   ContainerTaskSubCategoryStyle,
   ContainerTaskTextStyle,
   ContainerTaskWrapper,
-} from "./ContainerTaskStyle";
+} from "./ContainerTaskDoneStyle";
 
-interface IContainerTaskProps {
-  setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export default function ContainerTaskComponent({ setIsEditTaskOpen }: IContainerTaskProps) {
+export default function ContainerTaskDoneComponent() {
   return (
     <ContainerTaskWrapper>
       <ContainerTaskStyle>
@@ -25,8 +20,6 @@ export default function ContainerTaskComponent({ setIsEditTaskOpen }: IContainer
         <ContainerTaskPriorityStyle>
           <PriorityFlag />
         </ContainerTaskPriorityStyle>
-        <EditButtonComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-        <DeleteButtonComponent />
       </ContainerTaskStyle>
     </ContainerTaskWrapper>
   );

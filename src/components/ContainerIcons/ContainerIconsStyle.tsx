@@ -5,4 +5,8 @@ export const ContainerIconsStyle = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 24px;
+
+  & > svg {
+    cursor: pointer;
+  }
 `;

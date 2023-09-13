@@ -6,4 +6,5 @@ export const TaskTitleStyle = styled.h3`
   line-height: 28px;
   text-align: left;
   color: #171a21;
+  margin-left: 10px;
 `;

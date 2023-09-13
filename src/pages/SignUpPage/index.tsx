@@ -19,7 +19,7 @@ export default function SignUpPage() {
           <TitleAuthComponent>Crie sua conta</TitleAuthComponent>
           <SignUpFormComponent />
           <ButtonSocialComponent>Continuar com Google</ButtonSocialComponent>
-          <LinkAuthComponent path="#" linkText="Entrar">
+          <LinkAuthComponent path="/signinpage" linkText="Entrar">
             Já possui uma conta?
           </LinkAuthComponent>
         </SignUpPageWrapper>
