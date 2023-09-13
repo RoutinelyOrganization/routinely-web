@@ -20,4 +20,10 @@ export const PopupButtonStyle = styled.button`
   letter-spacing: 0.1px;
   cursor: pointer;
   align-self: flex-end;
+  &:hover {
+    transition: all .4s ease;
+    background-color: #a09df7;
+    color: #222;
+    font-weight: bold;
+  }
 `;

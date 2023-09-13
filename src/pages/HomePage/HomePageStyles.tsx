@@ -40,4 +40,10 @@ export const ButtonHomePageComponent = styled.button`
   border: none;
   cursor: pointer;
   margin-bottom: 38px;
+  &:hover {
+    transition: all .4s ease;
+    background-color: #a2f07b;
+    color: #222;
+    font-weight: bold;
+  }
 `;

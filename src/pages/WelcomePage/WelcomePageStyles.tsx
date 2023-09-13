@@ -46,6 +46,12 @@ export const ButtonAccount = styled.button`
   color: #F6F7F8;
   border: none;
   outline: none;
+  &:hover {
+    transition: all .4s ease;
+    background-color: #a09df7;
+    color: #222;
+    font-weight: bold;
+  }
 `;
 
 export const ButtonCreateAccount = styled(ButtonAccount)`

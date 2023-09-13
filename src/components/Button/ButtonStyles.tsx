@@ -16,10 +16,22 @@ export const ButtonStyle = styled.button<ButtonProps>`
   line-height: 20px;
   letter-spacing: 0.1px;
   cursor: pointer;
+  &:hover {
+    transition: all 0.4s ease;
+    background-color: #a09df7;
+    color: #222;
+    font-weight: bold;
+  }
 
   ${({ $secondaryColor }) =>
     $secondaryColor &&
     css`
-      background-color: #8F8CE7;
+      background-color: #8f8ce7;
+      &:hover {
+        transition: all 0.4s ease;
+        background-color: #7b79be;
+        color: white;
+        font-weight: bold;
+      }
     `}
 `;
