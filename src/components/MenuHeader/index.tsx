@@ -7,29 +7,24 @@ interface IMenuHeader {
 export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
   const menuItems = [
     {
-      name: "Perfil",
+      name: "Configurações",
       url: "#",
       id: 1,
     },
     {
-      name: "Configurações",
+      name: "Metas",
       url: "#",
       id: 2,
     },
     {
-      name: "Metas",
+      name: "Notificações",
       url: "#",
       id: 3,
     },
     {
-      name: "Notificações",
-      url: "#",
-      id: 4,
-    },
-    {
       name: "Sair da conta",
       url: "#",
-      id: 5,
+      id: 4,
     },
   ];
 

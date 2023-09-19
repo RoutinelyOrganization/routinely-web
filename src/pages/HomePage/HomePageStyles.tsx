@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const HeaderHomePageComponent = styled.header`
   display: flex;
-  padding: 1.62rem 6.7rem;
+  padding: .92rem 6.7rem;
   align-items: center;
   gap: 10.375rem;
   background-color: #5c59bb;
@@ -40,4 +40,10 @@ export const ButtonHomePageComponent = styled.button`
   border: none;
   cursor: pointer;
   margin-bottom: 38px;
+  &:hover {
+    transition: all .4s ease;
+    background-color: #a2f07b;
+    color: #222;
+    font-weight: bold;
+  }
 `;

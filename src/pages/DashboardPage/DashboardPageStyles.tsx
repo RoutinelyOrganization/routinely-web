@@ -29,6 +29,12 @@ export const ButtonEditTask = styled.button`
     font-size: 3.3rem;
     text-align: center;
     cursor: pointer;
+    &:hover {
+    transition: all .4s ease;
+    background-color: #93ee65;
+    color: #555555;
+    font-weight: bold;
+  }
   ` 
 
 export const ContainerCalendarStyle = styled.section`
