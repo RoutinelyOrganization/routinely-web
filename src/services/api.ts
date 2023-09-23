@@ -5,5 +5,4 @@ const instance = axios.create({
 });
 export default instance;
 
-
 // requições feitas por aqui com base no exemplo do Discord feito pela Day.
