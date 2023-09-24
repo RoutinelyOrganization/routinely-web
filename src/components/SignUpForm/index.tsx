@@ -10,13 +10,14 @@ import {
 } from "./SignUpFormStyles";
 import { InputStyle } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
+import signUp from "../../services/signUp";
 
 interface ISignUpInput {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  termsOfUse: boolean;
+  acceptedTerms: boolean;
 }
 
 export default function SignUpFormComponent() {
@@ -31,14 +32,25 @@ export default function SignUpFormComponent() {
     watch
   } = useForm<ISignUpInput>();
 
-  const submitSignUpForm = (data: ISignUpInput) => {
-    console.log(data);
-  };
-
   const password = watch("password")
 
+  const handleSignUp = async ({ name, email, password, acceptedTerms}: ISignUpInput) => {
+    const body = {
+      name,
+      email,
+      password,
+      acceptedTerms
+    };
+    try {
+      const response = await signUp(body)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
-    <SignUpFormStyle onSubmit={handleSubmit(submitSignUpForm)}>
+    // eslint-disable-next-line
+    <SignUpFormStyle onSubmit={handleSubmit(handleSignUp)}>
       <InputStyle
         type="text"
         placeholder="Nome"
@@ -107,7 +119,7 @@ export default function SignUpFormComponent() {
           type="checkbox"
           onClick={() => setTermsAccepted(!termsAccepted)}
           checked={termsAccepted ? true : false}
-          {...register("termsOfUse", {
+          {...register("acceptedTerms", {
             required: {
               value: true,
               message: "O usuário deve estar de acordo com os termos.",
@@ -118,7 +130,7 @@ export default function SignUpFormComponent() {
           Declaro que li e concordo com os <a href="#">termos de uso e política de privacidade.</a>
         </span>
       </TermsOfUseStyle>
-      {errors.termsOfUse && <ErrorMessageStyle>{errors.termsOfUse.message}</ErrorMessageStyle>}
+      {errors.acceptedTerms && <ErrorMessageStyle>{errors.acceptedTerms.message}</ErrorMessageStyle>}
       <ButtonComponent>Criar Conta</ButtonComponent>
     </SignUpFormStyle>
   );
