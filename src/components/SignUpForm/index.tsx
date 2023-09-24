@@ -41,10 +41,8 @@ export default function SignUpFormComponent() {
       password,
       acceptedTerms
     };
-    console.log(body);
     try {
       const response = await signUp(body)
-      console.log(response)
     } catch (err) {
       console.log(err)
     }
