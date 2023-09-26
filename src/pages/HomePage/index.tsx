@@ -21,7 +21,7 @@ export default function HomePage() {
         <Logo />
         <ButtonStyle children="Recursos" />
         <ButtonStyle children="Planos" />
-        <ButtonStyle children="Acesse" $secondaryColor onClick={() => navigate("/signInPage")} />
+        <ButtonStyle children="Acesse" $secondaryColor onClick={() => navigate("/welcomePage")} />
       </HeaderHomePageComponent>
 
       <MainHomePageComponent>
