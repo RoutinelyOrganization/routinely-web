@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import HeaderComponent from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
@@ -16,21 +17,25 @@ import {
 } from "./SignInPageStyles";
 import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
 import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { login } from "../../services/login";
 
-interface ISingInProps {
+export interface ISingInProps {
   email: string;
   password: string;
-  rememberPassword: boolean;
+  remember?: boolean;
 }
 
 export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -38,8 +43,18 @@ export function SignInPage() {
     formState: { errors },
   } = useForm<ISingInProps>();
 
-  function handleSubmitSignIn(Data: ISingInProps) {
-    console.log(Data);
+  async function handleSubmitSignIn(Data: ISingInProps) {
+    try {
+      const response = await login(Data);
+      setLoading(true);
+      if (response!.status === 200) {
+        setError(false);
+        navigate("/dashboardpage");
+      }
+    } catch (error) {
+      setError(true);
+      setLoading(false);
+    }
   }
 
   return (
@@ -86,7 +101,7 @@ export function SignInPage() {
           <CheckboxAndForgetPasswordWrapperSignInStyle>
             <CheckboxWrapperSignInStyle>
               <label htmlFor="checkboxSignIn">Lembrar meu acesso</label>
-              <CheckboxSignInStyle type="checkbox" id="checkboxSignIn" {...register("rememberPassword")} />
+              <CheckboxSignInStyle type="checkbox" id="checkboxSignIn" {...register("remember")} />
             </CheckboxWrapperSignInStyle>
             <ForgetPasswordSignInStyle>
               {<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}
@@ -94,7 +109,14 @@ export function SignInPage() {
           </CheckboxAndForgetPasswordWrapperSignInStyle>
 
           <ButtonWrapperSignInStyle>
-            <ButtonComponent>Fazer login</ButtonComponent>
+            {loading ? (
+              <ButtonComponent disabled>Fazer login</ButtonComponent>
+            ) : (
+              <ButtonComponent>Fazer login</ButtonComponent>
+            )}
+
+            {error && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
+
             <ButtonSocialComponent disabled>Continuar com Google</ButtonSocialComponent>
             <LinkAuthComponent path="/signUpPage" linkText="Crie a sua.">
               Não tem uma conta?
