@@ -45,8 +45,8 @@ export function SignInPage() {
 
   async function handleSubmitSignIn(Data: ISingInProps) {
     try {
-      const response = await login(Data);
       setLoading(true);
+      const response = await login(Data);
       if (response!.status === 200) {
         setError(false);
         navigate("/dashboardpage");
@@ -110,7 +110,7 @@ export function SignInPage() {
 
           <ButtonWrapperSignInStyle>
             {loading ? (
-              <ButtonComponent disabled>Fazer login</ButtonComponent>
+              <ButtonComponent disabled>Carregando...</ButtonComponent>
             ) : (
               <ButtonComponent>Fazer login</ButtonComponent>
             )}
