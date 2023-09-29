@@ -13,6 +13,6 @@ export async function login(data: ISingInProps) {
     return response;
   } catch (error) {
     const erro = error as AxiosError;
-    console.log(erro.message);
+    console.error(erro.message);
   }
 }

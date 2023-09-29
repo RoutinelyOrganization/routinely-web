@@ -10,9 +10,18 @@ import {
 import homePageImage from "../../assets/imagens/homePageImage.svg";
 import { useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const tokenValidate = window.localStorage.getItem("token");
+
+    if (tokenValidate) {
+      navigate("/dashboardpage");
+    }
+  }, [navigate]);
 
   return (
     <>

@@ -24,6 +24,7 @@ import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { login } from "../../services/login";
+import { AxiosResponse } from "axios";
 
 export interface ISingInProps {
   email: string;
@@ -46,9 +47,11 @@ export function SignInPage() {
   async function handleSubmitSignIn(Data: ISingInProps) {
     try {
       setLoading(true);
-      const response = await login(Data);
+      const response: AxiosResponse<{ token: string }> | undefined = await login(Data);
+      
       if (response!.status === 200) {
         setError(false);
+        Data.remember && window.localStorage.setItem("token", response! && response.data.token);
         navigate("/dashboardpage");
       }
     } catch (error) {
