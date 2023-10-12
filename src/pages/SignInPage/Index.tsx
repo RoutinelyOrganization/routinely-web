@@ -16,15 +16,14 @@ import {
   TitleSignInPageStyle,
 } from "./SignInPageStyles";
 import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
 import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
-import { login } from "../../services/login";
-import { AxiosResponse } from "axios";
+import { UserContext } from "../../contexts/UserContext";
 
 export interface ISingInProps {
   email: string;
@@ -35,8 +34,8 @@ export interface ISingInProps {
 export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState(false);
+
+  const { error, setError, loading, setLoading, setToken, setRefreshToken, loginContext } = useContext(UserContext);
 
   const {
     register,
@@ -47,14 +46,20 @@ export function SignInPage() {
   async function handleSubmitSignIn(Data: ISingInProps) {
     try {
       setLoading(true);
-      const response: AxiosResponse<{ token: string }> | undefined = await login(Data);
-      
+      const response = await loginContext(Data);
+      setRefreshToken(response!.data.refreshToken);
+
       if (response!.status === 200) {
-        setError(false);
-        Data.remember && window.localStorage.setItem("token", response! && response.data.token);
+        if (Data.remember) {
+          const tokenValid = response!.data.token;
+          window.localStorage.setItem("token", response! && tokenValid);
+          setToken(tokenValid);
+        }
         navigate("/dashboardpage");
+        setError(false);
+        setLoading(false); 
       }
-    } catch (error) {
+    } catch (error) { 
       setError(true);
       setLoading(false);
     }
