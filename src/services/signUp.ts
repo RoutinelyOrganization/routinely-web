@@ -7,7 +7,7 @@ interface ISignUpInput {
   acceptedTerms: boolean;
 }
 
-export default async function signUp({ name, email, password, acceptedTerms }: ISignUpInput) {
-  const response = await api.post("/auth/register", { name, email, password, acceptedTerms });
-  return response.data;
+export default async function signUp(body: ISignUpInput) {
+  const response = await api.post("/auth/register", body);
+  console.log(response.data);
 }
