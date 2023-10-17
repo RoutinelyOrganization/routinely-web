@@ -11,6 +11,7 @@ import {
 import { InputStyle } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
 import signUp from "../../services/signUp";
+import { useNavigate } from "react-router-dom";
 
 interface ISignUpInput {
   name: string;
@@ -24,6 +25,7 @@ export default function SignUpFormComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -43,6 +45,7 @@ export default function SignUpFormComponent() {
     };
     try {
       await signUp(body);
+      navigate("/signinpage");
     } catch (err) {
       console.log(err);
     }
