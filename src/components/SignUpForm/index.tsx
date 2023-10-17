@@ -29,24 +29,24 @@ export default function SignUpFormComponent() {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm<ISignUpInput>();
 
-  const password = watch("password")
+  const password = watch("password");
 
-  const handleSignUp = async ({ name, email, password, acceptedTerms}: ISignUpInput) => {
+  const handleSignUp = async ({ name, email, password, acceptedTerms }: ISignUpInput) => {
     const body = {
-      name,
-      email,
-      password,
-      acceptedTerms
+      name: name,
+      email: email,
+      password: password,
+      acceptedTerms: acceptedTerms,
     };
     try {
-      const response = await signUp(body)
+      await signUp(body);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     // eslint-disable-next-line
@@ -106,7 +106,7 @@ export default function SignUpFormComponent() {
           placeholder="Repetir senha"
           {...register("confirmPassword", {
             required: "Este campo é obrigatório.",
-            validate: (value) => value === password || "As senhas devem ser iguais"
+            validate: (value) => value === password || "As senhas devem ser iguais",
           })}
         />
         <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
