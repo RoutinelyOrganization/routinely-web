@@ -58,10 +58,11 @@ export function SignInPage() {
         }
         navigate("/dashboardpage");
         setError(false);
-        setLoading(false);
       }
     } catch (error) {
+      console.error(error);
       setError(true);
+    } finally {
       setLoading(false);
     }
   }

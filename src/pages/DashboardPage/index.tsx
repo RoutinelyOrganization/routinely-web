@@ -18,7 +18,7 @@ export default function DashboardPage() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
   const [isEditTaskOpen, setIsEditTaskOpen] = useState<boolean>(false);
   const { user } = useContext(UserContext);
-  const hasUser = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   function handleIsAddTask() {
@@ -26,10 +26,10 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    if (!user.email && !hasUser) {
+    if (!user.email && !token) {
       navigate("/signInPage");
     }
-  }, [hasUser, user.email, navigate]);
+  }, [token, user.email, navigate]);
 
   return (
     <>
