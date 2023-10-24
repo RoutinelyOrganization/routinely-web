@@ -42,7 +42,7 @@ export const UserProvider: React.FC<IUserProvider> = ({ children }) => {
   const [token, setToken] = useState<string>("");
   const [refreshToken, setRefreshToken] = useState<string>("");
   const navigate = useNavigate();
-  const { login, disconnectLogin, validateTokenRefresh } = useAuth();
+  const { login, disconnectLogin } = useAuth();
 
   const loginContext = async (data: ISingInProps) => {
     const response: AxiosResponse<{ token: string; refreshToken: string }> | undefined = await login(data);
@@ -68,28 +68,6 @@ export const UserProvider: React.FC<IUserProvider> = ({ children }) => {
   
   };
 
-  useEffect(() => {
-    try {
-      const validateToken = async () => {
-        
-        if (token && refreshToken) {
-          const response: AxiosResponse<{ token: string; refreshToken: string }> | undefined =
-            await validateTokenRefresh(token, refreshToken);
-
-          if (response?.status === 200) navigate("/dashboardpage");
-
-          return response;
-        }
-        return;
-
-        /* colocar um else para o login */
-      };
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      validateToken();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [refreshToken, token, validateTokenRefresh, navigate]);
 
   return (
     <UserContext.Provider

@@ -10,9 +10,27 @@ import {
 import homePageImage from "../../assets/imagens/homePageImage.svg";
 import { useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const navigate = useNavigate();
+
+  const { validateToken } = useAuth();
+
+  useEffect(() => {
+    const tokenLocal = window.localStorage.getItem("token");
+
+    if (!tokenLocal) return;
+
+    validateToken(tokenLocal, 2022, 12)
+      .then(() => {
+        navigate("/dashboardpage");
+      })
+      .catch(() => {
+        return;
+      });
+  }, [navigate, validateToken]);
 
   return (
     <>

@@ -27,33 +27,40 @@ export const useAuth = () => {
       });
 
       return response;
-
     } catch (error) {
       const erro = error as AxiosError;
       console.error(erro.message);
     }
   }
 
-  async function validateTokenRefresh(token: string, refreshToken: string) {
-    const body = {
-      refreshToken: `${refreshToken}`,
+  async function validateToken(token: string, year?: number, month?: number) {
+    const date = new Date();
+    year = year || date.getFullYear();
+    month = month || date.getMonth() + 1;
+
+    const params = {
+      year,
+      month,
     };
+
     try {
-      const response = await instance.post("/auth/refresh", body, {
+      const response = await instance.get("/tasks", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        params,
       });
+
       return response;
     } catch (error) {
       const erro = error as AxiosError;
-      console.error(erro.message);
+      console.error(erro.response?.data);
     }
   }
 
   return {
     login,
-    validateTokenRefresh,
-    disconnectLogin
+    validateToken,
+    disconnectLogin,
   };
 };
