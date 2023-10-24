@@ -1,4 +1,5 @@
-import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import {
   MenuHeaderBarStyle,
   MenuHeaderContainerStyle,
@@ -6,13 +7,24 @@ import {
   MenuHeaderListStyle,
   MenuHeaderStyle,
 } from "./MenuHeaderStyle";
+import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
 interface IMenuHeader {
   setIsShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
-  const { user , disconnectLoginContext } = useContext(UserContext);
+  const { disconnectLogin } = useAuth();
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+  
+  const closeSectionUser = async () => {
+    const token = localStorage.getItem("token");
+    await disconnectLogin(token || "");
+    setUser({ email: "", password: "", remember: false });
+    navigate("/");
+  };
+
   const menuItems = [
     {
       name: "Configurações",
@@ -33,7 +45,7 @@ export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
       name: "Sair da conta",
       url: "#",
       id: 4,
-      onclick: ()=> disconnectLoginContext()
+      onclick: () => closeSectionUser(),
     },
   ];
 
@@ -56,11 +68,11 @@ export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
       </MenuHeaderBarStyle>
       <MenuHeaderStyle>
         <MenuHeaderListStyle>
-          {menuItems.map((menuItem) =>
-            user.email || menuItem.name !== "Sair da conta" ? (
-              <MenuHeaderItemStyle key={menuItem.id} onClick={menuItem.onclick}>{menuItem.name}</MenuHeaderItemStyle>
-            ) : null,
-          )}
+          {menuItems.map((menuItem) => (
+            <MenuHeaderItemStyle key={menuItem.id} onClick={menuItem.onclick}>
+              {menuItem.name}
+            </MenuHeaderItemStyle>
+          ))}
         </MenuHeaderListStyle>
       </MenuHeaderStyle>
     </MenuHeaderContainerStyle>

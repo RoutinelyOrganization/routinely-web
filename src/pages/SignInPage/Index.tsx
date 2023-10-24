@@ -35,7 +35,7 @@ export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { error, setError, loading, setLoading, setToken, setRefreshToken, loginContext } = useContext(UserContext);
+  const { error, setError, loading, setLoading, setToken, setRefreshToken, loginContext , setUser } = useContext(UserContext);
 
   const {
     register,
@@ -50,6 +50,7 @@ export function SignInPage() {
       setRefreshToken(response!.data.refreshToken);
 
       if (response!.status === 200) {
+        setUser(Data)
         if (Data.remember) {
           const tokenValid = response!.data.token;
           window.localStorage.setItem("token", response! && tokenValid);

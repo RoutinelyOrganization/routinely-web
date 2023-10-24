@@ -18,15 +18,19 @@ export const useAuth = () => {
     }
   }
 
-  async function disconnectLogin() {
+  async function disconnectLogin(token: string) {
+    const body = {
+      closeAllSessions: true,
+    };
     try {
-      const response = instance.post("/auth/disconnect", {
-        Headers: {
-          closeAllSessions: true,
+      await instance.post("/auth/disconnect", body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       });
+      localStorage.clear();
 
-      return response;
+      return;
     } catch (error) {
       const erro = error as AxiosError;
       console.error(erro.message);
@@ -54,7 +58,7 @@ export const useAuth = () => {
       return response;
     } catch (error) {
       const erro = error as AxiosError;
-      console.error(erro.response?.data);
+      console.error(erro.message);
     }
   }
 

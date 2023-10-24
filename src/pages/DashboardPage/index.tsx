@@ -9,16 +9,28 @@ import PopUpComponent from "../../components/PopUp";
 import PopUpAddTaskComponent from "../../components/PopUpAddTask";
 import PopUpEditTaskComponent from "../../components/PopUpEditTask";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
   const [isEditTaskOpen, setIsEditTaskOpen] = useState<boolean>(false);
+  const { user } = useContext(UserContext);
+  const hasUser = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   function handleIsAddTask() {
     setIsAddTaskOpen(true);
   }
+
+  useEffect(() => {
+    if (!user.email && !hasUser) {
+      navigate("/signInPage");
+    }
+  }, [hasUser, user.email, navigate]);
+
   return (
     <>
       <ScrollToTop />
