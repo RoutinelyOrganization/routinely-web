@@ -24,7 +24,8 @@ import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { UserContext } from "../../contexts/UserContext";
-
+import { useAuth } from "../../hooks/useAuth";
+import { AxiosResponse } from "axios";
 export interface ISingInProps {
   email: string;
   password: string;
@@ -34,8 +35,9 @@ export interface ISingInProps {
 export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const { error, setError, loading, setLoading, setToken, setRefreshToken, loginContext , setUser } = useContext(UserContext);
+  const { error, setError, loading, setLoading, setUser } = useContext(UserContext);
 
   const {
     register,
@@ -46,21 +48,19 @@ export function SignInPage() {
   async function handleSubmitSignIn(Data: ISingInProps) {
     try {
       setLoading(true);
-      const response = await loginContext(Data); 
-      setRefreshToken(response!.data.refreshToken);
+      const response: AxiosResponse<{ token: string }> | undefined = await login(Data);
 
       if (response!.status === 200) {
-        setUser(Data)
+        setUser(Data);
         if (Data.remember) {
-          const tokenValid = response!.data.token;
-          window.localStorage.setItem("token", response! && tokenValid);
-          setToken(tokenValid);
+          const token = response!.data.token;
+          window.localStorage.setItem("token", response! && token);
         }
         navigate("/dashboardpage");
         setError(false);
-        setLoading(false); 
+        setLoading(false);
       }
-    } catch (error) { 
+    } catch (error) {
       setError(true);
       setLoading(false);
     }

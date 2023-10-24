@@ -4,13 +4,8 @@ import { AxiosError } from "axios";
 
 export const useAuth = () => {
   async function login(data: ISingInProps) {
-    const body = {
-      email: data.email,
-      password: data.password,
-      remember: data.remember,
-    };
     try {
-      const response = await instance.post("/auth", body);
+      const response = await instance.post("/auth", data);
       return response;
     } catch (error) {
       const erro = error as AxiosError;
