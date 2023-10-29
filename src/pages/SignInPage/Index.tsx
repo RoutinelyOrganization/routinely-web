@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import HeaderComponent from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
@@ -15,22 +16,28 @@ import {
   TitleSignInPageStyle,
 } from "./SignInPageStyles";
 import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
 import LinkAuthComponent from "../../components/LinkAuth";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
-
-interface ISingInProps {
+import { UserContext } from "../../contexts/UserContext";
+import { useAuth } from "../../hooks/useAuth";
+import { AxiosResponse } from "axios";
+export interface ISingInProps {
   email: string;
   password: string;
-  rememberPassword: boolean;
+  remember?: boolean;
 }
 
 export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const { error, setError, loading, setLoading, setUser } = useContext(UserContext);
 
   const {
     register,
@@ -38,8 +45,26 @@ export function SignInPage() {
     formState: { errors },
   } = useForm<ISingInProps>();
 
-  function handleSubmitSignIn(Data: ISingInProps) {
-    console.log(Data);
+  async function handleSubmitSignIn(Data: ISingInProps) {
+    try {
+      setLoading(true);
+      const response: AxiosResponse<{ token: string }> | undefined = await login(Data);
+
+      if (response!.status === 200) {
+        setUser(Data);
+        if (Data.remember) {
+          const token = response!.data.token;
+          window.localStorage.setItem("token", response! && token);
+        }
+        navigate("/dashboardpage");
+        setError(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -86,7 +111,7 @@ export function SignInPage() {
           <CheckboxAndForgetPasswordWrapperSignInStyle>
             <CheckboxWrapperSignInStyle>
               <label htmlFor="checkboxSignIn">Lembrar meu acesso</label>
-              <CheckboxSignInStyle type="checkbox" id="checkboxSignIn" {...register("rememberPassword")} />
+              <CheckboxSignInStyle type="checkbox" id="checkboxSignIn" {...register("remember")} />
             </CheckboxWrapperSignInStyle>
             <ForgetPasswordSignInStyle>
               {<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}
@@ -94,7 +119,14 @@ export function SignInPage() {
           </CheckboxAndForgetPasswordWrapperSignInStyle>
 
           <ButtonWrapperSignInStyle>
-            <ButtonComponent>Fazer login</ButtonComponent>
+            {loading ? (
+              <ButtonComponent disabled>Carregando...</ButtonComponent>
+            ) : (
+              <ButtonComponent>Fazer login</ButtonComponent>
+            )}
+
+            {error && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
+
             <ButtonSocialComponent disabled>Continuar com Google</ButtonSocialComponent>
             <LinkAuthComponent path="/signUpPage" linkText="Crie a sua.">
               Não tem uma conta?

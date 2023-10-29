@@ -7,10 +7,12 @@ import { WelcomePage } from "../pages/WelcomePage";
 import { SignInPage } from "../pages/SignInPage/Index";
 import { NewPasswordPage } from "../pages/NewPasswordPage";
 import DashboardPage from "../pages/DashboardPage";
+import { UserProvider } from "../contexts/UserContext";
+import App from "../App";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Outlet />}>
+    <Route path="/" element={<UserProvider><App /></UserProvider>}>
       <Route path="/" element={<HomePage />} />
       <Route path="/welcomePage" element={<WelcomePage />} />
       <Route path="/signUpPage" element={<SignUpPage />} />
