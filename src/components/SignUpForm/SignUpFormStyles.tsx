@@ -10,7 +10,7 @@ export const SignUpFormStyle = styled.form`
 `;
 
 export const ErrorMessageStyle = styled.span`
-  color: red;
+  color: #B3261B;
   font-size: 0.9rem;
   max-width: 368px;
   text-align: justify;
