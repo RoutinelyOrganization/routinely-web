@@ -11,6 +11,7 @@ import {
 import { InputStyle } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
 import signUp from "../../services/signUp";
+import { useNavigate } from "react-router-dom";
 
 interface ISignUpInput {
   name: string;
@@ -24,29 +25,31 @@ export default function SignUpFormComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm<ISignUpInput>();
 
-  const password = watch("password")
+  const password = watch("password");
 
-  const handleSignUp = async ({ name, email, password, acceptedTerms}: ISignUpInput) => {
+  const handleSignUp = async ({ name, email, password, acceptedTerms }: ISignUpInput) => {
     const body = {
-      name,
-      email,
-      password,
-      acceptedTerms
+      name: name,
+      email: email,
+      password: password,
+      acceptedTerms: acceptedTerms,
     };
     try {
-      const response = await signUp(body)
+      await signUp(body);
+      navigate("/signinpage");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     // eslint-disable-next-line
@@ -106,7 +109,7 @@ export default function SignUpFormComponent() {
           placeholder="Repetir senha"
           {...register("confirmPassword", {
             required: "Este campo é obrigatório.",
-            validate: (value) => value === password || "As senhas devem ser iguais"
+            validate: (value) => value === password || "As senhas devem ser iguais",
           })}
         />
         <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
