@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import HeaderComponent from "../../components/Header";
-import { InputStyle } from "../../components/Input/InputStyles";
+import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
 import {
   ButtonWrapperSignInStyle,
@@ -25,7 +25,8 @@ import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { UserContext } from "../../contexts/UserContext";
 import { useAuth } from "../../hooks/useAuth";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import infoErro from "../../assets/icons/infoErro.svg";
 export interface ISingInProps {
   email: string;
   password: string;
@@ -37,7 +38,9 @@ export function SignInPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const { error, setError, loading, setLoading, setUser } = useContext(UserContext);
+  const { showError, setShowError, loading, setLoading, setUser } = useContext(UserContext);
+  const [erroEmail, setErrorEmail] = useState(false);
+  const [erroPassword, setErrorPassword] = useState(false);
 
   const {
     register,
@@ -57,11 +60,14 @@ export function SignInPage() {
           window.localStorage.setItem("token", response! && token);
         }
         navigate("/dashboardpage");
-        setError(false);
+        setShowError(false);
       }
     } catch (error) {
-      console.error(error);
-      setError(true);
+      const erro = error as AxiosError;
+      console.error(erro.message);
+      setErrorEmail(true);
+      setErrorPassword(true);
+      setShowError(true);
     } finally {
       setLoading(false);
     }
@@ -76,38 +82,76 @@ export function SignInPage() {
           <LogoSharedComponent />
           <TitleSignInPageStyle>Acessar conta</TitleSignInPageStyle>
           <InputWrapperSignInStyle>
-            <InputStyle
-              type="email"
-              placeholder="E-mail"
-              {...register("email", {
-                required: "Campo de preenchimento obrigatório",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: "preencha um e-mail válido",
-                },
-              })}
-            />
-            {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-            <PasswordContainerStyle>
+            <InputContainer>
               <InputStyle
-                type={showPassord ? "text" : "password"}
-                placeholder="Senha"
-                {...register("password", {
-                  required: "campo de preenchimento obrigatório",
+                $hasErro={erroEmail}
+                type="email"
+                id="E-mail"
+                required
+                {...register("email", {
+                  required: "Campo de preenchimento obrigatório",
+                  onChange(event: React.ChangeEvent<HTMLInputElement>) {
+                    if (event.target.value) {
+                      setErrorEmail(false);
+                      setErrorPassword(false);
+                      setShowError(false);
+                    }
+                  },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
-                    message:
-                      "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "preencha um e-mail válido",
                   },
                 })}
               />
-              <ShowPasswordSignInPageStyle onClick={() => setShowPassword(!showPassord)}>
-                {showPassord ? "ESCONDER" : "EXIBIR"}
-              </ShowPasswordSignInPageStyle>
+              <LabelInput $hasErro={erroEmail} htmlFor="E-mail">
+                E-mail
+              </LabelInput>
+              {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
+              {erroEmail && <img src={infoErro} alt="icone de info erro" />}
+            </InputContainer>
+
+            <PasswordContainerStyle>
+              <InputContainer>
+                <InputStyle
+                  type={showPassord ? "text" : "password"}
+                  $hasErro={erroPassword}
+                  id="Password"
+                  required
+                  {...register("password", {
+                    required: "campo de preenchimento obrigatório",
+                    onChange(event: React.ChangeEvent<HTMLInputElement>) {
+                      if (event.target.value) {
+                        setErrorPassword(false);
+                        setShowError(false);
+                        setErrorEmail(false);
+                      }
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
+                      message:
+                        "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
+                    },
+                  })}
+                />
+                <LabelInput $hasErro={erroEmail} htmlFor="Password">
+                  Senha
+                </LabelInput>
+
+                <ShowPasswordSignInPageStyle onClick={() => setShowPassword(!showPassord)}>
+                  <>
+                    {erroPassword ? (
+                      <img src={infoErro} alt="icone de info erro" />
+                    ) : showPassord ? (
+                      "ESCONDER"
+                    ) : (
+                      "EXIBIR"
+                    )}
+                  </>
+                </ShowPasswordSignInPageStyle>
+              </InputContainer>
             </PasswordContainerStyle>
             {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
           </InputWrapperSignInStyle>
-
           <CheckboxAndForgetPasswordWrapperSignInStyle>
             <CheckboxWrapperSignInStyle>
               <label htmlFor="checkboxSignIn">Lembrar meu acesso</label>
@@ -125,7 +169,7 @@ export function SignInPage() {
               <ButtonComponent>Fazer login</ButtonComponent>
             )}
 
-            {error && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
+            {showError && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
 
             <ButtonSocialComponent disabled>Continuar com Google</ButtonSocialComponent>
             <LinkAuthComponent path="/signUpPage" linkText="Crie a sua.">

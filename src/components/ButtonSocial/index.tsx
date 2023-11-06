@@ -1,5 +1,5 @@
 import React from 'react';
-import IconGoogle from '../../assets/IconGoogle'
+import IconGoogle from '../../assets/icons/IconGoogle'
 import { ButtonSocialStyle } from "./ButtonSocialStyles";
 
 type IButtonSocial = React.ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -7,8 +7,8 @@ interface IUserProvider {
 interface IUserContext {
   user: ISingInProps;
   setUser: React.Dispatch<React.SetStateAction<ISingInProps>>;
-  error: boolean;
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  showError: boolean;
+  setShowError: React.Dispatch<React.SetStateAction<boolean>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,7 +18,7 @@ UserContext.displayName = "User Context";
 
 export const UserProvider: React.FC<IUserProvider> = ({ children }) => {
   const [user, setUser] = useState<ISingInProps>({ email: "", password: "", remember: false });
-  const [error, setError] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   return (
@@ -26,8 +26,8 @@ export const UserProvider: React.FC<IUserProvider> = ({ children }) => {
       value={{
         user,
         setUser,
-        error,
-        setError,
+        showError,
+        setShowError,
         loading,
         setLoading,
       }}
