@@ -8,7 +8,7 @@ import {
   ShowPasswordButtonStyle,
   SignUpFormStyle,
 } from "./SignUpFormStyles";
-import { InputStyle } from "../Input/InputStyles";
+import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
 import signUp from "../../services/signUp";
 import { useNavigate } from "react-router-dom";
@@ -54,69 +54,86 @@ export default function SignUpFormComponent() {
   return (
     // eslint-disable-next-line
     <SignUpFormStyle onSubmit={handleSubmit(handleSignUp)}>
-      <InputStyle
-        type="text"
-        placeholder="Nome"
-        {...register("name", {
-          required: "Este campo é obrigatório.",
-          minLength: {
-            value: 3,
-            message: "Este campo precisa ter no mínimo 3 letras.",
-          },
-          pattern: {
-            value: /^[a-zA-ZÀ-ÿ\s~]+$/,
-            message: "O campo nome não pode conter números nem caracteres especiais.",
-          },
-        })}
-      />
-      {errors.name && <ErrorMessageStyle>{errors.name.message}</ErrorMessageStyle>}
-
-      <InputStyle
-        type="email"
-        placeholder="Email"
-        {...register("email", {
-          required: "Este campo é obrigatório.",
-          pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            message: "Este campo precisa ser um email válido.",
-          },
-        })}
-      />
-      {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-
-      <PasswordContainerStyle>
+      <InputContainer>
         <InputStyle
-          type={showPassword ? "text" : "password"}
-          placeholder="Senha"
-          {...register("password", {
+          type="text"
+          id="name"
+          required
+          {...register("name", {
             required: "Este campo é obrigatório.",
+            minLength: {
+              value: 3,
+              message: "Este campo precisa ter no mínimo 3 letras.",
+            },
             pattern: {
-              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
-              message:
-                "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
+              value: /^[a-zA-ZÀ-ÿ\s~]+$/,
+              message: "O campo nome não pode conter números nem caracteres especiais.",
             },
           })}
         />
-        <ShowPasswordButtonStyle type="button" onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? "ESCONDER" : "EXIBIR"}
-        </ShowPasswordButtonStyle>
-      </PasswordContainerStyle>
-      {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
+        <LabelInput htmlFor="name">Nome</LabelInput>
+        {errors.name && <ErrorMessageStyle>{errors.name.message}</ErrorMessageStyle>}
+      </InputContainer>
 
-      <PasswordContainerStyle>
+      <InputContainer>
         <InputStyle
-          type={showConfirmPassword ? "text" : "password"}
-          placeholder="Repetir senha"
-          {...register("confirmPassword", {
+          type="email"
+          id="Email"
+          required
+          {...register("email", {
             required: "Este campo é obrigatório.",
-            validate: (value) => value === password || "As senhas devem ser iguais",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Este campo precisa ser um email válido.",
+            },
           })}
         />
-        <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-          {showConfirmPassword ? "ESCONDER" : "EXIBIR"}
-        </ShowPasswordButtonStyle>
-      </PasswordContainerStyle>
-      {errors.confirmPassword && <ErrorMessageStyle>{errors.confirmPassword.message}</ErrorMessageStyle>}
+        <LabelInput htmlFor="Email">Email</LabelInput>
+        {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
+      </InputContainer>
+
+      <InputContainer>
+        <PasswordContainerStyle>
+          <InputStyle
+            type={showPassword ? "text" : "password"}
+            id="password"
+            required
+            {...register("password", {
+              required: "Este campo é obrigatório.",
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
+                message:
+                  "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
+              },
+            })}
+          />
+          <LabelInput htmlFor="password">Senha</LabelInput>
+          <ShowPasswordButtonStyle type="button" onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? "ESCONDER" : "EXIBIR"}
+          </ShowPasswordButtonStyle>
+        </PasswordContainerStyle>
+
+        {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
+      </InputContainer>
+
+      <InputContainer>
+        <PasswordContainerStyle>
+          <InputStyle
+            type={showConfirmPassword ? "text" : "password"}
+            id="forgetPassword"
+            required
+            {...register("confirmPassword", {
+              required: "Este campo é obrigatório.",
+              validate: (value) => value === password || "As senhas devem ser iguais",
+            })}
+          />
+          <LabelInput htmlFor="forgetPassword">Repetir Senha</LabelInput>
+          <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+            {showConfirmPassword ? "ESCONDER" : "EXIBIR"}
+          </ShowPasswordButtonStyle>
+        </PasswordContainerStyle>
+        {errors.confirmPassword && <ErrorMessageStyle>{errors.confirmPassword.message}</ErrorMessageStyle>}
+      </InputContainer>
       <TermsOfUseStyle>
         <TermsOfUseCheckbox
           type="checkbox"
@@ -129,6 +146,7 @@ export default function SignUpFormComponent() {
             },
           })}
         />
+
         <span>
           Declaro que li e concordo com os <a href="#">termos de uso e política de privacidade.</a>
         </span>
