@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import ButtonComponent from "../Button";
 import {
@@ -12,7 +12,9 @@ import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
 import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
 import signUp from "../../services/signUp";
 import { useNavigate } from "react-router-dom";
-
+import { UserContext } from "../../contexts/UserContext";
+import { AxiosError } from "axios";
+import infoErro from "../../assets/icons/infoErro.svg";
 interface ISignUpInput {
   name: string;
   email: string;
@@ -25,8 +27,14 @@ export default function SignUpFormComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [erroName, setErroName] = useState(false);
+  const [erroEmail, setErroEmail] = useState(false);
+  const [erroPassword, setErroPassword] = useState(false);
+  const [erroConfirmPassword, setErroConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const { showError, setShowError } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -44,10 +52,20 @@ export default function SignUpFormComponent() {
       acceptedTerms: acceptedTerms,
     };
     try {
+      setLoading(true);
       await signUp(body);
+      setShowError(false);
       navigate("/signinpage");
     } catch (err) {
-      console.log(err);
+      const erro = err as AxiosError<{ message: string }>;
+      console.error(erro.message);
+      if (erro.response?.data.message) {
+        setShowError(true);
+        setErroEmail(true);
+        setLoading(false);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,6 +74,7 @@ export default function SignUpFormComponent() {
     <SignUpFormStyle onSubmit={handleSubmit(handleSignUp)}>
       <InputContainer>
         <InputStyle
+          $hasErro={erroName}
           type="text"
           id="name"
           required
@@ -69,14 +88,20 @@ export default function SignUpFormComponent() {
               value: /^[a-zA-ZÀ-ÿ\s~]+$/,
               message: "O campo nome não pode conter números nem caracteres especiais.",
             },
+            onChange(event: React.ChangeEvent<HTMLInputElement>) {
+              event.target.value.length < 3 ? setErroName(true) : setErroName(false);
+            },
           })}
         />
-        <LabelInput htmlFor="name">Nome</LabelInput>
+        <LabelInput $hasErro={erroName} htmlFor="name">
+          Nome
+        </LabelInput>
         {errors.name && <ErrorMessageStyle>{errors.name.message}</ErrorMessageStyle>}
       </InputContainer>
 
       <InputContainer>
         <InputStyle
+          $hasErro={erroEmail}
           type="email"
           id="Email"
           required
@@ -86,15 +111,29 @@ export default function SignUpFormComponent() {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               message: "Este campo precisa ser um email válido.",
             },
+            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+              const matchErro = target.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+              if (matchErro) {
+                setErroEmail(false);
+                setShowError(false);
+              } else {
+                setErroEmail(true);
+              }
+            },
           })}
         />
-        <LabelInput htmlFor="Email">Email</LabelInput>
+        <LabelInput $hasErro={erroEmail} htmlFor="Email">
+          Email
+        </LabelInput>
         {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
+        {showError && <ErrorMessageStyle>Esse email já está sendo usando</ErrorMessageStyle>}
+        {showError && <img src={infoErro} alt="icone de info erro" />}
       </InputContainer>
 
       <InputContainer>
         <PasswordContainerStyle>
           <InputStyle
+            $hasErro={erroPassword}
             type={showPassword ? "text" : "password"}
             id="password"
             required
@@ -105,9 +144,21 @@ export default function SignUpFormComponent() {
                 message:
                   "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
               },
+              onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+                const matchErro = target.value.match(
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
+                );
+                if (matchErro) {
+                  setErroPassword(false);
+                } else {
+                  setErroPassword(true);
+                }
+              },
             })}
           />
-          <LabelInput htmlFor="password">Senha</LabelInput>
+          <LabelInput $hasErro={erroPassword} htmlFor="password">
+            Senha
+          </LabelInput>
           <ShowPasswordButtonStyle type="button" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? "ESCONDER" : "EXIBIR"}
           </ShowPasswordButtonStyle>
@@ -119,21 +170,32 @@ export default function SignUpFormComponent() {
       <InputContainer>
         <PasswordContainerStyle>
           <InputStyle
+            $hasErro={erroConfirmPassword}
             type={showConfirmPassword ? "text" : "password"}
             id="forgetPassword"
             required
             {...register("confirmPassword", {
               required: "Este campo é obrigatório.",
               validate: (value) => value === password || "As senhas devem ser iguais",
+              onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+                if (target.value !== password) {
+                  setErroConfirmPassword(true);
+                } else {
+                  setErroConfirmPassword(false);
+                }
+              },
             })}
           />
-          <LabelInput htmlFor="forgetPassword">Repetir Senha</LabelInput>
+          <LabelInput $hasErro={erroConfirmPassword} htmlFor="forgetPassword">
+            Repetir Senha
+          </LabelInput>
           <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
             {showConfirmPassword ? "ESCONDER" : "EXIBIR"}
           </ShowPasswordButtonStyle>
         </PasswordContainerStyle>
         {errors.confirmPassword && <ErrorMessageStyle>{errors.confirmPassword.message}</ErrorMessageStyle>}
       </InputContainer>
+
       <TermsOfUseStyle>
         <TermsOfUseCheckbox
           type="checkbox"
@@ -152,7 +214,11 @@ export default function SignUpFormComponent() {
         </span>
       </TermsOfUseStyle>
       {errors.acceptedTerms && <ErrorMessageStyle>{errors.acceptedTerms.message}</ErrorMessageStyle>}
-      <ButtonComponent>Criar Conta</ButtonComponent>
+      {loading ? (
+        <ButtonComponent disabled>Carregando...</ButtonComponent>
+      ) : (
+        <ButtonComponent>Criar Conta</ButtonComponent>
+      )}
     </SignUpFormStyle>
   );
 }

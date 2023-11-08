@@ -1,5 +1,4 @@
-import api from "./api";
-
+import instance from "./api";
 interface ISignUpInput {
   name: string;
   email: string;
@@ -8,10 +7,6 @@ interface ISignUpInput {
 }
 
 export default async function signUp({ name, email, password, acceptedTerms }: ISignUpInput) {
-   try {
-    const response = await api.post("/auth/register", { name, email, password, acceptedTerms });
+  const response = await instance.post("/auth/register", { name, email, password, acceptedTerms });
   return response;
-   } catch (error) {
-      console.log(error)
-   }
 }
