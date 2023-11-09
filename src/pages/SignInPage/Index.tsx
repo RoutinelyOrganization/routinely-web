@@ -37,7 +37,7 @@ export function SignInPage() {
     formState: { errors },
   } = useForm<ISingInProps>();
 
-  async function handleSubmitSignIn(Data: ISingInProps) {
+  const handleSubmitSignIn = async(Data: ISingInProps) => {
     try {
       setLoading(true);
       const response: AxiosResponse<{ token: string }> | undefined = await login(Data);

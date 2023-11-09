@@ -1,14 +1,14 @@
-import { createBrowserRouter, createRoutesFromElements, Route, Outlet } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import SignUpPage from "../pages/SignUpPage";
-import ForgotPasswordPage from "../pages/ForgotPasswordPage";
-import RedefinePasswordPage from "../pages/RedefinePasswordPage";
-import { WelcomePage } from "../pages/WelcomePage";
-import { SignInPage } from "../pages/SignInPage/Index";
-import { NewPasswordPage } from "../pages/NewPasswordPage";
-import DashboardPage from "../pages/DashboardPage";
-import { UserProvider } from "../contexts/UserContext";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import App from "../App";
+import { UserProvider } from "../contexts/UserContext";
+import DashboardPage from "../pages/DashboardPage";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import HomePage from "../pages/HomePage";
+import { NewPasswordPage } from "../pages/NewPasswordPage";
+import RedefinePasswordPage from "../pages/RedefinePasswordPage";
+import { SignInPage } from "../pages/SignInPage/Index";
+import SignUpPage from "../pages/SignUpPage";
+import { WelcomePage } from "../pages/WelcomePage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

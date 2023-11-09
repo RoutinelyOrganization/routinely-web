@@ -25,7 +25,7 @@ export function NewPasswordPage() {
 
   const password = watch("password");
 
-  function handleSubmitNewPassword(data: INewPasswordProps) {
+  const handleSubmitNewPassword = (data: INewPasswordProps) => {
     console.log(data);
   }
   return (
