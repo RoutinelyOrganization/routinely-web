@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const NewPasswordPageWrapperStyle = styled.main`
+export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,13 +9,13 @@ export const NewPasswordPageWrapperStyle = styled.main`
   height: 100vh;
 `;
 
-export const NewPasswordPageFormStyle = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: start;
 `;
 
-export const TitleNewPasswordPageStyle = styled.h1`
+export const Title = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   line-height: 3.25rem;
@@ -24,7 +24,7 @@ export const TitleNewPasswordPageStyle = styled.h1`
   margin-top: 32px;
 `;
 
-export const CaptionNewPasswordPageStyle = styled.p`
+export const Caption = styled.p`
   font-size: 1rem;
   font-weight: 400;
   line-height: 20px;
@@ -32,14 +32,14 @@ export const CaptionNewPasswordPageStyle = styled.p`
   text-align: center;
   color: #171a21;
 `;
-export const InputWrapperNewPasswordPageStyle = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 16px;
 `;
 
-export const InputContainerNewPasswordPageStyle = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 40px 0 calc(40px - 16px) 0;

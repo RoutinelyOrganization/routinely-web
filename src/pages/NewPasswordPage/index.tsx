@@ -1,21 +1,14 @@
 import { useState } from "react";
-import HeaderComponent from "../../components/Header";
-import LogoSharedComponent from "../../components/LogoShared";
-import {
-  CaptionNewPasswordPageStyle,
-  InputWrapperNewPasswordPageStyle,
-  NewPasswordPageFormStyle,
-  NewPasswordPageWrapperStyle,
-  InputContainerNewPasswordPageStyle,
-  TitleNewPasswordPageStyle,
-} from "./NewPasswordPageStyles";
-import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg";
-import { InputStyle } from "../../components/Input/InputStyles";
 import { useForm } from "react-hook-form";
-import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
-import { ShowPasswordSignInPageStyle } from "../SignInPage/SignInPageStyles";
+import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg";
 import ButtonComponent from "../../components/Button";
+import HeaderComponent from "../../components/Header";
+import { InputStyle } from "../../components/Input/InputStyles";
+import LogoSharedComponent from "../../components/LogoShared";
+import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ShowPassword as ShowPasswordStyle } from "../SignInPage/styles";
+import * as S from "./styles";
 
 interface INewPasswordProps {
   password: string;
@@ -40,16 +33,16 @@ export function NewPasswordPage() {
       <ScrollToTop />
       <HeaderComponent />
 
-      <NewPasswordPageWrapperStyle>
-        <NewPasswordPageFormStyle onSubmit={handleSubmit(handleSubmitNewPassword)}>
+      <S.Wrapper>
+        <S.Form onSubmit={handleSubmit(handleSubmitNewPassword)}>
           <LogoSharedComponent />
-          <TitleNewPasswordPageStyle>Criar nova senha</TitleNewPasswordPageStyle>
-          <CaptionNewPasswordPageStyle>
+          <S.Title>Criar nova senha</S.Title>
+          <S.Caption>
             Escolha uma nova senha abaixo ela precisa ser diferente da senha anterior
-          </CaptionNewPasswordPageStyle>
+          </S.Caption>
 
-          <InputContainerNewPasswordPageStyle>
-            <InputWrapperNewPasswordPageStyle>
+          <S.InputContainer>
+            <S.InputWrapper>
               <PasswordContainerStyle>
                 <InputStyle
                   type={showPassword ? "text" : "password"}
@@ -63,14 +56,14 @@ export function NewPasswordPage() {
                     },
                   })}
                 />
-                <ShowPasswordSignInPageStyle onClick={() => setShowPassword(!showPassword)}>
+                <ShowPasswordStyle onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? "ESCONDER" : "EXIBIR"}
-                </ShowPasswordSignInPageStyle>
+                </ShowPasswordStyle>
               </PasswordContainerStyle>
-            </InputWrapperNewPasswordPageStyle>
+            </S.InputWrapper>
 
             {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
-            <InputWrapperNewPasswordPageStyle>
+            <S.InputWrapper>
               <PasswordContainerStyle>
                 <InputStyle
                   type={showPassword ? "text" : "password"}
@@ -80,18 +73,18 @@ export function NewPasswordPage() {
                     validate: (value) => value === password || "As Senhas devem ser iguais",
                   })}
                 />
-                <ShowPasswordSignInPageStyle onClick={() => setShowPassword(!showPassword)}>
+                <ShowPasswordStyle onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? "ESCONDER" : "EXIBIR"}
-                </ShowPasswordSignInPageStyle>
+                </ShowPasswordStyle>
               </PasswordContainerStyle>
-            </InputWrapperNewPasswordPageStyle>
+            </S.InputWrapper>
 
             {errors.newPassword && <ErrorMessageStyle>{errors.newPassword.message}</ErrorMessageStyle>}
-          </InputContainerNewPasswordPageStyle>
+          </S.InputContainer>
           <ButtonComponent>Atualizar Senha</ButtonComponent>
-        </NewPasswordPageFormStyle>
+        </S.Form>
         <img src={NewPasswordPageImage} alt="Imagem da Página de nova senha" />
-      </NewPasswordPageWrapperStyle>
+      </S.Wrapper>
     </>
   );
 }
