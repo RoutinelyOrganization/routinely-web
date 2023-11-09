@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WelcomePageWrapper = styled.main`
+export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   margin-top: 96px;
@@ -8,7 +8,7 @@ export const WelcomePageWrapper = styled.main`
   height: calc(100vh - 96px);
 `;
 
-export const TitleWelcomePage = styled.h1`
+export const Title = styled.h1`
   color: #171a21;
   font-size: 3rem;
   font-weight: 700;
@@ -17,7 +17,7 @@ export const TitleWelcomePage = styled.h1`
   margin-bottom: 24px;
 `;
 
-export const CaptionWelcomePage = styled.p`
+export const Caption = styled.p`
   font-size: 24px;
   font-weight: 700;
   line-height: 28px;
@@ -26,7 +26,7 @@ export const CaptionWelcomePage = styled.p`
   margin-bottom: 80px;
 `;
 
-export const ContainerButtonWelcomePage = styled.div`
+export const ContainerButton = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px 0px;
