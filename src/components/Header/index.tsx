@@ -1,10 +1,10 @@
 import { UserContext } from "../../contexts/UserContext";
-import ButtonBackPage from "../ButtonBackPage";
 import ContainerIcons from "../ContainerIcons";
+import LogoComponent from "../Logo";
 import MenuHeaderComponent from "../MenuHeader";
 import { HeaderStyle } from "./HeaderStyles";
 
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function HeaderComponent() {
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
@@ -14,7 +14,7 @@ export default function HeaderComponent() {
 
   return (
     <HeaderStyle>
-      <ButtonBackPage />
+      <LogoComponent/>
       {hasUser && (
         <>
           <ContainerIcons setIsShowMenu={setIsShowMenu} />
