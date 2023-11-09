@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const HeaderHomePageComponent = styled.header`
+export const Header = styled.header`
   display: flex;
   padding: .92rem 6.7rem;
   align-items: center;
@@ -8,13 +8,13 @@ export const HeaderHomePageComponent = styled.header`
   background-color: #5c59bb;
 `;
 
-export const MainHomePageComponent = styled.main`
+export const Main = styled.main`
   display: flex;
   margin-top: 152px;
   flex-direction: column;
   align-items: center;
 `;
-export const TitleHomePageComponent = styled.h1`
+export const Title = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   line-height: 3.25rem;
@@ -22,7 +22,7 @@ export const TitleHomePageComponent = styled.h1`
   width: 992px;
   margin-bottom: 40px;
 `;
-export const CaptionHomePageComponent = styled.p`
+export const Caption = styled.p`
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.75rem;
@@ -30,7 +30,7 @@ export const CaptionHomePageComponent = styled.p`
   width: 860px;
   margin-bottom: 48px;
 `;
-export const ButtonHomePageComponent = styled.button`
+export const Button = styled.button`
   width: 256px;
   height: 40px;
   border-radius: 8px;
