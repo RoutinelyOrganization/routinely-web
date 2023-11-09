@@ -1,19 +1,15 @@
+import { useForm } from "react-hook-form";
+import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
 import ButtonComponent from "../../components/Button";
 import HeaderComponent from "../../components/Header";
+import { InputStyle } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
+import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import SubTitleAuthComponent from "../../components/SubTitleAuth";
 import { NoticeSpanStyle } from "../../components/SubTitleAuth/SubTitleAuthStyles";
 import TitleAuthComponent from "../../components/TitleAuth";
-import {
-  ForgotPasswordImageContainer,
-  ForgotPasswordPageStyle,
-  ForgotPasswordPageWrapper,
-} from "./ForgotPasswordPageStyles";
-import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import { InputStyle } from "../../components/Input/InputStyles";
-import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles";
-import { useForm } from "react-hook-form";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import * as S from "./styles";
 
 interface IForgotPassword {
   email: string;
@@ -34,8 +30,8 @@ export default function ForgotPasswordPage() {
     <>
       <ScrollToTop />
       <HeaderComponent />
-      <ForgotPasswordPageStyle>
-        <ForgotPasswordPageWrapper>
+      <S.Main>
+        <S.Wrapper>
           <LogoSharedComponent />
           <TitleAuthComponent>Esqueceu sua Senha?</TitleAuthComponent>
           <SubTitleAuthComponent>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuthComponent>
@@ -55,11 +51,11 @@ export default function ForgotPasswordPage() {
             <NoticeSpanStyle>Você receberá um código de verificação no seu e-mail</NoticeSpanStyle>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
-        </ForgotPasswordPageWrapper>
-        <ForgotPasswordImageContainer>
+        </S.Wrapper>
+        <S.ImageContainer>
           <img src={forgotPasswordImage} alt="Imagem da página de esqueci senha" />
-        </ForgotPasswordImageContainer>
-      </ForgotPasswordPageStyle>
+        </S.ImageContainer>
+      </S.Main>
     </>
   );
 }
