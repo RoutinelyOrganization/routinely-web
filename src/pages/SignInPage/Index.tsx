@@ -1,32 +1,21 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { useForm } from "react-hook-form";
-import HeaderComponent from "../../components/Header";
-import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
-import LogoSharedComponent from "../../components/LogoShared";
-import {
-  ButtonWrapperSignInStyle,
-  CheckboxAndForgetPasswordWrapperSignInStyle,
-  CheckboxSignInStyle,
-  CheckboxWrapperSignInStyle,
-  ForgetPasswordSignInStyle,
-  InputWrapperSignInStyle,
-  ShowPasswordSignInPageStyle,
-  SignInPageWrapperStyle,
-  SingInPageFormStyle,
-  TitleSignInPageStyle,
-} from "./SignInPageStyles";
-import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
+import { AxiosError, AxiosResponse } from "axios";
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import infoErro from "../../assets/icons/infoErro.svg";
+import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
+import HeaderComponent from "../../components/Header";
+import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
 import LinkAuthComponent from "../../components/LinkAuth";
-import signInPageImage from "../../assets/imagens/signInPageImage.svg";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import LogoSharedComponent from "../../components/LogoShared";
+import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { UserContext } from "../../contexts/UserContext";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
-import { AxiosError, AxiosResponse } from "axios";
-import infoErro from "../../assets/icons/infoErro.svg";
+import * as S from "./styles";
 export interface ISingInProps {
   email: string;
   password: string;
@@ -77,11 +66,11 @@ export function SignInPage() {
     <>
       <ScrollToTop />
       <HeaderComponent />
-      <SignInPageWrapperStyle>
-        <SingInPageFormStyle onSubmit={handleSubmit(handleSubmitSignIn)}>
+      <S.Wrapper>
+        <S.Form onSubmit={handleSubmit(handleSubmitSignIn)}>
           <LogoSharedComponent />
-          <TitleSignInPageStyle>Acessar conta</TitleSignInPageStyle>
-          <InputWrapperSignInStyle>
+          <S.Title>Acessar conta</S.Title>
+          <S.InputWrapper>
             <InputContainer>
               <InputStyle
                 $hasErro={erroEmail}
@@ -137,7 +126,7 @@ export function SignInPage() {
                   Senha
                 </LabelInput>
 
-                <ShowPasswordSignInPageStyle onClick={() => setShowPassword(!showPassord)}>
+                <S.ShowPassword onClick={() => setShowPassword(!showPassord)}>
                   <>
                     {erroPassword ? (
                       <img src={infoErro} alt="icone de info erro" />
@@ -147,22 +136,22 @@ export function SignInPage() {
                       "EXIBIR"
                     )}
                   </>
-                </ShowPasswordSignInPageStyle>
+                </S.ShowPassword>
               </InputContainer>
             </PasswordContainerStyle>
             {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
-          </InputWrapperSignInStyle>
-          <CheckboxAndForgetPasswordWrapperSignInStyle>
-            <CheckboxWrapperSignInStyle>
+          </S.InputWrapper>
+          <S.CheckboxAndForgetPasswordWrapper>
+            <S.CheckboxWrapper>
               <label htmlFor="checkboxSignIn">Lembrar meu acesso</label>
-              <CheckboxSignInStyle type="checkbox" id="checkboxSignIn" {...register("remember")} />
-            </CheckboxWrapperSignInStyle>
-            <ForgetPasswordSignInStyle>
+              <S.Checkbox type="checkbox" id="checkboxSignIn" {...register("remember")} />
+            </S.CheckboxWrapper>
+            <S.ForgetPassword>
               {<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}
-            </ForgetPasswordSignInStyle>
-          </CheckboxAndForgetPasswordWrapperSignInStyle>
+            </S.ForgetPassword>
+          </S.CheckboxAndForgetPasswordWrapper>
 
-          <ButtonWrapperSignInStyle>
+          <S.ButtonWrapper>
             {loading ? (
               <ButtonComponent disabled>Carregando...</ButtonComponent>
             ) : (
@@ -175,10 +164,10 @@ export function SignInPage() {
             <LinkAuthComponent path="/signUpPage" linkText="Crie a sua.">
               Não tem uma conta?
             </LinkAuthComponent>
-          </ButtonWrapperSignInStyle>
-        </SingInPageFormStyle>
+          </S.ButtonWrapper>
+        </S.Form>
         <img src={signInPageImage} alt="Imagem da página acessar conta" />
-      </SignInPageWrapperStyle>
+      </S.Wrapper>
     </>
   );
 }

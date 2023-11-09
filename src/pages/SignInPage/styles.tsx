@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const SignInPageWrapperStyle = styled.main`
+export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,13 +9,13 @@ export const SignInPageWrapperStyle = styled.main`
   margin-bottom: 3rem;
 `;
 
-export const SingInPageFormStyle = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 104px;
 `;
 
-export const TitleSignInPageStyle = styled.h1`
+export const Title = styled.h1`
   font-family: Roboto;
   font-size: 3rem;
   font-weight: 700;
@@ -25,12 +25,12 @@ export const TitleSignInPageStyle = styled.h1`
   margin: 32px 0;
 `;
 
-export const InputWrapperSignInStyle = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 `;
-export const ShowPasswordSignInPageStyle = styled.span`
+export const ShowPassword = styled.span`
   position: absolute;
   right: 5%;
   top: 50%;
@@ -39,7 +39,7 @@ export const ShowPasswordSignInPageStyle = styled.span`
   color: #171a21;
   cursor: pointer;
 `;
-export const CheckboxAndForgetPasswordWrapperSignInStyle = styled.div`
+export const CheckboxAndForgetPasswordWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -47,7 +47,7 @@ export const CheckboxAndForgetPasswordWrapperSignInStyle = styled.div`
   margin: 1rem 0;
 `;
 
-export const CheckboxWrapperSignInStyle = styled.div`
+export const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
@@ -62,13 +62,13 @@ export const CheckboxWrapperSignInStyle = styled.div`
     cursor: pointer;
   }
 `;
-export const CheckboxSignInStyle = styled.input`
+export const Checkbox = styled.input`
   width: 24px;
   height: 24px;
   cursor: pointer;
 `;
 
-export const ForgetPasswordSignInStyle = styled.span`
+export const ForgetPassword = styled.span`
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1rem;
@@ -78,7 +78,7 @@ export const ForgetPasswordSignInStyle = styled.span`
   color: #171a21;
 `;
 
-export const ButtonWrapperSignInStyle = styled.div`
+export const ButtonWrapper = styled.div`
   display:flex;
   flex-direction: column;
   gap: 24px;
