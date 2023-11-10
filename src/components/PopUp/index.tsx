@@ -1,8 +1,8 @@
-import { ContainerPopUPstyle } from "./PopUpStyle";
+import * as S from "./styles";
 
 interface IPopUpProps {
   children: React.ReactNode;
 }
-export default function PopUpComponent({ children }: IPopUpProps) {
-  return <ContainerPopUPstyle>{children}</ContainerPopUPstyle>;
+export default function PopUp({ children }: IPopUpProps) {
+  return <S.Container>{children}</S.Container>;
 }

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ContainerPopUPstyle = styled.div` /* modal */
+export const Container = styled.div` /* modal */
   position: absolute;
   display: flex;
   flex-direction: column;
