@@ -6,7 +6,6 @@ import { InputStyle } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
 import { ErrorMessage as ErrorMessageStyle } from "../../components/SignUpForm/styles";
 import SubTitleAuthComponent from "../../components/SubTitleAuth";
-import { NoticeSpanStyle } from "../../components/SubTitleAuth/SubTitleAuthStyles";
 import TitleAuthComponent from "../../components/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
@@ -48,7 +47,7 @@ export default function ForgotPasswordPage() {
               })}
             />
             {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-            <NoticeSpanStyle>Você receberá um código de verificação no seu e-mail</NoticeSpanStyle>
+            <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </S.Wrapper>

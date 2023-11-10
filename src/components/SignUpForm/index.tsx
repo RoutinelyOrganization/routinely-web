@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
 import { UserContext } from "../../contexts/UserContext";
 import signUp from "../../services/signUp";
-import ButtonComponent from "../Button";
+import Button from "../Button";
 import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
 import * as S from "./styles";
 
@@ -210,9 +210,9 @@ export default function SignUpForm() {
       </S.TermsOfUseContainer>
       {errors.acceptedTerms && <S.ErrorMessage>{errors.acceptedTerms.message}</S.ErrorMessage>}
       {loading ? (
-        <ButtonComponent disabled>Carregando...</ButtonComponent>
+        <Button disabled>Carregando...</Button>
       ) : (
-        <ButtonComponent>Criar Conta</ButtonComponent>
+        <Button>Criar Conta</Button>
       )}
     </S.Form>
   );

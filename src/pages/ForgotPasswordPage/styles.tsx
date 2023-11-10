@@ -30,3 +30,9 @@ export const ImageContainer = styled.div`
   align-self: flex-end;
   padding-top: 48px;
 `;
+
+export const Span = styled.span`
+  font-size: 0.75rem;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+`;
