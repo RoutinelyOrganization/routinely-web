@@ -1,10 +1,10 @@
-import ToDoTasksComponent from "../ToDoTasks";
-import { TasksStyle } from "./TasksStyle";
+import ToDoTasks from "../ToDoTasks";
+import * as S from "./styles";
 
 export default function TasksComponent() {
     return (
-        <TasksStyle>
-            <ToDoTasksComponent />
-        </TasksStyle>
+        <S.Container>
+            <ToDoTasks />
+        </S.Container>
     )
 }

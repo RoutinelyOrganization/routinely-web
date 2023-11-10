@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const TasksStyle = styled.div`
+export const Container = styled.div`
   width: 576px;
   height: 848px;
   flex-shrink: 0;

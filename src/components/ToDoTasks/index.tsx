@@ -1,4 +1,4 @@
-import ContainerTaskComponent from "../ContainerTask";
+import ContainerTask from "../ContainerTask";
 import { ButtonAddTaskStyle, ToDoTasksStyle } from "./ToDoTasksStyle";
 
 interface ITodoTasksProps {
@@ -12,11 +12,11 @@ export default function ToDoTasksComponent({ setIsEditTaskOpen, setIsAddTaskOpen
   };
   return (
     <ToDoTasksStyle>
-      <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTaskComponent setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
       <ButtonAddTaskStyle onClick={handleAddTask}>Adicionar nova tarefa</ButtonAddTaskStyle>
       <hr />
     </ToDoTasksStyle>
