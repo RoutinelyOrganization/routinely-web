@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LinkAuthStyle = styled.p`
+export const Paragraph = styled.p`
   color: #171a21;
   font-size: 16px;
   line-height: 16px;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LinkAuthStyle } from "./LinkAuthStyles";
+import * as S from "./styles";
 
 interface ILinkAuth {
   children: string;
@@ -9,9 +9,9 @@ interface ILinkAuth {
 
 export default function LinkAuthComponent({ children, path, linkText }: ILinkAuth) {
   return (
-    <LinkAuthStyle>
+    <S.Paragraph>
       {children}
       {<Link to={path}>{linkText}</Link>}
-    </LinkAuthStyle>
+    </S.Paragraph>
   );
 }
