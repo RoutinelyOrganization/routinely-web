@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonBackPageStyle = styled.button`
+export const ButtonBackPage = styled.button`
   display: flex;
   align-items: center;
   gap: 16px;
