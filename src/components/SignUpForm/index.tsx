@@ -1,20 +1,20 @@
-import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import infoErro from "../../assets/icons/infoErro.svg";
+import { UserContext } from "../../contexts/UserContext";
+import signUp from "../../services/signUp";
 import ButtonComponent from "../Button";
+import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
 import {
   ErrorMessageStyle,
   PasswordContainerStyle,
   ShowPasswordButtonStyle,
   SignUpFormStyle,
+  TermsOfUseCheckbox, TermsOfUseStyle,
 } from "./SignUpFormStyles";
-import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
-import { TermsOfUseCheckbox, TermsOfUseStyle } from "./SignUpFormStyles";
-import signUp from "../../services/signUp";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
-import { AxiosError } from "axios";
-import infoErro from "../../assets/icons/infoErro.svg";
 interface ISignUpInput {
   name: string;
   email: string;

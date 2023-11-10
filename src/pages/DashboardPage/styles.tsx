@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
 
-export const DashboardPageStyle = styled.main`
+export const Main = styled.main`
   display: flex;
   justify-content: space-around;
   padding: 64px 0;
 `;
 
-export const ContainerTasksStyle = styled.section`
+export const ContainerTasks = styled.section`
   width: 576px;
   border-radius: 10px;
   border: 1px #5c59bb solid;
@@ -37,7 +37,7 @@ export const ButtonEditTask = styled.button`
   }
   ` 
 
-export const ContainerCalendarStyle = styled.section`
+export const ContainerCalendar = styled.section`
   display: flex;
   flex-direction: column;
   gap: 50px;
