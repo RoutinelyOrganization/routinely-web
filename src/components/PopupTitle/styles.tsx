@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const PopupTitleStyle = styled.h3`
+export const Title = styled.h3`
   color: #5c59bb;
   font-size: 24px;
   font-weight: 600;
