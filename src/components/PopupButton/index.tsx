@@ -1,13 +1,13 @@
-import { PopupButtonStyle } from "./PopupButtonStyle";
+import * as S from "./styles";
 
 interface IPopupButton {
     children: string
 }
 
-export default function PopupButtonComponent({ children }: IPopupButton) {
+export default function PopupButton({ children }: IPopupButton) {
     return (
-        <PopupButtonStyle>
+        <S.Button>
             {children}
-        </PopupButtonStyle>
+        </S.Button>
     )
 }

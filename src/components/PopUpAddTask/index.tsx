@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import PopUpCloseButton from "../PopUpCloseButton";
-import PopupButtonComponent from "../PopupButton";
+import PopupButton from "../PopupButton";
 import PopupTitle from "../PopupTitle";
 import { ErrorMessageStyle } from "../SignUpForm/SignUpFormStyles";
 import * as S from "./styles";
@@ -133,7 +133,7 @@ export default function PopUpAddTask({ setIsAddTaskOpen }: IPopUpAddTaskProps) {
         {errors.descriptionTask && <ErrorMessageStyle>{errors.descriptionTask.message}</ErrorMessageStyle>}
       </S.ContainerPopUp>
 
-      <PopupButtonComponent>Adicionar tarefa</PopupButtonComponent>
+      <PopupButton>Adicionar tarefa</PopupButton>
     </S.Form>
   );
 }
