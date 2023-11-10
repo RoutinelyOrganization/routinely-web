@@ -1,33 +1,25 @@
 import DeleteButtonComponent from "../DeleteButton";
 import EditButtonComponent from "../EditButton";
 import PriorityFlag from "../PriorityFlag";
-import {
-  ContainerTaskCategoryStyle,
-  ContainerTaskCheckboxStyle,
-  ContainerTaskPriorityStyle,
-  ContainerTaskStyle,
-  ContainerTaskSubCategoryStyle,
-  ContainerTaskTextStyle,
-  ContainerTaskWrapper,
-} from "./ContainerTaskStyle";
+import * as S from "./styles";
 
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function ContainerTaskComponent({ setIsEditTaskOpen }: IContainerTaskProps) {
   return (
-    <ContainerTaskWrapper>
-      <ContainerTaskStyle>
-        <ContainerTaskCheckboxStyle type="checkbox" />
-        <ContainerTaskTextStyle>afawdawdawdawadawadwdawdawdaw</ContainerTaskTextStyle>
-        <ContainerTaskCategoryStyle>pessoal</ContainerTaskCategoryStyle>
-        <ContainerTaskSubCategoryStyle>contas</ContainerTaskSubCategoryStyle>
-        <ContainerTaskPriorityStyle>
+    <S.Wrapper>
+      <S.ContainerTask>
+        <S.ContainerCheckbox type="checkbox" />
+        <S.ContainerText>afawdawdawdawadawadwdawdawdaw</S.ContainerText>
+        <S.ContainerCategory>pessoal</S.ContainerCategory>
+        <S.ContainerSubCategory>contas</S.ContainerSubCategory>
+        <S.ContainerPriority>
           <PriorityFlag />
-        </ContainerTaskPriorityStyle>
+        </S.ContainerPriority>
         <EditButtonComponent setIsEditTaskOpen={setIsEditTaskOpen} />
         <DeleteButtonComponent />
-      </ContainerTaskStyle>
-    </ContainerTaskWrapper>
+      </S.ContainerTask>
+    </S.Wrapper>
   );
 }
