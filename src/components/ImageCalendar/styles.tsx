@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ImageCalendarStyle = styled.div`
+export const Container = styled.div`
   display: flex;
   width: 572px;
   padding: 8px 0px;
