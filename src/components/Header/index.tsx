@@ -2,7 +2,7 @@ import { UserContext } from "../../contexts/UserContext";
 import ButtonBackPage from "../ButtonBackPage";
 import ContainerIcons from "../ContainerIcons";
 import Logo from "../Logo";
-import MenuHeaderComponent from "../MenuHeader";
+import MenuHeader from "../MenuHeader";
 import * as S from "./styles";
 
 import { useContext, useState } from "react";
@@ -26,7 +26,7 @@ export default function Header({header = 'primary'}:IHeader) {
       {hasUser && (
         <>
           <ContainerIcons setIsShowMenu={setIsShowMenu} />
-          {isShowMenu && <MenuHeaderComponent setIsShowMenu={setIsShowMenu} />}
+          {isShowMenu && <MenuHeader setIsShowMenu={setIsShowMenu} />}
         </>
       )}
     </S.Header>

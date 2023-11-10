@@ -1,19 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import {
-  MenuHeaderBarStyle,
-  MenuHeaderContainerStyle,
-  MenuHeaderItemStyle,
-  MenuHeaderListStyle,
-  MenuHeaderStyle,
-} from "./MenuHeaderStyle";
-import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
+import { useAuth } from "../../hooks/useAuth";
+import * as S from "./styles";
+
 interface IMenuHeader {
   setIsShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
+export default function MenuHeader({ setIsShowMenu }: IMenuHeader) {
   const { disconnectLogin } = useAuth();
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -50,8 +45,8 @@ export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
   ];
 
   return (
-    <MenuHeaderContainerStyle>
-      <MenuHeaderBarStyle>
+    <S.Wrapper>
+      <S.MenuBar>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -65,16 +60,16 @@ export default function MenuHeaderComponent({ setIsShowMenu }: IMenuHeader) {
             fill="#F6F7F8"
           />
         </svg>
-      </MenuHeaderBarStyle>
-      <MenuHeaderStyle>
-        <MenuHeaderListStyle>
+      </S.MenuBar>
+      <S.Container>
+        <S.List>
           {menuItems.map((menuItem) => (
-            <MenuHeaderItemStyle key={menuItem.id} onClick={menuItem.onclick}>
+            <S.Item key={menuItem.id} onClick={menuItem.onclick}>
               {menuItem.name}
-            </MenuHeaderItemStyle>
+            </S.Item>
           ))}
-        </MenuHeaderListStyle>
-      </MenuHeaderStyle>
-    </MenuHeaderContainerStyle>
+        </S.List>
+      </S.Container>
+    </S.Wrapper>
   );
 }
