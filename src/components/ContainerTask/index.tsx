@@ -6,7 +6,7 @@ import * as S from "./styles";
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function ContainerTaskComponent({ setIsEditTaskOpen }: IContainerTaskProps) {
+export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps) {
   return (
     <S.Wrapper>
       <S.ContainerTask>

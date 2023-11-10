@@ -1,26 +1,18 @@
 import PriorityFlag from "../PriorityFlag";
-import {
-  ContainerTaskCategoryStyle,
-  ContainerTaskCheckboxStyle,
-  ContainerTaskPriorityStyle,
-  ContainerTaskStyle,
-  ContainerTaskSubCategoryStyle,
-  ContainerTaskTextStyle,
-  ContainerTaskWrapper,
-} from "./ContainerTaskDoneStyle";
+import * as S from "./styles";
 
-export default function ContainerTaskDoneComponent() {
+export default function ContainerTaskDone() {
   return (
-    <ContainerTaskWrapper>
-      <ContainerTaskStyle>
-        <ContainerTaskCheckboxStyle type="checkbox" />
-        <ContainerTaskTextStyle>afawdawdawdawadawadwdawdawdaw</ContainerTaskTextStyle>
-        <ContainerTaskCategoryStyle>pessoal</ContainerTaskCategoryStyle>
-        <ContainerTaskSubCategoryStyle>contas</ContainerTaskSubCategoryStyle>
-        <ContainerTaskPriorityStyle>
+    <S.Wrapper>
+      <S.Container>
+        <S.ContainerCheckbox type="checkbox" />
+        <S.ContainerText>afawdawdawdawadawadwdawdawdaw</S.ContainerText>
+        <S.ContainerCategory>pessoal</S.ContainerCategory>
+        <S.ContainerSubCategory>contas</S.ContainerSubCategory>
+        <S.ContainerPriority>
           <PriorityFlag />
-        </ContainerTaskPriorityStyle>
-      </ContainerTaskStyle>
-    </ContainerTaskWrapper>
+        </S.ContainerPriority>
+      </S.Container>
+    </S.Wrapper>
   );
 }

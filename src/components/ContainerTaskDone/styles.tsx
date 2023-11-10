@@ -1,18 +1,18 @@
 import { styled } from "styled-components";
 
-export const ContainerTaskStyle = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 25px;
 `;
 
-export const ContainerTaskCheckboxStyle = styled.input`
+export const ContainerCheckbox = styled.input`
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 `;
 
-export const ContainerTaskTextStyle = styled.span`
+export const ContainerText = styled.span`
   width: 176px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -23,7 +23,7 @@ export const ContainerTaskTextStyle = styled.span`
   line-height: 20px;
 `;
 
-export const ContainerTaskCategoryStyle = styled.span`
+export const ContainerCategory = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +38,13 @@ export const ContainerTaskCategoryStyle = styled.span`
   color: #171a21;
 `;
 
-export const ContainerTaskSubCategoryStyle = styled.span`
+export const ContainerSubCategory = styled.span`
   color: #171a21;
   font-size: 1rem;
   line-height: 20px;
 `;
 
-export const ContainerTaskPriorityStyle = styled.span`
+export const ContainerPriority = styled.span`
   display: flex;
   align-items: center;
   gap: 4px;
@@ -54,7 +54,7 @@ export const ContainerTaskPriorityStyle = styled.span`
   letter-spacing: 0.5px;
 `;
 
-export const ContainerTaskWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
