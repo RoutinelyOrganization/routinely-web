@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import homePageImage from "../../assets/imagens/homePageImage.svg";
-import { ButtonStyle } from "../../components/Button/ButtonStyles";
+import { Button as ButtonStyle } from "../../components/Button/styles";
 import Logo from "../../components/Logo";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";

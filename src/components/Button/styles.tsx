@@ -4,7 +4,7 @@ type ButtonProps = {
   $secondaryColor?: boolean;
 };
 
-export const ButtonStyle = styled.button<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   width: 368px;
   padding: 10px 16px;
   border-radius: 8px;

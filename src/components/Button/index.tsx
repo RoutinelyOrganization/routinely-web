@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonStyle } from "./ButtonStyles";
+import * as S from "./styles";
 
 type IButton = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     children: string
@@ -7,6 +7,6 @@ type IButton = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export default function ButtonComponent({ children }: IButton) {
     return (
-        <ButtonStyle>{children}</ButtonStyle>
+        <S.Button>{children}</S.Button>
     )
 }
