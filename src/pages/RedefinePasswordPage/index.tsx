@@ -1,6 +1,6 @@
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
 import ButtonComponent from "../../components/Button";
-import HeaderComponent from "../../components/Header";
+import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
 import LinkAuthComponent from "../../components/LinkAuth";
 import LogoSharedComponent from "../../components/LogoShared";
@@ -15,7 +15,7 @@ export default function RedefinePasswordPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
+      <Header header="secundary" />
       <S.Main>
         <S.Wrapper>
           <LogoSharedComponent />

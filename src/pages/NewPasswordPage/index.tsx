@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg";
 import ButtonComponent from "../../components/Button";
-import HeaderComponent from "../../components/Header";
+import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
 import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
@@ -31,7 +31,7 @@ export function NewPasswordPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
+      <Header header="secundary"/>
 
       <S.Wrapper>
         <S.Form onSubmit={handleSubmit(handleSubmitNewPassword)}>

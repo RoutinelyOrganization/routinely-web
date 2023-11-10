@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
-import HeaderComponent from "../../components/Header";
+import Header from "../../components/Header";
 import LogoSharedComponent from "../../components/LogoShared";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
@@ -12,7 +12,7 @@ export function WelcomePage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
+      <Header header="secundary"/>
       <S.Wrapper>
         <form>
           <LogoSharedComponent />

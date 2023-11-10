@@ -7,7 +7,7 @@ import infoErro from "../../assets/icons/infoErro.svg";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
 import ButtonComponent from "../../components/Button";
 import ButtonSocialComponent from "../../components/ButtonSocial";
-import HeaderComponent from "../../components/Header";
+import Header from "../../components/Header";
 import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
 import LinkAuthComponent from "../../components/LinkAuth";
 import LogoSharedComponent from "../../components/LogoShared";
@@ -65,7 +65,7 @@ export function SignInPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
+      <Header header="secundary" />
       <S.Wrapper>
         <S.Form onSubmit={handleSubmit(handleSubmitSignIn)}>
           <LogoSharedComponent />

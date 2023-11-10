@@ -1,6 +1,6 @@
 import signUpPageImage from "../../assets/imagens/signUpPageImage.svg";
 import ButtonSocialComponent from "../../components/ButtonSocial";
-import HeaderComponent from "../../components/Header";
+import Header from "../../components/Header";
 import LinkAuthComponent from "../../components/LinkAuth";
 import LogoSharedComponent from "../../components/LogoShared";
 import SignUpFormComponent from "../../components/SignUpForm";
@@ -12,7 +12,7 @@ export default function SignUpPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
+      <Header header="secundary"/>
       <S.Main>
         <S.Wrapper>
           <LogoSharedComponent />
