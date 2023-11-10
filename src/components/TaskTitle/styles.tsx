@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const TaskTitleStyle = styled.h3`
+export const Title = styled.h3`
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 28px;
