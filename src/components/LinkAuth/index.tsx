@@ -7,7 +7,7 @@ interface ILinkAuth {
   linkText: string;
 }
 
-export default function LinkAuthComponent({ children, path, linkText }: ILinkAuth) {
+export default function LinkAuth({ children, path, linkText }: ILinkAuth) {
   return (
     <S.Paragraph>
       {children}

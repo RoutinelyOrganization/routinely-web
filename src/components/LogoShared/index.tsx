@@ -1,4 +1,4 @@
-export default function LogoSharedComponent() {
+export default function LogoShared() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="156" height="55" viewBox="0 0 156 55" fill="none">
       <path
