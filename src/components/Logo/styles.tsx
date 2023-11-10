@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LogoStyle = styled.div`
+export const Container = styled.div`
   width: 156px;
   height: 55px;
 `;

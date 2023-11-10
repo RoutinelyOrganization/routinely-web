@@ -1,7 +1,7 @@
 import { UserContext } from "../../contexts/UserContext";
 import ButtonBackPage from "../ButtonBackPage";
 import ContainerIcons from "../ContainerIcons";
-import LogoComponent from "../Logo";
+import Logo from "../Logo";
 import MenuHeaderComponent from "../MenuHeader";
 import * as S from "./styles";
 
@@ -20,7 +20,7 @@ export default function Header({header = 'primary'}:IHeader) {
   return (
     <S.Header header={header}>
       {header === 'primary' ?
-        <LogoComponent /> :
+        <Logo /> :
         <ButtonBackPage/>
       }
       {hasUser && (
