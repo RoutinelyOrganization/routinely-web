@@ -7,7 +7,7 @@ const FadeUp = keyframes`
   to { transform: scale(1)}
 `;
 
-export const FormPopuPStyle = styled.form`
+export const Form = styled.form`
   width: 512px;
   height: max-content;
   padding: 24px;
@@ -21,16 +21,16 @@ export const FormPopuPStyle = styled.form`
   margin-top: 150px;
   animation: ${FadeUp} 0.4s ease;
 `;
-export const FormInputContainerStyle = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const ContainerInputPopUpStyle = styled.div`
+export const ContainerPopUp = styled.div`
   position: relative;
 `;
 
-export const InputPopUpStyle = styled.input`
+export const InputPopUp = styled.input`
   width: 464px;
   height: 56px;
   border: 1px solid #d8d6dc;
@@ -47,7 +47,7 @@ export const InputPopUpStyle = styled.input`
     transition: all 0.4s ease;
   }
 `;
-export const InputPopUpLabelStyle = styled.label`
+export const LabelPopUp = styled.label`
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 24px;
@@ -59,11 +59,11 @@ export const InputPopUpLabelStyle = styled.label`
   pointer-events: none;
 `;
 
-export const ContainerInputDateTimePopUpstyle = styled.div`
+export const ContainerDateTimePopUp = styled.div`
   position: relative;
 `;
 
-export const InputDateTimePopUpstyle = styled.input`
+export const InputDateTimePopUp = styled.input`
   width: 224px;
   height: 56px;
   border-radius: 4px;
@@ -72,7 +72,7 @@ export const InputDateTimePopUpstyle = styled.input`
   outline: none;
   cursor: pointer;
 `;
-export const LabelInputDateTimePopUpstyle = styled.label`
+export const LabelDateTimePopUp = styled.label`
   position: absolute;
   font-size: 0.75rem;
   font-weight: 400;
@@ -82,11 +82,11 @@ export const LabelInputDateTimePopUpstyle = styled.label`
   padding: 5px;
   cursor: pointer;
 `;
-export const ContainerSelectPopUpStyle = styled.div`
+export const ContainerSelectPopUp = styled.div`
   position: relative;
 `;
 
-export const SelectPopUpStyle = styled.select`
+export const SelectPopUp = styled.select`
   width: 144px;
   height: 56px;
   border-radius: 8px;
@@ -102,7 +102,7 @@ export const SelectPopUpStyle = styled.select`
     transition: all 0.4s ease;
   }
 `;
-export const OptionPopUpStyle = styled.option`
+export const OptionPopUp = styled.option`
   padding: 1rem;
   font-size: 1rem;
   font-weight: 400;
@@ -110,7 +110,7 @@ export const OptionPopUpStyle = styled.option`
   letter-spacing: 0.5px;
   color: #171a21;
 `;
-export const LabelPopUpStyle = styled.label`
+export const LabelSelectPopUp = styled.label`
   font-size: 1rem;
   font-weight: 400;
   line-height: 24px;
