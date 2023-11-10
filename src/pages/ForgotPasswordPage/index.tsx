@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import ButtonComponent from "../../components/Button";
+import Button from "../../components/Button";
 import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
-import LogoSharedComponent from "../../components/LogoShared";
+import LogoShared from "../../components/LogoShared";
 import { ErrorMessage as ErrorMessageStyle } from "../../components/SignUpForm/styles";
-import SubTitleAuthComponent from "../../components/SubTitleAuth";
-import TitleAuthComponent from "../../components/TitleAuth";
+import SubTitleAuth from "../../components/SubTitleAuth";
+import TitleAuth from "../../components/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
 
@@ -31,9 +31,9 @@ export default function ForgotPasswordPage() {
       <Header header="secundary"/>
       <S.Main>
         <S.Wrapper>
-          <LogoSharedComponent />
-          <TitleAuthComponent>Esqueceu sua Senha?</TitleAuthComponent>
-          <SubTitleAuthComponent>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuthComponent>
+          <LogoShared />
+          <TitleAuth>Esqueceu sua Senha?</TitleAuth>
+          <SubTitleAuth>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuth>
           <form onSubmit={handleSubmit(submitForm)}>
             <InputStyle
               type="email"
@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
             />
             {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
             <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
-            <ButtonComponent>Enviar</ButtonComponent>
+            <Button>Enviar</Button>
           </form>
         </S.Wrapper>
         <S.ImageContainer>

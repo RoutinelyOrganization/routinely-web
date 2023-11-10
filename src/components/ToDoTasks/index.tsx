@@ -6,7 +6,7 @@ interface ITodoTasksProps {
   setIsAddTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ToDoTasksComponent({ setIsEditTaskOpen, setIsAddTaskOpen }: ITodoTasksProps) {
+export default function ToDoTasks({ setIsEditTaskOpen, setIsAddTaskOpen }: ITodoTasksProps) {
   const handleAddTask = () => {
     setIsAddTaskOpen(true);
   };

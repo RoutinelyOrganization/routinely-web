@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg";
-import ButtonComponent from "../../components/Button";
+import Button from "../../components/Button";
 import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
-import LogoSharedComponent from "../../components/LogoShared";
+import LogoShared from "../../components/LogoShared";
 import { ErrorMessage as ErrorMessageStyle, PasswordContainer as PasswordContainerStyle } from "../../components/SignUpForm/styles";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { ShowPassword as ShowPasswordStyle } from "../SignInPage/styles";
@@ -35,7 +35,7 @@ export function NewPasswordPage() {
 
       <S.Wrapper>
         <S.Form onSubmit={handleSubmit(handleSubmitNewPassword)}>
-          <LogoSharedComponent />
+          <LogoShared />
           <S.Title>Criar nova senha</S.Title>
           <S.Caption>
             Escolha uma nova senha abaixo ela precisa ser diferente da senha anterior
@@ -81,7 +81,7 @@ export function NewPasswordPage() {
 
             {errors.newPassword && <ErrorMessageStyle>{errors.newPassword.message}</ErrorMessageStyle>}
           </S.InputContainer>
-          <ButtonComponent>Atualizar Senha</ButtonComponent>
+          <Button>Atualizar Senha</Button>
         </S.Form>
         <img src={NewPasswordPageImage} alt="Imagem da Página de nova senha" />
       </S.Wrapper>

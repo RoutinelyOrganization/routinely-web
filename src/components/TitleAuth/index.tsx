@@ -4,7 +4,7 @@ interface ITitleAuth {
     children: string
 }
 
-export default function TitleAuthComponent({ children }: ITitleAuth) {
+export default function TitleAuth({ children }: ITitleAuth) {
     return (
         <S.Title>
             {children}

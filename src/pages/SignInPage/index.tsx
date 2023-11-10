@@ -5,12 +5,12 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
-import ButtonComponent from "../../components/Button";
-import ButtonSocialComponent from "../../components/ButtonSocial";
+import Button from "../../components/Button";
+import ButtonSocial from "../../components/ButtonSocial";
 import Header from "../../components/Header";
 import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
-import LinkAuthComponent from "../../components/LinkAuth";
-import LogoSharedComponent from "../../components/LogoShared";
+import LinkAuth from "../../components/LinkAuth";
+import LogoShared from "../../components/LogoShared";
 import { ErrorMessage as ErrorMessageStyle, PasswordContainer as PasswordContainerStyle } from "../../components/SignUpForm/styles";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
@@ -68,7 +68,7 @@ export function SignInPage() {
       <Header header="secundary" />
       <S.Wrapper>
         <S.Form onSubmit={handleSubmit(handleSubmitSignIn)}>
-          <LogoSharedComponent />
+          <LogoShared />
           <S.Title>Acessar conta</S.Title>
           <S.InputWrapper>
             <InputContainer>
@@ -153,17 +153,17 @@ export function SignInPage() {
 
           <S.ButtonWrapper>
             {loading ? (
-              <ButtonComponent disabled>Carregando...</ButtonComponent>
+              <Button disabled>Carregando...</Button>
             ) : (
-              <ButtonComponent>Fazer login</ButtonComponent>
+              <Button>Fazer login</Button>
             )}
 
             {showError && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
 
-            <ButtonSocialComponent disabled>Continuar com Google</ButtonSocialComponent>
-            <LinkAuthComponent path="/signUpPage" linkText="Crie a sua.">
+            <ButtonSocial disabled>Continuar com Google</ButtonSocial>
+            <LinkAuth path="/signUpPage" linkText="Crie a sua.">
               Não tem uma conta?
-            </LinkAuthComponent>
+            </LinkAuth>
           </S.ButtonWrapper>
         </S.Form>
         <img src={signInPageImage} alt="Imagem da página acessar conta" />

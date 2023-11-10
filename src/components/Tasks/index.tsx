@@ -1,7 +1,7 @@
 import ToDoTasks from "../ToDoTasks";
 import * as S from "./styles";
 
-export default function TasksComponent() {
+export default function Tasks() {
     return (
         <S.Container>
             <ToDoTasks />
