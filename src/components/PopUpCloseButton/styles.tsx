@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const PopUpCloseButtonStyle = styled.button`
+export const Button = styled.button`
     width: 24px;
     height: 24px;
     position: absolute;

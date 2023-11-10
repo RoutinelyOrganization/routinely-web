@@ -1,18 +1,18 @@
-import { PopUpCloseButtonStyle } from "./PopUpCloseButtonStyle";
+import * as S from "./styles";
 
 interface IPopUpCloseButton {
   setIsAddTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PopUpCloseButtonComponent({ setIsAddTaskOpen, setIsEditTaskOpen }: IPopUpCloseButton) {
+export default function PopUpCloseButton({ setIsAddTaskOpen, setIsEditTaskOpen }: IPopUpCloseButton) {
   const handleCloseButton = () => {
     setIsAddTaskOpen(false);
     setIsEditTaskOpen(false);
   };
 
   return (
-    <PopUpCloseButtonStyle onClick={handleCloseButton}>
+    <S.Button onClick={handleCloseButton}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="icone/fechar">
           <mask id="mask0_565_5223" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -27,6 +27,6 @@ export default function PopUpCloseButtonComponent({ setIsAddTaskOpen, setIsEditT
           </g>
         </g>
       </svg>
-    </PopUpCloseButtonStyle>
+    </S.Button>
   );
 }
