@@ -1,7 +1,7 @@
 import ContainerTaskDone from "../ContainerTaskDone";
 import * as S from "./styles";
 
-export default function DoneTasksComponent() {
+export default function DoneTasks() {
     return (
         <S.Container>
             <ContainerTaskDone />
