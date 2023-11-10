@@ -5,7 +5,7 @@ import ButtonComponent from "../../components/Button";
 import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
-import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
+import { ErrorMessage as ErrorMessageStyle, PasswordContainer as PasswordContainerStyle } from "../../components/SignUpForm/styles";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { ShowPassword as ShowPasswordStyle } from "../SignInPage/styles";
 import * as S from "./styles";

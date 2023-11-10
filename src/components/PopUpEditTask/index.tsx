@@ -1,10 +1,14 @@
+import { useForm } from "react-hook-form";
+import PopUpCloseButtonComponent from "../PopUpCloseButton";
 import PopupButtonComponent from "../PopupButton";
 import PopupTitleComponent from "../PopupTitle";
-import PopUpCloseButtonComponent from "../PopUpCloseButton";
+import { ErrorMessage as ErrorMessageStyle } from "../SignUpForm/styles";
 import {
+  ButtonsContainerStyle,
   ContainerInputDateTimePopUpstyle,
   ContainerInputPopUpStyle,
   ContainerSelectPopUpStyle,
+  DeleteButtonPopUpStyle,
   FormInputContainerStyle,
   FormPopuPStyle,
   InputDateTimePopUpstyle,
@@ -14,11 +18,7 @@ import {
   LabelPopUpStyle,
   OptionPopUpStyle,
   SelectPopUpStyle,
-  DeleteButtonPopUpStyle,
-  ButtonsContainerStyle,
 } from "./PopUpEditTaskStyle";
-import { useForm } from "react-hook-form";
-import { ErrorMessageStyle } from "../SignUpForm/SignUpFormStyles";
 
 interface IPopUpEditTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;

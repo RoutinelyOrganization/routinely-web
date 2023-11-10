@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ISingInProps } from "../pages/SignInPage/Index";
+import { ISingInProps } from "../pages/SignInPage";
 import instance from "../services/api";
 
 export const useAuth = () => {

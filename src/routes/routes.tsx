@@ -6,7 +6,7 @@ import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import HomePage from "../pages/HomePage";
 import { NewPasswordPage } from "../pages/NewPasswordPage";
 import RedefinePasswordPage from "../pages/RedefinePasswordPage";
-import { SignInPage } from "../pages/SignInPage/Index";
+import { SignInPage } from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import { WelcomePage } from "../pages/WelcomePage";
 

@@ -8,13 +8,8 @@ import { UserContext } from "../../contexts/UserContext";
 import signUp from "../../services/signUp";
 import ButtonComponent from "../Button";
 import { InputContainer, InputStyle, LabelInput } from "../Input/InputStyles";
-import {
-  ErrorMessageStyle,
-  PasswordContainerStyle,
-  ShowPasswordButtonStyle,
-  SignUpFormStyle,
-  TermsOfUseCheckbox, TermsOfUseStyle,
-} from "./SignUpFormStyles";
+import * as S from "./styles";
+
 interface ISignUpInput {
   name: string;
   email: string;
@@ -23,7 +18,7 @@ interface ISignUpInput {
   acceptedTerms: boolean;
 }
 
-export default function SignUpFormComponent() {
+export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -46,10 +41,10 @@ export default function SignUpFormComponent() {
 
   const handleSignUp = async ({ name, email, password, acceptedTerms }: ISignUpInput) => {
     const body = {
-      name: name,
-      email: email,
-      password: password,
-      acceptedTerms: acceptedTerms,
+      name,
+      email,
+      password,
+      acceptedTerms,
     };
     try {
       setLoading(true);
@@ -71,7 +66,7 @@ export default function SignUpFormComponent() {
 
   return (
     // eslint-disable-next-line
-    <SignUpFormStyle onSubmit={handleSubmit(handleSignUp)}>
+    <S.Form onSubmit={handleSubmit(handleSignUp)}>
       <InputContainer>
         <InputStyle
           $hasErro={erroName}
@@ -96,7 +91,7 @@ export default function SignUpFormComponent() {
         <LabelInput $hasErro={erroName} htmlFor="name">
           Nome
         </LabelInput>
-        {errors.name && <ErrorMessageStyle>{errors.name.message}</ErrorMessageStyle>}
+        {errors.name && <S.ErrorMessage>{errors.name.message}</S.ErrorMessage>}
       </InputContainer>
 
       <InputContainer>
@@ -125,13 +120,13 @@ export default function SignUpFormComponent() {
         <LabelInput $hasErro={erroEmail} htmlFor="Email">
           Email
         </LabelInput>
-        {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-        {showError && <ErrorMessageStyle>Esse email já está sendo usando</ErrorMessageStyle>}
+        {errors.email && <S.ErrorMessage>{errors.email.message}</S.ErrorMessage>}
+        {showError && <S.ErrorMessage>Esse email já está sendo usando</S.ErrorMessage>}
         {showError && <img src={infoErro} alt="icone de info erro" />}
       </InputContainer>
 
       <InputContainer>
-        <PasswordContainerStyle>
+        <S.PasswordContainer>
           <InputStyle
             $hasErro={erroPassword}
             type={showPassword ? "text" : "password"}
@@ -159,16 +154,16 @@ export default function SignUpFormComponent() {
           <LabelInput $hasErro={erroPassword} htmlFor="password">
             Senha
           </LabelInput>
-          <ShowPasswordButtonStyle type="button" onClick={() => setShowPassword(!showPassword)}>
+          <S.ShowPasswordButton type="button" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? "ESCONDER" : "EXIBIR"}
-          </ShowPasswordButtonStyle>
-        </PasswordContainerStyle>
+          </S.ShowPasswordButton>
+        </S.PasswordContainer>
 
-        {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
+        {errors.password && <S.ErrorMessage>{errors.password.message}</S.ErrorMessage>}
       </InputContainer>
 
       <InputContainer>
-        <PasswordContainerStyle>
+        <S.PasswordContainer>
           <InputStyle
             $hasErro={erroConfirmPassword}
             type={showConfirmPassword ? "text" : "password"}
@@ -189,15 +184,15 @@ export default function SignUpFormComponent() {
           <LabelInput $hasErro={erroConfirmPassword} htmlFor="forgetPassword">
             Repetir Senha
           </LabelInput>
-          <ShowPasswordButtonStyle type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+          <S.ShowPasswordButton type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
             {showConfirmPassword ? "ESCONDER" : "EXIBIR"}
-          </ShowPasswordButtonStyle>
-        </PasswordContainerStyle>
-        {errors.confirmPassword && <ErrorMessageStyle>{errors.confirmPassword.message}</ErrorMessageStyle>}
+          </S.ShowPasswordButton>
+        </S.PasswordContainer>
+        {errors.confirmPassword && <S.ErrorMessage>{errors.confirmPassword.message}</S.ErrorMessage>}
       </InputContainer>
 
-      <TermsOfUseStyle>
-        <TermsOfUseCheckbox
+      <S.TermsOfUseContainer>
+        <S.Checkbox
           type="checkbox"
           onClick={() => setTermsAccepted(!termsAccepted)}
           checked={termsAccepted ? true : false}
@@ -212,13 +207,13 @@ export default function SignUpFormComponent() {
         <span>
           Declaro que li e concordo com os <a href="#">termos de uso e política de privacidade.</a>
         </span>
-      </TermsOfUseStyle>
-      {errors.acceptedTerms && <ErrorMessageStyle>{errors.acceptedTerms.message}</ErrorMessageStyle>}
+      </S.TermsOfUseContainer>
+      {errors.acceptedTerms && <S.ErrorMessage>{errors.acceptedTerms.message}</S.ErrorMessage>}
       {loading ? (
         <ButtonComponent disabled>Carregando...</ButtonComponent>
       ) : (
         <ButtonComponent>Criar Conta</ButtonComponent>
       )}
-    </SignUpFormStyle>
+    </S.Form>
   );
 }

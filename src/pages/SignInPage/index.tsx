@@ -11,7 +11,7 @@ import Header from "../../components/Header";
 import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
 import LinkAuthComponent from "../../components/LinkAuth";
 import LogoSharedComponent from "../../components/LogoShared";
-import { ErrorMessageStyle, PasswordContainerStyle } from "../../components/SignUpForm/SignUpFormStyles";
+import { ErrorMessage as ErrorMessageStyle, PasswordContainer as PasswordContainerStyle } from "../../components/SignUpForm/styles";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";

@@ -4,7 +4,7 @@ import ButtonComponent from "../../components/Button";
 import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
 import LogoSharedComponent from "../../components/LogoShared";
-import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles";
+import { ErrorMessage as ErrorMessageStyle } from "../../components/SignUpForm/styles";
 import SubTitleAuthComponent from "../../components/SubTitleAuth";
 import { NoticeSpanStyle } from "../../components/SubTitleAuth/SubTitleAuthStyles";
 import TitleAuthComponent from "../../components/TitleAuth";

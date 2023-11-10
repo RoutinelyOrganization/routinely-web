@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import PopUpCloseButton from "../PopUpCloseButton";
 import PopupButton from "../PopupButton";
 import PopupTitle from "../PopupTitle";
-import { ErrorMessageStyle } from "../SignUpForm/SignUpFormStyles";
+import { ErrorMessage as ErrorMessageStyle } from "../SignUpForm/styles";
 import * as S from "./styles";
 
 interface IPopUpAddTaskProps {

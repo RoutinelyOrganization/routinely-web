@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignUpFormStyle = styled.form`
+export const Form = styled.form`
   display: flex;
   width: 368px;
   flex-direction: column;
@@ -9,18 +9,18 @@ export const SignUpFormStyle = styled.form`
   gap: 24px;
 `;
 
-export const ErrorMessageStyle = styled.span`
+export const ErrorMessage = styled.span`
   color: #B3261B;
   font-size: 0.9rem;
   max-width: 368px;
   text-align: justify;
 `;
 
-export const PasswordContainerStyle = styled.div`
+export const PasswordContainer = styled.div`
   position: relative;
 `
 
-export const ShowPasswordButtonStyle = styled.button`
+export const ShowPasswordButton = styled.button`
   color: #171a21;
   font-size: 0.75rem;
   line-height: 16px;
@@ -34,12 +34,12 @@ export const ShowPasswordButtonStyle = styled.button`
   transform: translateY(-50%);
 `;
 
-export const TermsOfUseCheckbox = styled.input`
+export const Checkbox = styled.input`
   width: 24px;
   height: 24px;
 `;
 
-export const TermsOfUseStyle = styled.div`
+export const TermsOfUseContainer = styled.div`
   display: flex;
   width: 368px;
   align-items: center;

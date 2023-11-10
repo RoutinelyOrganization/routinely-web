@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ISingInProps } from "../pages/SignInPage/Index";
+import { ISingInProps } from "../pages/SignInPage";
 interface IUserProvider {
   children: React.ReactNode;
 }
