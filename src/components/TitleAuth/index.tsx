@@ -1,4 +1,4 @@
-import { TitleAuthStyle } from "./TitleAuthStyles";
+import * as S from "./styles";
 
 interface ITitleAuth {
     children: string
@@ -6,8 +6,8 @@ interface ITitleAuth {
 
 export default function TitleAuthComponent({ children }: ITitleAuth) {
     return (
-        <TitleAuthStyle>
+        <S.Title>
             {children}
-        </TitleAuthStyle>
+        </S.Title>
     )
 }

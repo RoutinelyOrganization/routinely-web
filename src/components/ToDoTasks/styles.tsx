@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ToDoTasksStyle = styled.div`
+export const Container = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -14,7 +14,7 @@ gap: 10px;
 `;
 
 
-export const ButtonAddTaskStyle = styled.button`
+export const Button = styled.button`
 width: 512px;
 height: 40px;
 border-radius: 8px;
