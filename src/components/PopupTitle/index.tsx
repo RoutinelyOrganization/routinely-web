@@ -1,11 +1,11 @@
-import { PopupTitleStyle } from "./PopupTitleStyle";
+import * as S from "./styles";
 
 interface IPopupTitle {
     children: string
 }
 
-export default function PopupTitleComponent({ children }: IPopupTitle) {
+export default function PopupTitle({ children }: IPopupTitle) {
     return (
-        <PopupTitleStyle>{children}</PopupTitleStyle>
+        <S.Title>{children}</S.Title>
     )
 }

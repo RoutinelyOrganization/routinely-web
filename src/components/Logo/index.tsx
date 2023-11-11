@@ -1,8 +1,8 @@
-import { LogoStyle } from "./LogoStyles";
+import * as S from "./styles";
 
-export default function LogoComponent() {
+export default function Logo() {
   return (
-    <LogoStyle>
+    <S.Container>
         <svg
       xmlns="http://www.w3.org/2000/svg"
       width="156"
@@ -53,6 +53,6 @@ export default function LogoComponent() {
         fill="#ffffff"
       />
     </svg>
-    </LogoStyle>
+    </S.Container>
   );
 }

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ButtonBackPageStyle } from "./ButtonBackPageStyles";
+import * as S from "./styles";
 
-export default function ButtonBackPageComponent() {
+export default function ButtonBackPage() {
   const navigation = useNavigate()
   
   return (
-    <ButtonBackPageStyle onClick={ ()=> navigation(-1)}>
+    <S.ButtonBackPage onClick={ ()=> navigation(-1)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -19,6 +19,6 @@ export default function ButtonBackPageComponent() {
         />
       </svg>
       Voltar
-    </ButtonBackPageStyle>
+    </S.ButtonBackPage>
   );
 }

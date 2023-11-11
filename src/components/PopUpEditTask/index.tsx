@@ -1,24 +1,9 @@
-import PopupButtonComponent from "../PopupButton";
-import PopupTitleComponent from "../PopupTitle";
-import PopUpCloseButtonComponent from "../PopUpCloseButton";
-import {
-  ContainerInputDateTimePopUpstyle,
-  ContainerInputPopUpStyle,
-  ContainerSelectPopUpStyle,
-  FormInputContainerStyle,
-  FormPopuPStyle,
-  InputDateTimePopUpstyle,
-  InputPopUpLabelStyle,
-  InputPopUpStyle,
-  LabelInputDateTimePopUpstyle,
-  LabelPopUpStyle,
-  OptionPopUpStyle,
-  SelectPopUpStyle,
-  DeleteButtonPopUpStyle,
-  ButtonsContainerStyle,
-} from "./PopUpEditTaskStyle";
 import { useForm } from "react-hook-form";
-import { ErrorMessageStyle } from "../SignUpForm/SignUpFormStyles";
+import PopUpCloseButton from "../PopUpCloseButton";
+import PopupButton from "../PopupButton";
+import PopupTitle from "../PopupTitle";
+import { ErrorMessage as ErrorMessageStyle } from "../SignUpForm/styles";
+import * as S from "./styles";
 
 interface IPopUpEditTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,7 +19,7 @@ interface IEditTaskForm {
   descriptionTask?: string;
 }
 
-export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEditTaskProps) {
+export default function PopUpEditTask({ setIsEditTaskOpen }: IPopUpEditTaskProps) {
   const {
     register,
     handleSubmit,
@@ -48,12 +33,12 @@ export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEdit
   };
 
   return (
-    <FormPopuPStyle onSubmit={handleSubmit(handleSubmitEditTask)}>
-      <PopupTitleComponent>Editar tarefa</PopupTitleComponent>
-      <PopUpCloseButtonComponent setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsEditTaskOpen} />
+    <S.Form onSubmit={handleSubmit(handleSubmitEditTask)}>
+      <PopupTitle>Editar tarefa</PopupTitle>
+      <PopUpCloseButton setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsEditTaskOpen} />
 
-      <ContainerInputPopUpStyle>
-        <InputPopUpStyle
+      <S.ContainerPopUp>
+        <S.InputPopUp
           type="text"
           id="name"
           required
@@ -64,66 +49,66 @@ export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEdit
             },
           })}
         />
-        <InputPopUpLabelStyle htmlFor="name"> Nome da tarefa</InputPopUpLabelStyle>
+        <S.LabelPopUp htmlFor="name"> Nome da tarefa</S.LabelPopUp>
         {errors.nameTask && <ErrorMessageStyle>{errors.nameTask.message}</ErrorMessageStyle>}
-      </ContainerInputPopUpStyle>
-      <FormInputContainerStyle>
-        <ContainerInputDateTimePopUpstyle>
-          <InputDateTimePopUpstyle type="date" id="date" required />
-          <LabelInputDateTimePopUpstyle htmlFor="date">Data</LabelInputDateTimePopUpstyle>
-        </ContainerInputDateTimePopUpstyle>
+      </S.ContainerPopUp>
+      <S.InputContainer>
+        <S.ContainerDateTimePopUp>
+          <S.InputDateTime type="date" id="date" required />
+          <S.LabelDateTime htmlFor="date">Data</S.LabelDateTime>
+        </S.ContainerDateTimePopUp>
 
-        <ContainerInputDateTimePopUpstyle>
-          <InputDateTimePopUpstyle
+        <S.ContainerDateTimePopUp>
+          <S.InputDateTime
             type="time"
             id="time"
             required
             {...register("timeTask", { required: "Formato inválido" })}
           />
-          <LabelInputDateTimePopUpstyle htmlFor="time">Hora</LabelInputDateTimePopUpstyle>
+          <S.LabelDateTime htmlFor="time">Hora</S.LabelDateTime>
           {errors.timeTask && <ErrorMessageStyle>{errors.timeTask.message}</ErrorMessageStyle>}
-        </ContainerInputDateTimePopUpstyle>
-      </FormInputContainerStyle>
+        </S.ContainerDateTimePopUp>
+      </S.InputContainer>
 
-      <FormInputContainerStyle>
-        <ContainerSelectPopUpStyle>
-          <SelectPopUpStyle id="Prioridade" required>
-            <OptionPopUpStyle> </OptionPopUpStyle>
-            <OptionPopUpStyle>Urgente</OptionPopUpStyle>
-            <OptionPopUpStyle>Alta</OptionPopUpStyle>
-            <OptionPopUpStyle>Média</OptionPopUpStyle>
-            <OptionPopUpStyle>Baixa</OptionPopUpStyle>
-          </SelectPopUpStyle>
-          <LabelPopUpStyle htmlFor="Prioridade">Prioridade</LabelPopUpStyle>
-        </ContainerSelectPopUpStyle>
+      <S.InputContainer>
+        <S.ContainerSelectPopUp>
+          <S.SelectPopUp id="Prioridade" required>
+            <S.OptionPopUp> </S.OptionPopUp>
+            <S.OptionPopUp>Urgente</S.OptionPopUp>
+            <S.OptionPopUp>Alta</S.OptionPopUp>
+            <S.OptionPopUp>Média</S.OptionPopUp>
+            <S.OptionPopUp>Baixa</S.OptionPopUp>
+          </S.SelectPopUp>
+          <S.LabelSelect htmlFor="Prioridade">Prioridade</S.LabelSelect>
+        </S.ContainerSelectPopUp>
 
-        <ContainerSelectPopUpStyle>
-          <SelectPopUpStyle id="Categoria" required>
-            <OptionPopUpStyle> </OptionPopUpStyle>
-            <OptionPopUpStyle>Pessoal</OptionPopUpStyle>
-            <OptionPopUpStyle>Estudos</OptionPopUpStyle>
-            <OptionPopUpStyle>Finanças</OptionPopUpStyle>
-            <OptionPopUpStyle>Carreira</OptionPopUpStyle>
-            <OptionPopUpStyle>Saúde</OptionPopUpStyle>
-          </SelectPopUpStyle>
-          <LabelPopUpStyle htmlFor="Categoria">Categoria</LabelPopUpStyle>
-        </ContainerSelectPopUpStyle>
+        <S.ContainerSelectPopUp>
+          <S.SelectPopUp id="Categoria" required>
+            <S.OptionPopUp> </S.OptionPopUp>
+            <S.OptionPopUp>Pessoal</S.OptionPopUp>
+            <S.OptionPopUp>Estudos</S.OptionPopUp>
+            <S.OptionPopUp>Finanças</S.OptionPopUp>
+            <S.OptionPopUp>Carreira</S.OptionPopUp>
+            <S.OptionPopUp>Saúde</S.OptionPopUp>
+          </S.SelectPopUp>
+          <S.LabelSelect htmlFor="Categoria">Categoria</S.LabelSelect>
+        </S.ContainerSelectPopUp>
 
-        <ContainerSelectPopUpStyle>
-          <SelectPopUpStyle id="Tags" required>
-            <OptionPopUpStyle> </OptionPopUpStyle>
-            <OptionPopUpStyle>Canditatura</OptionPopUpStyle>
-            <OptionPopUpStyle>Conta</OptionPopUpStyle>
-            <OptionPopUpStyle>Exercicio</OptionPopUpStyle>
-            <OptionPopUpStyle>Beleza</OptionPopUpStyle>
-            <OptionPopUpStyle>Licenciatura</OptionPopUpStyle>
-          </SelectPopUpStyle>
-          <LabelPopUpStyle htmlFor="Tags">Tags</LabelPopUpStyle>
-        </ContainerSelectPopUpStyle>
-      </FormInputContainerStyle>
+        <S.ContainerSelectPopUp>
+          <S.SelectPopUp id="Tags" required>
+            <S.OptionPopUp> </S.OptionPopUp>
+            <S.OptionPopUp>Canditatura</S.OptionPopUp>
+            <S.OptionPopUp>Conta</S.OptionPopUp>
+            <S.OptionPopUp>Exercicio</S.OptionPopUp>
+            <S.OptionPopUp>Beleza</S.OptionPopUp>
+            <S.OptionPopUp>Licenciatura</S.OptionPopUp>
+          </S.SelectPopUp>
+          <S.LabelSelect htmlFor="Tags">Tags</S.LabelSelect>
+        </S.ContainerSelectPopUp>
+      </S.InputContainer>
 
-      <ContainerInputPopUpStyle>
-        <InputPopUpStyle
+      <S.ContainerPopUp>
+        <S.InputPopUp
           type="text"
           id="descricao"
           required
@@ -134,13 +119,13 @@ export default function PopUpEditTaskComponent({ setIsEditTaskOpen }: IPopUpEdit
             },
           })}
         />
-        <InputPopUpLabelStyle htmlFor="descricao"> Descrição</InputPopUpLabelStyle>
+        <S.LabelPopUp htmlFor="descricao"> Descrição</S.LabelPopUp>
         {errors.descriptionTask && <ErrorMessageStyle>{errors.descriptionTask.message}</ErrorMessageStyle>}
-      </ContainerInputPopUpStyle>
-      <ButtonsContainerStyle>
-        <DeleteButtonPopUpStyle>Excluir tarefa</DeleteButtonPopUpStyle>
-        <PopupButtonComponent>Salvar alterações</PopupButtonComponent>
-      </ButtonsContainerStyle>
-    </FormPopuPStyle>
+      </S.ContainerPopUp>
+      <S.ButtonsContainer>
+        <S.DeleteButton>Excluir tarefa</S.DeleteButton>
+        <PopupButton>Salvar alterações</PopupButton>
+      </S.ButtonsContainer>
+    </S.Form>
   );
 }

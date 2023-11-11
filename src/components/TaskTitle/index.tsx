@@ -1,9 +1,9 @@
-import { TaskTitleStyle } from "./TaskTitleStyle";
+import * as S from "./styles";
 
 interface ITaskTitleProps {
   title: string;
 }
 
 export default function TaskTitle({ title }: ITaskTitleProps) {
-  return <TaskTitleStyle>{title}</TaskTitleStyle>;
+  return <S.Title>{title}</S.Title>;
 }

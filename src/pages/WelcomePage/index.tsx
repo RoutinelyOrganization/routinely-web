@@ -1,16 +1,10 @@
-import HeaderComponent from "../../components/Header";
-import LogoSharedComponent from "../../components/LogoShared";
-import {
-  ButtonAccount,
-  ButtonCreateAccount,
-  CaptionWelcomePage,
-  ContainerButtonWelcomePage,
-  TitleWelcomePage,
-  WelcomePageWrapper,
-} from "./WelcomePageStyles";
-import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
 import { useNavigate } from "react-router-dom";
+import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
+import Header from "../../components/Header";
+import LogoShared from "../../components/LogoShared";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import * as S from "./styles";
+
 
 export function WelcomePage() {
   const navigate = useNavigate();
@@ -18,19 +12,19 @@ export function WelcomePage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
-      <WelcomePageWrapper>
+      <Header header="secundary"/>
+      <S.Wrapper>
         <form>
-          <LogoSharedComponent />
-          <TitleWelcomePage>Boas-vindas</TitleWelcomePage>
-          <CaptionWelcomePage>Escolha uma das opções para acessar </CaptionWelcomePage>
-          <ContainerButtonWelcomePage>
-            <ButtonAccount onClick={() => navigate("/SignInPage")}>Já tenho conta</ButtonAccount>
-            <ButtonCreateAccount onClick={() => navigate("/SignUpPage")}>Criar conta</ButtonCreateAccount>
-          </ContainerButtonWelcomePage>
+          <LogoShared />
+          <S.Title>Boas-vindas</S.Title>
+          <S.Caption>Escolha uma das opções para acessar </S.Caption>
+          <S.ContainerButton>
+            <S.ButtonAccount onClick={() => navigate("/SignInPage")}>Já tenho conta</S.ButtonAccount>
+            <S.ButtonCreateAccount onClick={() => navigate("/SignUpPage")}>Criar conta</S.ButtonCreateAccount>
+          </S.ContainerButton>
         </form>
         <img src={welcomePageImage} alt="Imagem da página de boas vindas" />
-      </WelcomePageWrapper>
+      </S.Wrapper>
     </>
   );
 }

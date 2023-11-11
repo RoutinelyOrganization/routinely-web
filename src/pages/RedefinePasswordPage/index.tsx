@@ -1,37 +1,38 @@
-import ButtonComponent from "../../components/Button";
-import HeaderComponent from "../../components/Header";
-import LinkAuthComponent from "../../components/LinkAuth";
-import LogoSharedComponent from "../../components/LogoShared";
-import SubTitleAuthComponent from "../../components/SubTitleAuth";
-import TitleAuthComponent from "../../components/TitleAuth";
-import { ForgotPasswordImageContainer } from "../ForgotPasswordPage/ForgotPasswordPageStyles";
-import { RedefinePasswordPageStyle, RedefinePasswordPageWrapper } from "./RedefinePasswordPageStyle";
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
+import Button from "../../components/Button";
+import Header from "../../components/Header";
 import { InputStyle } from "../../components/Input/InputStyles";
+import LinkAuth from "../../components/LinkAuth";
+import LogoShared from "../../components/LogoShared";
+import SubTitleAuth from "../../components/SubTitleAuth";
+import TitleAuth from "../../components/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ImageContainer as ImageContainerStyle } from "../ForgotPasswordPage/styles";
+import * as S from "./styles";
+
 
 export default function RedefinePasswordPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
-      <RedefinePasswordPageStyle>
-        <RedefinePasswordPageWrapper>
-          <LogoSharedComponent />
-          <TitleAuthComponent>Redefinir senha</TitleAuthComponent>
-          <SubTitleAuthComponent>Insira o código de verificação enviado no email.</SubTitleAuthComponent>
+      <Header header="secundary" />
+      <S.Main>
+        <S.Wrapper>
+          <LogoShared />
+          <TitleAuth>Redefinir senha</TitleAuth>
+          <SubTitleAuth>Insira o código de verificação enviado no email.</SubTitleAuth>
           <form>
             <InputStyle type="text" placeholder="Código de verificação" />
-            <LinkAuthComponent path="#" linkText="Enviar Novamente">
+            <LinkAuth path="#" linkText="Enviar Novamente">
               Não recebeu?
-            </LinkAuthComponent>
-            <ButtonComponent>Confirmar</ButtonComponent>
+            </LinkAuth>
+            <Button>Confirmar</Button>
           </form>
-        </RedefinePasswordPageWrapper>
-        <ForgotPasswordImageContainer>
+        </S.Wrapper>
+        <ImageContainerStyle>
           <img src={forgotPasswordImage} alt="Imagem da página redefinir senha" />
-        </ForgotPasswordImageContainer>
-      </RedefinePasswordPageStyle>
+        </ImageContainerStyle>
+      </S.Main>
     </>
   );
 }

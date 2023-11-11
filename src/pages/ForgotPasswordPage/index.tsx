@@ -1,19 +1,14 @@
-import ButtonComponent from "../../components/Button";
-import HeaderComponent from "../../components/Header";
-import LogoSharedComponent from "../../components/LogoShared";
-import SubTitleAuthComponent from "../../components/SubTitleAuth";
-import { NoticeSpanStyle } from "../../components/SubTitleAuth/SubTitleAuthStyles";
-import TitleAuthComponent from "../../components/TitleAuth";
-import {
-  ForgotPasswordImageContainer,
-  ForgotPasswordPageStyle,
-  ForgotPasswordPageWrapper,
-} from "./ForgotPasswordPageStyles";
-import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import { InputStyle } from "../../components/Input/InputStyles";
-import { ErrorMessageStyle } from "../../components/SignUpForm/SignUpFormStyles";
 import { useForm } from "react-hook-form";
+import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
+import Button from "../../components/Button";
+import Header from "../../components/Header";
+import { InputStyle } from "../../components/Input/InputStyles";
+import LogoShared from "../../components/LogoShared";
+import { ErrorMessage as ErrorMessageStyle } from "../../components/SignUpForm/styles";
+import SubTitleAuth from "../../components/SubTitleAuth";
+import TitleAuth from "../../components/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import * as S from "./styles";
 
 interface IForgotPassword {
   email: string;
@@ -33,12 +28,12 @@ export default function ForgotPasswordPage() {
   return (
     <>
       <ScrollToTop />
-      <HeaderComponent />
-      <ForgotPasswordPageStyle>
-        <ForgotPasswordPageWrapper>
-          <LogoSharedComponent />
-          <TitleAuthComponent>Esqueceu sua Senha?</TitleAuthComponent>
-          <SubTitleAuthComponent>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuthComponent>
+      <Header header="secundary"/>
+      <S.Main>
+        <S.Wrapper>
+          <LogoShared />
+          <TitleAuth>Esqueceu sua Senha?</TitleAuth>
+          <SubTitleAuth>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuth>
           <form onSubmit={handleSubmit(submitForm)}>
             <InputStyle
               type="email"
@@ -52,14 +47,14 @@ export default function ForgotPasswordPage() {
               })}
             />
             {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-            <NoticeSpanStyle>Você receberá um código de verificação no seu e-mail</NoticeSpanStyle>
-            <ButtonComponent>Enviar</ButtonComponent>
+            <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
+            <Button>Enviar</Button>
           </form>
-        </ForgotPasswordPageWrapper>
-        <ForgotPasswordImageContainer>
+        </S.Wrapper>
+        <S.ImageContainer>
           <img src={forgotPasswordImage} alt="Imagem da página de esqueci senha" />
-        </ForgotPasswordImageContainer>
-      </ForgotPasswordPageStyle>
+        </S.ImageContainer>
+      </S.Main>
     </>
   );
 }

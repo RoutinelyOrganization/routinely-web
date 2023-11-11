@@ -1,15 +1,15 @@
-import ContainerTaskDoneComponent from "../ContainerTaskDone";
-import { DoneTasksStyle } from "./DoneTasksStyle";
+import ContainerTaskDone from "../ContainerTaskDone";
+import * as S from "./styles";
 
-export default function DoneTasksComponent() {
+export default function DoneTasks() {
     return (
-        <DoneTasksStyle>
-            <ContainerTaskDoneComponent />
-            <ContainerTaskDoneComponent />
-            <ContainerTaskDoneComponent />
-            <ContainerTaskDoneComponent />
-            <ContainerTaskDoneComponent />
-            <ContainerTaskDoneComponent />
-        </DoneTasksStyle>
+        <S.Container>
+            <ContainerTaskDone />
+            <ContainerTaskDone />
+            <ContainerTaskDone />
+            <ContainerTaskDone />
+            <ContainerTaskDone />
+            <ContainerTaskDone />
+        </S.Container>
     )
 }

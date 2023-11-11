@@ -1,26 +1,34 @@
 import { UserContext } from "../../contexts/UserContext";
 import ButtonBackPage from "../ButtonBackPage";
 import ContainerIcons from "../ContainerIcons";
-import MenuHeaderComponent from "../MenuHeader";
-import { HeaderStyle } from "./HeaderStyles";
+import Logo from "../Logo";
+import MenuHeader from "../MenuHeader";
+import * as S from "./styles";
 
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 
-export default function HeaderComponent() {
+export interface IHeader {
+  header?: 'primary' | 'secundary'
+}
+
+export default function Header({header = 'primary'}:IHeader) {
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const { user } = useContext(UserContext);
   const token = localStorage.getItem("token");
   const hasUser = token || user.email;
 
   return (
-    <HeaderStyle>
-      <ButtonBackPage />
+    <S.Header header={header}>
+      {header === 'primary' ?
+        <Logo /> :
+        <ButtonBackPage/>
+      }
       {hasUser && (
         <>
           <ContainerIcons setIsShowMenu={setIsShowMenu} />
-          {isShowMenu && <MenuHeaderComponent setIsShowMenu={setIsShowMenu} />}
+          {isShowMenu && <MenuHeader setIsShowMenu={setIsShowMenu} />}
         </>
       )}
-    </HeaderStyle>
+    </S.Header>
   );
 }

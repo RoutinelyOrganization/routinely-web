@@ -7,6 +7,6 @@ interface ISignUpInput {
 }
 
 export default async function signUp({ name, email, password, acceptedTerms }: ISignUpInput) {
-  const response = await instance.post("/auth/register", { name, email, password, acceptedTerms });
+  const response = await instance.post("/auth/register", { name, email, password, acceptedTerms });  
   return response;
 }

@@ -1,10 +1,10 @@
-import { ImageCalendarStyle } from "./ImageCalendarStyle";
 import calendarImage from "../../assets/imagens/calendarImage.svg";
+import * as S from "./styles";
 
 export default function ImageCalendar() {
     return (
-        <ImageCalendarStyle>
+        <S.Container>
             <img src={calendarImage} alt="calendar image" />
-        </ImageCalendarStyle>
+        </S.Container>
     )
 }

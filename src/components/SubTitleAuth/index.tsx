@@ -1,9 +1,9 @@
-import { SubTitleAuthStyle } from "./SubTitleAuthStyles";
+import * as S from "./styles";
 
 interface ISubTitleAuth {
   children: string;
 }
 
-export default function SubTitleAuthComponent({ children }: ISubTitleAuth) {
-  return <SubTitleAuthStyle>{children}</SubTitleAuthStyle>;
+export default function SubTitleAuth({ children }: ISubTitleAuth) {
+  return <S.Paragraph>{children}</S.Paragraph>;
 }
