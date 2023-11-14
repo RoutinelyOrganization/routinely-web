@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ErrorMessage } from "../ErrorMessage/styles";
 
 export const Form = styled.form`
   display: flex;
@@ -7,18 +8,12 @@ export const Form = styled.form`
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
-`;
 
-export const ErrorMessage = styled.span`
-  color: #B3261B;
-  font-size: 0.9rem;
-  max-width: 368px;
-  text-align: justify;
-`;
+  ${ErrorMessage} {
+    margin-top: -15px;
+  }
 
-export const PasswordContainer = styled.div`
-  position: relative;
-`
+`;
 
 export const ShowPasswordButton = styled.button`
   color: #171a21;

@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-export default function DeleteButton() {
+export default function ButtonDelete() {
   return (
     <S.Button>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">

@@ -24,7 +24,7 @@
     },
     "include": [
         "src"
-    ],
+, "src/oldComponents/PopUp", "oldComponents"    ],
     "references": [
         {
             "path": "./tsconfig.node.json"

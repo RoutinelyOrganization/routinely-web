@@ -1,6 +1,6 @@
 import { UserContext } from "../../contexts/UserContext";
-import ButtonBackPage from "../ButtonBackPage";
-import ContainerIcons from "../ContainerIcons";
+import ButtonBackPage from "../buttons/ButtonBackPage";
+import ContainerIcons from "../containers/ContainerIcons";
 import Logo from "../Logo";
 import MenuHeader from "../MenuHeader";
 import * as S from "./styles";

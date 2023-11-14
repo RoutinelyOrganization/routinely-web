@@ -1,10 +1,10 @@
 import signUpPageImage from "../../assets/imagens/signUpPageImage.svg";
-import ButtonSocial from "../../components/ButtonSocial";
 import Header from "../../components/Header";
 import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
 import SignUpForm from "../../components/SignUpForm";
-import TitleAuth from "../../components/TitleAuth";
+import ButtonSocial from "../../components/buttons/ButtonSocial";
+import TitleAuth from "../../components/titles/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
 

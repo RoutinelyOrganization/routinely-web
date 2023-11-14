@@ -1,4 +1,4 @@
-import ContainerTaskDone from "../ContainerTaskDone";
+import ContainerTaskDone from "../containers/ContainerTaskDone";
 import * as S from "./styles";
 
 export default function DoneTasks() {

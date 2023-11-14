@@ -1,6 +1,6 @@
-import DeleteButton from "../DeleteButton";
-import EditButton from "../EditButton";
-import PriorityFlag from "../PriorityFlag";
+import ButtonEdit from "../../buttons/ButtonEdit";
+import DeleteButton from "../../buttons/ButtonDelete";
+import PriorityFlag from "../../PriorityFlag";
 import * as S from "./styles";
 
 interface IContainerTaskProps {
@@ -17,7 +17,7 @@ export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps
         <S.ContainerPriority>
           <PriorityFlag />
         </S.ContainerPriority>
-        <EditButton setIsEditTaskOpen={setIsEditTaskOpen} />
+        <ButtonEdit setIsEditTaskOpen={setIsEditTaskOpen} />
         <DeleteButton />
       </S.ContainerTask>
     </S.Wrapper>

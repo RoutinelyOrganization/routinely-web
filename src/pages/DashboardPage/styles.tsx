@@ -15,6 +15,7 @@ export const ContainerTasks = styled.section`
   padding: 1rem;
   gap: 1rem;
   position: relative;
+
   `;
 
 export const ButtonEditTask = styled.button`
