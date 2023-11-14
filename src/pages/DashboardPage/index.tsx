@@ -1,16 +1,14 @@
 import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
 import ImageCalendar from "../../components/ImageCalendar";
-import TaskTitle from "../../components/TaskTitle";
 import * as S from "./styles";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DoneTasks from "../../components/DoneTasks";
 import Header from "../../components/Header";
-import PopUp from "../../components/PopUp";
-import PopUpAddTask from "../../components/PopUpAddTask";
-import PopUpEditTask from "../../components/PopUpEditTask";
+import PopUpTesting from "../../components/PopUp";
 import ToDoTasks from "../../components/ToDoTasks";
+import TaskTitle from "../../components/titles/TaskTitle";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 
@@ -35,14 +33,10 @@ export default function DashboardPage() {
     <>
       <ScrollToTop />
       {isAddTaskOpen && (
-        <PopUp>
-          <PopUpAddTask setIsAddTaskOpen={setIsAddTaskOpen} />
-        </PopUp>
+        <PopUpTesting setIsTaskOpen={setIsAddTaskOpen} actionForm="add"/>
       )}
       {isEditTaskOpen && (
-        <PopUp>
-          <PopUpEditTask setIsEditTaskOpen={setIsEditTaskOpen} />
-        </PopUp>
+        <PopUpTesting setIsTaskOpen={setIsEditTaskOpen} actionForm="edit"/>
       )}
       <Header />
       <S.Main>

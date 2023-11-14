@@ -6,8 +6,6 @@ interface ITitleAuth {
 
 export default function TitleAuth({ children }: ITitleAuth) {
     return (
-        <S.Title>
-            {children}
-        </S.Title>
+        <S.Title>{children}</S.Title>
     )
 }

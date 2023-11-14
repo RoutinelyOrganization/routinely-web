@@ -1,13 +1,13 @@
 import * as S from "./styles";
 
 interface IPopUpCloseButton {
-  setIsAddTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PopUpCloseButton({ setIsAddTaskOpen, setIsEditTaskOpen }: IPopUpCloseButton) {
+export default function PopUpCloseButton({ setIsTaskOpen, setIsEditTaskOpen }: IPopUpCloseButton) {
   const handleCloseButton = () => {
-    setIsAddTaskOpen(false);
+    setIsTaskOpen(false);
     setIsEditTaskOpen(false);
   };
 

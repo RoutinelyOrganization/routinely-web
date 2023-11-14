@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import Button from "../../components/Button";
+import ErrorMessage from "../../components/ErrorMessage";
 import Header from "../../components/Header";
-import { InputStyle } from "../../components/Input/InputStyles";
+import Input from "../../components/Input";
 import LogoShared from "../../components/LogoShared";
-import { ErrorMessage as ErrorMessageStyle } from "../../components/SignUpForm/styles";
-import SubTitleAuth from "../../components/SubTitleAuth";
-import TitleAuth from "../../components/TitleAuth";
+import Button from "../../components/buttons/Button";
+import SubTitleAuth from "../../components/titles/SubTitleAuth";
+import TitleAuth from "../../components/titles/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
 
@@ -34,19 +34,22 @@ export default function ForgotPasswordPage() {
           <LogoShared />
           <TitleAuth>Esqueceu sua Senha?</TitleAuth>
           <SubTitleAuth>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuth>
+          {/*eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit(submitForm)}>
-            <InputStyle
+            <Input
               type="email"
               placeholder="Email"
-              {...register("email", {
+              register={register("email", {
                 required: "Este campo é obrigatório.",
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                   message: "Este campo precisa ser um email válido.",
                 },
               })}
-            />
-            {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
+            >
+
+            </Input>
+            {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
             <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
             <Button>Enviar</Button>
           </form>

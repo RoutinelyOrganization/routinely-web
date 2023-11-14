@@ -1,11 +1,11 @@
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import Button from "../../components/Button";
+import Button from "../../components/buttons/Button";
 import Header from "../../components/Header";
-import { InputStyle } from "../../components/Input/InputStyles";
+import Input from "../../components/Input";
 import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
-import SubTitleAuth from "../../components/SubTitleAuth";
-import TitleAuth from "../../components/TitleAuth";
+import SubTitleAuth from "../../components/titles/SubTitleAuth";
+import TitleAuth from "../../components/titles/TitleAuth";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { ImageContainer as ImageContainerStyle } from "../ForgotPasswordPage/styles";
 import * as S from "./styles";
@@ -22,7 +22,7 @@ export default function RedefinePasswordPage() {
           <TitleAuth>Redefinir senha</TitleAuth>
           <SubTitleAuth>Insira o código de verificação enviado no email.</SubTitleAuth>
           <form>
-            <InputStyle type="text" placeholder="Código de verificação" />
+            <Input type="text" placeholder="Código de verificação" />
             <LinkAuth path="#" linkText="Enviar Novamente">
               Não recebeu?
             </LinkAuth>

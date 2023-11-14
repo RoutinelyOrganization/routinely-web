@@ -2,7 +2,7 @@ import * as S from "./styles";
 interface IEditButtonProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function EditButton({ setIsEditTaskOpen }: IEditButtonProps) {
+export default function ButtonEdit({ setIsEditTaskOpen }: IEditButtonProps) {
   const handleEditTaskOpen = () => {
     setIsEditTaskOpen(true);
   };

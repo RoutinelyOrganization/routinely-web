@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
 import signInPageImage from "../../assets/imagens/signInPageImage.svg";
-import Button from "../../components/Button";
-import ButtonSocial from "../../components/ButtonSocial";
+import ErrorMessage from "../../components/ErrorMessage";
 import Header from "../../components/Header";
-import { InputContainer, InputStyle, LabelInput } from "../../components/Input/InputStyles";
+import Input from "../../components/Input";
 import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
-import { ErrorMessage as ErrorMessageStyle, PasswordContainer as PasswordContainerStyle } from "../../components/SignUpForm/styles";
+import Button from "../../components/buttons/Button";
+import ButtonSocial from "../../components/buttons/ButtonSocial";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
@@ -71,13 +71,13 @@ export function SignInPage() {
           <LogoShared />
           <S.Title>Acessar conta</S.Title>
           <S.InputWrapper>
-            <InputContainer>
-              <InputStyle
-                $hasErro={erroEmail}
+          <Input
+                label="E-mail"
+                hasError={erroEmail}
                 type="email"
                 id="E-mail"
                 required
-                {...register("email", {
+                register={register("email", {
                   required: "Campo de preenchimento obrigatório",
                   onChange(event: React.ChangeEvent<HTMLInputElement>) {
                     if (event.target.value) {
@@ -91,22 +91,21 @@ export function SignInPage() {
                     message: "preencha um e-mail válido",
                   },
                 })}
-              />
-              <LabelInput $hasErro={erroEmail} htmlFor="E-mail">
-                E-mail
-              </LabelInput>
-              {errors.email && <ErrorMessageStyle>{errors.email.message}</ErrorMessageStyle>}
-              {erroEmail && <img src={infoErro} alt="icone de info erro" />}
-            </InputContainer>
-
-            <PasswordContainerStyle>
-              <InputContainer>
-                <InputStyle
+              >
+                <>
+                  {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+                  {erroEmail && <img src={infoErro} alt="icone de info erro" />}
+                </>
+            </Input>
+            
+            
+            <Input
+                  label="Senha"
                   type={showPassord ? "text" : "password"}
-                  $hasErro={erroPassword}
+                  hasError={erroPassword}
                   id="Password"
                   required
-                  {...register("password", {
+                  register={register("password", {
                     required: "campo de preenchimento obrigatório",
                     onChange(event: React.ChangeEvent<HTMLInputElement>) {
                       if (event.target.value) {
@@ -121,12 +120,8 @@ export function SignInPage() {
                         "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
                     },
                   })}
-                />
-                <LabelInput $hasErro={erroEmail} htmlFor="Password">
-                  Senha
-                </LabelInput>
-
-                <S.ShowPassword onClick={() => setShowPassword(!showPassord)}>
+                >
+                  <S.ShowPassword onClick={() => setShowPassword(!showPassord)}>
                   <>
                     {erroPassword ? (
                       <img src={infoErro} alt="icone de info erro" />
@@ -137,9 +132,8 @@ export function SignInPage() {
                     )}
                   </>
                 </S.ShowPassword>
-              </InputContainer>
-            </PasswordContainerStyle>
-            {errors.password && <ErrorMessageStyle>{errors.password.message}</ErrorMessageStyle>}
+            </Input>
+            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
           </S.InputWrapper>
           <S.CheckboxAndForgetPasswordWrapper>
             <S.CheckboxWrapper>
@@ -158,7 +152,7 @@ export function SignInPage() {
               <Button>Fazer login</Button>
             )}
 
-            {showError && <ErrorMessageStyle>email ou senha inválidos</ErrorMessageStyle>}
+            {showError && <ErrorMessage>email ou senha inválidos</ErrorMessage>}
 
             <ButtonSocial disabled>Continuar com Google</ButtonSocial>
             <LinkAuth path="/signUpPage" linkText="Crie a sua.">

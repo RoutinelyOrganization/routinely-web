@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { ErrorMessage } from "../../components/ErrorMessage/styles";
 
 export const Wrapper = styled.main`
   display: flex;
@@ -7,6 +8,10 @@ export const Wrapper = styled.main`
   justify-content: space-evenly;
   margin-top: 104px;
   height: 100vh;
+
+  ${ErrorMessage} {
+    margin-top: -15px;
+  }
 `;
 
 export const Form = styled.form`

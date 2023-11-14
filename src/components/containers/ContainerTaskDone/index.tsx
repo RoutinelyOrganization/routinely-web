@@ -1,4 +1,4 @@
-import PriorityFlag from "../PriorityFlag";
+import PriorityFlag from "../../PriorityFlag";
 import * as S from "./styles";
 
 export default function ContainerTaskDone() {

@@ -1,4 +1,4 @@
-import ContainerTask from "../ContainerTask";
+import ContainerTask from "../containers/ContainerTask";
 import * as S from "./styles";
 
 interface ITodoTasksProps {
