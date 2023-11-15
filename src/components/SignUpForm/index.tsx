@@ -53,6 +53,7 @@ export default function SignUpForm() {
       await signUp(body);
       setShowError(false);
       navigate("/signinpage");
+      
     } catch (err) {
       const erro = err as AxiosError<{ message: string }>;
       console.log(erro.message);
@@ -149,6 +150,7 @@ export default function SignUpForm() {
           },
         })}
         errorMessage={errors.password && errors.password.message}
+        autoComplete="password"
       >
         <>
           <S.ShowPasswordButton type="button" onClick={() => setShowPassword(!showPassword)}>
@@ -161,7 +163,7 @@ export default function SignUpForm() {
         label="Repetir senha"
         hasError={erroConfirmPassword}
         type={showConfirmPassword ? "text" : "password"}
-        id="forgetPassword"
+        id="confirmPassword"
         required
         register={register("confirmPassword", {
           required: "Este campo é obrigatório.",
@@ -175,6 +177,7 @@ export default function SignUpForm() {
           },
         })}
         errorMessage={errors.confirmPassword && errors.confirmPassword.message}
+        autoComplete="confirmPassword"
       >
         <>
           <S.ShowPasswordButton type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>

@@ -18,7 +18,7 @@ export default function Header({header = 'primary'}:IHeader) {
   const hasUser = token || user.email;
 
   return (
-    <S.Header header={header}>
+    <S.Header $header={header}>
       {header === 'primary' ?
         <Logo /> :
         <ButtonBackPage/>
