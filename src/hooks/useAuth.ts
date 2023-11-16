@@ -7,6 +7,7 @@ export const useAuth = () => {
     try {
       const response = await instance.post("/auth", data);
       
+      
       return response;
     } catch (error) {
       const erro = error as AxiosError;
@@ -33,7 +34,7 @@ export const useAuth = () => {
     }
   }
 
-  async function validateToken(token: string, year?: number, month?: number) {
+  async function validateToken(token: string, refreshToken: string, year?: number, month?: number) {
     const date = new Date();
     year = year || date.getFullYear();
     month = month || date.getMonth() + 1;
@@ -44,17 +45,39 @@ export const useAuth = () => {
     };
 
     try {
+      
       const response = await instance.get("/tasks", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         params,
       });
-
+      
       return response;
     } catch (error) {
       const erro = error as AxiosError;
-      console.error(erro.message);
+      console.log(erro);
+      try {
+        const response = await validateRefreshToken(token,refreshToken)
+        console.log(response);
+      } catch (error) {
+        const erro = error as AxiosError;
+        console.log(erro);
+      }
+    }
+  }
+
+  async function validateRefreshToken(token: string, refreshToken: string) {
+    try {
+      const response = await instance.post('/auth/refresh', {refreshToken}, {
+        headers: {
+        Authorization: `Bearer ${token}`,
+        }
+      })
+      return response;
+    } catch (error) {
+      const erro = error as AxiosError;
+      console.log(erro);
     }
   }
 
@@ -62,5 +85,6 @@ export const useAuth = () => {
     login,
     validateToken,
     disconnectLogin,
+    validateRefreshToken
   };
 };

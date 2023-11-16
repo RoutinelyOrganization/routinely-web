@@ -22,6 +22,12 @@ export interface ISingInProps {
   remember?: boolean;
 }
 
+interface IAuthorization {
+  token: string,
+  refreshToken: string,
+  expiresIn: string
+}
+
 export function SignInPage() {
   const [showPassord, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -40,13 +46,16 @@ export function SignInPage() {
   const handleSubmitSignIn = async(Data: ISingInProps) => {
     try {
       setLoading(true);
-      const response: AxiosResponse<{ token: string }> | undefined = await login(Data);
+      const response: AxiosResponse<IAuthorization > | undefined = await login(Data);
+      console.log(response);
       
       if (response!.status === 200) {
         setUser(Data);
         if (Data.remember) {
-          const token = response!.data.token;
+          const {refreshToken,token} = response!.data;
           window.localStorage.setItem("token", response! && token);
+          window.localStorage.setItem("refreshToken", response! && refreshToken);
+
         }
         navigate("/dashboardpage");
         setShowError(false);

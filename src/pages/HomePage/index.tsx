@@ -10,30 +10,32 @@ import * as S from './styles';
 export default function HomePage() {
   const navigate = useNavigate();
 
-  const { validateToken } = useAuth();
+  const { validateToken,validateRefreshToken } = useAuth();
 
   useEffect(() => {
     const tokenLocal = window.localStorage.getItem("token");
+    const refreshTokenLocal = window.localStorage.getItem("refreshToken");
+  
+    if (!tokenLocal || !refreshTokenLocal) return;
 
-    if (!tokenLocal) return;
-
-    validateToken(tokenLocal, 2022, 12)
+    validateToken(tokenLocal, refreshTokenLocal, 2022, 12)
       .then(() => {
         navigate("/dashboardpage");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         return;
       });
-  }, [navigate, validateToken]);
+  }, [navigate, validateToken, validateRefreshToken]);
 
   return (
     <>
       <ScrollToTop />
       <S.Header>
         <Logo />
-        <ButtonStyle children="Recursos" />
-        <ButtonStyle children="Planos" />
-        <ButtonStyle children="Acesse" $secondaryColor onClick={() => navigate("/welcomePage")} />
+        <ButtonStyle>Recursos</ButtonStyle>
+        <ButtonStyle >Planos</ButtonStyle>
+        <ButtonStyle $secondaryColor onClick={() => navigate("/welcomePage")} >Acesse</ButtonStyle>
       </S.Header>
 
       <S.Main>

@@ -26,6 +26,7 @@
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "eslint-plugin-no-floating-promise": "off"
+        "eslint-plugin-no-floating-promise": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
