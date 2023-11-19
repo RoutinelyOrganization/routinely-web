@@ -1,9 +1,8 @@
 import { AxiosError } from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
-import { UserContext } from "../../contexts/UserContext";
 import signUp from "../../services/signUp";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
@@ -53,9 +52,8 @@ export default function SignUpForm() {
       setShowError(false);
       navigate("/signinpage");
     } catch (err) {
-      const erro = err as AxiosError<{ message: string }>;
-      console.log(erro.message);
-      if (erro.response?.data.message) {
+      const { response } = err as AxiosError<{ errors: { message: string }[] }>;
+      if (response?.data.errors[0].message) {
         setShowError(true);
         setErroEmail(true);
         setLoading(false);
