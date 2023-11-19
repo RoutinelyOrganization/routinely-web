@@ -94,7 +94,7 @@ export default function SignUpForm() {
       <Input
         label="Email"
         hasError={erroEmail}
-        type="email"
+        type="text"
         id="Email"
         required
         register={register("email", {

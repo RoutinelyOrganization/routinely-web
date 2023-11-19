@@ -75,16 +75,19 @@ export function SignInPage() {
             <Input
               label="E-mail"
               hasError={erroEmail}
-              type="email"
+              type="text"
               id="E-mail"
               required
               register={register("email", {
                 required: "Campo de preenchimento obrigatório",
                 onChange(event: React.ChangeEvent<HTMLInputElement>) {
-                  if (event.target.value) {
-                    setErrorEmail(false);
+                  const matchErro = event.target.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+                  if (!matchErro) {
+                    setErrorEmail(true);
                     setErrorPassword(false);
                     setShowError(false);
+                  } else {
+                    setErrorEmail(false);
                   }
                 },
                 pattern: {
