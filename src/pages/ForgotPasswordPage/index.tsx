@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
           {/*eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit(submitForm)}>
             <Input
-              type="email"
+              type="text"
               placeholder="Email"
               register={register("email", {
                 required: "Este campo é obrigatório.",

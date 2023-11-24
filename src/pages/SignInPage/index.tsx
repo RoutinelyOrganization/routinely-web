@@ -33,9 +33,10 @@ export function SignInPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const { showError, setShowError, loading, setLoading, setUser } = useContext(UserContext);
+  const { loading, setLoading, setUser } = useContext(UserContext);
   const [erroEmail, setErrorEmail] = useState(false);
   const [erroPassword, setErrorPassword] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const {
     register,
@@ -50,11 +51,10 @@ export function SignInPage() {
 
       if (response!.status === 200) {
         setUser(Data);
-        if (Data) {
-          const { refreshToken, token, expiresIn } = response!.data;
+        if (Data.remember) {
+          const { refreshToken, token } = response!.data;
           window.localStorage.setItem("token", response! && token);
           window.localStorage.setItem("refreshToken", response! && refreshToken);
-          window.localStorage.setItem("expiresIn", response! && expiresIn);
         }
         navigate("/dashboardpage");
         setShowError(false);
@@ -82,16 +82,19 @@ export function SignInPage() {
             <Input
               label="E-mail"
               hasError={erroEmail}
-              type="email"
+              type="text"
               id="E-mail"
               required
               register={register("email", {
                 required: "Campo de preenchimento obrigatório",
                 onChange(event: React.ChangeEvent<HTMLInputElement>) {
-                  if (event.target.value) {
-                    setErrorEmail(false);
+                  const matchErro = event.target.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+                  if (!matchErro) {
+                    setErrorEmail(true);
                     setErrorPassword(false);
                     setShowError(false);
+                  } else {
+                    setErrorEmail(false);
                   }
                 },
                 pattern: {

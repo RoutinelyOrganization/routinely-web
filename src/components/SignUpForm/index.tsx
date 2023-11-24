@@ -1,9 +1,8 @@
 import { AxiosError } from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
-import { UserContext } from "../../contexts/UserContext";
 import signUp from "../../services/signUp";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
@@ -28,8 +27,8 @@ export default function SignUpForm() {
   const [erroConfirmPassword, setErroConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
 
-  const { showError, setShowError } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -47,15 +46,15 @@ export default function SignUpForm() {
       acceptedTerms,
     };
 
+
     try {
       setLoading(true);
       await signUp(body);
       setShowError(false);
       navigate("/signinpage");
     } catch (err) {
-      const erro = err as AxiosError<{ message: string }>;
-      console.log(erro);
-      if (erro.response?.data.message) {
+      const { response } = err as AxiosError<{ errors: { message: string }[] }>;
+      if (response?.data.errors[0].message) {
         setShowError(true);
         setErroEmail(true);
         setLoading(false);
@@ -94,7 +93,7 @@ export default function SignUpForm() {
       <Input
         label="Email"
         hasError={erroEmail}
-        type="email"
+        type="text"
         id="Email"
         required
         register={register("email", {
@@ -114,12 +113,10 @@ export default function SignUpForm() {
           },
         })}
       >
-        <>
-          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-          {showError && <ErrorMessage>Esse email já está sendo usando</ErrorMessage>}
-          {showError && <img src={infoErro} alt="icone de info erro" />}
-        </>
+        {showError && <img src={infoErro} alt="icone de info erro" />}
       </Input>
+      {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+      {showError && <ErrorMessage>Este e-mail já está sendo utilizado</ErrorMessage>}
 
       <Input
         label="Senha"
