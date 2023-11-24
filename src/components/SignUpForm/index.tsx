@@ -46,17 +46,15 @@ export default function SignUpForm() {
       password,
       acceptedTerms,
     };
-    console.log(body);
-    
+
     try {
       setLoading(true);
       await signUp(body);
       setShowError(false);
       navigate("/signinpage");
-      
     } catch (err) {
       const erro = err as AxiosError<{ message: string }>;
-      console.log(erro.message);
+      console.log(erro);
       if (erro.response?.data.message) {
         setShowError(true);
         setErroEmail(true);
@@ -70,31 +68,29 @@ export default function SignUpForm() {
   return (
     // eslint-disable-next-line
     <S.Form onSubmit={handleSubmit(handleSignUp)}>
-
       <Input
-          label="Nome"
-          hasError={erroName}
-          type="text"
-          id="name"
-          required
-          register={register("name", {
-            required: "Este campo é obrigatório.",
-            minLength: {
-              value: 3,
-              message: "Este campo precisa ter no mínimo 3 letras.",
-            },
-            pattern: {
-              value: /^[a-zA-ZÀ-ÿ\s~]+$/,
-              message: "O campo nome não pode conter números nem caracteres especiais.",
-            },
-            onChange(event: React.ChangeEvent<HTMLInputElement>) {
-              event.target.value.length < 3 ? setErroName(true) : setErroName(false);
-            },
-          })}
-          errorMessage={errors.name && errors.name.message}
-        >
-      </Input>
-          
+        label="Nome"
+        hasError={erroName}
+        type="text"
+        id="name"
+        required
+        register={register("name", {
+          required: "Este campo é obrigatório.",
+          minLength: {
+            value: 3,
+            message: "Este campo precisa ter no mínimo 3 letras.",
+          },
+          pattern: {
+            value: /^[a-zA-ZÀ-ÿ\s~]+$/,
+            message: "O campo nome não pode conter números nem caracteres especiais.",
+          },
+          onChange(event: React.ChangeEvent<HTMLInputElement>) {
+            event.target.value.length < 3 ? setErroName(true) : setErroName(false);
+          },
+        })}
+        errorMessage={errors.name && errors.name.message}
+      ></Input>
+
       <Input
         label="Email"
         hasError={erroEmail}
@@ -204,11 +200,7 @@ export default function SignUpForm() {
         </span>
       </S.TermsOfUseContainer>
       {errors.acceptedTerms && <ErrorMessage>{errors.acceptedTerms.message}</ErrorMessage>}
-      {loading ? (
-        <Button disabled>Carregando...</Button>
-      ) : (
-        <Button>Criar Conta</Button>
-      )}
+      {loading ? <Button disabled>Carregando...</Button> : <Button>Criar Conta</Button>}
     </S.Form>
   );
 }

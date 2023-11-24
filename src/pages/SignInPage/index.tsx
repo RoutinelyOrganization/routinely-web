@@ -23,9 +23,9 @@ export interface ISingInProps {
 }
 
 interface IAuthorization {
-  token: string,
-  refreshToken: string,
-  expiresIn: string
+  token: string;
+  refreshToken: string;
+  expiresIn: string;
 }
 
 export function SignInPage() {
@@ -43,19 +43,18 @@ export function SignInPage() {
     formState: { errors },
   } = useForm<ISingInProps>();
 
-  const handleSubmitSignIn = async(Data: ISingInProps) => {
+  const handleSubmitSignIn = async (Data: ISingInProps) => {
     try {
       setLoading(true);
-      const response: AxiosResponse<IAuthorization > | undefined = await login(Data);
-      console.log(response);
-      
+      const response: AxiosResponse<IAuthorization> | undefined = await login(Data);
+
       if (response!.status === 200) {
         setUser(Data);
-        if (Data.remember) {
-          const {refreshToken,token} = response!.data;
+        if (Data) {
+          const { refreshToken, token, expiresIn } = response!.data;
           window.localStorage.setItem("token", response! && token);
           window.localStorage.setItem("refreshToken", response! && refreshToken);
-
+          window.localStorage.setItem("expiresIn", response! && expiresIn);
         }
         navigate("/dashboardpage");
         setShowError(false);
@@ -69,7 +68,7 @@ export function SignInPage() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -80,67 +79,60 @@ export function SignInPage() {
           <LogoShared />
           <S.Title>Acessar conta</S.Title>
           <S.InputWrapper>
-          <Input
-                label="E-mail"
-                hasError={erroEmail}
-                type="email"
-                id="E-mail"
-                required
-                register={register("email", {
-                  required: "Campo de preenchimento obrigatório",
-                  onChange(event: React.ChangeEvent<HTMLInputElement>) {
-                    if (event.target.value) {
-                      setErrorEmail(false);
-                      setErrorPassword(false);
-                      setShowError(false);
-                    }
-                  },
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "preencha um e-mail válido",
-                  },
-                })}
-              >
-                <>
-                  {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-                  {erroEmail && <img src={infoErro} alt="icone de info erro" />}
-                </>
-            </Input>
-            
-            
             <Input
-                  label="Senha"
-                  type={showPassord ? "text" : "password"}
-                  hasError={erroPassword}
-                  id="Password"
-                  required
-                  register={register("password", {
-                    required: "campo de preenchimento obrigatório",
-                    onChange(event: React.ChangeEvent<HTMLInputElement>) {
-                      if (event.target.value) {
-                        setErrorPassword(false);
-                        setShowError(false);
-                        setErrorEmail(false);
-                      }
-                    },
-                    pattern: {
-                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
-                      message:
-                        "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
-                    },
-                  })}
-                >
-                  <S.ShowPassword onClick={() => setShowPassword(!showPassord)}>
-                  <>
-                    {erroPassword ? (
-                      <img src={infoErro} alt="icone de info erro" />
-                    ) : showPassord ? (
-                      "ESCONDER"
-                    ) : (
-                      "EXIBIR"
-                    )}
-                  </>
-                </S.ShowPassword>
+              label="E-mail"
+              hasError={erroEmail}
+              type="email"
+              id="E-mail"
+              required
+              register={register("email", {
+                required: "Campo de preenchimento obrigatório",
+                onChange(event: React.ChangeEvent<HTMLInputElement>) {
+                  if (event.target.value) {
+                    setErrorEmail(false);
+                    setErrorPassword(false);
+                    setShowError(false);
+                  }
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "preencha um e-mail válido",
+                },
+              })}
+            >
+              <>
+                {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+                {erroEmail && <img src={infoErro} alt="icone de info erro" />}
+              </>
+            </Input>
+
+            <Input
+              label="Senha"
+              type={showPassord ? "text" : "password"}
+              hasError={erroPassword}
+              id="Password"
+              required
+              register={register("password", {
+                required: "campo de preenchimento obrigatório",
+                onChange(event: React.ChangeEvent<HTMLInputElement>) {
+                  if (event.target.value) {
+                    setErrorPassword(false);
+                    setShowError(false);
+                    setErrorEmail(false);
+                  }
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
+                  message:
+                    "A senha deve ter o mínimo de 6 caracteres e conter letras maiúsculas e minúsculas, números e símbolos como ! @ # $ % & * =",
+                },
+              })}
+            >
+              <S.ShowPassword onClick={() => setShowPassword(!showPassord)}>
+                <>
+                  {erroPassword ? <img src={infoErro} alt="icone de info erro" /> : showPassord ? "ESCONDER" : "EXIBIR"}
+                </>
+              </S.ShowPassword>
             </Input>
             {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
           </S.InputWrapper>
@@ -149,17 +141,11 @@ export function SignInPage() {
               <label htmlFor="checkboxSignIn">Lembrar meu acesso</label>
               <S.Checkbox type="checkbox" id="checkboxSignIn" {...register("remember")} />
             </S.CheckboxWrapper>
-            <S.ForgetPassword>
-              {<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}
-            </S.ForgetPassword>
+            <S.ForgetPassword>{<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}</S.ForgetPassword>
           </S.CheckboxAndForgetPasswordWrapper>
 
           <S.ButtonWrapper>
-            {loading ? (
-              <Button disabled>Carregando...</Button>
-            ) : (
-              <Button>Fazer login</Button>
-            )}
+            {loading ? <Button disabled>Carregando...</Button> : <Button>Fazer login</Button>}
 
             {showError && <ErrorMessage>email ou senha inválidos</ErrorMessage>}
 

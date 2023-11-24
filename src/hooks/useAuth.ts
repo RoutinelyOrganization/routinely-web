@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { ISingInProps } from "../pages/SignInPage";
 import instance from "../services/api";
 
@@ -34,7 +34,7 @@ export const useAuth = () => {
     }
   }
 
-  async function validateToken(token: string, refreshToken: string, year?: number, month?: number) {
+  async function validateToken(token: string, year?: number, month?: number) {
     const date = new Date();
     year = year || date.getFullYear();
     month = month || date.getMonth() + 1;
@@ -56,14 +56,8 @@ export const useAuth = () => {
       return response;
     } catch (error) {
       const erro = error as AxiosError;
-      console.log(erro);
-      try {
-        const response = await validateRefreshToken(token,refreshToken)
-        console.log(response);
-      } catch (error) {
-        const erro = error as AxiosError;
-        console.log(erro);
-      }
+      return erro
+      
     }
   }
 
@@ -77,14 +71,42 @@ export const useAuth = () => {
       return response;
     } catch (error) {
       const erro = error as AxiosError;
-      console.log(erro);
+      return erro
     }
+  }
+
+  async function authorization() {
+    const tokenLocal = window.localStorage.getItem("token");
+    const refreshTokenLocal = window.localStorage.getItem("refreshToken");
+
+    if (!tokenLocal || !refreshTokenLocal) {
+      return {valid:false}
+    }
+
+    const response = await validateToken(tokenLocal);
+    if (!axios.isAxiosError(response)) {
+        return {valid:true, response}
+
+      } else {
+        const result = await validateRefreshToken(tokenLocal, refreshTokenLocal);
+        if (!axios.isAxiosError(result)) {
+          const { refreshToken, token, expiresIn } = result!.data;
+          window.localStorage.setItem("token", result && token);
+          window.localStorage.setItem("refreshToken", result && refreshToken);
+          window.localStorage.setItem("expiresIn", result && expiresIn);
+          return { valid: true, response }
+          
+        } else {
+          return {valid: false, response}
+        }
+      }
   }
 
   return {
     login,
     validateToken,
     disconnectLogin,
-    validateRefreshToken
+    validateRefreshToken,
+    authorization
   };
 };
