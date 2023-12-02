@@ -37,6 +37,7 @@ export default function SignUpForm() {
   } = useForm<ISignUpInput>();
 
   const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
 
   const handleSignUp = async ({ name, email, password, acceptedTerms }: ISignUpInput) => {
     const body = {
@@ -138,6 +139,10 @@ export default function SignUpForm() {
               setErroPassword(false);
             } else {
               setErroPassword(true);
+            }
+            if (target.value === confirmPassword && matchErro) {
+              setErroConfirmPassword(false);
+              setErroPassword(false);
             }
           },
         })}
