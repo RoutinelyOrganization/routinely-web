@@ -47,7 +47,6 @@ export default function SignUpForm() {
       acceptedTerms,
     };
 
-
     try {
       setLoading(true);
       await signUp(body);
@@ -145,6 +144,8 @@ export default function SignUpForm() {
             if (target.value === confirmPassword && matchErro) {
               setErroConfirmPassword(false);
               setErroPassword(false);
+            } else if (confirmPassword) {
+              setErroConfirmPassword(true);
             }
             if (target.value === "") {
               setErroPassword(false);
@@ -181,7 +182,7 @@ export default function SignUpForm() {
             }
           },
         })}
-        errorMessage={errors.confirmPassword && errors.confirmPassword.message}
+        errorMessage={erroConfirmPassword ? errors.confirmPassword && errors.confirmPassword.message : undefined}
         autoComplete="confirmPassword"
       >
         <>
