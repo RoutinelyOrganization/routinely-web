@@ -135,6 +135,7 @@ export default function SignUpForm() {
             const matchErro = target.value.match(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
             );
+            console.log(confirmPassword, "teste");
             if (matchErro) {
               setErroPassword(false);
             } else {
@@ -142,6 +143,9 @@ export default function SignUpForm() {
             }
             if (target.value === confirmPassword && matchErro) {
               setErroConfirmPassword(false);
+              setErroPassword(false);
+            }
+            if (target.value === "") {
               setErroPassword(false);
             }
           },
@@ -169,6 +173,9 @@ export default function SignUpForm() {
             if (target.value !== password) {
               setErroConfirmPassword(true);
             } else {
+              setErroConfirmPassword(false);
+            }
+            if (target.value === "") {
               setErroConfirmPassword(false);
             }
           },
