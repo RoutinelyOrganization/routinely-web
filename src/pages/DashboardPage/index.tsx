@@ -5,6 +5,7 @@ import * as S from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DoneTasks from "../../components/DoneTasks";
+import FormTask from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpTesting from "../../components/PopUp";
 import ToDoTasks from "../../components/ToDoTasks";
@@ -21,7 +22,7 @@ export default function DashboardPage() {
 
   const handleIsAddTask = () => {
     setIsAddTaskOpen(true);
-  }
+  };
 
   useEffect(() => {
     if (!user.email && !token) {
@@ -33,10 +34,14 @@ export default function DashboardPage() {
     <>
       <ScrollToTop />
       {isAddTaskOpen && (
-        <PopUpTesting setIsTaskOpen={setIsAddTaskOpen} actionForm="add"/>
+        <PopUpTesting>
+          <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
+        </PopUpTesting>
       )}
       {isEditTaskOpen && (
-        <PopUpTesting setIsTaskOpen={setIsEditTaskOpen} actionForm="edit"/>
+        <PopUpTesting>
+          <FormTask actionForm="edit" setIsTaskOpen={setIsEditTaskOpen} />
+        </PopUpTesting>
       )}
       <Header />
       <S.Main>
