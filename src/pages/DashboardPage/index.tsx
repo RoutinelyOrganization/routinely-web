@@ -1,5 +1,4 @@
 import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
-import ImageCalendar from "../../components/ImageCalendar";
 import * as S from "./styles";
 
 import { useContext, useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import ToDoTasks from "../../components/ToDoTasks";
 import TaskTitle from "../../components/titles/TaskTitle";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import DateCalendar from "../../components/Calendar";
 
 export default function DashboardPage() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
@@ -41,7 +41,7 @@ export default function DashboardPage() {
       <Header />
       <S.Main>
         <S.ContainerCalendar>
-          <ImageCalendar />
+          <DateCalendar/>
           <img src={ImageCompleteTask} alt="imagem da pagina complete Task" />
         </S.ContainerCalendar>
 
