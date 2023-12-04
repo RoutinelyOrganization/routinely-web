@@ -1,8 +1,15 @@
 import * as S from "./styles";
 
-export default function ButtonDelete() {
+interface IDeleteButtonProps {
+  setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ButtonDelete({ setIsDeleteTaskOpen }: IDeleteButtonProps) {
+  const handleDeleteTaskOpen = () => {
+    setIsDeleteTaskOpen(true);
+  };
   return (
-    <S.Button>
+    <S.Button onClick={handleDeleteTaskOpen}>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
         <path
           fillRule="evenodd"

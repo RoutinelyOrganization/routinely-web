@@ -1,12 +1,13 @@
-import ButtonEdit from "../../buttons/ButtonEdit";
-import DeleteButton from "../../buttons/ButtonDelete";
 import PriorityFlag from "../../PriorityFlag";
+import DeleteButton from "../../buttons/ButtonDelete";
+import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
 
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps) {
+export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }: IContainerTaskProps) {
   return (
     <S.Wrapper>
       <S.ContainerTask>
@@ -18,7 +19,7 @@ export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps
           <PriorityFlag />
         </S.ContainerPriority>
         <ButtonEdit setIsEditTaskOpen={setIsEditTaskOpen} />
-        <DeleteButton />
+        <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
       </S.ContainerTask>
     </S.Wrapper>
   );
