@@ -47,6 +47,7 @@ export default function SignUpForm() {
       acceptedTerms,
     };
 
+
     try {
       setLoading(true);
       await signUp(body);

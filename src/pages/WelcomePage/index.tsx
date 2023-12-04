@@ -1,18 +1,31 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
 import Header from "../../components/Header";
 import LogoShared from "../../components/LogoShared";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { useAuth } from "../../hooks/useAuth";
 import * as S from "./styles";
-
 
 export function WelcomePage() {
   const navigate = useNavigate();
 
+  const { authorization } = useAuth();
+
+  useEffect(() => {
+    const fetchAuthorization = async () => {
+      const { valid } = await authorization();
+      if (valid) {
+        navigate("/dashboardpage");
+      }
+    };
+    fetchAuthorization();
+  }, [authorization, navigate]);
+
   return (
     <>
       <ScrollToTop />
-      <Header header="secundary"/>
+      <Header header="secundary" />
       <S.Wrapper>
         <form>
           <LogoShared />
