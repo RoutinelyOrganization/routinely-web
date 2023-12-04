@@ -12,19 +12,41 @@ interface IInput {
   id?: string;
   required?: boolean;
   errorMessage?: string;
-  autoComplete?: string
-
+  autoComplete?: string;
 }
 
-export default function InputComponent({ label,type, placeholder, register, hasError, id, required, children, errorMessage,autoComplete}: IInput) {
+export default function InputComponent({
+  label,
+  type,
+  placeholder,
+  register,
+  hasError,
+  id,
+  required,
+  children,
+  errorMessage,
+  autoComplete,
+}: IInput) {
   return (
     <>
       <S.InputContainer>
-        <S.InputStyle type={type} placeholder={placeholder} {...register} $hasErro={hasError} id={id} required={required} autoComplete={autoComplete} />
-        <S.LabelInput $hasErro={hasError} htmlFor={id}>{label}</S.LabelInput>
+        <S.InputStyle
+          type={type}
+          placeholder={placeholder}
+          {...register}
+          $hasErro={hasError}
+          id={id}
+          required={required}
+          autoComplete={autoComplete}
+        />
+        <S.LabelInput $hasErro={hasError}>
+          {" "}
+          <S.BorderWhite></S.BorderWhite>
+          <S.Label htmlFor={id}>{label}</S.Label>
+        </S.LabelInput>
         {children}
       </S.InputContainer>
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>} 
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </>
-      );
+  );
 }
