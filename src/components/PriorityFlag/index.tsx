@@ -1,4 +1,8 @@
-export default function PriorityFlag() {
+interface IPriorityFlagProps {
+  priority: string;
+}
+
+export default function PriorityFlag({ priority }: IPriorityFlagProps) {
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -12,7 +16,7 @@ export default function PriorityFlag() {
           />
         </g>
       </svg>
-      <span>Urgente</span>
+      <span>{priority}</span>
     </>
   );
 }

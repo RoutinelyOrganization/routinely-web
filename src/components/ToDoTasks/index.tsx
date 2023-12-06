@@ -12,11 +12,7 @@ export default function ToDoTasks({ setIsEditTaskOpen, setIsAddTaskOpen }: ITodo
   };
   return (
     <S.Container>
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />      
       <S.Button onClick={handleAddTask}>Adicionar nova tarefa</S.Button>
       <hr />
     </S.Container>

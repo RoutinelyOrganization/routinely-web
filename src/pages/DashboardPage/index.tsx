@@ -11,6 +11,7 @@ import TaskTitle from "../../components/titles/TaskTitle";
 import { UserContext } from "../../contexts/UserContext";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import DateCalendar from "../../components/Calendar";
+import { CalendarProvider } from "../../contexts/CalendarContext";
 
 export default function DashboardPage() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
@@ -21,7 +22,7 @@ export default function DashboardPage() {
 
   const handleIsAddTask = () => {
     setIsAddTaskOpen(true);
-  }
+  };
 
   useEffect(() => {
     if (!user.email && !token) {
@@ -31,28 +32,26 @@ export default function DashboardPage() {
 
   return (
     <>
-      <ScrollToTop />
-      {isAddTaskOpen && (
-        <PopUpTesting setIsTaskOpen={setIsAddTaskOpen} actionForm="add"/>
-      )}
-      {isEditTaskOpen && (
-        <PopUpTesting setIsTaskOpen={setIsEditTaskOpen} actionForm="edit"/>
-      )}
-      <Header />
-      <S.Main>
-        <S.ContainerCalendar>
-          <DateCalendar/>
-          <img src={ImageCompleteTask} alt="imagem da pagina complete Task" />
-        </S.ContainerCalendar>
+      <CalendarProvider>
+        <ScrollToTop />
+        {isAddTaskOpen && <PopUpTesting setIsTaskOpen={setIsAddTaskOpen} actionForm="add" />}
+        {isEditTaskOpen && <PopUpTesting setIsTaskOpen={setIsEditTaskOpen} actionForm="edit" />}
+        <Header />
+        <S.Main>
+          <S.ContainerCalendar>
+            <DateCalendar />
+            <img src={ImageCompleteTask} alt="imagem da pagina complete Task" />
+          </S.ContainerCalendar>
 
-        <S.ContainerTasks>
-          <S.ButtonEditTask onClick={handleIsAddTask}>+</S.ButtonEditTask>
-          <TaskTitle title="Visualizador de tarefas" />
-          <ToDoTasks setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsAddTaskOpen} />
-          <TaskTitle title="Tarefas concluídas" />
-          <DoneTasks />
-        </S.ContainerTasks>
-      </S.Main>
+          <S.ContainerTasks>
+            <S.ButtonEditTask onClick={handleIsAddTask}>+</S.ButtonEditTask>
+            <TaskTitle title="Visualizador de tarefas" />
+            <ToDoTasks setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsAddTaskOpen} />
+            <TaskTitle title="Tarefas concluídas" />
+            <DoneTasks />
+          </S.ContainerTasks>
+        </S.Main>
+      </CalendarProvider>
     </>
   );
 }
