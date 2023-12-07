@@ -37,6 +37,7 @@ export default function SignUpForm() {
   } = useForm<ISignUpInput>();
 
   const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
 
   const handleSignUp = async ({ name, email, password, acceptedTerms }: ISignUpInput) => {
     const body = {
@@ -45,7 +46,6 @@ export default function SignUpForm() {
       password,
       acceptedTerms,
     };
-
 
     try {
       setLoading(true);
@@ -135,10 +135,20 @@ export default function SignUpForm() {
             const matchErro = target.value.match(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
             );
+            console.log(confirmPassword, "teste");
             if (matchErro) {
               setErroPassword(false);
             } else {
               setErroPassword(true);
+            }
+            if (target.value === confirmPassword && matchErro) {
+              setErroConfirmPassword(false);
+              setErroPassword(false);
+            } else if (confirmPassword) {
+              setErroConfirmPassword(true);
+            }
+            if (target.value === "") {
+              setErroPassword(false);
             }
           },
         })}
@@ -167,9 +177,12 @@ export default function SignUpForm() {
             } else {
               setErroConfirmPassword(false);
             }
+            if (target.value === "") {
+              setErroConfirmPassword(false);
+            }
           },
         })}
-        errorMessage={errors.confirmPassword && errors.confirmPassword.message}
+        errorMessage={erroConfirmPassword ? errors.confirmPassword && errors.confirmPassword.message : undefined}
         autoComplete="confirmPassword"
       >
         <>
