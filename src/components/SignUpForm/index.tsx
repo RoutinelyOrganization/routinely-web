@@ -144,8 +144,6 @@ export default function SignUpForm() {
             if (target.value === confirmPassword && matchErro) {
               setErroConfirmPassword(false);
               setErroPassword(false);
-            } else if (confirmPassword) {
-              setErroConfirmPassword(true);
             }
             if (target.value === "") {
               setErroPassword(false);
