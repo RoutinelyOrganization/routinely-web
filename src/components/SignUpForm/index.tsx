@@ -47,7 +47,6 @@ export default function SignUpForm() {
       acceptedTerms,
     };
 
-
     try {
       setLoading(true);
       await signUp(body);
@@ -136,6 +135,7 @@ export default function SignUpForm() {
             const matchErro = target.value.match(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
             );
+            console.log(confirmPassword, "teste");
             if (matchErro) {
               setErroPassword(false);
             } else {
@@ -180,7 +180,7 @@ export default function SignUpForm() {
             }
           },
         })}
-        errorMessage={errors.confirmPassword && errors.confirmPassword.message}
+        errorMessage={erroConfirmPassword ? errors.confirmPassword && errors.confirmPassword.message : undefined}
         autoComplete="confirmPassword"
       >
         <>
