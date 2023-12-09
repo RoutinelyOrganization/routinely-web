@@ -1,6 +1,6 @@
-import ButtonEdit from "../../buttons/ButtonEdit";
-import DeleteButton from "../../buttons/ButtonDelete";
 import PriorityFlag from "../../PriorityFlag";
+import DeleteButton from "../../buttons/ButtonDelete";
+import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
 import { useEffect, useState, useContext } from "react";
 import instance from "../../../services/api";
@@ -9,7 +9,9 @@ import { CalendarContext } from "../../../contexts/CalendarContext";
 
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 
 interface Itasks {
   name: string;
@@ -56,6 +58,7 @@ export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps
               <DeleteButton />
             </S.ContainerTask>
           ))}
+
     </S.Wrapper>
   );
 }
