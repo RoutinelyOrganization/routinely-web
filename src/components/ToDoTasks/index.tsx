@@ -13,11 +13,9 @@ export default function ToDoTasks({ setIsEditTaskOpen, setIsAddTaskOpen, setIsDe
   };
   return (
     <S.Container>
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
+
+      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} />      
+
       <S.Button onClick={handleAddTask}>Adicionar nova tarefa</S.Button>
       <hr />
     </S.Container>
