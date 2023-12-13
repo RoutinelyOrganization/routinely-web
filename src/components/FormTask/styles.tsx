@@ -42,6 +42,7 @@ export const Title = styled.h3`
 export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  gap:0 1rem; 
 
   ${InputStyle} {
     width: 224px;

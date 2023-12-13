@@ -35,18 +35,20 @@ export default function DashboardPage() {
 
   return (
     <>
-
       <CalendarProvider>
         <ScrollToTop />
-        {isAddTaskOpen && <PopUpTesting setIsTaskOpen={setIsAddTaskOpen} actionForm="add" />}
-        {isEditTaskOpen && <PopUpTesting setIsTaskOpen={setIsEditTaskOpen} actionForm="edit" />}
+        {isAddTaskOpen && (
+          <PopUpTesting setIsTaskOpen={setIsAddTaskOpen}>
+            <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
+          </PopUpTesting>
+        )}
         {isDeleteTaskOpen && (
-        <PopUpTesting>
-          <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
-            Tem certeza que deseja realizar a exclusão da tarefa?
-          </ConfirmAction>
-        </PopUpTesting>
-      )}
+          <PopUpTesting>
+            <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
+              Tem certeza que deseja realizar a exclusão da tarefa?
+            </ConfirmAction>
+          </PopUpTesting>
+        )}
         <Header />
         <S.Main>
           <S.ContainerCalendar>
@@ -57,13 +59,16 @@ export default function DashboardPage() {
           <S.ContainerTasks>
             <S.ButtonEditTask onClick={handleIsAddTask}>+</S.ButtonEditTask>
             <TaskTitle title="Visualizador de tarefas" />
-            <ToDoTasks setIsEditTaskOpen={setIsEditTaskOpen} setIsAddTaskOpen={setIsAddTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen}/>
+            <ToDoTasks
+              setIsEditTaskOpen={setIsEditTaskOpen}
+              setIsAddTaskOpen={setIsAddTaskOpen}
+              setIsDeleteTaskOpen={setIsDeleteTaskOpen}
+            />
             <TaskTitle title="Tarefas concluídas" />
             <DoneTasks />
           </S.ContainerTasks>
         </S.Main>
       </CalendarProvider>
-
     </>
   );
 }
