@@ -5,41 +5,69 @@ import Input from "../Input";
 import Select from "../Select";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
+import { useContext, useState } from "react";
+import dayjs from "dayjs";
+import { UseCRUD } from "../../hooks/useCrud";
+import { TasksContext } from "../../contexts/TasksContext";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   actionForm: "add" | "edit";
 }
 
-interface IAddTaskForm {
-  nameTask: string;
-  dateTask: Date;
-  timeTask: string;
-  priorityTask: string;
-  categoryTask: string;
-  tagTask: string;
-  descriptionTask: string;
+export interface IAddTaskForm {
+  name?: string;
+  date?: Date;
+  hour?: string;
+  description?: string;
+  priority?: string;
+  tag?: string;
+  category?: string;
 }
 
 interface IEditTaskForm {
-  nameTask?: string;
-  dateTask?: Date;
-  timeTask?: string;
-  priorityTask?: string;
-  categoryTask?: string;
-  tagTask?: string;
-  descriptionTask?: string;
+  name?: string;
+  date?: Date;
+  hour?: string;
+  description?: string;
+  priority?: string;
+  tag?: string;
+  category?: string;
 }
 
 interface ISelectOptions {
   label: string;
   options: Array<string>;
-  formRequired: "priorityTask" | "categoryTask" | "tagTask";
+  value: string[];
+  formRequired: "priority" | "category" | "tag";
 }
 
+export const selectOptions: Array<ISelectOptions> = [
+    {
+      label: "Prioridade",
+      options: ["", "Urgente", "Alta", "Média", "Baixa"],
+      value: ["", "urgent", "high", "medium", "low"],
+      formRequired: "priority",
+    },
+    {
+      label: "Categoria",
+      options: ["", "Pessoal", "Estudos", "Finanças", "Carreira", "Saude"],
+      value: ["", "personal", "study", "finance", "career", " health"],
+      formRequired: "category",
+    },
+    {
+      label: "Tags",
+      options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
+      value: ["", "application", "account", "excercise", "beauty", "literature"],
+      formRequired: "tag",
+    },
+  ];
 export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
   const interfaceForm = actionForm === "add" ? useForm<IAddTaskForm>() : useForm<IEditTaskForm>();
-
+  const [hasNameTask, setHasNameTask] = useState<boolean>(false);
+  const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
+  const { setTasks } = useContext(TasksContext);
+  const { handleAddTask } = UseCRUD();
   const {
     register,
     handleSubmit,
@@ -47,33 +75,21 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
     formState: { errors },
   } = interfaceForm;
 
-  const handleSubmitFormTask = (data: IEditTaskForm) => {
+  const handleSubmitFormTask = async (data: IEditTaskForm) => {
     if (actionForm === "add") {
-      console.log(data);
-      //logica para adicionar task
+      try {
+        const task = await handleAddTask(data);
+        setTasks((prevstate) => [...prevstate, task]);
+        setIsTaskOpen(false);        
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       //logica para editar task
     }
     reset();
   };
 
-  const selectOptions: Array<ISelectOptions> = [
-    {
-      label: "Prioridade",
-      options: ["", "Urgente", "Alta", "Média", "Baixa"],
-      formRequired: "priorityTask",
-    },
-    {
-      label: "Categoria",
-      options: ["", "Pessoal", "Estudos", "Finanças", "Carreira", "Saude"],
-      formRequired: "categoryTask",
-    },
-    {
-      label: "TagTask",
-      options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
-      formRequired: "tagTask",
-    },
-  ];
 
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
@@ -85,34 +101,41 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
         type="text"
         id="name"
         required
-        register={register("nameTask", {
+        hasError={hasNameTask}
+        register={register("name", {
           required: "campo obrigatório",
           maxLength: {
             value: 50,
             message: "Quantidade de caracteres máximo, 50!",
           },
+          onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+            target.value.length > 50 ? setHasNameTask(true) : setHasNameTask(false);
+          },
         })}
-        errorMessage={errors.nameTask && errors.nameTask.message}
+        errorMessage={errors.name && errors.name.message}
       ></Input>
-
+      {hasNameTask && <ErrorMessage>Quantidade de caracteres máximo, 50!</ErrorMessage>}
       <S.InputContainer>
         <Input
           type="date"
           id="date"
-          required
-          register={register("dateTask", { required: "campo obrigatório" })}
-          errorMessage={errors.dateTask && errors.dateTask.message}
+          hasError={errors.date && true}
+          register={register("date", {
+            required: "campo obrigatório",
+            setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
+          })}
         >
+          <ErrorMessage>{errors.date && errors.date.message}</ErrorMessage>
           <S.LabelDateTimePopUp htmlFor="date">Data</S.LabelDateTimePopUp>
         </Input>
 
         <Input
           type="time"
           id="time"
-          required
-          register={register("timeTask", { required: "Formato inválido" })}
-          errorMessage={errors.timeTask && errors.timeTask.message}
+          hasError={errors.hour && true}
+          register={register("hour", { required: "Formato inválido" })}
         >
+          <ErrorMessage>{errors.hour && errors.hour.message}</ErrorMessage>
           <S.LabelDateTimePopUp htmlFor="time">Time</S.LabelDateTimePopUp>
         </Input>
       </S.InputContainer>
@@ -120,8 +143,10 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
       <S.InputContainer>
         {selectOptions.map((select) => (
           <Select
+            $hasError={errors[select.formRequired] && true}
             key={select.label}
             label={select.label}
+            value={select.value}
             options={select.options}
             register={register(select.formRequired, { required: "campo obrigatório" })}
             error={errors[select.formRequired]?.message || ""}
@@ -135,16 +160,20 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
           type="text"
           id="descricao"
           required
-          register={register("descriptionTask", {
+          hasError={hasDescriptionTask}
+          register={register("description", {
             required: "campo obrigatório",
             maxLength: {
               value: 1000,
               message: "Quantidade máxima de caracteres, 1000!",
             },
+            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+              target.value.length > 1000 ? setHasDescriptionTask(true) : setHasDescriptionTask(false);
+            },
           })}
-          errorMessage={errors.nameTask && errors.nameTask.message}
+          errorMessage={errors.name && errors.name.message}
         >
-          {errors.descriptionTask && <ErrorMessage>{errors.descriptionTask.message}</ErrorMessage>}
+          {hasDescriptionTask && <ErrorMessage>Quantidade máxima de caracteres, 1000!</ErrorMessage>}
         </Input>
       </S.ContainerPopUp>
       <S.ButtonsContainer>

@@ -1,9 +1,16 @@
 import { styled } from "styled-components";
 
 export const ContainerTask = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 30% 1fr 1fr 1fr 1fr;
   align-items: center;
   gap: 10px;
+  width: 100%;
+  margin-bottom: .5rem;
+  > div {
+    display: flex;
+    gap: 0 .4rem;
+  }
 `;
 
 export const ContainerCheckbox = styled.input`
@@ -54,7 +61,7 @@ export const ContainerPriority = styled.span`
   letter-spacing: 0.5px;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
