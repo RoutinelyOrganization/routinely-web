@@ -2,44 +2,54 @@ import PriorityFlag from "../../PriorityFlag";
 import DeleteButton from "../../buttons/ButtonDelete";
 import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import instance from "../../../services/api";
 import { AxiosError } from "axios";
 import { CalendarContext } from "../../../contexts/CalendarContext";
-
+import { TasksContext } from "../../../contexts/TasksContext";
+import { selectOptions } from "../../FormTask";
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
-interface Itasks {
-  name: string;
-  date: string;
-  hour: string;
-  description: string;
-  priority: string;
-  tag: string;
-  category: string;
+export enum Iterator {
+  Priority,
+  Category,
+  Tag,
 }
+export const findSelectValues = (valueToFind: string, iterator: Iterator) => {
+  const index = selectOptions[iterator].value.indexOf(valueToFind);
+  if (index !== -1) {
+    return selectOptions[iterator].options[index];
+  }
+};
 
-export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps) {
-  const [tasks, setTasks] = useState<Itasks[]>([]);
-
+export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }: IContainerTaskProps) {
+  const { tasks, setTasks } = useContext(TasksContext);
   const { month, year } = useContext(CalendarContext);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleFetch = async () => {
+    const getAllTasks = async () => {
       try {
+        setLoading(true);
+
         const { data } = await instance.get(`/tasks/?month=${month}&year=${year}`);
         setTasks(data);
       } catch (error) {
         const erro = error as AxiosError;
         console.log(erro);
+      } finally {
+        setLoading(false);
       }
     };
-    handleFetch();
-  }, [month, year]);
+    getAllTasks();
+  }, [month, year, setTasks]);
+
+  if (loading) {
+    return <p>Carregando tarefas...</p>;
+  }
 
   return (
     <S.Wrapper>
@@ -47,18 +57,21 @@ export default function ContainerTask({ setIsEditTaskOpen }: IContainerTaskProps
         ? null
         : tasks.map(({ name, category, tag, priority }, index) => (
             <S.ContainerTask key={index}>
-              <S.ContainerCheckbox type="checkbox" />
-              <S.ContainerText>{name}</S.ContainerText>
-              <S.ContainerCategory>{category}</S.ContainerCategory>
-              <S.ContainerSubCategory>{tag}</S.ContainerSubCategory>
+              <div>
+                <S.ContainerCheckbox type="checkbox" />
+                <S.ContainerText>{name}</S.ContainerText>
+              </div>
+              <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>
+              <S.ContainerSubCategory>{findSelectValues(tag, Iterator.Tag)}</S.ContainerSubCategory>
               <S.ContainerPriority>
                 <PriorityFlag priority={priority} />
               </S.ContainerPriority>
-              <ButtonEdit setIsEditTaskOpen={setIsEditTaskOpen} />
-              <DeleteButton />
+              <div>
+                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
+                <ButtonEdit setIsEditTaskOpen={setIsEditTaskOpen} />
+              </div>
             </S.ContainerTask>
           ))}
-
     </S.Wrapper>
   );
 }
