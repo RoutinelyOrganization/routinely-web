@@ -1,4 +1,11 @@
+import { TasksContext } from "../../contexts/TasksContext";
+import { useContext } from "react";
 import * as S from "./styles";
+import { UseCRUD } from "../../hooks/useCrud";
+import React from "react";
+import instance from "../../services/api";
+import { AxiosError } from "axios";
+import { CalendarContext } from "../../contexts/CalendarContext";
 
 interface IConfirmAction {
   children: string;
@@ -6,12 +13,27 @@ interface IConfirmAction {
 }
 
 export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfirmAction) {
-  const handleClick = (operation: "cancel" | "not" | "yes") => {
+  const { taskId, setTasks } = useContext(TasksContext);
+  const { handleDeleteTask } = UseCRUD();
+  const { month, year } = useContext(CalendarContext);
+
+  const handleClick = async (operation: "cancel" | "not" | "yes") => {
     switch (operation) {
       case "not":
         break;
 
       case "yes":
+        await handleDeleteTask(taskId);
+
+        (async () => {
+          try {
+            const { data } = await instance.get(`/tasks/?month=${month}&year=${year}`);
+            setTasks(data);
+          } catch (error) {
+            const erro = error as AxiosError;
+            console.log(erro);
+          }
+        })();
         break;
 
       case "cancel":
