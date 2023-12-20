@@ -18,6 +18,7 @@ import { TasksProvider } from "../../contexts/TasksContext";
 import { useAuth } from "../../hooks/useAuth";
 
 export interface Itasks {
+  id:number
   name: string;
   date: string;
   hour: string;

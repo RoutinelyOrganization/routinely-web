@@ -55,8 +55,8 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     <S.Wrapper>
       {tasks.length < 1
         ? null
-        : tasks.map(({ name, category, tag, priority }, index) => (
-            <S.ContainerTask key={index}>
+        : tasks.map(({ id, name, category, tag, priority }) => (
+            <S.ContainerTask key={id}>
               <div>
                 <S.ContainerCheckbox type="checkbox" />
                 <S.ContainerText>{name}</S.ContainerText>
@@ -67,7 +67,7 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
                 <PriorityFlag priority={priority} />
               </S.ContainerPriority>
               <div>
-                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
+                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
                 <ButtonEdit setIsEditTaskOpen={setIsEditTaskOpen} />
               </div>
             </S.ContainerTask>

@@ -1,4 +1,11 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const FadeUp = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to { transform: scale(1)}
+`;
 
 export const Container = styled.div`
   margin-top: 200px;
@@ -6,6 +13,7 @@ export const Container = styled.div`
   padding: 24px;
   width: 324px;
   border-radius: 8px;
+  animation: ${FadeUp} 0.4s ease;
 `;
 
 export const ContainerButton = styled.div`
@@ -22,6 +30,10 @@ export const Button = styled.button`
   padding: 10px 16px;
   border: 1px solid #d8d6dc;
   cursor: pointer;
+  transition: all 0.2s;
+  &:focus {
+    transform: scale(0.98);
+  }
 `;
 
 export const ButtonCancel = styled(Button)`

@@ -1,13 +1,20 @@
+import { useContext } from "react";
 import * as S from "./styles";
+import { TasksContext } from "../../../contexts/TasksContext";
 
 interface IDeleteButtonProps {
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: number;
 }
 
-export default function ButtonDelete({ setIsDeleteTaskOpen }: IDeleteButtonProps) {
+export default function ButtonDelete({ setIsDeleteTaskOpen, id }: IDeleteButtonProps) {
+  const { setTaskId } = useContext(TasksContext);
+
   const handleDeleteTaskOpen = () => {
     setIsDeleteTaskOpen(true);
+    setTaskId(id);
   };
+
   return (
     <S.Button onClick={handleDeleteTaskOpen}>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
