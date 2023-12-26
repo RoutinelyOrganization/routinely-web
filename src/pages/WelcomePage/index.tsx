@@ -27,7 +27,7 @@ export function WelcomePage() {
       <ScrollToTop />
       <Header header="secundary" />
       <S.Wrapper>
-        <form>
+        <div>
           <LogoShared />
           <S.Title>Boas-vindas</S.Title>
           <S.Caption>Escolha uma das opções para acessar </S.Caption>
@@ -35,7 +35,7 @@ export function WelcomePage() {
             <S.ButtonAccount onClick={() => navigate("/SignInPage")}>Já tenho conta</S.ButtonAccount>
             <S.ButtonCreateAccount onClick={() => navigate("/SignUpPage")}>Criar conta</S.ButtonCreateAccount>
           </S.ContainerButton>
-        </form>
+        </div>
         <img src={welcomePageImage} alt="Imagem da página de boas vindas" />
       </S.Wrapper>
     </>
