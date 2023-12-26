@@ -147,16 +147,16 @@ export function SignInPage() {
             <S.ForgetPassword>{<Link to={"/forgotPasswordPage"}>Esqueci minha senha</Link>}</S.ForgetPassword>
           </S.CheckboxAndForgetPasswordWrapper>
 
+          {showError && <ErrorMessage>email ou senha inválidos</ErrorMessage>}
+
           <S.ButtonWrapper>
             {loading ? <Button disabled>Carregando...</Button> : <Button>Fazer login</Button>}
 
-            {showError && <ErrorMessage>email ou senha inválidos</ErrorMessage>}
-
             <ButtonSocial disabled>Continuar com Google</ButtonSocial>
-            <LinkAuth path="/signUpPage" linkText="Crie a sua.">
-              Não tem uma conta?
-            </LinkAuth>
           </S.ButtonWrapper>
+          <LinkAuth path="/signUpPage" linkText="Crie a sua.">
+            Não tem uma conta?
+          </LinkAuth>
         </S.Form>
         <img src={signInPageImage} alt="Imagem da página acessar conta" />
       </S.Wrapper>
