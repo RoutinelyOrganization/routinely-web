@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import media from "../../mediaQueries";
 
 export const Main = styled.main`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  ${media.desktop} {
+    flex-direction: column;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -23,4 +28,3 @@ export const Wrapper = styled.div`
     }
   }
 `;
-

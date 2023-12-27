@@ -10,7 +10,6 @@ import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { ImageContainer as ImageContainerStyle } from "../ForgotPasswordPage/styles";
 import * as S from "./styles";
 
-
 export default function RedefinePasswordPage() {
   return (
     <>

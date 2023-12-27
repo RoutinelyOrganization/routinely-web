@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import media from "../../mediaQueries";
 
 export const Main = styled.main`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 32px;
+  padding: 0 24px;
+
+  ${media.desktop} {
+    flex-direction: column;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -25,10 +32,25 @@ export const Wrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  width: 653px;
-  height: 434px;
+  max-height: 434px;
   align-self: flex-end;
   padding-top: 48px;
+  max-width: 653px;
+  width: 50%;
+
+  > img {
+    width: 100%;
+  }
+
+  ${media.desktop} {
+    width: 100%;
+    padding-top: 0;
+    > img {
+      display: block;
+      margin: 0 auto;
+      max-width: 456px;
+    }
+  }
 `;
 
 export const Span = styled.span`
