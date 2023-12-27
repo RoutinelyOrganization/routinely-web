@@ -47,6 +47,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 32px;
+  max-width: 368px;
   width: 50%;
 
   ${media.tablet} {
