@@ -1,49 +1,20 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
-import { useAuth } from "../../hooks/useAuth";
+// import { useContext } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { UserContext } from "../../contexts/UserContext";
+// import { useAuth } from "../../hooks/useAuth";
 import * as S from "./styles";
 
 interface IMenuHeader {
   setIsShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  menuItems: {
+    name: string;
+    url: string;
+    id: number;
+    onclick?: () => void;
+  }[];
 }
 
-export default function MenuHeader({ setIsShowMenu }: IMenuHeader) {
-  const { disconnectLogin } = useAuth();
-  const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
-  
-  const closeSectionUser = async () => {
-    const token = localStorage.getItem("token");
-    await disconnectLogin(token || "");
-    setUser({ email: "", password: "", remember: false });
-    navigate("/");
-  };
-
-  const menuItems = [
-    {
-      name: "Configurações",
-      url: "#",
-      id: 1,
-    },
-    {
-      name: "Metas",
-      url: "#",
-      id: 2,
-    },
-    {
-      name: "Notificações",
-      url: "#",
-      id: 3,
-    },
-    {
-      name: "Sair da conta",
-      url: "#",
-      id: 4,
-      onclick: () => closeSectionUser(),
-    },
-  ];
-
+export default function MenuHeader({ setIsShowMenu, menuItems }: IMenuHeader) {
   return (
     <S.Wrapper>
       <S.MenuBar>

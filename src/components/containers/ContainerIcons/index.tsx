@@ -1,7 +1,7 @@
 import * as S from "./styles";
 
 interface IContainerIcons {
-  setIsShowMenu: React.Dispatch<React.SetStateAction<boolean>>
+  setIsShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ContainerIcons({ setIsShowMenu }: IContainerIcons) {
@@ -19,7 +19,14 @@ export default function ContainerIcons({ setIsShowMenu }: IContainerIcons) {
         </g>
       </svg>
 
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setIsShowMenu(true)}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        onClick={() => setIsShowMenu(true)}
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"

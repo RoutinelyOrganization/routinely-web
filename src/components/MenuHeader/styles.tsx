@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   top: 100%;
   right: 6%;
   z-index: 999;
-`
+`;
 
 export const Container = styled.div`
   width: 258px;
@@ -22,7 +22,6 @@ export const MenuBar = styled.div`
   justify-content: flex-end;
   align-items: center;
   background: #5c59bb;
-  
 
   & > svg {
     cursor: pointer;
