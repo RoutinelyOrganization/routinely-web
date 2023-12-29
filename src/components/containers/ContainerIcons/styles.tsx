@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import media from "../../../mediaQueries";
 
 export const Container = styled.div`
   display: flex;
@@ -8,5 +9,9 @@ export const Container = styled.div`
 
   & > svg {
     cursor: pointer;
+  }
+
+  ${media.mobile} {
+    gap: 14px;
   }
 `;

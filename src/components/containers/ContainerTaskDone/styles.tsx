@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 25px;
+  width: 100%;
 `;
 
 export const ContainerCheckbox = styled.input`
@@ -58,6 +59,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 536px;
+  max-width: 536px;
+  width: 100%;
   flex-shrink: 0;
 `;

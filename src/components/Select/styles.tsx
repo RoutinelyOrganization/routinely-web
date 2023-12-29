@@ -5,16 +5,18 @@ type SelectProps = {
 };
 export const ContainerSelectPopUp = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const SelectPopUp = styled.select<SelectProps>`
-  width: 144px;
+  width: 100%;
   height: 56px;
   border-radius: 8px;
   border-color: ${({ $hasErro }) => ($hasErro ? "#B3261B" : "#171a21")};
   cursor: pointer;
   font-size: 1rem;
   outline: none;
+  background-color: white;
   &:focus ~ label,
   &:valid ~ label {
     top: -15px;

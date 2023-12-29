@@ -1,4 +1,5 @@
 import { keyframes, styled } from "styled-components";
+import media from "../../mediaQueries";
 import { InputStyle, LabelInput } from "../Input/styles";
 
 const FadeUp = keyframes`
@@ -9,7 +10,8 @@ const FadeUp = keyframes`
 `;
 
 export const Form = styled.form`
-  width: 512px;
+  max-width: 512px;
+  width: 100%;
   height: max-content;
   padding: 24px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.719);
@@ -30,6 +32,13 @@ export const Form = styled.form`
     font-size: 20px;
     margin: 0;
   }
+
+  ${media.mobile} {
+    height: 80vh;
+    margin: 0;
+    box-shadow: none;
+    height: calc(100vh - 121px);
+  }
 `;
 
 export const Title = styled.h3`
@@ -42,15 +51,33 @@ export const Title = styled.h3`
 export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap:0 1rem; 
+  gap: 0 1rem;
 
   ${InputStyle} {
-    width: 224px;
+    max-width: 224px;
+  }
+
+  ${media.mobile} {
+    &.select {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      > :first-child {
+        grid-column: span 2;
+      }
+    }
   }
 `;
 
 export const ContainerPopUp = styled.div`
   position: relative;
+  ${media.mobile} {
+    ${InputStyle} {
+      height: 112px;
+      overflow-wrap: break-word;
+    }
+  }
 `;
 
 export const InputPopUp = styled.input`
@@ -119,7 +146,8 @@ export const SaveButton = styled.button`
   align-items: center;
   height: 40px;
   padding: 10px 16px;
-  width: 156px;
+  max-width: 156px;
+  width: 100%;
   gap: 8px;
   border: none;
   border-radius: 8px;
@@ -137,6 +165,10 @@ export const SaveButton = styled.button`
     background-color: #a09df7;
     color: #222;
     font-weight: bold;
+  }
+
+  ${media.mobile} {
+    max-width: 100%;
   }
 `;
 

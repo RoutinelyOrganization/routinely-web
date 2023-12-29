@@ -10,7 +10,7 @@ export default function ContainerTaskDone() {
         <S.ContainerCategory>pessoal</S.ContainerCategory>
         <S.ContainerSubCategory>contas</S.ContainerSubCategory>
         <S.ContainerPriority>
-          <PriorityFlag />
+          <PriorityFlag priority={""} />
         </S.ContainerPriority>
       </S.Container>
     </S.Wrapper>

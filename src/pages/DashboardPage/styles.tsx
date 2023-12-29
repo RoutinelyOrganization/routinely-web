@@ -1,13 +1,39 @@
 import { styled } from "styled-components";
+import { Header } from "../../components/Header/styles";
+import { ButtonBackPage } from "../../components/buttons/ButtonBackPage/styles";
+import media from "../../mediaQueries";
+
+export const Container = styled.div`
+  ${media.mobile} {
+    ${Header} {
+      &:first-child {
+        padding-left: calc(100vw - 60%);
+      }
+    }
+    ${ButtonBackPage} {
+      display: none;
+    }
+  }
+`;
 
 export const Main = styled.main`
   display: flex;
   justify-content: space-around;
-  padding: 64px 0;
+  padding: 64px 24px;
+  gap: 14px;
+
+  ${media.tablet} {
+    flex-direction: column;
+  }
+
+  ${media.mobile} {
+    padding: 24px;
+  }
 `;
 
 export const ContainerTasks = styled.section`
-  width: 576px;
+  max-width: 576px;
+  width: 50%;
   border-radius: 10px;
   border: 1px #5c59bb solid;
   display: flex;
@@ -16,30 +42,76 @@ export const ContainerTasks = styled.section`
   gap: 1rem;
   position: relative;
 
-  `;
+  ${media.tablet} {
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  ${media.mobile} {
+    width: 100%;
+    margin-top: 10px;
+  }
+`;
 
 export const ButtonEditTask = styled.button`
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 64px;
-    height: 64px;
-    border:none;
-    border-radius: 100px;
-    background-color: #5fbe2f;
-    font-size: 3.3rem;
-    text-align: center;
-    cursor: pointer;
-    &:hover {
-    transition: all .4s ease;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  background-color: #5fbe2f;
+  font-size: 3.3rem;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.4s ease;
     background-color: #93ee65;
     color: #555555;
     font-weight: bold;
   }
-  ` 
+
+  ${media.mobile} {
+    display: none;
+  }
+`;
 
 export const ContainerCalendar = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 50px;
+  max-width: 576px;
+  width: 50%;
+
+  > .tablet {
+    display: none;
+  }
+
+  ${media.desktop} {
+    max-width: 300px;
+
+    > img {
+      width: 100%;
+    }
+  }
+
+  ${media.tablet} {
+    flex-direction: row;
+    > .desktop {
+      display: none;
+    }
+    > .tablet {
+      display: block;
+    }
+  }
+
+  ${media.mobile} {
+    max-width: 400px;
+    width: 100%;
+    > .tablet {
+      display: none;
+    }
+  }
 `;

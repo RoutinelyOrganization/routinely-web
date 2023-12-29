@@ -1,24 +1,27 @@
 import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
+import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
+import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
 import FormTask from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpTesting from "../../components/PopUp";
 import Tasks from "../../components/Tasks";
+import ButtonFooter from "../../components/buttons/ButtonFooter";
 import ConfirmAction from "../../components/confirmAction";
 import TaskTitle from "../../components/titles/TaskTitle";
-import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
-import DateCalendar from "../../components/Calendar";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
+import { UserContext } from "../../contexts/UserContext";
+import { ScrollToTop } from "../../helpers/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
 
 export interface Itasks {
-  id:number
+  id: number;
   name: string;
   date: string;
   hour: string;
@@ -36,14 +39,14 @@ export default function DashboardPage() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const { authorization } = useAuth();
-  
+
   const handleIsAddTask = () => {
     setIsAddTaskOpen(true);
   };
 
   useEffect(() => {
     (async () => {
-      authorization();     
+      authorization();
     })();
 
     if (!user.email && !token) {
@@ -52,27 +55,28 @@ export default function DashboardPage() {
   }, [token, user.email, navigate, authorization]);
 
   return (
-    <>
-      <TasksProvider>
-        <CalendarProvider>
-          <ScrollToTop />
-          {isAddTaskOpen && (
-            <PopUpTesting setIsTaskOpen={setIsAddTaskOpen}>
-              <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
-            </PopUpTesting>
-          )}
-          {isDeleteTaskOpen && (
-            <PopUpTesting>
-              <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
-                Tem certeza que deseja realizar a exclusão da tarefa?
-              </ConfirmAction>
-            </PopUpTesting>
-          )}
+    <TasksProvider>
+      <CalendarProvider>
+        <ScrollToTop />
+        {isAddTaskOpen && (
+          <PopUpTesting setIsTaskOpen={setIsAddTaskOpen}>
+            <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
+          </PopUpTesting>
+        )}
+        {isDeleteTaskOpen && (
+          <PopUpTesting>
+            <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
+              Tem certeza que deseja realizar a exclusão da tarefa?
+            </ConfirmAction>
+          </PopUpTesting>
+        )}
+        <S.Container>
           <Header />
           <S.Main>
             <S.ContainerCalendar>
               <DateCalendar />
-              <img src={ImageCompleteTask} alt="imagem da pagina complete Task" />
+              <img className="desktop" src={ImageCompleteTask} alt="imagem da pagina complete Task" />
+              <img className="tablet" src={ImageCompleteTask2} alt="imagem da pagina complete Task" />
             </S.ContainerCalendar>
 
             <S.ContainerTasks>
@@ -83,12 +87,20 @@ export default function DashboardPage() {
                 setIsAddTaskOpen={setIsAddTaskOpen}
                 setIsDeleteTaskOpen={setIsDeleteTaskOpen}
               />
+              <hr />
               <TaskTitle title="Tarefas concluídas" />
               <DoneTasks />
             </S.ContainerTasks>
           </S.Main>
-        </CalendarProvider>
-      </TasksProvider>
-    </>
+          {isAddTaskOpen || isEditTaskOpen ? (
+            <ButtonFooter />
+          ) : (
+            <ButtonFooter onClick={handleIsAddTask}>
+              <img src={NewTask} alt="" />
+            </ButtonFooter>
+          )}
+        </S.Container>
+      </CalendarProvider>
+    </TasksProvider>
   );
 }

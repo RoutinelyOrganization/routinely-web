@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import dayjs from "dayjs";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { TasksContext } from "../../contexts/TasksContext";
+import { UseCRUD } from "../../hooks/useCrud";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
-import { useContext, useState } from "react";
-import dayjs from "dayjs";
-import { UseCRUD } from "../../hooks/useCrud";
-import { TasksContext } from "../../contexts/TasksContext";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,25 +43,25 @@ interface ISelectOptions {
 }
 
 export const selectOptions: Array<ISelectOptions> = [
-    {
-      label: "Prioridade",
-      options: ["", "Urgente", "Alta", "Média", "Baixa"],
-      value: ["", "urgent", "high", "medium", "low"],
-      formRequired: "priority",
-    },
-    {
-      label: "Categoria",
-      options: ["", "Pessoal", "Estudos", "Finanças", "Carreira", "Saude"],
-      value: ["", "personal", "study", "finance", "career", " health"],
-      formRequired: "category",
-    },
-    {
-      label: "Tags",
-      options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
-      value: ["", "application", "account", "excercise", "beauty", "literature"],
-      formRequired: "tag",
-    },
-  ];
+  {
+    label: "Prioridade",
+    options: ["", "Urgente", "Alta", "Média", "Baixa"],
+    value: ["", "urgent", "high", "medium", "low"],
+    formRequired: "priority",
+  },
+  {
+    label: "Categoria",
+    options: ["", "Pessoal", "Estudos", "Finanças", "Carreira", "Saude"],
+    value: ["", "personal", "study", "finance", "career", " health"],
+    formRequired: "category",
+  },
+  {
+    label: "Tags",
+    options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
+    value: ["", "application", "account", "excercise", "beauty", "literature"],
+    formRequired: "tag",
+  },
+];
 export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
   const interfaceForm = actionForm === "add" ? useForm<IAddTaskForm>() : useForm<IEditTaskForm>();
   const [hasNameTask, setHasNameTask] = useState<boolean>(false);
@@ -80,7 +80,7 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
       try {
         const task = await handleAddTask(data);
         setTasks((prevstate) => [...prevstate, task]);
-        setIsTaskOpen(false);        
+        setIsTaskOpen(false);
       } catch (error) {
         console.log(error);
       }
@@ -89,7 +89,6 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
     }
     reset();
   };
-
 
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
@@ -140,7 +139,7 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
         </Input>
       </S.InputContainer>
 
-      <S.InputContainer>
+      <S.InputContainer className="select">
         {selectOptions.map((select) => (
           <Select
             $hasError={errors[select.formRequired] && true}
@@ -154,8 +153,9 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
         ))}
       </S.InputContainer>
 
-      <S.ContainerPopUp>
+      <S.ContainerPopUp className="description">
         <Input
+          as={"textarea"}
           label="Descrição"
           type="text"
           id="descricao"
