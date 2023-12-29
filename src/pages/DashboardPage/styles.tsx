@@ -4,14 +4,14 @@ import { ButtonBackPage } from "../../components/buttons/ButtonBackPage/styles";
 import media from "../../mediaQueries";
 
 export const Container = styled.div`
-  ${media.mobile} {
+  ${ButtonBackPage} {
+    display: none;
+  }
+  ${media.desktop} {
     ${Header} {
       &:first-child {
         padding-left: calc(100vw - 60%);
       }
-    }
-    ${ButtonBackPage} {
-      display: none;
     }
   }
 `;
@@ -41,6 +41,10 @@ export const ContainerTasks = styled.section`
   padding: 1rem;
   gap: 1rem;
   position: relative;
+
+  ${media.desktop} {
+    width: 60%;
+  }
 
   ${media.tablet} {
     width: 100%;
@@ -90,20 +94,25 @@ export const ContainerCalendar = styled.section`
   }
 
   ${media.desktop} {
-    max-width: 300px;
+    width: 40%;
 
     > img {
       width: 100%;
     }
-  }
-
-  ${media.tablet} {
-    flex-direction: row;
     > .desktop {
       display: none;
     }
     > .tablet {
       display: block;
+    }
+  }
+
+  ${media.tablet} {
+    flex-direction: row;
+    width: 100%;
+    gap: 14px;
+    > img {
+      width: 50%;
     }
   }
 

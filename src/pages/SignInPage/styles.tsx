@@ -6,16 +6,15 @@ export const Wrapper = styled.main`
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-evenly;
-  height: auto;
-  margin-bottom: 3rem;
   gap: 14px;
-  padding: 0 32px;
+  padding: 100px 32px;
 
   > img {
     width: 50%;
   }
 
   ${media.tablet} {
+    padding-top: 64px;
     flex-direction: column;
     align-items: center;
 
@@ -29,22 +28,20 @@ export const Wrapper = styled.main`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 104px;
   max-width: 370px;
   width: 50%;
 
   ${media.tablet} {
     width: 100%;
-    margin-top: 64px;
   }
 `;
 
 export const Title = styled.h1`
   font-family: Roboto;
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 700;
-  line-height: 3.25rem;
-  text-align: center;
+  line-height: 52px;
+  text-align: left;
   color: #171a21;
   margin: 32px 0;
 `;

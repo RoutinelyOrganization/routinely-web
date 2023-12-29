@@ -5,17 +5,16 @@ export const Main = styled.main`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 120px;
+  padding: 64px 120px;
   gap: 14px;
 
   > img {
-    margin-top: 50px;
     width: 50%;
     z-index: 1;
   }
 
   ${media.desktop} {
-    padding: 0 32px;
+    padding: 40px 32px;
 
     > img {
       margin-top: 90px;
@@ -23,6 +22,7 @@ export const Main = styled.main`
   }
 
   ${media.tablet} {
+    padding-top: 64px;
     flex-direction: column;
     align-items: center;
 
@@ -35,6 +35,7 @@ export const Main = styled.main`
   }
 
   ${media.mobile} {
+    padding-top: 40px;
     > img {
       display: none;
     }
@@ -42,7 +43,6 @@ export const Main = styled.main`
 `;
 
 export const Wrapper = styled.div`
-  padding: 64px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

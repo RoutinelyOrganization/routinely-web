@@ -3,16 +3,15 @@ import media from "../../mediaQueries";
 
 export const Wrapper = styled.main`
   display: flex;
-  flex-direction: row;
-  margin-top: 96px;
-  justify-content: space-evenly;
-  height: calc(100vh - 96px);
+  justify-content: space-around;
+  padding: 96px 32px 0;
+  height: 100vh;
+  gap: 24px;
 
   ${media.desktop} {
     height: auto;
     > div {
       width: 100%;
-      padding: 0 24px;
     }
     > img {
       width: 60%;
@@ -21,12 +20,12 @@ export const Wrapper = styled.main`
   }
 
   ${media.tablet} {
+    padding-top: 64px;
+    margin: auto;
     flex-direction: column;
-    margin: 64px auto;
 
     > div {
       width: 100%;
-      padding: 0 24px;
     }
 
     > img {
@@ -38,11 +37,17 @@ export const Wrapper = styled.main`
 
 export const Title = styled.h1`
   color: #171a21;
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 700;
-  line-height: 3.25rem;
+  line-height: 52px;
   margin-top: 40px;
   margin-bottom: 24px;
+
+  ${media.mobile} {
+    font-size: 32px;
+    line-height: 36px;
+    margin-top: 24px;
+  }
 `;
 
 export const Caption = styled.p`
@@ -54,6 +59,7 @@ export const Caption = styled.p`
 
   ${media.desktop} {
     font-weight: 400;
+    line-height: 20px;
     margin-bottom: 24px;
   }
 
@@ -76,11 +82,11 @@ export const ContainerButton = styled.div`
 
 export const ButtonAccount = styled.button`
   height: 40px;
-  padding: 0.625rem 1rem;
+  padding: 10px 16px;
   max-width: 368px;
   width: 100%;
   border-radius: 8px;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   text-align: center;

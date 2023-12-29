@@ -6,6 +6,7 @@ import homePageBanner from "../../assets/imagens/homePage/homePageBanner.svg";
 import Logo from "../../components/Logo";
 import MenuHeader from "../../components/MenuHeader";
 import { Button as ButtonStyle } from "../../components/buttons/Button/styles";
+import ButtonDownloadApp from "../../components/buttons/ButtonApp";
 import ContainerIcons from "../../components/containers/ContainerIcons";
 import { ScrollToTop } from "../../helpers/ScrollToTop";
 import * as S from "./styles";
@@ -57,6 +58,8 @@ export default function HomePage() {
           <img className="tablet-horizontal" src={completedTasks} alt="tarefas concluídas" />
           <img className="tablet-vertical" src={completedTasksLitlle} alt="tarefas concluídas" />
         </S.ContainerCaptionImg>
+        <hr />
+        <ButtonDownloadApp />
       </S.Main>
     </>
   );

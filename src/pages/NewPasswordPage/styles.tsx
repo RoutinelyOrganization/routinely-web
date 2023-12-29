@@ -6,10 +6,9 @@ import media from "../../mediaQueries";
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: normal;
   justify-content: space-evenly;
-  margin-top: 104px;
-  padding: 0 32px 60px;
+  padding: 104px 32px 60px;
   gap: 24px;
 
   > img {
@@ -17,11 +16,16 @@ export const Wrapper = styled.main`
     width: 50%;
   }
 
+  ${ErrorMessage} {
+    margin-top: -15px;
+  }
+
   ${media.desktop} {
-    margin-top: 40px;
+    padding-top: 40px;
   }
 
   ${media.tablet} {
+    padding-top: 64px;
     flex-direction: column;
     align-items: center;
 
@@ -31,12 +35,13 @@ export const Wrapper = styled.main`
     }
   }
 
-  ${ErrorMessage} {
-    margin-top: -15px;
+  ${media.mobile} {
+    padding: 40px 24px 0;
   }
 `;
 
 export const Form = styled.form`
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -50,6 +55,7 @@ export const Form = styled.form`
   }
 
   ${media.mobile} {
+    margin-bottom: 81px;
     ${Button} {
       max-width: 100%;
     }
@@ -57,21 +63,29 @@ export const Form = styled.form`
 `;
 
 export const Title = styled.h1`
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
-  line-height: 3.25rem;
-  text-align: center;
+  line-height: 52px;
   color: #171a21;
   margin-top: 32px;
+
+  ${media.mobile} {
+    font-size: 32px;
+    line-height: 36px;
+  }
 `;
 
 export const Caption = styled.p`
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
   line-height: 20px;
   margin-top: 16px;
-  text-align: center;
   color: #171a21;
+
+  ${media.mobile} {
+    font-size: 14px;
+    line-height: 16px;
+  }
 `;
 export const InputWrapper = styled.div`
   display: flex;
@@ -83,11 +97,16 @@ export const InputWrapper = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 40px 0 calc(40px - 16px) 0;
+  margin: 40px 0 24px;
+  margin-top: 40px;
   max-width: 368px;
   width: 100%;
 
   ${media.tablet} {
     max-width: 457px;
+  }
+
+  ${media.mobile} {
+    margin: 24px 0 16px;
   }
 `;

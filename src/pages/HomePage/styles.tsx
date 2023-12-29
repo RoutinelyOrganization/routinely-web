@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Wrapper } from "../../components/MenuHeader/styles";
+import { Button as ButtonStyle } from "../../components/buttons/Button/styles";
 import { Container } from "../../components/containers/ContainerIcons/styles";
 import media from "../../mediaQueries";
 
@@ -16,6 +17,10 @@ export const Header = styled.header`
 
   ${media.mobile} {
     padding: 4px 24px;
+
+    & ${ButtonStyle} {
+      margin-right: 8px;
+    }
   }
 `;
 
@@ -49,7 +54,7 @@ export const ContainerButtonsHeader = styled.div`
 
   ${media.mobile} {
     ${Wrapper} {
-      top: 10%;
+      top: 7%;
     }
     max-width: 150px;
     & .resources,
@@ -61,32 +66,70 @@ export const ContainerButtonsHeader = styled.div`
 
 export const Main = styled.main`
   display: flex;
-  margin-top: 152px;
   flex-direction: column;
   align-items: center;
+  padding: 152px 32px 80px;
+
+  > hr {
+    display: none;
+  }
+
+  ${media.desktop} {
+    padding-top: 56px;
+  }
+
+  ${media.mobile} {
+    padding-top: 40px;
+    > hr {
+      display: block;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+  }
 `;
 export const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 700;
-  line-height: 3.25rem;
+  line-height: 52px;
   text-align: center;
   max-width: 992px;
   width: 100%;
   margin-bottom: 40px;
+
+  ${media.desktop} {
+    text-align: left;
+    margin-bottom: 56px;
+  }
+
+  ${media.tablet} {
+    margin-bottom: 40px;
+    font-size: 40px;
+    line-height: 44px;
+  }
+
+  ${media.mobile} {
+    font-size: 24px;
+    line-height: 28px;
+  }
 `;
 
 export const Caption = styled.p`
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 700;
-  line-height: 1.75rem;
+  line-height: 28px;
   text-align: center;
   max-width: 860px;
   width: 100%;
   margin-bottom: 48px;
+
+  ${media.mobile} {
+    font-size: 16px;
+    line-height: 20px;
+  }
 `;
 export const Button = styled.button`
   max-width: 256px;
-  width: 100%;
+  width: 50%;
   height: 40px;
   border-radius: 8px;
   background-color: #5fbe2f;
@@ -131,7 +174,6 @@ export const ContainerCaptionImg = styled.div`
     align-items: normal;
 
     > div {
-      padding: 0 32px;
       text-align: left;
       max-width: 516px;
       width: 100%;
@@ -166,6 +208,7 @@ export const ContainerCaptionImg = styled.div`
 
   ${media.mobile} {
     display: block;
+    margin-bottom: 32px;
 
     > div {
       text-align: center;

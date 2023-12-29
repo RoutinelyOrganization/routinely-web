@@ -21,7 +21,7 @@ export const Header = styled.header<IHeader>`
   }
 
   ${media.mobile} {
-    padding: ${(props) => (props.$header === "primary" ? "14px 32px" : "24px 32px;")};
+    padding: ${(props) => (props.$header === "primary" ? "14px 32px" : "14px 24px;")};
     gap: 0;
 
     ${ButtonBackPage} {

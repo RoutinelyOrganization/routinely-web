@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../../components/buttons/Button/styles";
 import media from "../../mediaQueries";
 
 export const Main = styled.main`
@@ -6,15 +7,21 @@ export const Main = styled.main`
   justify-content: space-around;
   align-items: center;
   gap: 32px;
-  padding: 0 24px;
+  padding: 64px 24px;
 
   ${media.desktop} {
+    padding-top: 40px;
+  }
+
+  ${media.tablet} {
     flex-direction: column;
+  }
+  ${media.mobile} {
+    padding-top: 64px;
   }
 `;
 
 export const Wrapper = styled.div`
-  padding: 64px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,12 +36,17 @@ export const Wrapper = styled.div`
       margin-top: 32px;
     }
   }
+
+  ${media.tablet} {
+    ${Button} {
+      width: 50%;
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
   max-height: 434px;
   align-self: flex-end;
-  padding-top: 48px;
   max-width: 653px;
   width: 50%;
 
@@ -54,7 +66,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const Span = styled.span`
-  font-size: 0.75rem;
+  font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.5px;
 `;
