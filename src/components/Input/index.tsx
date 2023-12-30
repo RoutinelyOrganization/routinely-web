@@ -13,6 +13,7 @@ interface IInput {
   required?: boolean;
   errorMessage?: string;
   autoComplete?: string;
+  as?: React.ElementType;
 }
 
 export default function InputComponent({
@@ -26,11 +27,13 @@ export default function InputComponent({
   children,
   errorMessage,
   autoComplete,
+  as,
 }: IInput) {
   return (
     <>
       <S.InputContainer>
         <S.InputStyle
+          as={as}
           type={type}
           placeholder={placeholder}
           {...register}

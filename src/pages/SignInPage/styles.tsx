@@ -1,26 +1,47 @@
 import { styled } from "styled-components";
+import media from "../../mediaQueries";
 
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-evenly;
-  height: 100vh;
-  margin-bottom: 3rem;
+  gap: 14px;
+  padding: 100px 32px;
+
+  > img {
+    width: 50%;
+  }
+
+  ${media.tablet} {
+    padding-top: 64px;
+    flex-direction: column;
+    align-items: center;
+
+    > img {
+      max-width: 468px;
+      width: 100%;
+    }
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 104px;
+  max-width: 370px;
+  width: 50%;
+
+  ${media.tablet} {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`
   font-family: Roboto;
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 700;
-  line-height: 3.25rem;
-  text-align: center;
+  line-height: 52px;
+  text-align: left;
   color: #171a21;
   margin: 32px 0;
 `;
@@ -35,7 +56,9 @@ export const ShowPassword = styled.span`
   right: 5%;
   top: 50%;
   transform: translateY(-50%);
-  font-size: .9rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
   color: #171a21;
   cursor: pointer;
 `;
@@ -79,7 +102,18 @@ export const ForgetPassword = styled.span`
 `;
 
 export const ButtonWrapper = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 24px;
-`
+  margin-bottom: 24px;
+  margin-top: 16px;
+
+  ${media.desktop} {
+    flex-direction: row;
+  }
+
+  ${media.tablet} {
+    flex-direction: column;
+    gap: 16px;
+  }
+`;

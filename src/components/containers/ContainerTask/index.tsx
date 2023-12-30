@@ -1,13 +1,13 @@
+import { AxiosError } from "axios";
+import { useContext, useEffect, useState } from "react";
+import { CalendarContext } from "../../../contexts/CalendarContext";
+import { TasksContext } from "../../../contexts/TasksContext";
+import instance from "../../../services/api";
+import { selectOptions } from "../../FormTask";
 import PriorityFlag from "../../PriorityFlag";
 import DeleteButton from "../../buttons/ButtonDelete";
 import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
-import { useEffect, useContext, useState } from "react";
-import instance from "../../../services/api";
-import { AxiosError } from "axios";
-import { CalendarContext } from "../../../contexts/CalendarContext";
-import { TasksContext } from "../../../contexts/TasksContext";
-import { selectOptions } from "../../FormTask";
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;

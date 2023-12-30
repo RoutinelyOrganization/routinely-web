@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ButtonSocial = styled.button`
   display: flex;
-  width: 368px;
+  max-width: 368px;
+  width: 100%;
   height: 40px;
   padding: 11px 10px;
   justify-content: center;

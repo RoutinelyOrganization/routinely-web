@@ -1,4 +1,5 @@
 import { Iterator, findSelectValues } from "../containers/ContainerTask";
+import * as S from "./styles";
 
 interface IPriorityFlagProps {
   priority: string;
@@ -35,7 +36,7 @@ export default function PriorityFlag({ priority }: IPriorityFlagProps) {
           />
         </g>
       </svg>
-      <span style={{ color: `${colorFlag}` }}>{priorityValue}</span>
+      <S.PriorityValue style={{ color: `${colorFlag}` }}>{priorityValue}</S.PriorityValue>
     </>
   );
 }

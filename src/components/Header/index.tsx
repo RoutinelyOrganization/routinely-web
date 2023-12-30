@@ -56,7 +56,14 @@ export default function Header({ header = "primary" }: IHeader) {
 
   return (
     <S.Header $header={header}>
-      {header === "primary" ? <Logo /> : <ButtonBackPage />}
+      {header === "primary" ? (
+        <>
+          <ButtonBackPage />
+          <Logo />
+        </>
+      ) : (
+        <ButtonBackPage />
+      )}
       {hasUser && (
         <>
           <ContainerIcons setIsShowMenu={setIsShowMenu} />

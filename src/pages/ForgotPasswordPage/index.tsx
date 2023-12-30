@@ -28,7 +28,7 @@ export default function ForgotPasswordPage() {
   return (
     <>
       <ScrollToTop />
-      <Header header="secundary"/>
+      <Header header="secundary" />
       <S.Main>
         <S.Wrapper>
           <LogoShared />
@@ -46,9 +46,7 @@ export default function ForgotPasswordPage() {
                   message: "Este campo precisa ser um email válido.",
                 },
               })}
-            >
-
-            </Input>
+            ></Input>
             {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
             <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
             <Button>Enviar</Button>

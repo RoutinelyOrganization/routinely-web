@@ -26,20 +26,18 @@ export function NewPasswordPage() {
 
   const handleSubmitNewPassword = (data: INewPasswordProps) => {
     console.log(data);
-  }
+  };
   return (
     <>
       <ScrollToTop />
-      <Header header="secundary"/>
+      <Header header="secundary" />
 
       <S.Wrapper>
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <S.Form onSubmit={handleSubmit(handleSubmitNewPassword)}>
           <LogoShared />
           <S.Title>Criar nova senha</S.Title>
-          <S.Caption>
-            Escolha uma nova senha abaixo ela precisa ser diferente da senha anterior
-          </S.Caption>
+          <S.Caption>Escolha uma nova senha abaixo ela precisa ser diferente da senha anterior</S.Caption>
 
           <S.InputContainer>
             <S.InputWrapper>
@@ -63,20 +61,20 @@ export function NewPasswordPage() {
                 </>
               </Input>
             </S.InputWrapper>
-            <S.InputWrapper>   
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Repetir senha"
-                  register={register("newPassword", {
-                    required: "Este campo é obrigatório",
-                    validate: (value) => value === password || "As Senhas devem ser iguais",
-                  })}
-                  errorMessage={errors.newPassword && errors.newPassword.message}
-                >
-                  <ShowPasswordStyle onClick={() => setShowPassword(!showPassword)}>
+            <S.InputWrapper>
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Repetir senha"
+                register={register("newPassword", {
+                  required: "Este campo é obrigatório",
+                  validate: (value) => value === password || "As Senhas devem ser iguais",
+                })}
+                errorMessage={errors.newPassword && errors.newPassword.message}
+              >
+                <ShowPasswordStyle onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? "ESCONDER" : "EXIBIR"}
-                  </ShowPasswordStyle>
-                </Input>
+                </ShowPasswordStyle>
+              </Input>
             </S.InputWrapper>
           </S.InputContainer>
           <Button>Atualizar Senha</Button>

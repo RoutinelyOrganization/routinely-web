@@ -2,14 +2,15 @@ import { styled } from "styled-components";
 
 export const ContainerTask = styled.div`
   display: grid;
-  grid-template-columns: 30% 1fr 1fr 1fr 1fr;
+  grid-template-columns: 20% 1fr 1fr 1fr 1fr;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  max-width: 536px;
   width: 100%;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   > div {
     display: flex;
-    gap: 0 .4rem;
+    gap: 0 0.4rem;
   }
 `;
 
@@ -20,7 +21,8 @@ export const ContainerCheckbox = styled.input`
 `;
 
 export const ContainerText = styled.span`
-  width: 176px;
+  max-width: 176px;
+  width: 100%;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
@@ -34,7 +36,8 @@ export const ContainerCategory = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 64px;
+  max-width: 64px;
+  width: 100%;
   padding: 4px 6px;
   gap: 4px;
   border-radius: 4px;
@@ -65,6 +68,7 @@ export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 536px;
+  max-width: 536px;
+  width: 100%;
   flex-shrink: 0;
 `;

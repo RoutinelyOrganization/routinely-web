@@ -1,8 +1,8 @@
-import React from "react";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { styled } from "@mui/system";
 import { DateCalendar } from "@mui/x-date-pickers";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import "dayjs/locale/pt-br";
+import React from "react";
 
 interface ICustomDemoItemProps {
   label: string;
@@ -10,7 +10,7 @@ interface ICustomDemoItemProps {
 }
 
 export const StyledDateCalendar = styled(DateCalendar)({
-  width: "400px",
+  width: "100%",
   borderRadius: "0 0 10px 10px",
   backgroundColor: "#F6F7F8",
 
@@ -41,7 +41,8 @@ export const StyledDateCalendar = styled(DateCalendar)({
 
 const StyledDemoItemWrapper = styled("div")({
   backgroundColor: "#F6F7F8",
-  maxWidth: "max-content",
+  maxWidth: "400px",
+  width: "100%",
   border: "2px solid #5C59BB",
   borderRadius: "8px",
 
