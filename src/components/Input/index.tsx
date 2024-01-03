@@ -10,7 +10,6 @@ interface IInput {
   register?: UseFormRegisterReturn<string>;
   hasError?: boolean;
   id?: string;
-  required?: boolean;
   errorMessage?: string;
   autoComplete?: string;
   as?: React.ElementType;
@@ -23,7 +22,6 @@ export default function InputComponent({
   register,
   hasError,
   id,
-  required,
   children,
   errorMessage,
   autoComplete,
@@ -39,11 +37,9 @@ export default function InputComponent({
           {...register}
           $hasErro={hasError}
           id={id}
-          required={required}
           autoComplete={autoComplete}
         />
         <S.LabelInput $hasErro={hasError}>
-          {" "}
           <S.BorderWhite></S.BorderWhite>
           <S.Label htmlFor={id}>{label}</S.Label>
         </S.LabelInput>

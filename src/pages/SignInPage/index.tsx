@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, useState } from "react";
+import { isValidElement, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
@@ -41,7 +41,7 @@ export function SignInPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm<ISingInProps>();
 
   const handleSubmitSignIn = async (Data: ISingInProps) => {
@@ -69,6 +69,12 @@ export function SignInPage() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (isSubmitted) {
+      setErrorEmail(true);
+      setErrorPassword(true);
+    }
+  }, [isSubmitted]);
 
   return (
     <>
@@ -84,7 +90,7 @@ export function SignInPage() {
               hasError={erroEmail}
               type="text"
               id="E-mail"
-              required
+              placeholder="e-mail"
               register={register("email", {
                 required: "Campo de preenchimento obrigatório",
                 onChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -114,7 +120,7 @@ export function SignInPage() {
               type={showPassord ? "text" : "password"}
               hasError={erroPassword}
               id="Password"
-              required
+              placeholder="senha"
               register={register("password", {
                 required: "campo de preenchimento obrigatório",
                 onChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -136,8 +142,8 @@ export function SignInPage() {
                   {erroPassword ? <img src={infoErro} alt="icone de info erro" /> : showPassord ? "ESCONDER" : "EXIBIR"}
                 </>
               </S.ShowPassword>
-            </Input>
             {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+            </Input>
           </S.InputWrapper>
           <S.CheckboxAndForgetPasswordWrapper>
             <S.CheckboxWrapper>

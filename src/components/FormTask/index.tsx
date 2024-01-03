@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import dayjs from "dayjs";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
@@ -72,7 +72,7 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = interfaceForm;
 
   const handleSubmitFormTask = async (data: IEditTaskForm) => {
@@ -90,30 +90,37 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
     reset();
   };
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setHasNameTask(true);
+      setHasDescriptionTask(true);
+    }
+  }, [isSubmitted]);
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
       <S.Title>{actionForm === "add" ? "Adicionar tarefa" : "Editar tarefa"}</S.Title>
       <PopUpCloseButton setIsTaskOpen={setIsTaskOpen} setIsEditTaskOpen={setIsTaskOpen} />
 
-      <Input
-        label="Nome da tarefa"
-        type="text"
-        id="name"
-        required
-        hasError={hasNameTask}
-        register={register("name", {
-          required: "campo obrigatório",
-          maxLength: {
-            value: 50,
-            message: "Quantidade de caracteres máximo, 50!",
-          },
-          onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-            target.value.length > 50 ? setHasNameTask(true) : setHasNameTask(false);
-          },
-        })}
-        errorMessage={errors.name && errors.name.message}
-      ></Input>
-      {hasNameTask && <ErrorMessage>Quantidade de caracteres máximo, 50!</ErrorMessage>}
+      <S.InputTaskContainer>
+        <Input
+          label="Nome da tarefa"
+          type="text"
+          id="name"
+          placeholder="nome da tarefa"
+          hasError={hasNameTask}
+          register={register("name", {
+            required: "campo obrigatório",
+            maxLength: {
+              value: 50,
+              message: "Quantidade de caracteres máximo, 50!",
+            },
+            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+              target.value.length > 50 ? setHasNameTask(true) : setHasNameTask(false);
+            },
+          })}
+          errorMessage={errors.name && errors.name.message}
+        ></Input>
+      </S.InputTaskContainer>
       <S.InputContainer>
         <Input
           type="date"
@@ -159,7 +166,7 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
           label="Descrição"
           type="text"
           id="descricao"
-          required
+          placeholder="descrição"
           hasError={hasDescriptionTask}
           register={register("description", {
             required: "campo obrigatório",
@@ -171,10 +178,8 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
               target.value.length > 1000 ? setHasDescriptionTask(true) : setHasDescriptionTask(false);
             },
           })}
-          errorMessage={errors.name && errors.name.message}
-        >
-          {hasDescriptionTask && <ErrorMessage>Quantidade máxima de caracteres, 1000!</ErrorMessage>}
-        </Input>
+          errorMessage={errors.description && errors.description.message}
+        ></Input>
       </S.ContainerPopUp>
       <S.ButtonsContainer>
         {actionForm === "add" ? (
