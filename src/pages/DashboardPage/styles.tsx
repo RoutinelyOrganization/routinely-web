@@ -66,14 +66,14 @@ export const ButtonEditTask = styled.button`
   border: none;
   border-radius: 100px;
   background-color: #5fbe2f;
-  font-size: 3.3rem;
-  text-align: center;
   cursor: pointer;
+  transition: all 0.4s ease;
+  > img {
+    width: 2.5rem;
+  }
   &:hover {
-    transition: all 0.4s ease;
-    background-color: #93ee65;
-    color: #555555;
-    font-weight: bold;
+    background-color: #80d854;
+    transform: scale(0.97);
   }
 
   ${media.mobile} {

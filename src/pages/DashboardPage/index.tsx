@@ -2,6 +2,7 @@ import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
 import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
+import closeIcon from "../../assets/icons/closeIcon.svg";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -80,7 +81,9 @@ export default function DashboardPage() {
             </S.ContainerCalendar>
 
             <S.ContainerTasks>
-              <S.ButtonEditTask onClick={handleIsAddTask}>+</S.ButtonEditTask>
+              <S.ButtonEditTask onClick={handleIsAddTask}>
+                <img src={closeIcon} alt="close button" />
+              </S.ButtonEditTask>
               <TaskTitle title="Visualizador de tarefas" />
               <Tasks
                 setIsEditTaskOpen={setIsEditTaskOpen}
