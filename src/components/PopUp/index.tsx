@@ -3,12 +3,12 @@ import Header from "../Header";
 import ButtonFooter from "../buttons/ButtonFooter";
 import * as S from "./styles";
 
-interface IPopUpAddTaskProps {
+interface IPopCustomProps {
   children: React.ReactNode;
   setIsTaskOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PopUpTesting({ children }: IPopUpAddTaskProps) {
+export default function PopUpCustom({ children }: IPopCustomProps) {
   return (
     <S.Modal>
       <Header />

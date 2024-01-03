@@ -9,7 +9,7 @@ import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
 import FormTask from "../../components/FormTask";
 import Header from "../../components/Header";
-import PopUpTesting from "../../components/PopUp";
+import PopUpCustom from "../../components/PopUp";
 import Tasks from "../../components/Tasks";
 import ButtonFooter from "../../components/buttons/ButtonFooter";
 import ConfirmAction from "../../components/confirmAction";
@@ -59,16 +59,16 @@ export default function DashboardPage() {
       <CalendarProvider>
         <ScrollToTop />
         {isAddTaskOpen && (
-          <PopUpTesting setIsTaskOpen={setIsAddTaskOpen}>
+          <PopUpCustom setIsTaskOpen={setIsAddTaskOpen}>
             <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
-          </PopUpTesting>
+          </PopUpCustom>
         )}
         {isDeleteTaskOpen && (
-          <PopUpTesting>
+          <PopUpCustom>
             <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
               Tem certeza que deseja realizar a exclusão da tarefa?
             </ConfirmAction>
-          </PopUpTesting>
+          </PopUpCustom>
         )}
         <S.Container>
           <Header />
