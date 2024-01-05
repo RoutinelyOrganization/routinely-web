@@ -2,12 +2,12 @@ import { AxiosError } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
-import instance from "../../../services/api";
 import { selectOptions } from "../../FormTask";
 import PriorityFlag from "../../PriorityFlag";
 import DeleteButton from "../../buttons/ButtonDelete";
 import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
+import { getAllTasks } from "../../../utils/functions/getAllTasks";
 interface IContainerTaskProps {
   setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,20 +31,18 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getAllTasks = async () => {
-      try {
-        setLoading(true);
-
-        const { data } = await instance.get(`/tasks/?month=${month}&year=${year}`);
+    try {
+      setLoading(true);
+      (async () => {
+        const data = await getAllTasks(month, year);
         setTasks(data);
-      } catch (error) {
-        const erro = error as AxiosError;
-        console.log(erro);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getAllTasks();
+      })();
+    } catch (error) {
+      const erro = error as AxiosError;
+      console.log(erro);
+    } finally {
+      setLoading(false);
+    }
   }, [month, year, setTasks]);
 
   if (loading) {

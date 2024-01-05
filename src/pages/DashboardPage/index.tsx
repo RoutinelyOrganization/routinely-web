@@ -18,7 +18,7 @@ import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
 import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
 
 export interface Itasks {

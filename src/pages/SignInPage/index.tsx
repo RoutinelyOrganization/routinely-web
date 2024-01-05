@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { AxiosError, AxiosResponse } from "axios";
-import { isValidElement, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import infoErro from "../../assets/icons/infoErro.svg";
@@ -13,7 +13,7 @@ import LogoShared from "../../components/LogoShared";
 import Button from "../../components/buttons/Button";
 import ButtonSocial from "../../components/buttons/ButtonSocial";
 import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
 import * as S from "./styles";
 export interface ISingInProps {

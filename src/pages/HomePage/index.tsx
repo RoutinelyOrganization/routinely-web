@@ -8,7 +8,7 @@ import MenuHeader from "../../components/MenuHeader";
 import { Button as ButtonStyle } from "../../components/buttons/Button/styles";
 import ButtonDownloadApp from "../../components/buttons/ButtonApp";
 import ContainerIcons from "../../components/containers/ContainerIcons";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 
 export default function HomePage() {

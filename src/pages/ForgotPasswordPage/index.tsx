@@ -7,7 +7,7 @@ import LogoShared from "../../components/LogoShared";
 import Button from "../../components/buttons/Button";
 import SubTitleAuth from "../../components/titles/SubTitleAuth";
 import TitleAuth from "../../components/titles/TitleAuth";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 
 interface IForgotPassword {
