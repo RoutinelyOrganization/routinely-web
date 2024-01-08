@@ -2,11 +2,8 @@ import { TasksContext } from "../../contexts/TasksContext";
 import { useContext } from "react";
 import * as S from "./styles";
 import { UseCRUD } from "../../hooks/useCrud";
-import React from "react";
-import instance from "../../services/api";
-import { AxiosError } from "axios";
 import { CalendarContext } from "../../contexts/CalendarContext";
-
+import { getAllTasks } from "../../utils/functions/getAllTasks";
 interface IConfirmAction {
   children: string;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,16 +21,8 @@ export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfir
 
       case "yes":
         await handleDeleteTask(taskId);
-
-        (async () => {
-          try {
-            const { data } = await instance.get(`/tasks/?month=${month}&year=${year}`);
-            setTasks(data);
-          } catch (error) {
-            const erro = error as AxiosError;
-            console.log(erro);
-          }
-        })();
+        const data = await getAllTasks(month, year);
+        setTasks(data);
         break;
 
       case "cancel":

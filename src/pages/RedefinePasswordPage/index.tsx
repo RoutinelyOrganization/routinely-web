@@ -6,7 +6,7 @@ import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
 import SubTitleAuth from "../../components/titles/SubTitleAuth";
 import TitleAuth from "../../components/titles/TitleAuth";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { ImageContainer as ImageContainerStyle } from "../ForgotPasswordPage/styles";
 import * as S from "./styles";
 

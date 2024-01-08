@@ -21,7 +21,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 150px;
+  margin-top: 100px;
   animation: ${FadeUp} 0.4s ease;
 
   ${InputStyle} {
@@ -67,6 +67,14 @@ export const InputContainer = styled.div`
         grid-column: span 2;
       }
     }
+  }
+`;
+export const InputTaskContainer = styled(InputContainer)`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  ${InputStyle} {
+    max-width: inherit;
   }
 `;
 

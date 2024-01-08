@@ -54,7 +54,7 @@ export const InputStyle = styled.input<InputProps>`
   letter-spacing: 0.5px;
   color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#333333")};
 
-  &:focus ~ ${LabelInput}, &:valid ~ ${LabelInput} {
+  &:focus ~ ${LabelInput} {
     top: -15px;
     font-size: 0.85rem;
     background-color: transparent;
@@ -63,9 +63,14 @@ export const InputStyle = styled.input<InputProps>`
   }
 
   &::placeholder {
+    color: transparent;
+  }
+  &:not(:placeholder-shown) ~ ${LabelInput} {
+    top: -15px;
+    font-size: 0.85rem;
+    padding: 0.2rem;
     color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#333333")};
   }
-
   &::-ms-reveal,
   ::-ms-clear {
     display: none;

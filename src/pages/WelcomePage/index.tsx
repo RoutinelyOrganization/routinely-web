@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
 import Header from "../../components/Header";
 import LogoShared from "../../components/LogoShared";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
 import * as S from "./styles";
 

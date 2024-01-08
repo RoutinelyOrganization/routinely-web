@@ -4,7 +4,7 @@ import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
 import SignUpForm from "../../components/SignUpForm";
 import TitleAuth from "../../components/titles/TitleAuth";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 
 export default function SignUpPage() {

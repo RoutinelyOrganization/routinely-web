@@ -34,7 +34,7 @@ export default function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted },
     watch,
   } = useForm<ISignUpInput>();
 
@@ -68,8 +68,6 @@ export default function SignUpForm() {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("executando");
-
       if (window.innerWidth < 904) {
         setLabelConfirmPassword("Repetir");
       } else {
@@ -83,6 +81,14 @@ export default function SignUpForm() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setErroName(true);
+      setErroEmail(true);
+      setErroPassword(true);
+      setErroConfirmPassword(true);
+    }
+  }, [isSubmitted]);
   return (
     // eslint-disable-next-line
     <S.Form onSubmit={handleSubmit(handleSignUp)}>
@@ -91,7 +97,7 @@ export default function SignUpForm() {
         hasError={erroName}
         type="text"
         id="name"
-        required
+        placeholder="nome"
         register={register("name", {
           required: "Este campo é obrigatório.",
           minLength: {
@@ -114,7 +120,7 @@ export default function SignUpForm() {
         hasError={erroEmail}
         type="text"
         id="Email"
-        required
+        placeholder="email"
         register={register("email", {
           required: "Este campo é obrigatório.",
           pattern: {
@@ -142,7 +148,7 @@ export default function SignUpForm() {
           hasError={erroPassword}
           type={showPassword ? "text" : "password"}
           id="password"
-          required
+          placeholder="senha"
           register={register("password", {
             required: "Este campo é obrigatório.",
             pattern: {
@@ -184,7 +190,7 @@ export default function SignUpForm() {
           hasError={erroConfirmPassword}
           type={showConfirmPassword ? "text" : "password"}
           id="confirmPassword"
-          required
+          placeholder="confirmar senha"
           register={register("confirmPassword", {
             required: "Este campo é obrigatório.",
             validate: (value) => value === password || "As senhas devem ser iguais",

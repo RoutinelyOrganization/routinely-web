@@ -54,13 +54,10 @@ export const InputWrapper = styled.div`
 export const ShowPassword = styled.span`
   position: absolute;
   right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 25%;
   cursor: pointer;
-  transform: translateY(-50%);
   font-size: 0.9rem;
   color: #171a21;
-  cursor: pointer;
 `;
 export const CheckboxAndForgetPasswordWrapper = styled.div`
   display: flex;

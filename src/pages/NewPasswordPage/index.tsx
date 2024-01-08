@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LogoShared from "../../components/LogoShared";
 import Button from "../../components/buttons/Button";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { ShowPassword as ShowPasswordStyle } from "../SignInPage/styles";
 import * as S from "./styles";
 

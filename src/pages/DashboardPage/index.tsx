@@ -2,6 +2,7 @@ import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
 import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
+import closeIcon from "../../assets/icons/closeIcon.svg";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +10,7 @@ import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
 import FormTask from "../../components/FormTask";
 import Header from "../../components/Header";
-import PopUpTesting from "../../components/PopUp";
+import PopUpCustom from "../../components/PopUp";
 import Tasks from "../../components/Tasks";
 import ButtonFooter from "../../components/buttons/ButtonFooter";
 import ConfirmAction from "../../components/confirmAction";
@@ -17,7 +18,7 @@ import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
 import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../helpers/ScrollToTop";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
 
 export interface Itasks {
@@ -59,16 +60,16 @@ export default function DashboardPage() {
       <CalendarProvider>
         <ScrollToTop />
         {isAddTaskOpen && (
-          <PopUpTesting setIsTaskOpen={setIsAddTaskOpen}>
+          <PopUpCustom setIsTaskOpen={setIsAddTaskOpen}>
             <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
-          </PopUpTesting>
+          </PopUpCustom>
         )}
         {isDeleteTaskOpen && (
-          <PopUpTesting>
+          <PopUpCustom>
             <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
               Tem certeza que deseja realizar a exclusão da tarefa?
             </ConfirmAction>
-          </PopUpTesting>
+          </PopUpCustom>
         )}
         <S.Container>
           <Header />
@@ -80,7 +81,9 @@ export default function DashboardPage() {
             </S.ContainerCalendar>
 
             <S.ContainerTasks>
-              <S.ButtonEditTask onClick={handleIsAddTask}>+</S.ButtonEditTask>
+              <S.ButtonEditTask onClick={handleIsAddTask}>
+                <img src={closeIcon} alt="close button" />
+              </S.ButtonEditTask>
               <TaskTitle title="Visualizador de tarefas" />
               <Tasks
                 setIsEditTaskOpen={setIsEditTaskOpen}
