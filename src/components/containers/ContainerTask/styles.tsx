@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import media from "../../../mediaQueries";
 
 export const ContainerTask = styled.div`
   display: grid;
@@ -11,6 +12,10 @@ export const ContainerTask = styled.div`
   > div {
     display: flex;
     gap: 0 0.4rem;
+  }
+
+  ${media.mobile} {
+    grid-template-columns: 40% 1fr 1fr 1fr;
   }
 `;
 
@@ -52,6 +57,10 @@ export const ContainerSubCategory = styled.span`
   color: #171a21;
   font-size: 1rem;
   line-height: 20px;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const ContainerPriority = styled.span`

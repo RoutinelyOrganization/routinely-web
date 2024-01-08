@@ -11,6 +11,10 @@ export const Header = styled.header`
   justify-content: space-between;
   background-color: #5c59bb;
 
+  & ${ButtonStyle} {
+    max-width: 160px;
+  }
+
   ${media.desktop} {
     padding: 15px 32px;
   }

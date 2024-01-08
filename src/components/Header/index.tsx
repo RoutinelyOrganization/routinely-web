@@ -11,9 +11,10 @@ import { useContext, useState } from "react";
 
 export interface IHeader {
   header?: "primary" | "secundary";
+  setIsTaskOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ header = "primary" }: IHeader) {
+export default function Header({ header = "primary", setIsTaskOpen }: IHeader) {
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const { user } = useContext(UserContext);
   const token = localStorage.getItem("token");
@@ -58,7 +59,7 @@ export default function Header({ header = "primary" }: IHeader) {
     <S.Header $header={header}>
       {header === "primary" ? (
         <>
-          <ButtonBackPage />
+          <ButtonBackPage setIsTaskOpen={setIsTaskOpen} />
           <Logo />
         </>
       ) : (
