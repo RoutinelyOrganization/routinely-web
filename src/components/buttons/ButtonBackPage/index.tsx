@@ -2,15 +2,17 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 
 interface IButtonBackPage {
-  route?: string;
+  setIsTaskOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ButtonBackPage({ route }: IButtonBackPage) {
+export default function ButtonBackPage({ setIsTaskOpen }: IButtonBackPage) {
   const navigation = useNavigate();
-  const navigateRoute = () => (route ? navigation(route) : navigation(-1));
+  const handleBack = () => {
+    setIsTaskOpen ? setIsTaskOpen(false) : navigation(-1);
+  };
 
   return (
-    <S.ButtonBackPage onClick={navigateRoute}>
+    <S.ButtonBackPage onClick={handleBack}>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#F6F7F8" />
       </svg>

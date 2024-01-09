@@ -4,6 +4,7 @@ import media from "../../mediaQueries";
 export const Container = styled.div`
   width: 156px;
   height: 55px;
+  cursor: pointer;
 
   ${media.mobile} {
     width: 72px;

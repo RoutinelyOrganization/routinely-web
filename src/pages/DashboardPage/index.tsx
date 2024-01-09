@@ -1,8 +1,8 @@
+import closeIcon from "../../assets/icons/closeIcon.svg";
 import ImageCompleteTask from "../../assets/imagens/ImageCompleteTask.svg";
 import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
-import closeIcon from "../../assets/icons/closeIcon.svg";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,8 @@ import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
 import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 
 export interface Itasks {
   id: number;
@@ -65,11 +65,9 @@ export default function DashboardPage() {
           </PopUpCustom>
         )}
         {isDeleteTaskOpen && (
-          <PopUpCustom>
-            <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
-              Tem certeza que deseja realizar a exclusão da tarefa?
-            </ConfirmAction>
-          </PopUpCustom>
+          <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
+            Tem certeza que deseja realizar a exclusão da tarefa?
+          </ConfirmAction>
         )}
         <S.Container>
           <Header />

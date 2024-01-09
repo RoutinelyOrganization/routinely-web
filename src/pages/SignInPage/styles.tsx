@@ -54,7 +54,7 @@ export const InputWrapper = styled.div`
 export const ShowPassword = styled.span`
   position: absolute;
   right: 5%;
-  top: 25%;
+  top: 35%;
   cursor: pointer;
   font-size: 0.9rem;
   color: #171a21;

@@ -8,10 +8,10 @@ interface IPopCustomProps {
   setIsTaskOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PopUpCustom({ children }: IPopCustomProps) {
+export default function PopUpCustom({ children, setIsTaskOpen }: IPopCustomProps) {
   return (
     <S.Modal>
-      <Header />
+      <Header setIsTaskOpen={setIsTaskOpen} />
       {children}
       <ButtonFooter />
     </S.Modal>

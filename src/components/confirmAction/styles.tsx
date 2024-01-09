@@ -7,8 +7,18 @@ const FadeUp = keyframes`
   to { transform: scale(1)}
 `;
 
+export const Wrapper = styled.div`
+  background-color: #0b0c0b3e;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`;
+
 export const Container = styled.div`
-  margin-top: 200px;
   background-color: #fff;
   padding: 24px;
   width: 324px;
