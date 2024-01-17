@@ -29,11 +29,12 @@ export const Container = styled.div`
 export const ContainerButton = styled.div`
   margin-top: 24px;
   display: flex;
-  justify-content: space-between;
+  gap: 0px 32px;
 `;
 
 export const Button = styled.button`
   border-radius: 8px;
+  width: 120px;
   font-weight: bold;
   text-align: center;
   font-size: 14px;
@@ -46,9 +47,6 @@ export const Button = styled.button`
   }
 `;
 
-export const ButtonCancel = styled(Button)`
-  color: #767676;
-`;
 export const ButtonNot = styled(Button)`
   color: #b3261e;
 `;

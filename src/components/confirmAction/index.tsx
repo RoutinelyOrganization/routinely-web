@@ -14,18 +14,15 @@ export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfir
   const { handleDeleteTask } = UseCRUD();
   const { month, year } = useContext(CalendarContext);
 
-  const handleClick = async (operation: "cancel" | "not" | "yes") => {
+  const handleClick = async (operation: "yes" | "not") => {
     switch (operation) {
-      case "not":
-        break;
-
       case "yes":
         await handleDeleteTask(taskId);
         const data = await getAllTasks(month, year);
         setTasks(data);
         break;
 
-      case "cancel":
+      case "not":
         break;
     }
     setIsDeleteTaskOpen(false);
@@ -36,9 +33,8 @@ export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfir
       <S.Container>
         <S.Paragraph>{children}</S.Paragraph>
         <S.ContainerButton>
-          <S.ButtonCancel onClick={() => handleClick("cancel")}>Cancelar</S.ButtonCancel>
-          <S.ButtonNot onClick={() => handleClick("not")}>Não</S.ButtonNot>
           <S.ButtonYes onClick={() => handleClick("yes")}>Sim</S.ButtonYes>
+          <S.ButtonNot onClick={() => handleClick("not")}>Não</S.ButtonNot>
         </S.ContainerButton>
       </S.Container>
     </S.Wrapper>
