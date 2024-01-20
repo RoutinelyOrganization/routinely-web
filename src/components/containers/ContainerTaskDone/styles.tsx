@@ -5,12 +5,25 @@ export const Container = styled.div`
   align-items: center;
   gap: 25px;
   width: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 90%;
+    height: 1px;
+    background-color: #767676;
+  }
 `;
 
 export const ContainerCheckbox = styled.input`
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  background-color: #000;
+  border: 10px solid black;
 `;
 
 export const ContainerText = styled.span`
@@ -18,7 +31,7 @@ export const ContainerText = styled.span`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  color: #171a21;
+  color: #767676;
   text-overflow: ellipsis;
   font-size: 1rem;
   line-height: 20px;

@@ -3,7 +3,7 @@ import media from "../../../mediaQueries";
 
 export const ContainerTask = styled.div`
   display: grid;
-  grid-template-columns: 20% 1fr 1fr 1fr 1fr;
+  grid-template-columns: 20% 1fr 20% 20% 1fr;
   align-items: center;
   gap: 6px;
   max-width: 536px;
@@ -16,13 +16,8 @@ export const ContainerTask = styled.div`
 
   ${media.mobile} {
     grid-template-columns: 40% 1fr 1fr 1fr;
+    padding-right: 16px;
   }
-`;
-
-export const ContainerCheckbox = styled.input`
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
 `;
 
 export const ContainerText = styled.span`
@@ -35,6 +30,7 @@ export const ContainerText = styled.span`
   text-overflow: ellipsis;
   font-size: 1rem;
   line-height: 20px;
+  white-space: nowrap;
 `;
 
 export const ContainerCategory = styled.span`
@@ -57,6 +53,9 @@ export const ContainerSubCategory = styled.span`
   color: #171a21;
   font-size: 1rem;
   line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${media.mobile} {
     display: none;
@@ -80,4 +79,7 @@ export const Wrapper = styled.section`
   max-width: 536px;
   width: 100%;
   flex-shrink: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;

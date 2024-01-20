@@ -12,7 +12,6 @@ export const TimeFormat = (date: string) => {
   const dateFormatted = new Date(date);
   const hour = (dateFormatted.getUTCHours()).toString().padStart(2, '0');
   const minutes = dateFormatted.getUTCMinutes().toString().padStart(2, '0');
-  console.log(`${hour}:${minutes}`);
-  
+ 
   return `${hour}:${minutes}`;
 }

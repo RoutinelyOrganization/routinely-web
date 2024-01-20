@@ -10,7 +10,8 @@ interface ITasksProps {
 export default function Tasks({ setIsEditTaskOpen, setIsAddTaskOpen, setIsDeleteTaskOpen }: ITasksProps) {
   const handleAddTask = () => {
     setIsAddTaskOpen(true);
-  };''
+  };
+  ("");
   return (
     <S.Container>
       <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
