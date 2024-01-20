@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import dayjs from "dayjs";
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
+import { TimeFormat, dateFormat } from "../../utils/formats/dateAndTime";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
@@ -12,7 +13,6 @@ import * as S from "./styles";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  actionForm: "add" | "edit";
 }
 
 export interface IAddTaskForm {
@@ -62,11 +62,19 @@ export const selectOptions: Array<ISelectOptions> = [
     formRequired: "tag",
   },
 ];
-export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
-  const interfaceForm = actionForm === "add" ? useForm<IAddTaskForm>() : useForm<IEditTaskForm>();
+export default function FormTask({ setIsTaskOpen }: IForm) {
+  const { setTasks, tempTask, setTempTask } = useContext(TasksContext);
+  const interfaceForm = !tempTask
+    ? useForm<IAddTaskForm>()
+    : useForm<IEditTaskForm>({
+        defaultValues: {
+          ...tempTask,
+          date: dateFormat(tempTask.date) as unknown as Date,
+          hour: TimeFormat(tempTask.hour),
+        },
+      });
   const [hasNameTask, setHasNameTask] = useState<boolean>(false);
   const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
-  const { setTasks } = useContext(TasksContext);
   const { handleAddTask } = UseCRUD();
   const {
     register,
@@ -75,19 +83,27 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
     formState: { errors, isSubmitted },
   } = interfaceForm;
 
-  const handleSubmitFormTask = async (data: IEditTaskForm) => {
-    if (actionForm === "add") {
-      try {
-        const task = await handleAddTask(data);
-        setTasks((prevstate) => [...prevstate, task]);
-        setIsTaskOpen(false);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      //logica para editar task
+  const handleSubmitFormTask: SubmitHandler<IEditTaskForm> = async (data, event) => {
+    const buttonSubmited = event?.nativeEvent.submitter.name;
+
+    switch (buttonSubmited) {
+      case "addTask":
+        try {
+          const task = await handleAddTask(data);
+          setTasks((prevstate) => [...prevstate, task]);
+          setIsTaskOpen(false);
+        } catch (error) {
+          console.log(error);
+        }
+        break;
+      case "editTask":
+        break;
+      case "deleteTask":
+        break;
     }
+
     reset();
+    setTempTask(null);
   };
 
   useEffect(() => {
@@ -96,9 +112,10 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
       setHasDescriptionTask(true);
     }
   }, [isSubmitted]);
+
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
-      <S.Title>{actionForm === "add" ? "Adicionar tarefa" : "Editar tarefa"}</S.Title>
+      <S.Title>{!tempTask ? "Adicionar tarefa" : "Editar tarefa"}</S.Title>
       <PopUpCloseButton setIsTaskOpen={setIsTaskOpen} setIsEditTaskOpen={setIsTaskOpen} />
 
       <S.InputTaskContainer>
@@ -182,12 +199,13 @@ export default function FormTask({ actionForm, setIsTaskOpen }: IForm) {
         ></Input>
       </S.ContainerPopUp>
       <S.ButtonsContainer>
-        {actionForm === "add" ? (
-          <S.SaveButton>Adicionar tarefa</S.SaveButton>
+        {!tempTask ? (
+          <S.SaveButton name="addTask">Adicionar tarefa</S.SaveButton>
         ) : (
           <>
-            <S.DeleteButton>Excluir tarefa</S.DeleteButton>
-            <S.SaveButton>Salvar alterações</S.SaveButton>
+            <S.DeleteButton name="deleteTask">Excluir tarefa</S.DeleteButton>
+            <S.DuplicateButton name="addTask">Duplicar tarefa</S.DuplicateButton>
+            <S.SaveButton name="editTask">Salvar alterações</S.SaveButton>
           </>
         )}
       </S.ButtonsContainer>

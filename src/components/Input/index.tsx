@@ -13,6 +13,7 @@ interface IInput {
   errorMessage?: string;
   autoComplete?: string;
   as?: React.ElementType;
+  value?: string;
 }
 
 export default function InputComponent({
@@ -26,6 +27,7 @@ export default function InputComponent({
   errorMessage,
   autoComplete,
   as,
+  value,
 }: IInput) {
   return (
     <>
@@ -38,6 +40,7 @@ export default function InputComponent({
           $hasErro={hasError}
           id={id}
           autoComplete={autoComplete}
+          value={value}
         />
         <S.LabelInput $hasErro={hasError}>
           <S.BorderWhite></S.BorderWhite>

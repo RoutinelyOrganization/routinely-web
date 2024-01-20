@@ -5,7 +5,7 @@ import instance from "../services/api";
 export const UseCRUD = () => {
   async function handleAddTask(body: IAddTaskForm) {
     const token = window.localStorage.getItem("token");
-    
+
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -18,7 +18,6 @@ export const UseCRUD = () => {
     }
   }
   async function handleDeleteTask(id: number) {
-    
     const token = window.localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -29,12 +28,11 @@ export const UseCRUD = () => {
     } catch (err) {
       const error = err as AxiosError;
       console.log(error);
-      
     }
   }
 
   return {
     handleAddTask,
-    handleDeleteTask
+    handleDeleteTask,
   };
 };

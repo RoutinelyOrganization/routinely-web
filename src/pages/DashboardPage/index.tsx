@@ -61,7 +61,12 @@ export default function DashboardPage() {
         <ScrollToTop />
         {isAddTaskOpen && (
           <PopUpCustom setIsTaskOpen={setIsAddTaskOpen}>
-            <FormTask actionForm="add" setIsTaskOpen={setIsAddTaskOpen} />
+            <FormTask setIsTaskOpen={setIsAddTaskOpen} />
+          </PopUpCustom>
+        )}
+        {isEditTaskOpen && (
+          <PopUpCustom setIsTaskOpen={setIsEditTaskOpen}>
+            <FormTask setIsTaskOpen={setIsEditTaskOpen} />
           </PopUpCustom>
         )}
         {isDeleteTaskOpen && (
