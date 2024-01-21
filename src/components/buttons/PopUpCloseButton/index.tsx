@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TasksContext } from "../../../contexts/TasksContext";
 import * as S from "./styles";
 
 interface IPopUpCloseButton {
@@ -6,9 +8,11 @@ interface IPopUpCloseButton {
 }
 
 export default function PopUpCloseButton({ setIsTaskOpen, setIsEditTaskOpen }: IPopUpCloseButton) {
+  const { setTempTask } = useContext(TasksContext);
   const handleCloseButton = () => {
     setIsTaskOpen(false);
     setIsEditTaskOpen(false);
+    setTempTask(null);
   };
 
   return (

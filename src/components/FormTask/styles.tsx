@@ -147,26 +147,29 @@ export const ButtonsContainer = styled.div`
   gap: 15px;
 `;
 
-export const SaveButton = styled.button`
+export const Button = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 40px;
   padding: 10px 16px;
-  max-width: 156px;
+  max-width: 145px;
   width: 100%;
   gap: 8px;
   border: none;
   border-radius: 8px;
-  background: #5c59bb;
-  color: #f6f7f8;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.1px;
   cursor: pointer;
+`;
+
+export const SaveButton = styled(Button)`
+  background: #5c59bb;
+  color: #f6f7f8;
   align-self: flex-end;
   &:hover {
     transition: all 0.4s ease;
@@ -180,23 +183,14 @@ export const SaveButton = styled.button`
   }
 `;
 
-export const DeleteButton = styled.button`
-  display: flex;
-  width: 156px;
-  height: 40px;
-  padding: 10px 16px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 8px;
+export const DeleteButton = styled(Button)`
   border: 1px solid #d8d6dc;
   background-color: transparent;
   color: var(--aes-erro, #b3261e);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.1px;
-  cursor: pointer;
+`;
+
+export const DuplicateButton = styled(Button)`
+  border: 1px solid #d8d6dc;
+  background-color: transparent;
+  color: #5c59bb;
 `;
