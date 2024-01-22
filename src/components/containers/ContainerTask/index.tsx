@@ -4,6 +4,7 @@ import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
 import { Itasks } from "../../../pages/DashboardPage";
 import { getAllTasks } from "../../../utils/functions/getAllTasks";
+import CustonCheckedBox from "../../CustonCheckedBox";
 import { selectOptions } from "../../FormTask";
 import PriorityFlag from "../../PriorityFlag";
 import DeleteButton from "../../buttons/ButtonDelete";
@@ -61,7 +62,7 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
         : tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
             <S.ContainerTask key={id}>
               <div>
-                <S.ContainerCheckbox type="checkbox" />
+                <CustonCheckedBox id={id} />
                 <S.ContainerText>{name}</S.ContainerText>
               </div>
               <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>

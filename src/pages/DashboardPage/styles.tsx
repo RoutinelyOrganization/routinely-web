@@ -24,6 +24,7 @@ export const Main = styled.main`
 
   ${media.tablet} {
     flex-direction: column;
+    align-items: center;
   }
 
   ${media.mobile} {
@@ -89,6 +90,10 @@ export const ContainerCalendar = styled.section`
   max-width: 576px;
   width: 50%;
 
+  > img {
+    max-width: 350px;
+  }
+
   > .tablet {
     display: none;
   }
@@ -112,7 +117,7 @@ export const ContainerCalendar = styled.section`
     width: 100%;
     gap: 14px;
     > img {
-      width: 50%;
+      width: 40%;
     }
   }
 

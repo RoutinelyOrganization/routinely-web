@@ -11,6 +11,9 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
+  ${media.tablet} {
+    gap: 16px;
+  }
   ${media.mobile} {
     gap: 14px;
   }
