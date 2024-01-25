@@ -57,7 +57,7 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
 
   return (
     <S.Wrapper>
-      {tasks.length < 1
+      {tasks && tasks.length < 1
         ? null
         : tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
             <S.ContainerTask key={id}>
