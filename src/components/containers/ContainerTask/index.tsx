@@ -50,35 +50,35 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   if (loading) {
     return <p>Carregando tarefas...</p>;
   }
-
   const setDataTaskTemp = (data: Itasks) => {
     setTempTask(data);
   };
+  console.log(tasks);
 
   return (
     <S.Wrapper>
-      {tasks && tasks.length < 1
-        ? null
-        : tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
-            <S.ContainerTask key={id}>
-              <div>
-                <CustonCheckedBox id={id} />
-                <S.ContainerText>{name}</S.ContainerText>
-              </div>
-              <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>
-              <S.ContainerSubCategory>{findSelectValues(tag, Iterator.Tag)}</S.ContainerSubCategory>
-              <S.ContainerPriority>
-                <PriorityFlag priority={priority} />
-              </S.ContainerPriority>
-              <div>
-                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
-                <ButtonEdit
-                  setIsEditTaskOpen={setIsEditTaskOpen}
-                  setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
-                />
-              </div>
-            </S.ContainerTask>
-          ))}
+      {tasks &&
+        tasks.length > 0 &&
+        tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
+          <S.ContainerTask key={id}>
+            <div>
+              <CustonCheckedBox id={id} />
+              <S.ContainerText>{name}</S.ContainerText>
+            </div>
+            <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>
+            <S.ContainerSubCategory>{findSelectValues(tag, Iterator.Tag)}</S.ContainerSubCategory>
+            <S.ContainerPriority>
+              <PriorityFlag priority={priority} />
+            </S.ContainerPriority>
+            <div>
+              <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
+              <ButtonEdit
+                setIsEditTaskOpen={setIsEditTaskOpen}
+                setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
+              />
+            </div>
+          </S.ContainerTask>
+        ))}
     </S.Wrapper>
   );
 }
