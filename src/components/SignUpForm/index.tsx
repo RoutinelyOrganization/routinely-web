@@ -90,7 +90,6 @@ export default function SignUpForm() {
     }
   }, [isSubmitted]);
   return (
-    // eslint-disable-next-line
     <S.Form onSubmit={handleSubmit(handleSignUp)}>
       <Input
         label="Nome"

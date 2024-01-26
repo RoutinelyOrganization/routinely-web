@@ -42,6 +42,11 @@ interface ISelectOptions {
   formRequired: "priority" | "category" | "tag";
 }
 
+interface CustomFormEvent extends React.FormEvent {
+  submitter: {
+    name: string;
+  };
+}
 export const selectOptions: Array<ISelectOptions> = [
   {
     label: "Prioridade",
@@ -84,7 +89,7 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
   } = interfaceForm;
 
   const handleSubmitFormTask: SubmitHandler<IEditTaskForm> = async (data, event) => {
-    const buttonSubmited = event?.nativeEvent.submitter.name;
+    const buttonSubmited = (event!.nativeEvent as CustomFormEvent).submitter.name;
 
     switch (buttonSubmited) {
       case "addTask":

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,8 +12,8 @@ import LogoShared from "../../components/LogoShared";
 import Button from "../../components/buttons/Button";
 import ButtonSocial from "../../components/buttons/ButtonSocial";
 import { UserContext } from "../../contexts/UserContext";
-import { ScrollToTop } from "../../utils/ScrollToTop";
 import { useAuth } from "../../hooks/useAuth";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 export interface ISingInProps {
   email: string;
@@ -142,7 +141,7 @@ export function SignInPage() {
                   {erroPassword ? <img src={infoErro} alt="icone de info erro" /> : showPassord ? "ESCONDER" : "EXIBIR"}
                 </>
               </S.ShowPassword>
-            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+              {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
             </Input>
           </S.InputWrapper>
           <S.CheckboxAndForgetPasswordWrapper>
