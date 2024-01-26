@@ -4,7 +4,7 @@ import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
@@ -45,15 +45,15 @@ export default function DashboardPage() {
     setIsAddTaskOpen(true);
   };
 
-  useEffect(() => {
-    (async () => {
-      authorization();
-    })();
+  // useEffect(() => {
+  //   (async () => {
+  //     authorization();
+  //   })();
 
-    if (!user.email && !token) {
-      navigate("/signInPage");
-    }
-  }, [token, user.email, navigate, authorization]);
+  //   if (!user.email && !token) {
+  //     navigate("/signInPage");
+  //   }
+  // }, [token, user.email, navigate, authorization]);
 
   return (
     <TasksProvider>

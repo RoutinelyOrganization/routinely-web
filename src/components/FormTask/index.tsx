@@ -107,6 +107,16 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
         break;
     }
 
+    // console.log("testes");
+    // try {
+    //   const date = new Date();
+    //   const monthCurrent = date.getMonth() + 1;
+    //   const yearCurrent = date.getFullYear();
+    //   await reqGetTask(monthCurrent, yearCurrent);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
     reset();
     setTempTask(null);
   };

@@ -10,6 +10,8 @@ interface ITasksContext {
   setTasks: React.Dispatch<React.SetStateAction<Itasks[]>>;
   taskId: number;
   setTaskId: React.Dispatch<React.SetStateAction<number>>;
+  initialTasks: boolean;
+  setInitialTasks: React.Dispatch<React.SetStateAction<boolean>>;
   tempTask: Itasks | null;
   setTempTask: React.Dispatch<React.SetStateAction<Itasks | null>>;
 }
@@ -21,6 +23,7 @@ export const TasksProvider: React.FC<ITasksProvider> = ({ children }) => {
   const [tasks, setTasks] = useState<Itasks[]>([]);
   const [taskId, setTaskId] = useState(0);
   const [tempTask, setTempTask] = useState<Itasks | null>(null);
+  const [initialTasks, setInitialTasks] = useState(false);
 
   return (
     <TasksContext.Provider
@@ -31,6 +34,8 @@ export const TasksProvider: React.FC<ITasksProvider> = ({ children }) => {
         setTaskId,
         tempTask,
         setTempTask,
+        initialTasks,
+        setInitialTasks,
       }}
     >
       {children}

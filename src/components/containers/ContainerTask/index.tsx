@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
@@ -28,24 +27,58 @@ export const findSelectValues = (valueToFind: string, iterator: Iterator) => {
 };
 
 export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }: IContainerTaskProps) {
-  const { tasks, setTasks, setTempTask } = useContext(TasksContext);
+  const { tasks, setTasks, setTempTask, initialTasks, setInitialTasks } = useContext(TasksContext);
   const { month, year } = useContext(CalendarContext);
   const [loading, setLoading] = useState(false);
+  const [mapTask, setMapTask] = useState(tasks);
+
+  // useEffect(() => {
+  //   // if (loading) {
+  //   //   return;
+  //   // }
+  //   // try {
+  //   //   setLoading(true);
+  //   //   (async () => {
+  //   //     const data = await getAllTasks(month, year)
+  //   //       .then((res) => res)
+  //   //       .finally(() => setLoading(false));
+  //   //     console.log(data);
+
+  //   //     data && setTasks(data);
+  //   //   })();
+  //   // } catch (error) {
+  //   //   const erro = error as AxiosError;
+  //   //   console.log(erro);
+  //   // } finally {
+  //   //   setLoading(false);
+  //   // }
+  //   console.log(teste);
+
+  //   if (teste) {
+  //     reqGetTask(month, year);
+  //     setTeste(false);
+  //   }
+  //   console.log(teste);
+  // }, [month]);
+  // setTeste(true);
 
   useEffect(() => {
-    try {
-      setLoading(true);
-      (async () => {
-        const data = await getAllTasks(month, year);
-        setTasks(data);
-      })();
-    } catch (error) {
-      const erro = error as AxiosError;
-      console.log(erro);
-    } finally {
-      setLoading(false);
-    }
-  }, [month, year, setTasks]);
+    setInitialTasks(true);
+  }, []);
+
+  useEffect(() => {
+    setMapTask(tasks);
+  }, [tasks]);
+
+  if (initialTasks) {
+    setLoading(true);
+
+    getAllTasks(month, year)
+      .then((res) => {
+        console.log(res);
+      })
+      .finally(() => setLoading(false));
+  }
 
   if (loading) {
     return <p>Carregando tarefas...</p>;
@@ -56,9 +89,9 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
 
   return (
     <S.Wrapper>
-      {tasks &&
-        tasks.length > 0 &&
-        tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
+      {mapTask &&
+        mapTask.length > 0 &&
+        mapTask.map(({ id, name, category, tag, priority, date, description, hour }) => (
           <S.ContainerTask key={id}>
             <div>
               <CustonCheckedBox id={id} />
