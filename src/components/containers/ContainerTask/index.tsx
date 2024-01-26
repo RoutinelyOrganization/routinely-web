@@ -53,7 +53,6 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   const setDataTaskTemp = (data: Itasks) => {
     setTempTask(data);
   };
-  console.log(tasks);
 
   return (
     <S.Wrapper>

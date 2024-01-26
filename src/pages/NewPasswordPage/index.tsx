@@ -33,7 +33,6 @@ export function NewPasswordPage() {
       <Header header="secundary" />
 
       <S.Wrapper>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <S.Form onSubmit={handleSubmit(handleSubmitNewPassword)}>
           <LogoShared />
           <S.Title>Criar nova senha</S.Title>

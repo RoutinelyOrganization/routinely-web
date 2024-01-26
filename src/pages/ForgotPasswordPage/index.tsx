@@ -34,7 +34,6 @@ export default function ForgotPasswordPage() {
           <LogoShared />
           <TitleAuth>Esqueceu sua Senha?</TitleAuth>
           <SubTitleAuth>Digite o e-mail cadastrado na sua conta Routinely</SubTitleAuth>
-          {/*eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit(submitForm)}>
             <Input
               type="text"
