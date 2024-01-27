@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { AxiosError } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
@@ -28,42 +28,25 @@ export const findSelectValues = (valueToFind: string, iterator: Iterator) => {
 };
 
 export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }: IContainerTaskProps) {
-  const { tasks, setTasks, setTempTask, initialTasks, setInitialTasks } = useContext(TasksContext);
+  const { tasks, setTasks, setTempTask } = useContext(TasksContext);
   const { month, year } = useContext(CalendarContext);
   const [loading, setLoading] = useState(false);
-  const [mapTask, setMapTask] = useState(tasks);
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
-    setInitialTasks(true);
-  }, []);
-
-  useEffect(() => {
-    setMapTask(tasks);
-  }, [tasks]);
-
-  if (initialTasks && !loading && token) {
-    setInitialTasks(false);
-    setLoading(true);
-
-    console.log("teste");
-
-    getAllTasks(token, month, year)
-      .then((res) => {
-        console.log(res);
-        if (res) {
-          setTasks(res);
-          setMapTask(res);
-        }
-      })
-      .catch((res) => {
-        console.log(res.data);
-      })
-      .finally(() => {
-        setInitialTasks(false);
-        setLoading(false);
-      });
-  }
+    try {
+      setLoading(true);
+      (async () => {
+        const data = await getAllTasks(token!, month, year);
+        data && setTasks(data);
+      })();
+    } catch (error) {
+      const erro = error as AxiosError;
+      console.log(erro);
+    } finally {
+      setLoading(false);
+    }
+  }, [month, year, setTasks, token]);
 
   if (loading) {
     return <p>Carregando tarefas...</p>;
@@ -74,9 +57,9 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
 
   return (
     <S.Wrapper>
-      {mapTask &&
-        mapTask.length > 0 &&
-        mapTask.map(({ id, name, category, tag, priority, date, description, hour }) => (
+      {tasks &&
+        tasks.length > 0 &&
+        tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
           <S.ContainerTask key={id}>
             <div>
               <CustonCheckedBox id={id} />
