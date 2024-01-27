@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
@@ -31,36 +32,7 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   const { month, year } = useContext(CalendarContext);
   const [loading, setLoading] = useState(false);
   const [mapTask, setMapTask] = useState(tasks);
-
-  // useEffect(() => {
-  //   // if (loading) {
-  //   //   return;
-  //   // }
-  //   // try {
-  //   //   setLoading(true);
-  //   //   (async () => {
-  //   //     const data = await getAllTasks(month, year)
-  //   //       .then((res) => res)
-  //   //       .finally(() => setLoading(false));
-  //   //     console.log(data);
-
-  //   //     data && setTasks(data);
-  //   //   })();
-  //   // } catch (error) {
-  //   //   const erro = error as AxiosError;
-  //   //   console.log(erro);
-  //   // } finally {
-  //   //   setLoading(false);
-  //   // }
-  //   console.log(teste);
-
-  //   if (teste) {
-  //     reqGetTask(month, year);
-  //     setTeste(false);
-  //   }
-  //   console.log(teste);
-  // }, [month]);
-  // setTeste(true);
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     setInitialTasks(true);
@@ -70,14 +42,27 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     setMapTask(tasks);
   }, [tasks]);
 
-  if (initialTasks) {
+  if (initialTasks && !loading && token) {
+    setInitialTasks(false);
     setLoading(true);
 
-    getAllTasks(month, year)
+    console.log("teste");
+
+    getAllTasks(token, month, year)
       .then((res) => {
         console.log(res);
+        if (res) {
+          setTasks(res);
+          setMapTask(res);
+        }
       })
-      .finally(() => setLoading(false));
+      .catch((res) => {
+        console.log(res.data);
+      })
+      .finally(() => {
+        setInitialTasks(false);
+        setLoading(false);
+      });
   }
 
   if (loading) {

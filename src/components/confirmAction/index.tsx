@@ -13,13 +13,14 @@ export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfir
   const { taskId, setTasks } = useContext(TasksContext);
   const { handleDeleteTask } = UseCRUD();
   const { month, year } = useContext(CalendarContext);
+  const token = window.localStorage.getItem("token");
 
   const handleClick = async (operation: "yes" | "not") => {
     switch (operation) {
       case "yes":
         await handleDeleteTask(taskId);
-        const data = await getAllTasks(month, year);
-        setTasks(data);
+        const data = await getAllTasks(token!, month, year);
+        data && setTasks(data);
         break;
 
       case "not":

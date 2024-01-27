@@ -11,12 +11,10 @@ export const UseCRUD = () => {
     };
     try {
       const response = await instance.post("/tasks", body, { headers });
-      console.log("post", response.data);
 
       return response.data;
     } catch (err) {
-      const error = err as AxiosError;
-      console.log(error.message);
+      throw new Error();
     }
   }
   async function handleDeleteTask(id: number) {
