@@ -31,13 +31,14 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   const { tasks, setTasks, setTempTask } = useContext(TasksContext);
   const { month, year } = useContext(CalendarContext);
   const [loading, setLoading] = useState(false);
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     try {
       setLoading(true);
       (async () => {
-        const data = await getAllTasks(month, year);
-        setTasks(data);
+        const data = await getAllTasks(token!, month, year);
+        data && setTasks(data);
       })();
     } catch (error) {
       const erro = error as AxiosError;
@@ -45,7 +46,7 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     } finally {
       setLoading(false);
     }
-  }, [month, year, setTasks]);
+  }, [month, year, setTasks, token]);
 
   if (loading) {
     return <p>Carregando tarefas...</p>;

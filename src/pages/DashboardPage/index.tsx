@@ -46,9 +46,9 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    (async () => {
-      authorization();
-    })();
+    authorization().catch(() => {
+      navigate("/signInPage");
+    });
 
     if (!user.email && !token) {
       navigate("/signInPage");

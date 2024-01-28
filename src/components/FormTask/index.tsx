@@ -57,16 +57,17 @@ export const selectOptions: Array<ISelectOptions> = [
   {
     label: "Categoria",
     options: ["", "Pessoal", "Estudos", "Finanças", "Carreira", "Saude"],
-    value: ["", "personal", "study", "finance", "career", " health"],
+    value: ["", "personal", "study", "finance", "career", "health"],
     formRequired: "category",
   },
   {
     label: "Tags",
     options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
-    value: ["", "application", "account", "excercise", "beauty", "literature"],
+    value: ["", "application", "account", "exercise", "beauty", "literature"],
     formRequired: "tag",
   },
 ];
+
 export default function FormTask({ setIsTaskOpen }: IForm) {
   const { setTasks, tempTask, setTempTask } = useContext(TasksContext);
   const interfaceForm = !tempTask
@@ -95,10 +96,12 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
       case "addTask":
         try {
           const task = await handleAddTask(data);
+          console.log("post task", task);
+
           setTasks((prevstate) => [...prevstate, task]);
           setIsTaskOpen(false);
         } catch (error) {
-          console.log(error);
+          console.log("erro post", error);
         }
         break;
       case "editTask":
@@ -106,7 +109,6 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
       case "deleteTask":
         break;
     }
-
     reset();
     setTempTask(null);
   };
