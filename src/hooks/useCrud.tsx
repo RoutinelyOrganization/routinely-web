@@ -30,9 +30,23 @@ export const UseCRUD = () => {
       console.log(error);
     }
   }
+  async function handleEditTask(id: number, body: IAddTaskForm) {
+    const token = window.localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+      try {
+        const response = await instance.put(`/tasks/${id}`, body,{ headers })
+        return response
+      } catch (err){
+        const error = err as AxiosError
+        console.log(error)
+      }
+  }
 
   return {
     handleAddTask,
     handleDeleteTask,
+    handleEditTask
   };
 };
