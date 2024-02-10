@@ -122,7 +122,7 @@ export const ContainerCalendar = styled.section`
   }
 
   ${media.mobile} {
-    max-width: 400px;
+    max-width: 450px;
     width: 100%;
     > .tablet {
       display: none;

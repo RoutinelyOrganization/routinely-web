@@ -6,7 +6,7 @@ export const Main = styled.main`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 104px 32px;
+  padding: 104px 32px 32px;
   gap: 24px;
 
   ${media.desktop} {
