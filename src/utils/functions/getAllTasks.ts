@@ -12,9 +12,10 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
         Authorization: `Bearer ${token}`
       }
     });
+    
     return data as Itasks[];
   } catch (error) {
     const erro = error as AxiosError;
-    console.log(erro);
+    return erro
   }
 };
