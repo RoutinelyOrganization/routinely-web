@@ -10,6 +10,8 @@ import Input from "../Input";
 import Select from "../Select";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
+import { getAllTasks } from "../../utils/functions/getAllTasks";
+import { CalendarContext } from "../../contexts/CalendarContext";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -81,7 +83,9 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
       });
   const [hasNameTask, setHasNameTask] = useState<boolean>(false);
   const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
-  const { handleAddTask } = UseCRUD();
+  const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
+  const token = window.localStorage.getItem('token')
+  const { month, year } = useContext(CalendarContext)
   const {
     register,
     handleSubmit,
@@ -104,9 +108,26 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           console.log("erro post", error);
         }
         break;
-      case "editTask":
+        
+        case "editTask":
+          try{
+            await handleEditTask(tempTask!.id, data)
+            const tasks = await getAllTasks(token!, month, year);
+            setIsTaskOpen(false);
+            if (tasks) setTasks(tasks)        
+        }catch (error){
+            console.log("error edit", error)
+        }
         break;
       case "deleteTask":
+        try {
+            await handleDeleteTask(tempTask!.id)
+            const tasks = await getAllTasks(token!, month, year);
+            if (tasks) setTasks(tasks)        
+            setIsTaskOpen(false);
+        } catch (error) {
+          console.log("error delete", error)
+        }
         break;
     }
     reset();
