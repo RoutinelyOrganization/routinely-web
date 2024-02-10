@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { CustomDemoItem, StyledDateCalendar } from "./styles";
+import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/pt-br";
+import { useContext, useState } from "react";
+import ArrowDown from "../../assets/icons/arrowDown.svg";
 import { CalendarContext } from "../../contexts/CalendarContext";
+import * as SComponents from "./styledComponents";
+import * as SCalendar from "./stylesCalendar";
 
 dayjs.locale("pt-br");
 
@@ -24,6 +26,7 @@ const customDayOfWeekFormatter = (day: string) => {
 
 export default function DateCalendar() {
   const [date, setDate] = useState<Dayjs>(dayjs());
+  const [openCalendar, setOpenCalendar] = useState(false);
   const { setMonth, setYear } = useContext(CalendarContext);
 
   const handleChangeDate = (selectedValue: Dayjs) => {
@@ -35,15 +38,22 @@ export default function DateCalendar() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <CustomDemoItem label={dayjs().format("dddd, DD MMMM")}>
-        <StyledDateCalendar
-          openTo="day"
-          onChange={(event) => handleChangeDate(event as Dayjs)}
-          value={date}
-          views={["day", "month", "year"]}
-          dayOfWeekFormatter={customDayOfWeekFormatter}
-        />
-      </CustomDemoItem>
+      <SComponents.MobileChangeDisplay>
+        <SComponents.Button onClick={() => setOpenCalendar(!openCalendar)} open={openCalendar}>
+          <img src={ArrowDown} alt="" />
+        </SComponents.Button>
+        <SCalendar.CustomDemoItem label={dayjs().format("dddd, DD MMMM")}>
+          <SComponents.MobileDisplay open={openCalendar}>
+            <SCalendar.StyledDateCalendar
+              openTo="day"
+              onChange={(event) => handleChangeDate(event as Dayjs)}
+              value={date}
+              views={["day", "month", "year"]}
+              dayOfWeekFormatter={customDayOfWeekFormatter}
+            />
+          </SComponents.MobileDisplay>
+        </SCalendar.CustomDemoItem>
+      </SComponents.MobileChangeDisplay>
     </LocalizationProvider>
   );
 }

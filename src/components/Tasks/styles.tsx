@@ -1,12 +1,19 @@
 import { styled } from "styled-components";
+import media from "../../mediaQueries";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 10px;
   width: 100%;
+  height: 400px;
+
+  ${media.mobile} {
+    max-height: 216px;
+    height: 216px;
+  }
 `;
 
 export const Button = styled.button`

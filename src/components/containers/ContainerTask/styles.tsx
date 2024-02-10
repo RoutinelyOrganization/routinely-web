@@ -82,4 +82,8 @@ export const Wrapper = styled.section`
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  ${media.mobile} {
+    max-height: 152px;
+  }
 `;

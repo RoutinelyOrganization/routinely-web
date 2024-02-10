@@ -41,7 +41,7 @@ export const StyledDateCalendar = styled(DateCalendar)({
 
 const StyledDemoItemWrapper = styled("div")({
   backgroundColor: "#F6F7F8",
-  maxWidth: "400px",
+  maxWidth: "450px",
   width: "100%",
   border: "2px solid #5C59BB",
   borderRadius: "8px",
