@@ -71,11 +71,11 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
               <PriorityFlag priority={priority} />
             </S.ContainerPriority>
             <div>
-              <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
               <ButtonEdit
                 setIsEditTaskOpen={setIsEditTaskOpen}
                 setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
               />
+              <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
             </div>
           </S.ContainerTask>
         ))}
