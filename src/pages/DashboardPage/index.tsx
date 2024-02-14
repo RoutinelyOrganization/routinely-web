@@ -4,8 +4,7 @@ import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
 
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
 import FormTask from "../../components/FormTask";
@@ -17,8 +16,6 @@ import ConfirmAction from "../../components/confirmAction";
 import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
-import { UserContext } from "../../contexts/UserContext";
-import { useAuth } from "../../hooks/useAuth";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
 export interface Itasks {
@@ -36,24 +33,24 @@ export default function DashboardPage() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
   const [isEditTaskOpen, setIsEditTaskOpen] = useState<boolean>(false);
   const [isDeleteTaskOpen, setIsDeleteTaskOpen] = useState<boolean>(false);
-  const { user } = useContext(UserContext);
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  const { authorization } = useAuth();
+  // const { user } = useContext(UserContext);
+  // const token = localStorage.getItem("token");
+  // const navigate = useNavigate();
+  // const { authorization } = useAuth();
 
   const handleIsAddTask = () => {
     setIsAddTaskOpen(true);
   };
 
-  useEffect(() => {
-    authorization().catch(() => {
-      navigate("/signInPage");
-    });
+  // useEffect(() => {
+  //   authorization().catch(() => {
+  //     navigate("/signInPage");
+  //   });
 
-    if (!user.email && !token) {
-      navigate("/signInPage");
-    }
-  }, [token, user.email, navigate, authorization]);
+  //   if (!user.email && !token) {
+  //     navigate("/signInPage");
+  //   }
+  // }, [token, user.email, navigate, authorization]);
 
   return (
     <TasksProvider>

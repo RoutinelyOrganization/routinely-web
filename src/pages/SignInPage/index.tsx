@@ -50,7 +50,7 @@ export function SignInPage() {
 
       if (response!.status === 200) {
         setUser(Data);
-        if (Data.remember) {
+        if (Data) {
           const { refreshToken, token } = response!.data;
           window.localStorage.setItem("token", response! && token);
           window.localStorage.setItem("refreshToken", response! && refreshToken);

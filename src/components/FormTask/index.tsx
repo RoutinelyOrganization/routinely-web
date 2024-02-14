@@ -71,7 +71,7 @@ export const selectOptions: Array<ISelectOptions> = [
 ];
 
 export default function FormTask({ setIsTaskOpen }: IForm) {
-  const { setTasks, tempTask, setTempTask } = useContext(TasksContext);
+  const { setTasks, tempTask, setTempTask, tasks } = useContext(TasksContext);
   const interfaceForm = !tempTask
     ? useForm<IAddTaskForm>()
     : useForm<IEditTaskForm>({
@@ -99,14 +99,24 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
     switch (buttonSubmited) {
       case "addTask":
         try {
+          const [dataNameSplit] = data.name!.split("(");
+          const taskRepeated = tasks.filter((task) => {
+            const [taskNameSplit] = task.name.split("(");
+            return taskNameSplit === dataNameSplit;
+          });
+
+          const taskRepeatedLength = taskRepeated.length;
+          if (taskRepeatedLength > 4) {
+            return alert("Limite de tarefas repetidas atingido");
+          }
+          if (taskRepeatedLength) {
+            data.name = `${dataNameSplit}(${taskRepeated.length})`;
+          }
           const task = await handleAddTask(data);
-          console.log("post task", task);
 
           setTasks((prevstate) => [...prevstate, task]);
           setIsTaskOpen(false);
-        } catch (error) {
-          console.log("erro post", error);
-        }
+        } catch (error) {}
         break;
         
         case "editTask":

@@ -71,6 +71,8 @@ export const useAuth = () => {
       return response;
     } catch (error) {
       const erro = error as AxiosError;
+      // console.log(erro);
+      
       return erro
     }
   }
@@ -84,10 +86,14 @@ export const useAuth = () => {
     }
 
     const response = await validateToken(tokenLocal);
+    console.log(response);
+    
     if (!axios.isAxiosError(response)) {
-        return {valid:true, response}
-
-      } else {
+      
+      return {valid:true, response}
+      
+    } else {
+        console.log('passei aqui');
         const result = await validateRefreshToken(tokenLocal, refreshTokenLocal);
         if (!axios.isAxiosError(result)) {
           const { refreshToken, token, expiresIn } = result!.data;

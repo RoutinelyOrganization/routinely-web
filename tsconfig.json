@@ -23,8 +23,10 @@
         "noFallthroughCasesInSwitch": true
     },
     "include": [
-        "src"
-, "src/oldComponents/PopUp", "oldComponents"    ],
+        "src",
+        "src/oldComponents/PopUp",
+        "oldComponents"
+    ],
     "references": [
         {
             "path": "./tsconfig.node.json"
