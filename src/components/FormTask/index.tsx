@@ -100,7 +100,6 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
             const [taskNameSplit] = task.name.split("(");
             return taskNameSplit === dataNameSplit;
           });
-          console.log(taskRepeated);
 
           const taskRepeatedLength = taskRepeated.length;
           if (taskRepeatedLength > 4) {

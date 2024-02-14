@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { Itasks } from "../../pages/DashboardPage";
 import instance from "../../services/api";
 
@@ -15,7 +14,6 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
     
     return data as Itasks[];
   } catch (error) {
-    const erro = error as AxiosError;
-    return erro
+    throw new Error();
   }
 };

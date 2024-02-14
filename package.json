@@ -21,6 +21,8 @@
         "styled-components": "^6.0.3"
     },
     "devDependencies": {
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
         "@types/react": "^18.2.14",
         "@types/react-dom": "^18.2.6",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
