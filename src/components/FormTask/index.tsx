@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import dayjs from "dayjs";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
 import { TimeFormat, dateFormat } from "../../utils/formats/dateAndTime";
+import { getAllTasks } from "../../utils/functions/getAllTasks";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
-import { getAllTasks } from "../../utils/functions/getAllTasks";
-import { CalendarContext } from "../../contexts/CalendarContext";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -81,16 +81,15 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           hour: TimeFormat(tempTask.hour),
         },
       });
-  const [hasNameTask, setHasNameTask] = useState<boolean>(false);
-  const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
+
   const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const token = window.localStorage.getItem('token')
-  const { month, year } = useContext(CalendarContext)
+  const token = window.localStorage.getItem("token");
+  const { month, year } = useContext(CalendarContext);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = interfaceForm;
 
   const handleSubmitFormTask: SubmitHandler<IEditTaskForm> = async (data, event) => {
@@ -118,38 +117,31 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           setIsTaskOpen(false);
         } catch (error) {}
         break;
-        
-        case "editTask":
-          try{
-            await handleEditTask(tempTask!.id, data)
-            const tasks = await getAllTasks(token!, month, year);
-            setIsTaskOpen(false);
-            if (tasks) setTasks(tasks)        
-        }catch (error){
-            console.log("error edit", error)
+
+      case "editTask":
+        try {
+          await handleEditTask(tempTask!.id, data);
+          const tasks = await getAllTasks(token!, month, year);
+          setIsTaskOpen(false);
+          if (tasks) setTasks(tasks);
+        } catch (error) {
+          console.log("error edit", error);
         }
         break;
       case "deleteTask":
         try {
-            await handleDeleteTask(tempTask!.id)
-            const tasks = await getAllTasks(token!, month, year);
-            if (tasks) setTasks(tasks)        
-            setIsTaskOpen(false);
+          await handleDeleteTask(tempTask!.id);
+          const tasks = await getAllTasks(token!, month, year);
+          if (tasks) setTasks(tasks);
+          setIsTaskOpen(false);
         } catch (error) {
-          console.log("error delete", error)
+          console.log("error delete", error);
         }
         break;
     }
     reset();
     setTempTask(null);
   };
-
-  useEffect(() => {
-    if (isSubmitted) {
-      setHasNameTask(true);
-      setHasDescriptionTask(true);
-    }
-  }, [isSubmitted]);
 
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
@@ -162,15 +154,12 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           type="text"
           id="name"
           placeholder="nome da tarefa"
-          hasError={hasNameTask}
+          hasError={!!errors.name}
           register={register("name", {
             required: "campo obrigatório",
             maxLength: {
               value: 50,
               message: "Quantidade de caracteres máximo, 50!",
-            },
-            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-              target.value.length > 50 ? setHasNameTask(true) : setHasNameTask(false);
             },
           })}
           errorMessage={errors.name && errors.name.message}
@@ -180,7 +169,7 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
         <Input
           type="date"
           id="date"
-          hasError={errors.date && true}
+          hasError={!!errors.date}
           register={register("date", {
             required: "campo obrigatório",
             setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
@@ -193,7 +182,7 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
         <Input
           type="time"
           id="time"
-          hasError={errors.hour && true}
+          hasError={!!errors.hour}
           register={register("hour", { required: "Formato inválido" })}
         >
           <ErrorMessage>{errors.hour && errors.hour.message}</ErrorMessage>
@@ -204,7 +193,7 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
       <S.InputContainer className="select">
         {selectOptions.map((select) => (
           <Select
-            $hasError={errors[select.formRequired] && true}
+            $hasError={!!errors[select.formRequired]}
             key={select.label}
             label={select.label}
             value={select.value}
@@ -222,15 +211,12 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           type="text"
           id="descricao"
           placeholder="descrição"
-          hasError={hasDescriptionTask}
+          hasError={!!errors.description}
           register={register("description", {
             required: "campo obrigatório",
             maxLength: {
               value: 1000,
               message: "Quantidade máxima de caracteres, 1000!",
-            },
-            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-              target.value.length > 1000 ? setHasDescriptionTask(true) : setHasDescriptionTask(false);
             },
           })}
           errorMessage={errors.description && errors.description.message}
