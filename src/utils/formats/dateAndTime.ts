@@ -1,7 +1,6 @@
 export const dateFormat = (date: string): string => {
   
   const dateFormatted = new Date(date);
-  console.log("data formnate", dateFormatted.toISOString());
   
   const year = dateFormatted.getUTCFullYear();
   const month = (dateFormatted.getUTCMonth() + 1).toString().padStart(2, '0');

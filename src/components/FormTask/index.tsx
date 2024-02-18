@@ -6,6 +6,7 @@ import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
 import { getAllTasks } from "../../utils/functions/getAllTasks";
+import { pastDate } from "../../utils/validators/pastDate";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
@@ -97,6 +98,8 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
     switch (buttonSubmited) {
       case "addTask":
         try {
+          pastDate(data.date!);
+
           const [dataNameSplit] = data.name!.split("(");
           const taskRepeated = tasks.filter((task) => {
             const [taskNameSplit] = task.name.split("(");
@@ -114,13 +117,13 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
 
           setTasks((prevstate) => [...prevstate, task]);
           setIsTaskOpen(false);
-        } catch (error) {}
+        } catch (error) {
+          console.log("error add", error);
+        }
         break;
 
       case "editTask":
         try {
-          // console.log("aqui", tempTask);
-
           await handleEditTask(tempTask!.id, data);
           const tasks = await getAllTasks(token!, month, year);
 
@@ -185,6 +188,9 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           register={register("date", {
             required: "campo obrigatório",
             setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
+            validate: (value) => {
+              return pastDate(value!);
+            },
           })}
         >
           <ErrorMessage>{errors.date && errors.date.message}</ErrorMessage>

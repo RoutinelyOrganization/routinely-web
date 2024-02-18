@@ -12,9 +12,7 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
         Authorization: `Bearer ${token}`
       }
     });
-    const tasks = data as Itasks[]
-    console.log(tasks);
-    
+    const tasks = data as Itasks[]    
     
     if (tasks.length > 0 ) {
       tasks.forEach(task => {
