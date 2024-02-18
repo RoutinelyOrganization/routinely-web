@@ -98,8 +98,6 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
     switch (buttonSubmited) {
       case "addTask":
         try {
-          pastDate(data.date!);
-
           const [dataNameSplit] = data.name!.split("(");
           const taskRepeated = tasks.filter((task) => {
             const [taskNameSplit] = task.name.split("(");
