@@ -52,6 +52,8 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     return <p>Carregando tarefas...</p>;
   }
   const setDataTaskTemp = (data: Itasks) => {
+    console.log("data", data);
+
     setTempTask(data);
   };
 

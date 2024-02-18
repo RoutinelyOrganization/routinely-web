@@ -1,9 +1,11 @@
 export const dateFormat = (date: string): string => {
-  const dateFormatted = new Date(date);
   
-  const year = dateFormatted.getFullYear();
-  const month = (dateFormatted.getMonth() + 1).toString().padStart(2, '0');
-  const day = dateFormatted.getDate().toString().padStart(2, '0');
+  const dateFormatted = new Date(date);
+  console.log("data formnate", dateFormatted.toISOString());
+  
+  const year = dateFormatted.getUTCFullYear();
+  const month = (dateFormatted.getUTCMonth() + 1).toString().padStart(2, '0');
+  const day = dateFormatted.getUTCDate().toString().padStart(2, '0');
 
   return `${year}-${month}-${day}`;
 }
