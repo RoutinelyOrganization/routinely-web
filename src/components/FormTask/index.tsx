@@ -112,6 +112,7 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
             data.name = `${dataNameSplit}(${taskRepeated.length})`;
           }
           const task = await handleAddTask(data);
+          console.log(task);
 
           setTasks((prevstate) => [...prevstate, task]);
           setIsTaskOpen(false);
