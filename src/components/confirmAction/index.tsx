@@ -8,8 +8,7 @@ export interface AddTaskProps {
   tasks: Itasks[];
 }
 
-export interface EditTaskProps {
-  data: IAddTaskForm;
+export interface EditTaskProps extends AddTaskProps {
   id: number;
 }
 
@@ -39,7 +38,6 @@ export default function ConfirmAction({
 
   const handleClick = async (operation: "yes" | "not") => {
     const id = tempTask?.id || taskId || 0;
-    console.log("id", tempTask?.id);
 
     const props = { data: dataTask, tasks, id };
     switch (operation) {
