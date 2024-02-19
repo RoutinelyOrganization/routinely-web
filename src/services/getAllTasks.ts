@@ -1,6 +1,6 @@
-import instance from "../../services/api";
-import { TimeFormat, dateFormat } from "../formats/dateAndTime";
-import { Itasks } from './../../pages/DashboardPage/index';
+import { Itasks } from '../pages/DashboardPage/index';
+import { TimeFormat, dateFormat } from "../utils/formats/dateAndTime";
+import instance from "./api";
 
 export const getAllTasks = async (token:string, month?: number, year?: number) => {
   const date = new Date()

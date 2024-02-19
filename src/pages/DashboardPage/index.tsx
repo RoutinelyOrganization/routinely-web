@@ -7,15 +7,16 @@ import * as S from "./styles";
 import { useState } from "react";
 import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
-import FormTask from "../../components/FormTask";
+import FormTask, { IAddTaskForm } from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpCustom from "../../components/PopUp";
 import Tasks from "../../components/Tasks";
 import ButtonFooter from "../../components/buttons/ButtonFooter";
-import ConfirmAction from "../../components/confirmAction";
+import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
+import { UseCRUD } from "../../hooks/useCrud";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
 export interface Itasks {
@@ -30,16 +31,41 @@ export interface Itasks {
 }
 
 export default function DashboardPage() {
-  const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
-  const [isEditTaskOpen, setIsEditTaskOpen] = useState<boolean>(false);
-  const [isDeleteTaskOpen, setIsDeleteTaskOpen] = useState<boolean>(false);
+  const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
+  const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
+  const [isConfirmActionOpen, setIsConfirmActionOpen] = useState<boolean>(false);
+  const [crudTasksOptions, setCrudTasksOptions] = useState<"addTask" | "editTask" | "deleteTask" | null>(null);
+  const [dataTask, setDataTask] = useState<IAddTaskForm | null>(null);
+
   // const { user } = useContext(UserContext);
   // const token = localStorage.getItem("token");
   // const navigate = useNavigate();
   // const { authorization } = useAuth();
 
-  const handleIsAddTask = () => {
-    setIsAddTaskOpen(true);
+  const crudTasks = {
+    addTask: {
+      name: "adição",
+      execute: async (props: AddTaskProps) => {
+        const task = await handleAddTask(props.data, props.tasks);
+        return task;
+      },
+    },
+
+    editTask: {
+      name: "edição",
+      execute: async (props: EditTaskProps) => {
+        const task = await handleEditTask(props.id, props.data);
+        return task;
+      },
+    },
+
+    deleteTask: {
+      name: "exclusão",
+      execute: async (props: DeleteTaskProps) => {
+        const task = await handleDeleteTask(props.id);
+        return task;
+      },
+    },
   };
 
   // useEffect(() => {
@@ -56,19 +82,25 @@ export default function DashboardPage() {
     <TasksProvider>
       <CalendarProvider>
         <ScrollToTop />
-        {isAddTaskOpen && (
-          <PopUpCustom setIsTaskOpen={setIsAddTaskOpen}>
-            <FormTask setIsTaskOpen={setIsAddTaskOpen} />
+        {isTaskOpen && (
+          <PopUpCustom setIsTaskOpen={setIsTaskOpen}>
+            <FormTask
+              setIsTaskOpen={setIsTaskOpen}
+              setCrudTasksOptions={setCrudTasksOptions}
+              setDataTask={setDataTask}
+              setIsConfirmActionOpen={setIsConfirmActionOpen}
+            />
           </PopUpCustom>
         )}
-        {isEditTaskOpen && (
-          <PopUpCustom setIsTaskOpen={setIsEditTaskOpen}>
-            <FormTask setIsTaskOpen={setIsEditTaskOpen} />
-          </PopUpCustom>
-        )}
-        {isDeleteTaskOpen && (
-          <ConfirmAction setIsDeleteTaskOpen={setIsDeleteTaskOpen}>
-            Tem certeza que deseja realizar a exclusão da tarefa?
+
+        {isConfirmActionOpen && (
+          <ConfirmAction
+            setIsDeleteTaskOpen={setIsConfirmActionOpen}
+            crudTask={crudTasks[crudTasksOptions!].execute}
+            dataTask={dataTask!}
+            setIsTaskOpen={setIsTaskOpen}
+          >
+            {`Tem certeza que deseja realizar a ${crudTasks[crudTasksOptions!].name} da tarefa?`}
           </ConfirmAction>
         )}
         <S.Container>
@@ -81,24 +113,24 @@ export default function DashboardPage() {
             </S.ContainerCalendar>
 
             <S.ContainerTasks>
-              <S.ButtonEditTask onClick={handleIsAddTask}>
+              <S.ButtonEditTask onClick={() => setIsTaskOpen(true)}>
                 <img src={closeIcon} alt="close button" />
               </S.ButtonEditTask>
               <TaskTitle title="Visualizador de tarefas" />
               <Tasks
-                setIsEditTaskOpen={setIsEditTaskOpen}
-                setIsAddTaskOpen={setIsAddTaskOpen}
-                setIsDeleteTaskOpen={setIsDeleteTaskOpen}
+                setIsDeleteTaskOpen={setIsConfirmActionOpen}
+                setIsTaskOpen={setIsTaskOpen}
+                setCrudTasksOptions={setCrudTasksOptions}
               />
               <hr />
               <TaskTitle title="Tarefas concluídas" />
               <DoneTasks />
             </S.ContainerTasks>
           </S.Main>
-          {isAddTaskOpen || isEditTaskOpen ? (
+          {isTaskOpen ? (
             <ButtonFooter />
           ) : (
-            <ButtonFooter onClick={handleIsAddTask}>
+            <ButtonFooter onClick={() => setIsTaskOpen(true)}>
               <img src={NewTask} alt="" />
             </ButtonFooter>
           )}

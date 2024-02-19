@@ -2,10 +2,7 @@
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
-import { UseCRUD } from "../../hooks/useCrud";
-import { getAllTasks } from "../../utils/functions/getAllTasks";
 import { pastDate } from "../../utils/validators/pastDate";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
@@ -15,6 +12,9 @@ import * as S from "./styles";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCrudTasksOptions: React.Dispatch<React.SetStateAction<"addTask" | "editTask" | "deleteTask" | null>>;
+  setDataTask: React.Dispatch<React.SetStateAction<IAddTaskForm | null>>;
+  setIsConfirmActionOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IAddTaskForm {
@@ -70,8 +70,8 @@ export const selectOptions: Array<ISelectOptions> = [
   },
 ];
 
-export default function FormTask({ setIsTaskOpen }: IForm) {
-  const { setTasks, tempTask, setTempTask, tasks } = useContext(TasksContext);
+export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTask, setIsConfirmActionOpen }: IForm) {
+  const { tempTask } = useContext(TasksContext);
   const interfaceForm = !tempTask
     ? useForm<IAddTaskForm>()
     : useForm<IEditTaskForm>({
@@ -80,11 +80,9 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           date: tempTask.date as unknown as Date,
         },
       });
-  const [hasNameTask, setHasNameTask] = useState<boolean>(false);
+  const [_, setHasNameTask] = useState<boolean>(false);
   const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
-  const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const token = window.localStorage.getItem("token");
-  const { month, year } = useContext(CalendarContext);
+
   const {
     register,
     handleSubmit,
@@ -97,54 +95,25 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
 
     switch (buttonSubmited) {
       case "addTask":
-        try {
-          const [dataNameSplit] = data.name!.split("(");
-          const taskRepeated = tasks.filter((task) => {
-            const [taskNameSplit] = task.name.split("(");
-            return taskNameSplit === dataNameSplit;
-          });
+        setIsConfirmActionOpen(true);
+        setCrudTasksOptions("addTask");
+        setDataTask(data);
 
-          const taskRepeatedLength = taskRepeated.length;
-          if (taskRepeatedLength > 4) {
-            return alert("Limite de tarefas repetidas atingido");
-          }
-          if (taskRepeatedLength) {
-            data.name = `${dataNameSplit}(${taskRepeated.length})`;
-          }
-          const task = await handleAddTask(data);
-          console.log(task);
-
-          setTasks((prevstate) => [...prevstate, task]);
-          setIsTaskOpen(false);
-        } catch (error) {
-          console.log("error add", error);
-        }
         break;
 
       case "editTask":
-        try {
-          await handleEditTask(tempTask!.id, data);
-          const tasks = await getAllTasks(token!, month, year);
+        setIsConfirmActionOpen(true);
+        setCrudTasksOptions("editTask");
+        setDataTask(data);
 
-          setIsTaskOpen(false);
-          if (tasks) setTasks(tasks);
-        } catch (error) {
-          console.log("error edit", error);
-        }
         break;
       case "deleteTask":
-        try {
-          await handleDeleteTask(tempTask!.id);
-          const tasks = await getAllTasks(token!, month, year);
-          if (tasks) setTasks(tasks);
-          setIsTaskOpen(false);
-        } catch (error) {
-          console.log("error delete", error);
-        }
+        setIsConfirmActionOpen(true);
+        setCrudTasksOptions("deleteTask");
+        setDataTask(data);
+
         break;
     }
-    reset();
-    setTempTask(null);
   };
 
   useEffect(() => {
@@ -157,15 +126,14 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
       <S.Title>{!tempTask ? "Adicionar tarefa" : "Editar tarefa"}</S.Title>
-      <PopUpCloseButton setIsTaskOpen={setIsTaskOpen} setIsEditTaskOpen={setIsTaskOpen} />
-
+      <PopUpCloseButton setIsTaskOpen={setIsTaskOpen} />
       <S.InputTaskContainer>
         <Input
           label="Nome da tarefa"
           type="text"
           id="name"
           placeholder="nome da tarefa"
-          hasError={hasNameTask}
+          hasError={!!errors.name}
           register={register("name", {
             required: "campo obrigatório",
             maxLength: {
@@ -206,7 +174,6 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           <S.LabelDateTimePopUp htmlFor="time">Time</S.LabelDateTimePopUp>
         </Input>
       </S.InputContainer>
-
       <S.InputContainer className="select">
         {selectOptions.map((select) => (
           <Select
@@ -220,7 +187,6 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           />
         ))}
       </S.InputContainer>
-
       <S.ContainerPopUp className="description">
         <Input
           as={"textarea"}

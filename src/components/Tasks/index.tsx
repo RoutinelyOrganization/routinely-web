@@ -2,20 +2,20 @@ import ContainerTask from "../containers/ContainerTask";
 import * as S from "./styles";
 
 interface ITasksProps {
-  setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsAddTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCrudTasksOptions: React.Dispatch<React.SetStateAction<"addTask" | "editTask" | "deleteTask" | null>>;
 }
 
-export default function Tasks({ setIsEditTaskOpen, setIsAddTaskOpen, setIsDeleteTaskOpen }: ITasksProps) {
-  const handleAddTask = () => {
-    setIsAddTaskOpen(true);
-  };
-  ("");
+export default function Tasks({ setIsDeleteTaskOpen, setIsTaskOpen, setCrudTasksOptions }: ITasksProps) {
   return (
     <S.Container>
-      <ContainerTask setIsEditTaskOpen={setIsEditTaskOpen} setIsDeleteTaskOpen={setIsDeleteTaskOpen} />
-      <S.Button onClick={handleAddTask}>Adicionar nova tarefa</S.Button>
+      <ContainerTask
+        setIsTaskOpen={setIsTaskOpen}
+        setIsDeleteTaskOpen={setIsDeleteTaskOpen}
+        setCrudTasksOptions={setCrudTasksOptions}
+      />
+      <S.Button onClick={() => setIsTaskOpen(true)}>Adicionar nova tarefa</S.Button>
     </S.Container>
   );
 }
