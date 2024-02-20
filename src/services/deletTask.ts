@@ -1,7 +1,5 @@
 import { AxiosError } from "axios";
-// import { Itasks } from "../pages/DashboardPage";
 import instance from "./api";
-// import { getAllTasks } from "./getAllTasks";
 
  const deleteTask= async (id: number): Promise<void> => {
   const token = window.localStorage.getItem("token");
@@ -10,7 +8,6 @@ import instance from "./api";
   };
   try {
     await instance.delete(`/tasks/${id}`, { headers });
-    // const response = await getAllTasks(token!);
 
     return ;
   } catch (err) {
