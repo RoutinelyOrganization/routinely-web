@@ -52,8 +52,14 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     return <p>Carregando tarefas...</p>;
   }
   const setDataTaskTemp = (data: Itasks) => {
+    console.log("data", data);
+
     setTempTask(data);
   };
+  tasks.forEach((task) => {
+    const hourSplit = task.hour.split(":");
+    task.hour = `${hourSplit[0].padStart(2, "0")}:${hourSplit[1].padStart(2, "0")}`;
+  });
 
   return (
     <S.Wrapper>

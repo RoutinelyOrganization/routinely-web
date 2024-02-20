@@ -35,18 +35,20 @@ export const UseCRUD = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-      try {
-        const response = await instance.put(`/tasks/${id}`, body,{ headers })
-        return response
-      } catch (err){
-        const error = err as AxiosError
-        console.log(error)
-      }
+    try {
+      const response = await instance.put(`/tasks/${id}`, body, { headers });
+      // console.log(response.data);
+
+      return response;
+    } catch (err) {
+      const error = err as AxiosError;
+      console.log(error);
+    }
   }
 
   return {
     handleAddTask,
     handleDeleteTask,
-    handleEditTask
+    handleEditTask,
   };
 };
