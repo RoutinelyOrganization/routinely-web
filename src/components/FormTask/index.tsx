@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import dayjs from "dayjs";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TasksContext } from "../../contexts/TasksContext";
 import { pastDate } from "../../utils/validators/pastDate";
@@ -80,14 +80,16 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
           date: tempTask.date as unknown as Date,
         },
       });
-  const [_, setHasNameTask] = useState<boolean>(false);
-  const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
 
+  const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
+  const token = window.localStorage.getItem("token");
+  const { month, year } = useContext(CalendarContext);
+  
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = interfaceForm;
 
   const handleSubmitFormTask: SubmitHandler<IEditTaskForm> = async (data, event) => {
@@ -102,9 +104,15 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         break;
 
       case "editTask":
-        setIsConfirmActionOpen(true);
-        setCrudTasksOptions("editTask");
-        setDataTask(data);
+
+        try {
+          await handleEditTask(tempTask!.id, data);
+          const tasks = await getAllTasks(token!, month, year);
+          setIsTaskOpen(false);
+          if (tasks) setTasks(tasks);
+        } catch (error) {
+          console.log("error edit", error);
+        }
 
         break;
       case "deleteTask":
@@ -115,13 +123,6 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         break;
     }
   };
-
-  useEffect(() => {
-    if (isSubmitted) {
-      setHasNameTask(true);
-      setHasDescriptionTask(true);
-    }
-  }, [isSubmitted]);
 
   return (
     <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
@@ -140,9 +141,6 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
               value: 50,
               message: "Quantidade de caracteres máximo, 50!",
             },
-            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-              target.value.length > 50 ? setHasNameTask(true) : setHasNameTask(false);
-            },
           })}
           errorMessage={errors.name && errors.name.message}
         ></Input>
@@ -151,7 +149,7 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         <Input
           type="date"
           id="date"
-          hasError={errors.date && true}
+          hasError={!!errors.date}
           register={register("date", {
             required: "campo obrigatório",
             setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
@@ -167,7 +165,7 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         <Input
           type="time"
           id="time"
-          hasError={errors.hour && true}
+          hasError={!!errors.hour}
           register={register("hour", { required: "Formato inválido" })}
         >
           <ErrorMessage>{errors.hour && errors.hour.message}</ErrorMessage>
@@ -177,7 +175,7 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
       <S.InputContainer className="select">
         {selectOptions.map((select) => (
           <Select
-            $hasError={errors[select.formRequired] && true}
+            $hasError={!!errors[select.formRequired]}
             key={select.label}
             label={select.label}
             value={select.value}
@@ -194,15 +192,12 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
           type="text"
           id="descricao"
           placeholder="descrição"
-          hasError={hasDescriptionTask}
+          hasError={!!errors.description}
           register={register("description", {
             required: "campo obrigatório",
             maxLength: {
               value: 1000,
               message: "Quantidade máxima de caracteres, 1000!",
-            },
-            onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-              target.value.length > 1000 ? setHasDescriptionTask(true) : setHasDescriptionTask(false);
             },
           })}
           errorMessage={errors.description && errors.description.message}
