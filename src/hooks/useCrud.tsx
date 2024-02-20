@@ -1,48 +1,52 @@
-import { AxiosError } from "axios";
 import { IAddTaskForm } from "../components/FormTask";
-import instance from "../services/api";
+import { Itasks } from "../pages/DashboardPage";
+import addTask from "../services/addTask";
+import deleteTask from "../services/deletTask";
+import editTask from "../services/editTasks";
 
 export const UseCRUD = () => {
-  async function handleAddTask(body: IAddTaskForm) {
-    const token = window.localStorage.getItem("token");
+  async function handleAddTask(data: IAddTaskForm, tasks: Itasks[]): Promise<Itasks> {
+    console.log("crud", "data", data, "tasks", tasks);
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
     try {
-      const response = await instance.post("/tasks", body, { headers });
+      const [dataNameSplit] = data.name!.split("(");
+      const taskRepeated = tasks.filter((task) => {
+        const [taskNameSplit] = task.name.split("(");
+        return taskNameSplit === dataNameSplit;
+      });
 
-      return response.data;
-    } catch (err) {
-      throw new Error();
+      const taskRepeatedLength = taskRepeated.length;
+      if (taskRepeatedLength > 4) {
+        alert("Limite de tarefas repetidas atingido");
+        throw new Error("Limite de tarefas repetidas atingido");
+      }
+      if (taskRepeatedLength) {
+        data.name = `${dataNameSplit}(${taskRepeated.length})`;
+      }
+      const task = await addTask(data);
+      console.log(task);
+      return task;
+    } catch (error) {
+      console.log("error add", error);
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
     }
   }
-  async function handleDeleteTask(id: number) {
-    const token = window.localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+
+  async function handleEditTask(id: number, data: IAddTaskForm): Promise<Itasks[]> {
     try {
-      const response = await instance.delete(`/tasks/${id}`, { headers });
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError;
-      console.log(error);
-    }
-  }
-  async function handleEditTask(id: number, body: IAddTaskForm) {
-    const token = window.localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    try {
-      const response = await instance.put(`/tasks/${id}`, body, { headers });
-      // console.log(response.data);
+      const response = await editTask(id, data);
 
       return response;
-    } catch (err) {
-      const error = err as AxiosError;
-      console.log(error);
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
+    }
+  }
+
+  async function handleDeleteTask(id: number): Promise<Itasks[]> {
+    try {
+      return await deleteTask(id);
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
     }
   }
 
