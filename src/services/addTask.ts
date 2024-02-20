@@ -1,8 +1,11 @@
+import { AxiosError } from "axios";
 import { IAddTaskForm } from "../components/FormTask";
 import instance from "./api";
 
 const  addTask = async (body: IAddTaskForm) => {
   const token = window.localStorage.getItem("token");
+  console.log("token", token);
+  
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -12,7 +15,8 @@ const  addTask = async (body: IAddTaskForm) => {
 
     return response.data;
   } catch (err) {
-    throw new Error();
+    
+    throw new Error((err as AxiosError).message);
   }
 }
 
