@@ -54,7 +54,7 @@ export default function DashboardPage() {
     editTask: {
       name: "edição",
       execute: async (props: EditTaskProps) => {
-        const task = await handleEditTask(props.id, props.data);
+        const task = await handleEditTask(props.id, props.data, props.tasks);
         return task;
       },
     },
