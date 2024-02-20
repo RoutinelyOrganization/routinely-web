@@ -2,16 +2,16 @@
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
-import { TimeFormat, dateFormat } from "../../utils/formats/dateAndTime";
+import { getAllTasks } from "../../utils/functions/getAllTasks";
+import { pastDate } from "../../utils/validators/pastDate";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
-import { getAllTasks } from "../../utils/functions/getAllTasks";
-import { CalendarContext } from "../../contexts/CalendarContext";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -77,15 +77,14 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
     : useForm<IEditTaskForm>({
         defaultValues: {
           ...tempTask,
-          date: dateFormat(tempTask.date) as unknown as Date,
-          hour: TimeFormat(tempTask.hour),
+          date: tempTask.date as unknown as Date,
         },
       });
   const [hasNameTask, setHasNameTask] = useState<boolean>(false);
   const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
   const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const token = window.localStorage.getItem('token')
-  const { month, year } = useContext(CalendarContext)
+  const token = window.localStorage.getItem("token");
+  const { month, year } = useContext(CalendarContext);
   const {
     register,
     handleSubmit,
@@ -113,30 +112,34 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
             data.name = `${dataNameSplit}(${taskRepeated.length})`;
           }
           const task = await handleAddTask(data);
+          console.log(task);
 
           setTasks((prevstate) => [...prevstate, task]);
           setIsTaskOpen(false);
-        } catch (error) {}
+        } catch (error) {
+          console.log("error add", error);
+        }
         break;
-        
-        case "editTask":
-          try{
-            await handleEditTask(tempTask!.id, data)
-            const tasks = await getAllTasks(token!, month, year);
-            setIsTaskOpen(false);
-            if (tasks) setTasks(tasks)        
-        }catch (error){
-            console.log("error edit", error)
+
+      case "editTask":
+        try {
+          await handleEditTask(tempTask!.id, data);
+          const tasks = await getAllTasks(token!, month, year);
+
+          setIsTaskOpen(false);
+          if (tasks) setTasks(tasks);
+        } catch (error) {
+          console.log("error edit", error);
         }
         break;
       case "deleteTask":
         try {
-            await handleDeleteTask(tempTask!.id)
-            const tasks = await getAllTasks(token!, month, year);
-            if (tasks) setTasks(tasks)        
-            setIsTaskOpen(false);
+          await handleDeleteTask(tempTask!.id);
+          const tasks = await getAllTasks(token!, month, year);
+          if (tasks) setTasks(tasks);
+          setIsTaskOpen(false);
         } catch (error) {
-          console.log("error delete", error)
+          console.log("error delete", error);
         }
         break;
     }
@@ -184,6 +187,9 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
           register={register("date", {
             required: "campo obrigatório",
             setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
+            validate: (value) => {
+              return pastDate(value!);
+            },
           })}
         >
           <ErrorMessage>{errors.date && errors.date.message}</ErrorMessage>
