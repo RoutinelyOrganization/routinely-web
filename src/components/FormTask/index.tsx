@@ -81,14 +81,9 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         },
       });
 
-  const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const token = window.localStorage.getItem("token");
-  const { month, year } = useContext(CalendarContext);
-  
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = interfaceForm;
 
@@ -104,15 +99,9 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         break;
 
       case "editTask":
-
-        try {
-          await handleEditTask(tempTask!.id, data);
-          const tasks = await getAllTasks(token!, month, year);
-          setIsTaskOpen(false);
-          if (tasks) setTasks(tasks);
-        } catch (error) {
-          console.log("error edit", error);
-        }
+        setIsConfirmActionOpen(true);
+        setCrudTasksOptions("editTask");
+        setDataTask(data);
 
         break;
       case "deleteTask":

@@ -6,6 +6,7 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
   const date = new Date()
   const monthCurrent = month || date.getMonth()+1 
   const yearCurrent = year || date.getFullYear() 
+  
   try {
     const { data } = await instance.get(`/tasks/?month=${monthCurrent}&year=${yearCurrent}`,{
       headers: {
@@ -24,6 +25,6 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
     
     return data as Itasks[];
   } catch (error) {
-    throw new Error();
+    throw new Error(error instanceof Error ? error.message: "error getAllTask" );
   }
 };

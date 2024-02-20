@@ -1,10 +1,8 @@
 import { AxiosError } from "axios";
 import { IAddTaskForm } from "../components/FormTask";
-import { Itasks } from "../pages/DashboardPage";
 import instance from "./api";
-import { getAllTasks } from "./getAllTasks";
 
-const editTask = async (id: number, body: IAddTaskForm): Promise<Itasks[]> => {
+const editTask = async (id: number, body: IAddTaskForm): Promise<void> => {
   console.log("edit");
   
   const token = window.localStorage.getItem("token");
@@ -13,9 +11,9 @@ const editTask = async (id: number, body: IAddTaskForm): Promise<Itasks[]> => {
   };
   try {
      await instance.put(`/tasks/${id}`, body, { headers });
-    const response = await getAllTasks(token!);
+   
 
-    return response;
+    return ;
   } catch (err) {
     const error = err as AxiosError;
     console.log(error);

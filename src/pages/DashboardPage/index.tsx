@@ -62,7 +62,7 @@ export default function DashboardPage() {
     deleteTask: {
       name: "exclusão",
       execute: async (props: DeleteTaskProps) => {
-        const task = await handleDeleteTask(props.id);
+        const task = await handleDeleteTask(props.id, props.tasks);
         return task;
       },
     },

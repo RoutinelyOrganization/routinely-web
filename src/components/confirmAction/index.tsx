@@ -14,6 +14,7 @@ export interface EditTaskProps extends AddTaskProps {
 
 export interface DeleteTaskProps {
   id: number;
+  tasks: Itasks[];
 }
 
 interface IConfirmAction {
