@@ -6,7 +6,6 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
   const date = new Date()
   const monthCurrent = month || date.getMonth()+1 
   const yearCurrent = year || date.getFullYear() 
-  console.log("getaltask token", token);
   
   try {
     const { data } = await instance.get(`/tasks/?month=${monthCurrent}&year=${yearCurrent}`,{

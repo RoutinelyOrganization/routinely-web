@@ -4,7 +4,6 @@ import instance from "./api";
 
 const  addTask = async (body: IAddTaskForm) => {
   const token = window.localStorage.getItem("token");
-  console.log("token", token);
   
 
   const headers = {
