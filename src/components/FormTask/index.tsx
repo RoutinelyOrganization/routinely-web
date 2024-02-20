@@ -104,7 +104,6 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
         break;
 
       case "editTask":
-
         try {
           await handleEditTask(tempTask!.id, data);
           const tasks = await getAllTasks(token!, month, year);
