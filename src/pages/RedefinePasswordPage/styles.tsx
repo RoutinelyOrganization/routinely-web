@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../components/buttons/Button/styles";
+import { Button } from "../../components/buttons/ButtonPrincipal/styles";
 import media from "../../mediaQueries";
 
 export const Main = styled.main`

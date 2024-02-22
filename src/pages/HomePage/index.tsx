@@ -5,8 +5,8 @@ import completedTasksLitlle from "../../assets/imagens/homePage/completed_tasks_
 import homePageBanner from "../../assets/imagens/homePage/homePageBanner.svg";
 import Logo from "../../components/Logo";
 import MenuHeader from "../../components/MenuHeader";
-import { Button as ButtonStyle } from "../../components/buttons/Button/styles";
 import ButtonDownloadApp from "../../components/buttons/ButtonApp";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import ContainerIcons from "../../components/containers/ContainerIcons";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
@@ -34,11 +34,11 @@ export default function HomePage() {
       <S.Header>
         <Logo />
         <S.ContainerButtonsHeader>
-          <ButtonStyle className="resources">Recursos</ButtonStyle>
-          <ButtonStyle className="plans">Planos</ButtonStyle>
-          <ButtonStyle $secondaryColor onClick={() => navigate("/welcomePage")}>
+          <ButtonPrincipal hover={false}>Recursos</ButtonPrincipal>
+          <ButtonPrincipal hover={false}>Planos</ButtonPrincipal>
+          <ButtonPrincipal secondaryColor={true} onClick={() => navigate("/welcomePage")}>
             Acesse
-          </ButtonStyle>
+          </ButtonPrincipal>
           <ContainerIcons setIsShowMenu={setIsOpenMenu} />
           {isOpenMenu && <MenuHeader setIsShowMenu={setIsOpenMenu} menuItems={menuItems} />}
         </S.ContainerButtonsHeader>

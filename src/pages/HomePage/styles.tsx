@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { Wrapper } from "../../components/MenuHeader/styles";
-import { Button as ButtonStyle } from "../../components/buttons/Button/styles";
+import { Button as ButtonStyle } from "../../components/buttons/ButtonPrincipal/styles";
 import { Container } from "../../components/containers/ContainerIcons/styles";
 import media from "../../mediaQueries";
 

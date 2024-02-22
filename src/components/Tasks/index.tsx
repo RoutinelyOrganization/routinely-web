@@ -4,7 +4,9 @@ import * as S from "./styles";
 interface ITasksProps {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setCrudTasksOptions: React.Dispatch<React.SetStateAction<"addTask" | "editTask" | "deleteTask" | null>>;
+  setCrudTasksOptions: React.Dispatch<
+    React.SetStateAction<"addTask" | "editTask" | "deleteTask" | "duplicateTask" | null>
+  >;
 }
 
 export default function Tasks({ setIsDeleteTaskOpen, setIsTaskOpen, setCrudTasksOptions }: ITasksProps) {

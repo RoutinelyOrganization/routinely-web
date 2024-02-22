@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LinkAuth from "../../components/LinkAuth";
 import LogoShared from "../../components/LogoShared";
-import Button from "../../components/buttons/Button";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import ButtonSocial from "../../components/buttons/ButtonSocial";
 import { UserContext } from "../../contexts/UserContext";
 import { useAuth } from "../../hooks/useAuth";
@@ -155,7 +155,11 @@ export function SignInPage() {
           {showError && <ErrorMessage>email ou senha inválidos</ErrorMessage>}
 
           <S.ButtonWrapper>
-            {loading ? <Button disabled>Carregando...</Button> : <Button>Fazer login</Button>}
+            {loading ? (
+              <ButtonPrincipal disabled>Carregando...</ButtonPrincipal>
+            ) : (
+              <ButtonPrincipal>Fazer login</ButtonPrincipal>
+            )}
 
             <ButtonSocial disabled>Continuar com Google</ButtonSocial>
           </S.ButtonWrapper>

@@ -4,7 +4,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LogoShared from "../../components/LogoShared";
-import Button from "../../components/buttons/Button";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import SubTitleAuth from "../../components/titles/SubTitleAuth";
 import TitleAuth from "../../components/titles/TitleAuth";
 import { ScrollToTop } from "../../utils/ScrollToTop";
@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
             ></Input>
             {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
             <S.Span>Você receberá um código de verificação no seu e-mail</S.Span>
-            <Button>Enviar</Button>
+            <ButtonPrincipal>Enviar</ButtonPrincipal>
           </form>
         </S.Wrapper>
         <S.ImageContainer>

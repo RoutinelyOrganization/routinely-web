@@ -36,7 +36,7 @@ export const Button = styled.button`
 
   &::before {
     content: "+";
-    font-size: 2rem;
+    font-size: 1rem;
     position: absolute;
     display: block;
     left: 10px;
