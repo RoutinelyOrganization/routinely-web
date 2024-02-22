@@ -2,14 +2,17 @@ import { useContext } from "react";
 import { TasksContext } from "../../contexts/TasksContext";
 import { Itasks } from "../../pages/DashboardPage";
 import { IAddTaskForm } from "../FormTask";
+import ButtonDanger from "../buttons/ButtonDanger";
+import ButtonPrincipal from "../buttons/ButtonPrincipal";
 import * as S from "./styles";
+
 export interface AddTaskProps {
   data: IAddTaskForm;
-  tasks: Itasks[];
 }
 
 export interface EditTaskProps extends AddTaskProps {
   id: number;
+  tasks: Itasks[];
 }
 
 export interface DeleteTaskProps {
@@ -43,6 +46,8 @@ export default function ConfirmAction({
     const props = { data: dataTask, tasks, id };
     switch (operation) {
       case "yes":
+        console.log("test");
+
         const task = await crudTask({ ...props });
 
         task && task instanceof Array ? setTasks(task) : setTasks((prevstate) => [...prevstate, task]);
@@ -58,14 +63,12 @@ export default function ConfirmAction({
   };
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Paragraph>{children}</S.Paragraph>
-        <S.ContainerButton>
-          <S.ButtonYes onClick={() => handleClick("yes")}>Sim</S.ButtonYes>
-          <S.ButtonNot onClick={() => handleClick("not")}>Não</S.ButtonNot>
-        </S.ContainerButton>
-      </S.Container>
-    </S.Wrapper>
+    <>
+      <p>{children}</p>
+      <S.ContainerButton>
+        <ButtonPrincipal onClick={() => handleClick("yes")}>Sim</ButtonPrincipal>
+        <ButtonDanger onClick={() => handleClick("not")}>Não</ButtonDanger>
+      </S.ContainerButton>
+    </>
   );
 }

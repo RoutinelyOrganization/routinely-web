@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { TasksContext } from "../../../contexts/TasksContext";
 import * as S from "./styles";
 
 interface IButtonBackPage {
@@ -6,9 +8,11 @@ interface IButtonBackPage {
 }
 
 export default function ButtonBackPage({ setIsTaskOpen }: IButtonBackPage) {
+  const { setTempTask } = useContext(TasksContext);
   const navigation = useNavigate();
   const handleBack = () => {
     setIsTaskOpen ? setIsTaskOpen(false) : navigation(-1);
+    setTempTask(null);
   };
 
   return (

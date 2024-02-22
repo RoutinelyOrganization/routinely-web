@@ -4,7 +4,9 @@ import * as S from "./styles";
 
 interface IDeleteButtonProps {
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setCrudTasksOptions: React.Dispatch<React.SetStateAction<"addTask" | "editTask" | "deleteTask" | null>>;
+  setCrudTasksOptions: React.Dispatch<
+    React.SetStateAction<"addTask" | "editTask" | "deleteTask" | "duplicateTask" | null>
+  >;
   id: number;
 }
 
