@@ -69,8 +69,8 @@ export const selectOptions: Array<ISelectOptions> = [
     formRequired: "category",
   },
   {
-    label: "Tags",
-    options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
+    label: "Tag",
+    options: ["", "Canditatura", "Conta", "Exercício", "Beleza", "Licenciatura"],
     value: ["", "application", "account", "exercise", "beauty", "literature"],
     formRequired: "tag",
   },
