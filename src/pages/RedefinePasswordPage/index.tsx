@@ -1,5 +1,5 @@
 import forgotPasswordImage from "../../assets/imagens/forgotPasswordImage.svg";
-import Button from "../../components/buttons/Button";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LinkAuth from "../../components/LinkAuth";
@@ -25,7 +25,7 @@ export default function RedefinePasswordPage() {
             <LinkAuth path="#" linkText="Enviar Novamente">
               Não recebeu?
             </LinkAuth>
-            <Button>Confirmar</Button>
+            <ButtonPrincipal>Confirmar</ButtonPrincipal>
           </form>
         </S.Wrapper>
         <ImageContainerStyle>

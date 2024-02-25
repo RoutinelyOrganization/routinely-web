@@ -6,7 +6,7 @@ import infoErro from "../../assets/icons/infoErro.svg";
 import signUp from "../../services/signUp";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
-import Button from "../buttons/Button";
+import { default as ButtonPrincipal } from "../buttons/ButtonPrincipal";
 import ButtonSocial from "../buttons/ButtonSocial";
 import * as S from "./styles";
 
@@ -234,7 +234,11 @@ export default function SignUpForm() {
       </S.TermsOfUseContainer>
       {errors.acceptedTerms && <ErrorMessage>{errors.acceptedTerms.message}</ErrorMessage>}
       <S.ContainerButtons>
-        {loading ? <Button disabled>Carregando...</Button> : <Button>Criar Conta</Button>}
+        {loading ? (
+          <ButtonPrincipal disabled>Carregando...</ButtonPrincipal>
+        ) : (
+          <ButtonPrincipal>Criar Conta</ButtonPrincipal>
+        )}
         <ButtonSocial>Continuar com Google</ButtonSocial>
       </S.ContainerButtons>
     </S.Form>

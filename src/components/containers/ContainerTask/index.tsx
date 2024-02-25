@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { CalendarContext } from "../../../contexts/CalendarContext";
 import { TasksContext } from "../../../contexts/TasksContext";
 import { Itasks } from "../../../pages/DashboardPage";
-import { getAllTasks } from "../../../utils/functions/getAllTasks";
+import { getAllTasks } from "../../../services/getAllTasks";
 import CustonCheckedBox from "../../CustonCheckedBox";
 import { selectOptions } from "../../FormTask";
 import PriorityFlag from "../../PriorityFlag";
@@ -11,8 +11,11 @@ import DeleteButton from "../../buttons/ButtonDelete";
 import ButtonEdit from "../../buttons/ButtonEdit";
 import * as S from "./styles";
 interface IContainerTaskProps {
-  setIsEditTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCrudTasksOptions: React.Dispatch<
+    React.SetStateAction<"addTask" | "editTask" | "deleteTask" | "duplicateTask" | null>
+  >;
 }
 
 export enum Iterator {
@@ -27,7 +30,11 @@ export const findSelectValues = (valueToFind: string, iterator: Iterator) => {
   }
 };
 
-export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }: IContainerTaskProps) {
+export default function ContainerTask({
+  setIsTaskOpen,
+  setIsDeleteTaskOpen,
+  setCrudTasksOptions,
+}: IContainerTaskProps) {
   const { tasks, setTasks, setTempTask } = useContext(TasksContext);
   const { month, year } = useContext(CalendarContext);
   const [loading, setLoading] = useState(false);
@@ -54,6 +61,10 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
   const setDataTaskTemp = (data: Itasks) => {
     setTempTask(data);
   };
+  tasks.forEach((task) => {
+    const hourSplit = task.hour.split(":");
+    task.hour = `${hourSplit[0].padStart(2, "0")}:${hourSplit[1].padStart(2, "0")}`;
+  });
 
   return (
     <S.Wrapper>
@@ -73,10 +84,14 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
               </S.ContainerPriority>
               <div>
                 <ButtonEdit
-                  setIsEditTaskOpen={setIsEditTaskOpen}
+                  setIsEditTaskOpen={setIsTaskOpen}
                   setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
                 />
-                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
+                <DeleteButton
+                setIsDeleteTaskOpen={setIsDeleteTaskOpen}
+                id={id}
+                setCrudTasksOptions={setCrudTasksOptions}
+              />
               </div>
             </S.ContainerTask>
           ) : null,

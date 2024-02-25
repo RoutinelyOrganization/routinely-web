@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { ErrorMessage } from "../../components/ErrorMessage/styles";
-import { Button } from "../../components/buttons/Button/styles";
+import { Button } from "../../components/buttons/ButtonPrincipal/styles";
 import media from "../../mediaQueries";
 
 export const Wrapper = styled.main`

@@ -1,6 +1,7 @@
 import { keyframes, styled } from "styled-components";
 import media from "../../mediaQueries";
 import { InputStyle, LabelInput } from "../Input/styles";
+import { Button as ButtonPrincipal } from "../buttons/ButtonPrincipal/styles";
 
 const FadeUp = keyframes`
   from {
@@ -34,10 +35,8 @@ export const Form = styled.form`
   }
 
   ${media.mobile} {
-    height: 80vh;
     margin: 0;
     box-shadow: none;
-    height: calc(100vh - 121px);
   }
 `;
 
@@ -145,9 +144,24 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 15px;
+
+  > button {
+    max-width: 200px;
+  }
+
+  ${media.mobile} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    ${ButtonPrincipal} {
+      grid-row: 1;
+      grid-column: span 2;
+      max-width: 100%;
+    }
+  }
 `;
 
-export const Button = styled.button`
+export const DuplicateButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,40 +171,14 @@ export const Button = styled.button`
   max-width: 145px;
   width: 100%;
   gap: 8px;
-  border: none;
+  border: 1px solid #d8d6dc;
   border-radius: 8px;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.1px;
-  cursor: pointer;
-`;
-
-export const SaveButton = styled(Button)`
-  background: #5c59bb;
-  color: #f6f7f8;
-  align-self: flex-end;
-  &:hover {
-    transition: all 0.4s ease;
-    background-color: #a09df7;
-    color: #222;
-    font-weight: bold;
-  }
-
-  ${media.mobile} {
-    max-width: 100%;
-  }
-`;
-
-export const DeleteButton = styled(Button)`
-  border: 1px solid #d8d6dc;
-  background-color: transparent;
-  color: var(--aes-erro, #b3261e);
-`;
-
-export const DuplicateButton = styled(Button)`
-  border: 1px solid #d8d6dc;
   background-color: transparent;
   color: #5c59bb;
+  cursor: pointer;
 `;

@@ -1,48 +1,42 @@
-import { AxiosError } from "axios";
-import { IAddTaskForm, IEditTaskForm } from "../components/FormTask";
-import instance from "../services/api";
+import { IAddTaskForm } from "../components/FormTask";
+import { Itasks } from "../pages/DashboardPage";
+import addTask from "../services/addTask";
+import deleteTask from "../services/deletTask";
+import editTask from "../services/editTasks";
 
 export const UseCRUD = () => {
-  async function handleAddTask(body: IAddTaskForm) {
-    const token = window.localStorage.getItem("token");
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+  async function handleAddTask(data: IAddTaskForm): Promise<Itasks> {
     try {
-      const response = await instance.post("/tasks", body, { headers });
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err)
-      throw new Error();
+      const task = await addTask(data);
+      return task;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
     }
   }
-  async function handleDeleteTask(id: number) {
-    const token = window.localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+
+  async function handleEditTask(id: number, data: IAddTaskForm, tasks: Itasks[]): Promise<Itasks[]> {
     try {
-      const response = await instance.delete(`/tasks/${id}`, { headers });
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError;
-      console.log(error);
+      await editTask(id, data);
+      const response = tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, ...data };
+        }
+        return task;
+      });
+
+      return response as Itasks[];
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
     }
   }
-  async function handleEditTask(id: number, body: IEditTaskForm) {
-    const token = window.localStorage.getItem("token");
 
-    const headers = {
-      Authorization: `Bearer ${token!}`,
-    };
+  async function handleDeleteTask(id: number, tasks: Itasks[]): Promise<Itasks[]> {
     try {
-      const response = await instance.put(`/tasks/${id}`, body, { headers });
+      await deleteTask(id);
+      const response = tasks.filter((task) => task.id !== id);
       return response;
-    } catch (err) {
-      const error = err as AxiosError;
-      console.log(error);
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Erro no servidor");
     }
   }
 

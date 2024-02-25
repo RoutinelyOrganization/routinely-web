@@ -80,7 +80,7 @@ export const ContainerButton = styled.div`
   }
 `;
 
-export const ButtonAccount = styled.button`
+export const ButtonCreateAccount = styled.button`
   height: 40px;
   padding: 10px 16px;
   max-width: 368px;
@@ -91,9 +91,9 @@ export const ButtonAccount = styled.button`
   line-height: 20px;
   text-align: center;
   cursor: pointer;
-  background-color: #5c59bb;
-  color: #f6f7f8;
-  border: none;
+  background-color: #d8d6dc;
+  color: #5c59bb;
+  border: 1px #5c59bb solid;
   outline: none;
   &:hover {
     transition: all 0.4s ease;
@@ -101,10 +101,4 @@ export const ButtonAccount = styled.button`
     color: #222;
     font-weight: bold;
   }
-`;
-
-export const ButtonCreateAccount = styled(ButtonAccount)`
-  background-color: #d8d6dc;
-  border: 1px #5c59bb solid;
-  color: #5c59bb;
 `;

@@ -1,16 +1,20 @@
 import { useContext } from "react";
-import * as S from "./styles";
 import { TasksContext } from "../../../contexts/TasksContext";
+import * as S from "./styles";
 
 interface IDeleteButtonProps {
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCrudTasksOptions: React.Dispatch<
+    React.SetStateAction<"addTask" | "editTask" | "deleteTask" | "duplicateTask" | null>
+  >;
   id: number;
 }
 
-export default function ButtonDelete({ setIsDeleteTaskOpen, id }: IDeleteButtonProps) {
+export default function ButtonDelete({ setIsDeleteTaskOpen, setCrudTasksOptions, id }: IDeleteButtonProps) {
   const { setTaskId } = useContext(TasksContext);
 
   const handleDeleteTaskOpen = () => {
+    setCrudTasksOptions("deleteTask");
     setIsDeleteTaskOpen(true);
     setTaskId(id);
   };

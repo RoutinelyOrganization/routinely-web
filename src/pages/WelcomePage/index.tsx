@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import welcomePageImage from "../../assets/imagens/welcomePageImage.svg";
 import Header from "../../components/Header";
 import LogoShared from "../../components/LogoShared";
-import { ScrollToTop } from "../../utils/ScrollToTop";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import { useAuth } from "../../hooks/useAuth";
+import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 
 export function WelcomePage() {
@@ -32,7 +33,7 @@ export function WelcomePage() {
           <S.Title>Boas-vindas</S.Title>
           <S.Caption>Escolha uma das opções para acessar </S.Caption>
           <S.ContainerButton>
-            <S.ButtonAccount onClick={() => navigate("/SignInPage")}>Já tenho conta</S.ButtonAccount>
+            <ButtonPrincipal onClick={() => navigate("/SignInPage")}>Já tenho conta</ButtonPrincipal>
             <S.ButtonCreateAccount onClick={() => navigate("/SignUpPage")}>Criar conta</S.ButtonCreateAccount>
           </S.ContainerButton>
         </div>

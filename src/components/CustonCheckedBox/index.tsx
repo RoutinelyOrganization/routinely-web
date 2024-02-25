@@ -24,7 +24,7 @@ export default function CustonCheckedBox({ id }: ICheckBox) {
     const findTask = tasks.find((task) => task.id === id);
     const taskDone = { ...findTask, checked: newCheckedValue };
 
-    await handleEditTask(id, taskDone);
+    await handleEditTask(id, taskDone, tasks);
     const dados = await getAllTasks(token!, month, year);
     setTasks(dados);
   }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 type InputProps = {
   $hasErro?: boolean;
+  $as?: string;
 };
 
 export const InputContainer = styled.div`
@@ -53,6 +54,7 @@ export const InputStyle = styled.input<InputProps>`
   line-height: 24px;
   letter-spacing: 0.5px;
   color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#333333")};
+  resize: none;
 
   &:focus ~ ${LabelInput} {
     top: -15px;

@@ -1,26 +1,59 @@
 import { useContext } from "react";
-import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
-import { UseCRUD } from "../../hooks/useCrud";
-import { getAllTasks } from "../../utils/functions/getAllTasks";
+import { Itasks } from "../../pages/DashboardPage";
+import { IAddTaskForm } from "../FormTask";
+import ButtonDanger from "../buttons/ButtonDanger";
+import ButtonPrincipal from "../buttons/ButtonPrincipal";
 import * as S from "./styles";
+
+export interface AddTaskProps {
+  data: IAddTaskForm;
+}
+
+export interface EditTaskProps extends AddTaskProps {
+  id: number;
+  tasks: Itasks[];
+}
+
+export interface DeleteTaskProps {
+  id: number;
+  tasks: Itasks[];
+}
+
 interface IConfirmAction {
   children: string;
   setIsDeleteTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  crudTask:
+    | ((props: AddTaskProps) => Promise<Itasks>)
+    | ((props: EditTaskProps) => Promise<Itasks[]>)
+    | ((props: DeleteTaskProps) => Promise<Itasks>);
+  dataTask: IAddTaskForm;
 }
 
-export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfirmAction) {
-  const { taskId, setTasks } = useContext(TasksContext);
-  const { handleDeleteTask } = UseCRUD();
-  const { month, year } = useContext(CalendarContext);
-  const token = window.localStorage.getItem("token");
+export default function ConfirmAction({
+  children,
+  setIsDeleteTaskOpen,
+  crudTask,
+  dataTask,
+  setIsTaskOpen,
+}: IConfirmAction) {
+  const { setTasks, tasks, tempTask, taskId, setTempTask } = useContext(TasksContext);
 
   const handleClick = async (operation: "yes" | "not") => {
+    const id = tempTask?.id || taskId || 0;
+
+    const props = { data: dataTask, tasks, id };
     switch (operation) {
       case "yes":
-        await handleDeleteTask(taskId);
-        const data = await getAllTasks(token!, month, year);
-        data && setTasks(data);
+        console.log("test");
+
+        const task = await crudTask({ ...props });
+
+        task && task instanceof Array ? setTasks(task) : setTasks((prevstate) => [...prevstate, task]);
+
+        setIsTaskOpen(false);
+        setTempTask(null);
         break;
 
       case "not":
@@ -30,14 +63,12 @@ export default function ConfirmAction({ children, setIsDeleteTaskOpen }: IConfir
   };
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Paragraph>{children}</S.Paragraph>
-        <S.ContainerButton>
-          <S.ButtonYes onClick={() => handleClick("yes")}>Sim</S.ButtonYes>
-          <S.ButtonNot onClick={() => handleClick("not")}>Não</S.ButtonNot>
-        </S.ContainerButton>
-      </S.Container>
-    </S.Wrapper>
+    <>
+      <p>{children}</p>
+      <S.ContainerButton>
+        <ButtonPrincipal onClick={() => handleClick("yes")}>Sim</ButtonPrincipal>
+        <ButtonDanger onClick={() => handleClick("not")}>Não</ButtonDanger>
+      </S.ContainerButton>
+    </>
   );
 }
