@@ -59,26 +59,28 @@ export default function ContainerTask({ setIsEditTaskOpen, setIsDeleteTaskOpen }
     <S.Wrapper>
       {tasks &&
         tasks.length > 0 &&
-        tasks.map(({ id, name, category, tag, priority, date, description, hour }) => (
-          <S.ContainerTask key={id}>
-            <div>
-              <CustonCheckedBox id={id} />
-              <S.ContainerText>{name}</S.ContainerText>
-            </div>
-            <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>
-            <S.ContainerSubCategory>{findSelectValues(tag, Iterator.Tag)}</S.ContainerSubCategory>
-            <S.ContainerPriority>
-              <PriorityFlag priority={priority} />
-            </S.ContainerPriority>
-            <div>
-              <ButtonEdit
-                setIsEditTaskOpen={setIsEditTaskOpen}
-                setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
-              />
-              <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
-            </div>
-          </S.ContainerTask>
-        ))}
+        tasks.map(({ id, name, category, tag, priority, date, description, hour, checked }) =>
+          checked === false ? (
+            <S.ContainerTask key={id}>
+              <div>
+                <CustonCheckedBox id={id} checked={checked} />
+                <S.ContainerText>{name}</S.ContainerText>
+              </div>
+              <S.ContainerCategory>{findSelectValues(category, Iterator.Category)}</S.ContainerCategory>
+              <S.ContainerSubCategory>{findSelectValues(tag, Iterator.Tag)}</S.ContainerSubCategory>
+              <S.ContainerPriority>
+                <PriorityFlag priority={priority} />
+              </S.ContainerPriority>
+              <div>
+                <ButtonEdit
+                  setIsEditTaskOpen={setIsEditTaskOpen}
+                  setData={() => setDataTaskTemp({ id, name, category, tag, priority, date, description, hour })}
+                />
+                <DeleteButton setIsDeleteTaskOpen={setIsDeleteTaskOpen} id={id} />
+              </div>
+            </S.ContainerTask>
+          ) : null,
+        )}
     </S.Wrapper>
   );
 }

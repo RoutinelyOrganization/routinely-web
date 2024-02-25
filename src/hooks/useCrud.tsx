@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { IAddTaskForm } from "../components/FormTask";
+import { IAddTaskForm, IEditTaskForm } from "../components/FormTask";
 import instance from "../services/api";
 
 export const UseCRUD = () => {
@@ -11,9 +11,10 @@ export const UseCRUD = () => {
     };
     try {
       const response = await instance.post("/tasks", body, { headers });
-
+      console.log(response.data);
       return response.data;
     } catch (err) {
+      console.log(err)
       throw new Error();
     }
   }
@@ -30,23 +31,24 @@ export const UseCRUD = () => {
       console.log(error);
     }
   }
-  async function handleEditTask(id: number, body: IAddTaskForm) {
+  async function handleEditTask(id: number, body: IEditTaskForm) {
     const token = window.localStorage.getItem("token");
+
     const headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token!}`,
     };
-      try {
-        const response = await instance.put(`/tasks/${id}`, body,{ headers })
-        return response
-      } catch (err){
-        const error = err as AxiosError
-        console.log(error)
-      }
+    try {
+      const response = await instance.put(`/tasks/${id}`, body, { headers });
+      return response;
+    } catch (err) {
+      const error = err as AxiosError;
+      console.log(error);
+    }
   }
 
   return {
     handleAddTask,
     handleDeleteTask,
-    handleEditTask
+    handleEditTask,
   };
 };

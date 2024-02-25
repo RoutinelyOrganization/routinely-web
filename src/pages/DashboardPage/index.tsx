@@ -21,12 +21,13 @@ import { ScrollToTop } from "../../utils/ScrollToTop";
 export interface Itasks {
   id: number;
   name: string;
-  date: string;
+  date: Date;
   hour: string;
   description: string;
   priority: string;
   tag: string;
   category: string;
+  checked?:boolean
 }
 
 export default function DashboardPage() {

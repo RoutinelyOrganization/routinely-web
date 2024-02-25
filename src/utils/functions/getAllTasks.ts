@@ -11,7 +11,7 @@ export const getAllTasks = async (token:string, month?: number, year?: number) =
         Authorization: `Bearer ${token}`
       }
     });
-    
+    console.log(data)
     return data as Itasks[];
   } catch (error) {
     throw new Error();

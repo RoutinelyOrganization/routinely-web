@@ -2,16 +2,24 @@ import CustonCheckedBox from "../../CustonCheckedBox";
 import PriorityFlag from "../../PriorityFlag";
 import * as S from "./styles";
 
-export default function ContainerTaskDone() {
+interface ITaskDoneProps {
+  id: number;
+  title: string;
+  category: string;
+  subCategory: string;
+  priority: string;
+}
+
+export default function ContainerTaskDone({ id, title, category, subCategory, priority }: ITaskDoneProps) {
   return (
     <S.Wrapper>
       <S.Container>
-        <CustonCheckedBox id={1} checked={true} />
-        <S.ContainerText>afawdawdawdawadawadwdawdawdaw</S.ContainerText>
-        <S.ContainerCategory>pessoal</S.ContainerCategory>
-        <S.ContainerSubCategory>contas</S.ContainerSubCategory>
+        <CustonCheckedBox id={id} checked={true} />
+        <S.ContainerText>{title}</S.ContainerText>
+        <S.ContainerCategory>{category}</S.ContainerCategory>
+        <S.ContainerSubCategory>{subCategory}</S.ContainerSubCategory>
         <S.ContainerPriority>
-          <PriorityFlag priority="urgent" />
+          <PriorityFlag priority={priority} />
         </S.ContainerPriority>
       </S.Container>
     </S.Wrapper>

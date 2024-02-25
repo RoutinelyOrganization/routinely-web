@@ -25,9 +25,10 @@ export interface IAddTaskForm {
   priority?: string;
   tag?: string;
   category?: string;
+  checked?: boolean;
 }
 
-interface IEditTaskForm {
+export interface IEditTaskForm {
   name?: string;
   date?: Date;
   hour?: string;
@@ -35,6 +36,7 @@ interface IEditTaskForm {
   priority?: string;
   tag?: string;
   category?: string;
+  checked?: boolean;
 }
 
 interface ISelectOptions {
@@ -84,8 +86,8 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
   const [hasNameTask, setHasNameTask] = useState<boolean>(false);
   const [hasDescriptionTask, setHasDescriptionTask] = useState<boolean>(false);
   const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const token = window.localStorage.getItem('token')
-  const { month, year } = useContext(CalendarContext)
+  const token = window.localStorage.getItem("token");
+  const { month, year } = useContext(CalendarContext);
   const {
     register,
     handleSubmit,
@@ -113,30 +115,31 @@ export default function FormTask({ setIsTaskOpen }: IForm) {
             data.name = `${dataNameSplit}(${taskRepeated.length})`;
           }
           const task = await handleAddTask(data);
-
-          setTasks((prevstate) => [...prevstate, task]);
+          console.log(task);
+          setTasks((prevstate) => [...prevstate, task]);        
           setIsTaskOpen(false);
         } catch (error) {}
         break;
-        
-        case "editTask":
-          try{
-            await handleEditTask(tempTask!.id, data)
-            const tasks = await getAllTasks(token!, month, year);
-            setIsTaskOpen(false);
-            if (tasks) setTasks(tasks)        
-        }catch (error){
-            console.log("error edit", error)
+
+      case "editTask":
+        try {
+          await handleEditTask(tempTask!.id, data);
+          const tasks = await getAllTasks(token!, month, year);
+          console.log("put", tasks);
+          setIsTaskOpen(false);
+          if (tasks) setTasks(tasks);
+        } catch (error) {
+          console.log("error edit", error);
         }
         break;
       case "deleteTask":
         try {
-            await handleDeleteTask(tempTask!.id)
-            const tasks = await getAllTasks(token!, month, year);
-            if (tasks) setTasks(tasks)        
-            setIsTaskOpen(false);
+          await handleDeleteTask(tempTask!.id);
+          const tasks = await getAllTasks(token!, month, year);
+          if (tasks) setTasks(tasks);
+          setIsTaskOpen(false);
         } catch (error) {
-          console.log("error delete", error)
+          console.log("error delete", error);
         }
         break;
     }
