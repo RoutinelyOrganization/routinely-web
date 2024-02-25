@@ -3,7 +3,11 @@ import { Header } from "../../components/Header/styles";
 import { ButtonBackPage } from "../../components/buttons/ButtonBackPage/styles";
 import media from "../../mediaQueries";
 
-export const Container = styled.div`
+interface IDashboardPageStyle {
+  $visible: boolean;
+}
+
+export const Container = styled.div<IDashboardPageStyle>`
   ${ButtonBackPage} {
     display: none;
   }
@@ -13,6 +17,10 @@ export const Container = styled.div`
         padding-left: calc(100vw - 60%);
       }
     }
+  }
+
+  ${media.mobile} {
+    display: ${(props) => (props.$visible ? "none" : "block")};
   }
 `;
 

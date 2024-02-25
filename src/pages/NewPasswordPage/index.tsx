@@ -4,7 +4,7 @@ import NewPasswordPageImage from "../../assets/imagens/NewPasswordPageImage.svg"
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LogoShared from "../../components/LogoShared";
-import Button from "../../components/buttons/Button";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 import { ShowPassword as ShowPasswordStyle } from "../SignInPage/styles";
 import * as S from "./styles";
@@ -76,7 +76,7 @@ export function NewPasswordPage() {
               </Input>
             </S.InputWrapper>
           </S.InputContainer>
-          <Button>Atualizar Senha</Button>
+          <ButtonPrincipal>Atualizar Senha</ButtonPrincipal>
         </S.Form>
         <img src={NewPasswordPageImage} alt="Imagem da Página de nova senha" />
       </S.Wrapper>

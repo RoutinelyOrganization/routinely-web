@@ -7,7 +7,7 @@ export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 999;
+  z-index: 100;
   background-color: #0b0c0b3e;
   width: 100%;
   height: 100vh;
@@ -19,6 +19,7 @@ export const Modal = styled.div`
   ${media.mobile} {
     display: block;
     background: none;
+    position: static;
 
     ${Header} {
       display: flex;

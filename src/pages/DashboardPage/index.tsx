@@ -4,18 +4,23 @@ import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from "../../components/Alert";
 import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
 import FormTask, { IAddTaskForm } from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpCustom from "../../components/PopUp";
+import PopupAlert from "../../components/PopupAlert";
 import Tasks from "../../components/Tasks";
 import ButtonFooter from "../../components/buttons/ButtonFooter";
 import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
+import { UserContext } from "../../contexts/UserContext";
+import { useAuth } from "../../hooks/useAuth";
 import { UseCRUD } from "../../hooks/useCrud";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
@@ -34,19 +39,30 @@ export default function DashboardPage() {
   const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
   const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
   const [isConfirmActionOpen, setIsConfirmActionOpen] = useState<boolean>(false);
-  const [crudTasksOptions, setCrudTasksOptions] = useState<"addTask" | "editTask" | "deleteTask" | null>(null);
+  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
+  const [crudTasksOptions, setCrudTasksOptions] = useState<
+    "addTask" | "editTask" | "deleteTask" | "duplicateTask" | null
+  >(null);
   const [dataTask, setDataTask] = useState<IAddTaskForm | null>(null);
 
-  // const { user } = useContext(UserContext);
-  // const token = localStorage.getItem("token");
-  // const navigate = useNavigate();
-  // const { authorization } = useAuth();
+  const { user } = useContext(UserContext);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const { authorization } = useAuth();
 
   const crudTasks = {
     addTask: {
       name: "adição",
       execute: async (props: AddTaskProps) => {
-        const task = await handleAddTask(props.data, props.tasks);
+        const task = await handleAddTask(props.data);
+        return task;
+      },
+    },
+
+    duplicateTask: {
+      name: "duplicação",
+      execute: async (props: AddTaskProps) => {
+        const task = await handleAddTask(props.data);
         return task;
       },
     },
@@ -68,15 +84,15 @@ export default function DashboardPage() {
     },
   };
 
-  // useEffect(() => {
-  //   authorization().catch(() => {
-  //     navigate("/signInPage");
-  //   });
+  useEffect(() => {
+    authorization().catch(() => {
+      navigate("/signInPage");
+    });
 
-  //   if (!user.email && !token) {
-  //     navigate("/signInPage");
-  //   }
-  // }, [token, user.email, navigate, authorization]);
+    if (!user.email && !token) {
+      navigate("/signInPage");
+    }
+  }, [token, user.email, navigate, authorization]);
 
   return (
     <TasksProvider>
@@ -89,21 +105,29 @@ export default function DashboardPage() {
               setCrudTasksOptions={setCrudTasksOptions}
               setDataTask={setDataTask}
               setIsConfirmActionOpen={setIsConfirmActionOpen}
+              setIsAlertOpen={setIsAlertOpen}
             />
           </PopUpCustom>
         )}
 
         {isConfirmActionOpen && (
-          <ConfirmAction
-            setIsDeleteTaskOpen={setIsConfirmActionOpen}
-            crudTask={crudTasks[crudTasksOptions!].execute}
-            dataTask={dataTask!}
-            setIsTaskOpen={setIsTaskOpen}
-          >
-            {`Tem certeza que deseja realizar a ${crudTasks[crudTasksOptions!].name} da tarefa?`}
-          </ConfirmAction>
+          <PopupAlert>
+            <ConfirmAction
+              setIsDeleteTaskOpen={setIsConfirmActionOpen}
+              crudTask={crudTasks[crudTasksOptions!].execute}
+              dataTask={dataTask!}
+              setIsTaskOpen={setIsTaskOpen}
+            >
+              {`Tem certeza que deseja realizar a ${crudTasks[crudTasksOptions!].name} da tarefa?`}
+            </ConfirmAction>
+          </PopupAlert>
         )}
-        <S.Container>
+        {isAlertOpen && (
+          <PopupAlert>
+            <Alert setIsAlertOpen={setIsAlertOpen}>Limite de tarefas repetidas atingido</Alert>
+          </PopupAlert>
+        )}
+        <S.Container $visible={isTaskOpen}>
           <Header />
           <S.Main>
             <S.ContainerCalendar>
@@ -127,9 +151,7 @@ export default function DashboardPage() {
               <DoneTasks />
             </S.ContainerTasks>
           </S.Main>
-          {isTaskOpen ? (
-            <ButtonFooter />
-          ) : (
+          {!isTaskOpen && (
             <ButtonFooter onClick={() => setIsTaskOpen(true)}>
               <img src={NewTask} alt="" />
             </ButtonFooter>

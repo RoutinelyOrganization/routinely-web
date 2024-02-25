@@ -4,17 +4,23 @@ import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TasksContext } from "../../contexts/TasksContext";
 import { pastDate } from "../../utils/validators/pastDate";
+import validateRepeatedTask from "../../utils/validators/validateTaskRepeated";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../Input";
 import Select from "../Select";
+import ButtonDanger from "../buttons/ButtonDanger";
+import ButtonPrincipal from "../buttons/ButtonPrincipal";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import * as S from "./styles";
 
 interface IForm {
   setIsTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setCrudTasksOptions: React.Dispatch<React.SetStateAction<"addTask" | "editTask" | "deleteTask" | null>>;
+  setCrudTasksOptions: React.Dispatch<
+    React.SetStateAction<"addTask" | "editTask" | "deleteTask" | "duplicateTask" | null>
+  >;
   setDataTask: React.Dispatch<React.SetStateAction<IAddTaskForm | null>>;
   setIsConfirmActionOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IAddTaskForm {
@@ -63,15 +69,21 @@ export const selectOptions: Array<ISelectOptions> = [
     formRequired: "category",
   },
   {
-    label: "Tags",
-    options: ["", "Canditatura", "Conta", "Exercicio", "Beleza", "Licenciatura"],
+    label: "Tag",
+    options: ["", "Canditatura", "Conta", "Exercício", "Beleza", "Licenciatura"],
     value: ["", "application", "account", "exercise", "beauty", "literature"],
     formRequired: "tag",
   },
 ];
 
-export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTask, setIsConfirmActionOpen }: IForm) {
-  const { tempTask } = useContext(TasksContext);
+export default function FormTask({
+  setIsTaskOpen,
+  setCrudTasksOptions,
+  setDataTask,
+  setIsConfirmActionOpen,
+  setIsAlertOpen,
+}: IForm) {
+  const { tempTask, tasks } = useContext(TasksContext);
   const interfaceForm = !tempTask
     ? useForm<IAddTaskForm>()
     : useForm<IEditTaskForm>({
@@ -90,10 +102,26 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
   const handleSubmitFormTask: SubmitHandler<IEditTaskForm> = async (data, event) => {
     const buttonSubmited = (event!.nativeEvent as CustomFormEvent).submitter.name;
 
+    if (buttonSubmited !== "deleteTask") {
+      const cleanedData = validateRepeatedTask(data, tasks);
+
+      if (typeof cleanedData === "string") {
+        setIsAlertOpen(true);
+        return;
+      }
+    }
+
     switch (buttonSubmited) {
       case "addTask":
         setIsConfirmActionOpen(true);
         setCrudTasksOptions("addTask");
+        setDataTask(data);
+
+        break;
+
+      case "duplicateTask":
+        setIsConfirmActionOpen(true);
+        setCrudTasksOptions("duplicateTask");
         setDataTask(data);
 
         break;
@@ -176,7 +204,7 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
       </S.InputContainer>
       <S.ContainerPopUp className="description">
         <Input
-          as={"textarea"}
+          as="textarea"
           label="Descrição"
           type="text"
           id="descricao"
@@ -194,12 +222,12 @@ export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTa
       </S.ContainerPopUp>
       <S.ButtonsContainer>
         {!tempTask ? (
-          <S.SaveButton name="addTask">Adicionar tarefa</S.SaveButton>
+          <ButtonPrincipal name="editTask">Salvar alterações</ButtonPrincipal>
         ) : (
           <>
-            <S.DeleteButton name="deleteTask">Excluir tarefa</S.DeleteButton>
-            <S.DuplicateButton name="addTask">Duplicar tarefa</S.DuplicateButton>
-            <S.SaveButton name="editTask">Salvar alterações</S.SaveButton>
+            <ButtonDanger name="deleteTask">Excluir tarefa</ButtonDanger>
+            <S.DuplicateButton name="duplicateTask">Duplicar tarefa</S.DuplicateButton>
+            <ButtonPrincipal name="editTask">Salvar alterações</ButtonPrincipal>
           </>
         )}
       </S.ButtonsContainer>
