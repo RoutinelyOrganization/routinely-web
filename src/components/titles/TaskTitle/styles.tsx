@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import media from "../../../utils/functions/mediaQueries";
 
 export const Title = styled.h3`
   font-size: 1.5rem;
@@ -7,4 +8,7 @@ export const Title = styled.h3`
   text-align: left;
   color: #171a21;
   margin-left: 10px;
+  ${media.tablet} {
+    font-size: 1rem;
+  }
 `;

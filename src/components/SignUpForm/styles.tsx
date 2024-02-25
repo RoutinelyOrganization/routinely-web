@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 import { ErrorMessage } from "../ErrorMessage/styles";
 
 export const Form = styled.form`

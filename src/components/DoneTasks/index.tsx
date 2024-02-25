@@ -4,6 +4,7 @@ import * as S from "./styles";
 import { getAllTasks } from "../../utils/functions/getAllTasks";
 import { CalendarContext } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
+import { Iterator, findSelectValues } from "../containers/ContainerTask";
 
 export default function DoneTasks() {
   const token = localStorage.getItem("token");
@@ -27,9 +28,9 @@ export default function DoneTasks() {
             key={task.id}
             id={task.id}
             title={task.name}
-            category={task.category}
+            category={findSelectValues(task.category, Iterator.Category)}
             priority={task.priority}
-            subCategory={task.tag}
+            subCategory={findSelectValues(task.tag, Iterator.Tag)}
           />
         ) : null,
       )}

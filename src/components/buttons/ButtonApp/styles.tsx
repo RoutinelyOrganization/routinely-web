@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "../../../mediaQueries";
+import media from "../../../utils/functions/mediaQueries";
 
 export const ButtonApp = styled.button`
   display: flex;

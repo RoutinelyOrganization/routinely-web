@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { Wrapper } from "../../components/MenuHeader/styles";
 import { Button as ButtonStyle } from "../../components/buttons/ButtonPrincipal/styles";
 import { Container } from "../../components/containers/ContainerIcons/styles";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 
 export const Header = styled.header`
   display: flex;

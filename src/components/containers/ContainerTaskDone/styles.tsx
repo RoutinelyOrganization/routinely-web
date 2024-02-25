@@ -1,12 +1,16 @@
 import { styled } from "styled-components";
+import media from "../../../utils/functions/mediaQueries";
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
   width: 100%;
+  align-items: center;
+  gap: 10px;
   position: relative;
-
+  ${media.mobile} {
+    grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+  }
   &::after {
     content: "";
     position: absolute;
@@ -19,7 +23,6 @@ export const Container = styled.div`
 `;
 
 export const ContainerCheckbox = styled.input`
-  width: 20px;
   height: 20px;
   flex-shrink: 0;
   background-color: #000;
@@ -27,7 +30,6 @@ export const ContainerCheckbox = styled.input`
 `;
 
 export const ContainerText = styled.span`
-  width: 176px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
@@ -35,13 +37,18 @@ export const ContainerText = styled.span`
   text-overflow: ellipsis;
   font-size: 1rem;
   line-height: 20px;
+  ${media.tablet} {
+    font-size: 0.9rem;
+  }
+  ${media.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 export const ContainerCategory = styled.span`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 64px;
+  width: max-content;
   padding: 4px 6px;
   gap: 4px;
   border-radius: 4px;
@@ -50,12 +57,22 @@ export const ContainerCategory = styled.span`
   line-height: 16px;
   letter-spacing: 0.5px;
   color: #171a21;
+
+  ${media.tablet} {
+    font-size: 0.6rem;
+  }
 `;
 
 export const ContainerSubCategory = styled.span`
   color: #171a21;
   font-size: 1rem;
   line-height: 20px;
+  ${media.tablet} {
+    font-size: 0.9rem;
+  }
+  ${media.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 export const ContainerPriority = styled.span`

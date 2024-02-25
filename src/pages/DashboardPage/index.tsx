@@ -85,15 +85,15 @@ export default function DashboardPage() {
     },
   };
 
-  useEffect(() => {
-    authorization().catch(() => {
-      navigate("/signInPage");
-    });
+  // useEffect(() => {
+  //   authorization().catch(() => {
+  //     navigate("/signInPage");
+  //   });
 
-    if (!user.email && !token) {
-      navigate("/signInPage");
-    }
-  }, [token, user.email, navigate, authorization]);
+  //   if (!user.email && !token) {
+  //     navigate("/signInPage");
+  //   }
+  // }, [token, user.email, navigate, authorization]);
 
   return (
     <TasksProvider>

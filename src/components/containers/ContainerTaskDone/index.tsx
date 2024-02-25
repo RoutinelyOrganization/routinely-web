@@ -5,8 +5,8 @@ import * as S from "./styles";
 interface ITaskDoneProps {
   id: number;
   title: string;
-  category: string;
-  subCategory: string;
+  category: string | undefined;
+  subCategory: string | undefined ;
   priority: string;
 }
 

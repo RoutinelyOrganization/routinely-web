@@ -224,7 +224,7 @@ export default function FormTask({
       </S.ContainerPopUp>
       <S.ButtonsContainer>
         {!tempTask ? (
-          <ButtonPrincipal name="editTask">Salvar alterações</ButtonPrincipal>
+          <ButtonPrincipal name="addTask">Salvar alterações</ButtonPrincipal>
         ) : (
           <>
             <ButtonDanger name="deleteTask">Excluir tarefa</ButtonDanger>
