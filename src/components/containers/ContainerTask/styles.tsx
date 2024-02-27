@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import media from "../../../mediaQueries";
+import media from "../../../utils/functions/mediaQueries";
 
 export const ContainerTask = styled.div`
   display: grid;
@@ -31,6 +31,13 @@ export const ContainerText = styled.span`
   font-size: 1rem;
   line-height: 20px;
   white-space: nowrap;
+
+  ${media.tablet} {
+    font-size: 0.9rem;
+  }
+  ${media.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 export const ContainerCategory = styled.span`
@@ -43,10 +50,13 @@ export const ContainerCategory = styled.span`
   gap: 4px;
   border-radius: 4px;
   background: #ffff7e;
-  font-size: 0.75rem;
+  font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.5px;
   color: #171a21;
+  ${media.tablet} {
+    font-size: 10px;
+  }
 `;
 
 export const ContainerSubCategory = styled.span`

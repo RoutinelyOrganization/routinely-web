@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 
 export const Container = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const Button = styled.button`
   border-radius: 8px;
   border: 1px #d8d6dc solid;
   outline: none;
-  background-color: transparent;
+  background-color: #f6f7f8;
   color: #3b719f;
   font-size: 1rem;
   font-weight: 400;
@@ -33,6 +33,9 @@ export const Button = styled.button`
   position: relative;
   cursor: pointer;
   margin: 25px 0px;
+  ${media.mobile} {
+    font-size: 0.9rem;
+  }
 
   &::before {
     content: "+";

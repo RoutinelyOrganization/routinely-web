@@ -27,12 +27,13 @@ import { ScrollToTop } from "../../utils/ScrollToTop";
 export interface Itasks {
   id: number;
   name: string;
-  date: string;
+  date: Date;
   hour: string;
   description: string;
   priority: string;
   tag: string;
   category: string;
+  checked?:boolean
 }
 
 export default function DashboardPage() {
@@ -84,15 +85,15 @@ export default function DashboardPage() {
     },
   };
 
-  useEffect(() => {
-    authorization().catch(() => {
-      navigate("/signInPage");
-    });
+  // useEffect(() => {
+  //   authorization().catch(() => {
+  //     navigate("/signInPage");
+  //   });
 
-    if (!user.email && !token) {
-      navigate("/signInPage");
-    }
-  }, [token, user.email, navigate, authorization]);
+  //   if (!user.email && !token) {
+  //     navigate("/signInPage");
+  //   }
+  // }, [token, user.email, navigate, authorization]);
 
   return (
     <TasksProvider>

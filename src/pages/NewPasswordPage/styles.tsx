@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { ErrorMessage } from "../../components/ErrorMessage/styles";
 import { Button } from "../../components/buttons/ButtonPrincipal/styles";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 
 export const Wrapper = styled.main`
   display: flex;

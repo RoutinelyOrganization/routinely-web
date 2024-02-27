@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  max-height: 150px;
+  max-height: 300px;
   overflow-y: auto;
   padding-right: 16px;
 `;

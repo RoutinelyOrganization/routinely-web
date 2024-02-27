@@ -31,9 +31,10 @@ export interface IAddTaskForm {
   priority?: string;
   tag?: string;
   category?: string;
+  checked?: boolean;
 }
 
-interface IEditTaskForm {
+export interface IEditTaskForm {
   name?: string;
   date?: Date;
   hour?: string;
@@ -41,6 +42,7 @@ interface IEditTaskForm {
   priority?: string;
   tag?: string;
   category?: string;
+  checked?: boolean;
 }
 
 interface ISelectOptions {
@@ -222,7 +224,7 @@ export default function FormTask({
       </S.ContainerPopUp>
       <S.ButtonsContainer>
         {!tempTask ? (
-          <ButtonPrincipal name="editTask">Salvar alterações</ButtonPrincipal>
+          <ButtonPrincipal name="addTask">Salvar alterações</ButtonPrincipal>
         ) : (
           <>
             <ButtonDanger name="deleteTask">Excluir tarefa</ButtonDanger>

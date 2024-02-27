@@ -2,7 +2,7 @@ import { Iterator, findSelectValues } from "../containers/ContainerTask";
 import * as S from "./styles";
 
 interface IPriorityFlagProps {
-  priority: string;
+  priority: string ;
 }
 
 const getColorFlag = (priority: string) => {
@@ -22,7 +22,6 @@ const getColorFlag = (priority: string) => {
 export default function PriorityFlag({ priority }: IPriorityFlagProps) {
   const colorFlag = getColorFlag(priority);
   const priorityValue = findSelectValues(priority, Iterator.Priority);
-
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">

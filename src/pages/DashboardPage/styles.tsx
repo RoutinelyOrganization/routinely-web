@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { Header } from "../../components/Header/styles";
 import { ButtonBackPage } from "../../components/buttons/ButtonBackPage/styles";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 
 interface IDashboardPageStyle {
   $visible: boolean;
@@ -36,7 +36,7 @@ export const Main = styled.main`
   }
 
   ${media.mobile} {
-    padding: 24px;
+    padding: 10px;
   }
 `;
 

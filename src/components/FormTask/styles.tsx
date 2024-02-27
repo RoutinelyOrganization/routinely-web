@@ -1,5 +1,5 @@
 import { keyframes, styled } from "styled-components";
-import media from "../../mediaQueries";
+import media from "../../utils/functions/mediaQueries";
 import { InputStyle, LabelInput } from "../Input/styles";
 import { Button as ButtonPrincipal } from "../buttons/ButtonPrincipal/styles";
 
