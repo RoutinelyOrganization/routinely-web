@@ -159,7 +159,6 @@ export default function SignUpForm() {
               const matchErro = target.value.match(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*=])[a-zA-Z\d!@#$%&*=]{6,}$/,
               );
-              console.log(confirmPassword, "teste");
               if (matchErro) {
                 setErroPassword(false);
               } else {
