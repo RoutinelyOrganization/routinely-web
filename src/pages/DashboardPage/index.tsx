@@ -4,8 +4,7 @@ import ImageCompleteTask2 from "../../assets/imagens/complete_task_versao2.svg";
 import NewTask from "../../assets/imagens/nova tarefa.svg";
 import * as S from "./styles";
 
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Alert from "../../components/Alert";
 import DateCalendar from "../../components/Calendar";
 import DoneTasks from "../../components/DoneTasks";
@@ -19,8 +18,6 @@ import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../
 import TaskTitle from "../../components/titles/TaskTitle";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
-import { UserContext } from "../../contexts/UserContext";
-import { useAuth } from "../../hooks/useAuth";
 import { UseCRUD } from "../../hooks/useCrud";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
@@ -33,7 +30,7 @@ export interface Itasks {
   priority: string;
   tag: string;
   category: string;
-  checked?:boolean
+  checked?: boolean;
 }
 
 export default function DashboardPage() {
@@ -46,14 +43,14 @@ export default function DashboardPage() {
   >(null);
   const [dataTask, setDataTask] = useState<IAddTaskForm | null>(null);
 
-  const { user } = useContext(UserContext);
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  const { authorization } = useAuth();
+  // const { user } = useContext(UserContext);
+  // const token = localStorage.getItem("token");
+  // const navigate = useNavigate();
+  // const { authorization } = useAuth();
 
   const crudTasks = {
     addTask: {
-      name: "adição",
+      name: "adicionar",
       execute: async (props: AddTaskProps) => {
         const task = await handleAddTask(props.data);
         return task;
@@ -61,7 +58,7 @@ export default function DashboardPage() {
     },
 
     duplicateTask: {
-      name: "duplicação",
+      name: "duplicar",
       execute: async (props: AddTaskProps) => {
         const task = await handleAddTask(props.data);
         return task;
@@ -69,7 +66,7 @@ export default function DashboardPage() {
     },
 
     editTask: {
-      name: "edição",
+      name: "editar",
       execute: async (props: EditTaskProps) => {
         const task = await handleEditTask(props.id, props.data, props.tasks);
         return task;
@@ -77,7 +74,7 @@ export default function DashboardPage() {
     },
 
     deleteTask: {
-      name: "exclusão",
+      name: "excluir",
       execute: async (props: DeleteTaskProps) => {
         const task = await handleDeleteTask(props.id, props.tasks);
         return task;
@@ -119,13 +116,13 @@ export default function DashboardPage() {
               dataTask={dataTask!}
               setIsTaskOpen={setIsTaskOpen}
             >
-              {`Tem certeza que deseja realizar a ${crudTasks[crudTasksOptions!].name} da tarefa?`}
+              {`Tem certeza que deseja ${crudTasks[crudTasksOptions!].name} a tarefa?`}
             </ConfirmAction>
           </PopupAlert>
         )}
         {isAlertOpen && (
           <PopupAlert>
-            <Alert setIsAlertOpen={setIsAlertOpen}>Limite de tarefas repetidas atingido</Alert>
+            <Alert setIsAlertOpen={setIsAlertOpen}>Você atingiu o limite de tarefas duplicadas</Alert>
           </PopupAlert>
         )}
         <S.Container $visible={isTaskOpen}>
