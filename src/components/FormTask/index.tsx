@@ -20,7 +20,6 @@ interface IForm {
   >;
   setDataTask: React.Dispatch<React.SetStateAction<IAddTaskForm | null>>;
   setIsConfirmActionOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IAddTaskForm {
@@ -78,13 +77,7 @@ export const selectOptions: Array<ISelectOptions> = [
   },
 ];
 
-export default function FormTask({
-  setIsTaskOpen,
-  setCrudTasksOptions,
-  setDataTask,
-  setIsConfirmActionOpen,
-  setIsAlertOpen,
-}: IForm) {
+export default function FormTask({ setIsTaskOpen, setCrudTasksOptions, setDataTask, setIsConfirmActionOpen }: IForm) {
   const { tempTask, tasks } = useContext(TasksContext);
   const interfaceForm = !tempTask
     ? useForm<IAddTaskForm>()
@@ -108,7 +101,6 @@ export default function FormTask({
       const cleanedData = validateRepeatedTask(data, tasks);
 
       if (typeof cleanedData === "string") {
-        setIsAlertOpen(true);
         return;
       }
     }
