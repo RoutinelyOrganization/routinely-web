@@ -25,8 +25,6 @@ export const Container = styled.div<IDashboardPageStyle>`
 `;
 
 export const Main = styled.main`
-  display: flex;
-  justify-content: space-around;
   padding: 64px 24px;
   gap: 14px;
 

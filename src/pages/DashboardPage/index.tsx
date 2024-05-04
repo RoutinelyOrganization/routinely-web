@@ -1,11 +1,11 @@
 import * as S from "./styles";
 
 import { useState } from "react";
-import CardTask from "../../components/CardTask";
 import FormTask, { IAddTaskForm } from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpCustom from "../../components/PopUp";
 import PopupAlert from "../../components/PopupAlert";
+import Task from "../../components/TaskNew";
 import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksProvider } from "../../contexts/TasksContext";
@@ -112,7 +112,7 @@ export default function DashboardPage() {
         <S.Container $visible={isTaskOpen}>
           <Header />
           <S.Main>
-            <CardTask />
+            <Task />
             {/* <S.ContainerCalendar>
               <DateCalendar />
               <img className="desktop" src={ImageCompleteTask} alt="imagem da pagina complete Task" />
