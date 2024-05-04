@@ -17,16 +17,11 @@ interface IOptionsProps {
 interface ICardTask {
   category: "habit" | "project" | "task";
   titleTask: string;
-  checked?: boolean;
+  checked: boolean;
   idTask: number;
 }
 
-export default function CardTask({
-  category = "task",
-  titleTask = "jbdsbuindiobndbnsdon",
-  idTask = 1,
-  checked = false,
-}: ICardTask) {
+export default function CardTask({ category, titleTask, idTask, checked }: ICardTask) {
   const options: IOptionsProps = {
     habit: {
       title: "Hábitos",
