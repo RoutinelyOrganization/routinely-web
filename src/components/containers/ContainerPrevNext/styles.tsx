@@ -16,7 +16,7 @@ export const Container = styled.div`
   }
 
   > img {
-    margin: 5px;
-    width: 22px;
+    width: 40px;
+    padding: 8px;
   }
 `;
