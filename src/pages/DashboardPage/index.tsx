@@ -1,10 +1,12 @@
 import * as S from "./styles";
 
 import { useState } from "react";
+import closeIcon from "../../assets/icons/closeIcon.svg";
 import FormTask, { IAddTaskForm } from "../../components/FormTask";
 import Header from "../../components/Header";
 import PopUpCustom from "../../components/PopUp";
 import PopupAlert from "../../components/PopupAlert";
+import SectionCalendar from "../../components/SectionCalendar";
 import Task from "../../components/TaskNew";
 import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import { CalendarProvider } from "../../contexts/CalendarContext";
@@ -112,6 +114,12 @@ export default function DashboardPage() {
         <S.Container $visible={isTaskOpen}>
           <Header />
           <S.Main>
+            <S.ContainerCalendar>
+              <SectionCalendar />
+              <S.ButtonEditTask onClick={() => setIsTaskOpen(true)}>
+                <img src={closeIcon} alt="close button" />
+              </S.ButtonEditTask>
+            </S.ContainerCalendar>
             <Task />
             {/* <S.ContainerCalendar>
               <DateCalendar />

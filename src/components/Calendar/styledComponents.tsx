@@ -5,7 +5,7 @@ interface IChangeDisplayCalendar {
   open: boolean;
 }
 
-export const MobileDisplay = styled.div<IChangeDisplayCalendar>`
+export const MobileChangeDisplay = styled.div<IChangeDisplayCalendar>`
   opacity: 1;
   display: block;
   ${media.mobile} {
@@ -16,7 +16,7 @@ export const MobileDisplay = styled.div<IChangeDisplayCalendar>`
   }
 `;
 
-export const MobileChangeDisplay = styled.div`
+export const CustonExibitionCalendar = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;

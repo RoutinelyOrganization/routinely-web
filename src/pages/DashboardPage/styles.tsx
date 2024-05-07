@@ -65,22 +65,19 @@ export const ContainerTasks = styled.section`
 `;
 
 export const ButtonEditTask = styled.button`
-  position: absolute;
   top: -20px;
-  right: -20px;
-  width: 64px;
-  height: 64px;
+  width: 40px;
+  height: 40px;
   border: none;
-  border-radius: 100px;
+  border-radius: 50%;
   background-color: #5fbe2f;
   cursor: pointer;
   transition: all 0.4s ease;
   > img {
-    width: 2.5rem;
+    width: 1.5rem;
   }
   &:hover {
     background-color: #80d854;
-    transform: scale(0.97);
   }
 
   ${media.mobile} {
@@ -90,48 +87,6 @@ export const ButtonEditTask = styled.button`
 
 export const ContainerCalendar = styled.section`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  max-width: 576px;
-  width: 50%;
-
-  > img {
-    max-width: 350px;
-  }
-
-  > .tablet {
-    display: none;
-  }
-
-  ${media.desktop} {
-    width: 40%;
-
-    > img {
-      width: 100%;
-    }
-    > .desktop {
-      display: none;
-    }
-    > .tablet {
-      display: block;
-    }
-  }
-
-  ${media.tablet} {
-    flex-direction: row;
-    width: 100%;
-    gap: 14px;
-    > img {
-      width: 40%;
-    }
-  }
-
-  ${media.mobile} {
-    max-width: 450px;
-    width: 100%;
-    > .tablet {
-      display: none;
-    }
-  }
+  gap: 1.5rem;
+  margin-bottom: 40px;
 `;

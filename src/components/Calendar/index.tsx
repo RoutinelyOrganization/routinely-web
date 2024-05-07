@@ -25,25 +25,26 @@ const customDayOfWeekFormatter = (day: string) => {
 };
 
 export default function DateCalendar() {
-  const [date, setDate] = useState<Dayjs>(dayjs());
+  // const [date, setDate] = useState<Dayjs>(dayjs());
   const [openCalendar, setOpenCalendar] = useState(false);
-  const { setMonth, setYear } = useContext(CalendarContext);
+  const { setDate, date } = useContext(CalendarContext);
 
   const handleChangeDate = (selectedValue: Dayjs) => {
     setDate(selectedValue);
 
-    setMonth(date.month() + 1);
-    setYear(date.year());
+    // setMonth(date.month() + 1);
+    // setYear(date.year());
+    // setDay(date.date());
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <SComponents.MobileChangeDisplay>
+      <SComponents.CustonExibitionCalendar>
         <SComponents.Button onClick={() => setOpenCalendar(!openCalendar)} open={openCalendar}>
           <img src={ArrowDown} alt="" />
         </SComponents.Button>
         <SCalendar.CustomDemoItem label={dayjs().format("dddd, DD MMMM")}>
-          <SComponents.MobileDisplay open={openCalendar}>
+          <SComponents.MobileChangeDisplay open={openCalendar}>
             <SCalendar.StyledDateCalendar
               openTo="day"
               onChange={(event) => handleChangeDate(event as Dayjs)}
@@ -51,9 +52,9 @@ export default function DateCalendar() {
               views={["day", "month", "year"]}
               dayOfWeekFormatter={customDayOfWeekFormatter}
             />
-          </SComponents.MobileDisplay>
+          </SComponents.MobileChangeDisplay>
         </SCalendar.CustomDemoItem>
-      </SComponents.MobileChangeDisplay>
+      </SComponents.CustonExibitionCalendar>
     </LocalizationProvider>
   );
 }
