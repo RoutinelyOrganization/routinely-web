@@ -13,14 +13,13 @@ export const CustonCheckedBox = styled.label`
     height: 25px;
     border-radius: 50%;
     border: 3px solid #5c59bb;
+
     > img {
       display: none;
     }
   }
 
   > input:checked ~ span {
-    /* border-color: #767676; */
-    border-color: #5c59bb;
     > img {
       display: block;
     }

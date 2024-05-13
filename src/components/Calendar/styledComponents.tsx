@@ -5,6 +5,10 @@ interface IChangeDisplayCalendar {
   open: boolean;
 }
 
+interface IExibitionCalendar {
+  version?: "expanded" | "compact";
+}
+
 export const MobileChangeDisplay = styled.div<IChangeDisplayCalendar>`
   opacity: 1;
   display: block;
@@ -16,10 +20,35 @@ export const MobileChangeDisplay = styled.div<IChangeDisplayCalendar>`
   }
 `;
 
-export const CustonExibitionCalendar = styled.div`
+export const CustonExibitionCalendar = styled.div<IExibitionCalendar>`
   display: flex;
   justify-content: center;
   width: 100%;
+  border: 2px solid #5c59bb;
+  border-radius: 8px;
+
+  > div {
+    border-radius: 8px;
+  }
+
+  ${(props) =>
+    props.version === "compact" &&
+    `
+    .css-dplwbx-MuiPickersCalendarHeader-label {
+      font-weight: 400 !important;
+      text-transform: capitalize;
+    }
+    .MuiDateCalendar-root {
+      border-radius: 8px;
+    }
+
+    > div {
+      > p{
+        display: none;
+      }
+    }
+  `}
+
   ${media.mobile} {
     position: relative;
   }

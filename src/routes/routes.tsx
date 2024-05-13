@@ -1,5 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import App from "../App";
+import { TasksProvider } from "../contexts/TasksContext";
 import { UserProvider } from "../contexts/UserContext";
 import DashboardPage from "../pages/DashboardPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
@@ -12,15 +13,29 @@ import { WelcomePage } from "../pages/WelcomePage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<UserProvider><App /></UserProvider>}>
+    <Route
+      path="/"
+      element={
+        <UserProvider>
+          <App />
+        </UserProvider>
+      }
+    >
       <Route path="/" element={<HomePage />} />
       <Route path="/welcomePage" element={<WelcomePage />} />
       <Route path="/signUpPage" element={<SignUpPage />} />
       <Route path="/signInPage" element={<SignInPage />} />
       <Route path="/forgotPasswordPage" element={<ForgotPasswordPage />} />
       <Route path="/redefinePasswordPage" element={<RedefinePasswordPage />} />
-      <Route path="/newPasswordPage" element={<NewPasswordPage/>} />
-      <Route path="/dashboardpage" element={<DashboardPage />} />
+      <Route path="/newPasswordPage" element={<NewPasswordPage />} />
+      <Route
+        path="/dashboardpage"
+        element={
+          <TasksProvider>
+            <DashboardPage />
+          </TasksProvider>
+        }
+      />
     </Route>,
   ),
 );

@@ -18,5 +18,8 @@ export const Container = styled.div`
   > img {
     width: 40px;
     padding: 8px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;

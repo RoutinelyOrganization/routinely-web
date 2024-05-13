@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
-import { Header } from "../../components/Header/styles";
 import { ButtonBackPage } from "../../components/buttons/ButtonBackPage/styles";
+import { Header } from "../../components/Header/styles";
+import { Container as ContainerTypeTask } from "../../components/TypeTask/styles";
 import media from "../../utils/functions/mediaQueries";
 
 interface IDashboardPageStyle {
@@ -89,4 +90,13 @@ export const ContainerCalendar = styled.section`
   display: flex;
   gap: 1.5rem;
   margin-bottom: 40px;
+`;
+
+export const ContainerNewTask = styled.div`
+  position: relative;
+
+  > ${ContainerTypeTask} {
+    left: -153%;
+    top: 43%;
+  }
 `;

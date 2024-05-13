@@ -1,26 +1,53 @@
 import React, { createContext, useState } from "react";
-import { Itasks } from "../pages/DashboardPage";
+import { Task } from "../types/task";
+import { TypeTask } from "../types/typeTasks";
 
 interface ITasksProvider {
   children: React.ReactNode;
 }
 
+interface IFormTypeTask {
+  type: TypeTask["type"];
+  description: string;
+}
+
 interface ITasksContext {
-  tasks: Itasks[];
-  setTasks: React.Dispatch<React.SetStateAction<Itasks[]>>;
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   taskId: number;
   setTaskId: React.Dispatch<React.SetStateAction<number>>;
-  tempTask: Itasks | null;
-  setTempTask: React.Dispatch<React.SetStateAction<Itasks | null>>;
+  tempTask: Task | null;
+  setTempTask: React.Dispatch<React.SetStateAction<Task | null>>;
+  formTaskOpen: boolean;
+  setFormTaskOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  formTypeTask: TypeTask["type"];
+  setFormTypeTask: React.Dispatch<React.SetStateAction<TypeTask["type"]>>;
+  formTypeAndDescTask: Array<IFormTypeTask>;
 }
 
 export const TasksContext = createContext<ITasksContext>({} as ITasksContext);
 TasksContext.displayName = "Tasks Context";
 
 export const TasksProvider: React.FC<ITasksProvider> = ({ children }) => {
-  const [tasks, setTasks] = useState<Itasks[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [taskId, setTaskId] = useState(0);
-  const [tempTask, setTempTask] = useState<Itasks | null>(null);
+  const [tempTask, setTempTask] = useState<Task | null>(null);
+  const [formTaskOpen, setFormTaskOpen] = useState<boolean>(false);
+  const [formTypeTask, setFormTypeTask] = useState<TypeTask["type"]>("habit");
+  const [formTypeAndDescTask] = useState<Array<IFormTypeTask>>([
+    {
+      type: "habit",
+      description: "descrição do habito",
+    },
+    {
+      type: "project",
+      description: "descrição do projeto",
+    },
+    {
+      type: "task",
+      description: "descrição da tarefa",
+    },
+  ]);
 
   return (
     <TasksContext.Provider
@@ -31,6 +58,11 @@ export const TasksProvider: React.FC<ITasksProvider> = ({ children }) => {
         setTaskId,
         tempTask,
         setTempTask,
+        setFormTaskOpen,
+        formTaskOpen,
+        setFormTypeTask,
+        formTypeTask,
+        formTypeAndDescTask,
       }}
     >
       {children}

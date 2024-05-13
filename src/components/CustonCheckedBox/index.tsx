@@ -4,9 +4,12 @@ import * as S from "./styles";
 interface ICheckBox {
   id: number;
   checked: boolean;
-  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue?: (id: number, checked: boolean, name?: string, text?: string) => void;
+  text?: string;
+  name?: string;
 }
-export default function CustonCheckedBox({ id, checked, setChecked }: ICheckBox) {
+export default function CustonCheckedBox({ id, checked, setChecked, text, name, setValue }: ICheckBox) {
   // const [isChecked, setIsChecked] = useState<boolean>(checked);
   // const { handleEditTask } = UseCRUD();
   // const { tasks, setTasks } = useContext(TasksContext);
@@ -23,6 +26,11 @@ export default function CustonCheckedBox({ id, checked, setChecked }: ICheckBox)
   //   setTasks(newTasks);
   // }
 
+  const handleChecked = () => {
+    setChecked && setChecked(!checked);
+    setValue && setValue(id, !checked, name, text);
+  };
+
   return (
     <S.CustonCheckedBox htmlFor={`checkbox-${id}`}>
       <input
@@ -30,11 +38,11 @@ export default function CustonCheckedBox({ id, checked, setChecked }: ICheckBox)
         id={`checkbox-${id}`}
         type="checkbox"
         checked={checked}
-        onChange={() => setChecked(!checked)}
+        onChange={handleChecked}
+        value={text}
+        name={name}
       />
-      <span>
-        <img src={image} alt="" />
-      </span>
+      <span>{text || <img src={image} alt="" />}</span>
     </S.CustonCheckedBox>
   );
 }

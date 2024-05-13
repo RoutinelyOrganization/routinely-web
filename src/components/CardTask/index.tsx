@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TasksContext } from "../../contexts/TasksContext";
 import ButtonEdit from "../buttons/ButtonEdit";
 import CustonCheckedBox from "../CustonCheckedBox";
 import * as S from "./styles";
@@ -41,6 +42,18 @@ export default function CardTask({ category, titleTask, idTask, checked }: ICard
 
   const { icon, title } = options[category];
   const descrptionFormated = titleTask.length > 91 ? titleTask.slice(0, 90) + "..." : titleTask;
+
+  const { setFormTaskOpen, setTempTask } = useContext(TasksContext);
+  const handleEditTask = () => {
+    setTempTask({
+      id: idTask,
+      name: titleTask,
+      type: category,
+      checked,
+    });
+
+    setFormTaskOpen(true);
+  };
   return (
     <S.Container category={category} checked={isChecked}>
       <S.Title>
@@ -53,7 +66,7 @@ export default function CardTask({ category, titleTask, idTask, checked }: ICard
       </S.ContainerDescription>
       <S.ContainerBtnIcon>
         <S.Button>Carreira</S.Button>
-        <ButtonEdit />
+        <ButtonEdit executeEdit={handleEditTask} />
       </S.ContainerBtnIcon>
     </S.Container>
   );

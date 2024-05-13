@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { ITask } from "../../types/task";
+import { type Task } from "../../types/task";
 import ContainerTask from "../containers/ContainerTaskNew";
 import * as S from "./styles";
 
-const tasks: ITask[] = [
-  { category: "task", id: 1, name: "Tarefa 1", checked: true },
-  { category: "habit", id: 2, name: "Tarefa 2", checked: false },
-  { category: "project", id: 3, name: "Tarefa 3", checked: true },
-  { category: "task", id: 4, name: "Tarefa 4", checked: false },
-  { category: "habit", id: 5, name: "Tarefa 5", checked: false },
-  { category: "project", id: 6, name: "Tarefa 6", checked: true },
-  { category: "task", id: 7, name: "Tarefa 7", checked: false },
-  { category: "habit", id: 8, name: "Tarefa 8", checked: false },
-  { category: "project", id: 9, name: "Tarefa 9", checked: true },
-  { category: "task", id: 10, name: "Tarefa 10", checked: false },
-  { category: "habit", id: 11, name: "Tarefa 11", checked: true },
-  { category: "project", id: 12, name: "Tarefa 12", checked: false },
+const tasks: Task[] = [
+  { type: "task", id: 1, name: "Tarefa 1", checked: true },
+  { type: "habit", id: 2, name: "Tarefa 2", checked: false },
+  { type: "project", id: 3, name: "Tarefa 3", checked: true },
+  { type: "task", id: 4, name: "Tarefa 4", checked: false },
+  { type: "habit", id: 5, name: "Tarefa 5", checked: false },
+  { type: "project", id: 6, name: "Tarefa 6", checked: true },
+  { type: "task", id: 7, name: "Tarefa 7", checked: false },
+  { type: "habit", id: 8, name: "Tarefa 8", checked: false },
+  { type: "project", id: 9, name: "Tarefa 9", checked: true },
+  { type: "task", id: 10, name: "Tarefa 10", checked: false },
+  { type: "habit", id: 11, name: "Tarefa 11", checked: true },
+  { type: "project", id: 12, name: "Tarefa 12", checked: false },
 ];
 
 export default function Task() {
-  const [isTask, setIsTask] = useState<ITask[]>(tasks);
+  const [isTask, setIsTask] = useState<Task[]>(tasks);
   const [selected, setSelected] = useState("all tasks");
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Task() {
       return;
     }
 
-    const tasksForCategory = tasks.filter((task) => task.category === selected && task.checked === false);
+    const tasksForCategory = tasks.filter((task) => task.type === selected && task.checked === false);
     setIsTask(tasksForCategory);
   }, [selected]);
 

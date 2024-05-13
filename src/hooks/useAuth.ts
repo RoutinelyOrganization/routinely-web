@@ -86,7 +86,6 @@ export const useAuth = () => {
     }
 
     const response = await validateToken(tokenLocal);
-    console.log(response);
     
     if (!axios.isAxiosError(response)) {
       

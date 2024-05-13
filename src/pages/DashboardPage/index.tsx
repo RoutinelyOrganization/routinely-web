@@ -1,16 +1,18 @@
 import * as S from "./styles";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import closeIcon from "../../assets/icons/closeIcon.svg";
-import FormTask, { IAddTaskForm } from "../../components/FormTask";
+import { IAddTaskForm } from "../../components/FormTask";
+import FormTask from "../../components/FormTaskNew";
 import Header from "../../components/Header";
 import PopUpCustom from "../../components/PopUp";
 import PopupAlert from "../../components/PopupAlert";
 import SectionCalendar from "../../components/SectionCalendar";
 import Task from "../../components/TaskNew";
+import TypeTask from "../../components/TypeTask";
 import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import { CalendarProvider } from "../../contexts/CalendarContext";
-import { TasksProvider } from "../../contexts/TasksContext";
+import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
@@ -28,12 +30,13 @@ export interface Itasks {
 
 export default function DashboardPage() {
   const { handleAddTask, handleEditTask, handleDeleteTask } = UseCRUD();
-  const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
+  const [selectTypeTaskOpen, setSelectTypeTaskOpen] = useState<boolean>(false);
   const [isConfirmActionOpen, setIsConfirmActionOpen] = useState<boolean>(false);
   const [crudTasksOptions, setCrudTasksOptions] = useState<
     "addTask" | "editTask" | "deleteTask" | "duplicateTask" | null
   >(null);
   const [dataTask, setDataTask] = useState<IAddTaskForm | null>(null);
+  const { formTaskOpen, setFormTaskOpen } = useContext(TasksContext);
 
   // const { user } = useContext(UserContext);
   // const token = localStorage.getItem("token");
@@ -74,6 +77,12 @@ export default function DashboardPage() {
     },
   };
 
+  const closeTaskInMain = () => {
+    if (selectTypeTaskOpen) {
+      setSelectTypeTaskOpen(false);
+    }
+  };
+
   // useEffect(() => {
   //   authorization().catch(() => {
   //     navigate("/signInPage");
@@ -85,50 +94,52 @@ export default function DashboardPage() {
   // }, [token, user.email, navigate, authorization]);
 
   return (
-    <TasksProvider>
-      <CalendarProvider>
-        <ScrollToTop />
-        {isTaskOpen && (
-          <PopUpCustom setIsTaskOpen={setIsTaskOpen}>
-            <FormTask
+    <CalendarProvider>
+      <ScrollToTop />
+      {formTaskOpen && (
+        <PopUpCustom setIsTaskOpen={setSelectTypeTaskOpen}>
+          {/* <FormTask
               setIsTaskOpen={setIsTaskOpen}
               setCrudTasksOptions={setCrudTasksOptions}
               setDataTask={setDataTask}
               setIsConfirmActionOpen={setIsConfirmActionOpen}
-            />
-          </PopUpCustom>
-        )}
+            /> */}
+          <FormTask />
+        </PopUpCustom>
+      )}
 
-        {isConfirmActionOpen && (
-          <PopupAlert>
-            <ConfirmAction
-              setIsDeleteTaskOpen={setIsConfirmActionOpen}
-              crudTask={crudTasks[crudTasksOptions!].execute}
-              dataTask={dataTask!}
-              setIsTaskOpen={setIsTaskOpen}
-            >
-              {`Tem certeza que deseja ${crudTasks[crudTasksOptions!].name} a tarefa?`}
-            </ConfirmAction>
-          </PopupAlert>
-        )}
-        <S.Container $visible={isTaskOpen}>
-          <Header />
-          <S.Main>
-            <S.ContainerCalendar>
-              <SectionCalendar />
-              <S.ButtonEditTask onClick={() => setIsTaskOpen(true)}>
+      {isConfirmActionOpen && (
+        <PopupAlert>
+          <ConfirmAction
+            setIsDeleteTaskOpen={setIsConfirmActionOpen}
+            crudTask={crudTasks[crudTasksOptions!].execute}
+            dataTask={dataTask!}
+            setIsTaskOpen={setSelectTypeTaskOpen}
+          >
+            {`Tem certeza que deseja ${crudTasks[crudTasksOptions!].name} a tarefa?`}
+          </ConfirmAction>
+        </PopupAlert>
+      )}
+      <S.Container $visible={selectTypeTaskOpen}>
+        <Header />
+        <S.Main onClick={closeTaskInMain}>
+          <S.ContainerCalendar>
+            <SectionCalendar />
+            <S.ContainerNewTask>
+              <S.ButtonEditTask onClick={() => setSelectTypeTaskOpen(true)}>
                 <img src={closeIcon} alt="close button" />
               </S.ButtonEditTask>
-            </S.ContainerCalendar>
-            <Task />
-            {/* <S.ContainerCalendar>
+              {selectTypeTaskOpen && <TypeTask />}
+            </S.ContainerNewTask>
+          </S.ContainerCalendar>
+          <Task />
+          {/* <S.ContainerCalendar>
               <DateCalendar />
               <img className="desktop" src={ImageCompleteTask} alt="imagem da pagina complete Task" />
               <img className="tablet" src={ImageCompleteTask2} alt="imagem da pagina complete Task" />
             </S.ContainerCalendar> */}
-          </S.Main>
-        </S.Container>
-      </CalendarProvider>
-    </TasksProvider>
+        </S.Main>
+      </S.Container>
+    </CalendarProvider>
   );
 }

@@ -37,14 +37,23 @@ export const StyledDateCalendar = styled(DateCalendar)({
   "& .MuiPickersCalendarHeader-switchViewIcon": {
     color: "#5C59BB",
   },
+  "& .css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+    fontWeight: "bold",
+    fontSize: "16px",
+    color: "#000",
+  },
+
+  "& .MuiPickersCalendarHeader-root": {
+    padding: "0 0 0 13px",
+  },
 });
 
 const StyledDemoItemWrapper = styled("div")({
   backgroundColor: "#F6F7F8",
   maxWidth: "450px",
   width: "100%",
-  border: "2px solid #5C59BB",
-  borderRadius: "8px",
+  // border: "2px solid #5C59BB",
+  // borderRadius: "8px",
 
   "> p": {
     color: "#5C59BB",

@@ -54,6 +54,13 @@ export const ContainerDescription = styled.div`
     max-width: 100%;
     word-break: break-all;
   }
+
+  > label {
+    > span {
+      position: relative;
+      z-index: 11;
+    }
+  }
 `;
 
 export const Container = styled.div<ICardTaskStyles>`

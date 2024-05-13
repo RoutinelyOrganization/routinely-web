@@ -1,21 +1,19 @@
-import { ITask } from "../../../types/task";
+import { Task } from "../../../types/task";
 import CardTask from "../../CardTask";
 import * as S from "./styles";
 
 interface IContainerTask {
-  tasks: ITask[];
+  tasks: Task[];
 }
 
 export default function ContainerTask({ tasks }: IContainerTask) {
-  console.log(tasks);
-
   return (
     <S.Container>
       {tasks && tasks.length
         ? tasks.map((task) => (
             <CardTask
               key={task.id}
-              category={task.category}
+              category={task.type}
               idTask={task.id}
               titleTask={task.name}
               checked={task.checked}

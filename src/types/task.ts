@@ -1,6 +1,7 @@
-export interface ITask {
+import { TypeTask } from "./typeTasks";
+
+export interface Task  extends TypeTask {
   id: number;
   name: string;
-  category: "habit" | "project" | "task";
   checked: boolean;
 }
