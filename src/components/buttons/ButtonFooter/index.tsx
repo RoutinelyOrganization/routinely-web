@@ -6,5 +6,5 @@ interface IButtonFooterProps {
   onClick: () => void;
 }
 export default function ButtonFooter({ children, onClick }: IButtonFooterProps) {
-  return <S.ButtonFooter onClick={onClick}>{children || <img src={Start} alt="" />}</S.ButtonFooter>;
+  return <S.ButtonFooter onClick={onClick}>{children || <img src={Start} alt="Inicio" />}</S.ButtonFooter>;
 }

@@ -34,8 +34,12 @@ export default function HomePage() {
       <S.Header>
         <Logo />
         <S.ContainerButtonsHeader>
-          <ButtonPrincipal hover={false}>Recursos</ButtonPrincipal>
-          <ButtonPrincipal hover={false}>Planos</ButtonPrincipal>
+          <ButtonPrincipal className="d-none-mobile" hover={false}>
+            Recursos
+          </ButtonPrincipal>
+          <ButtonPrincipal className="d-none-mobile" hover={false}>
+            Planos
+          </ButtonPrincipal>
           <ButtonPrincipal secondaryColor={true} onClick={() => navigate("/welcomePage")}>
             Acesse
           </ButtonPrincipal>

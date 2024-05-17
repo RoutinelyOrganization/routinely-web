@@ -19,10 +19,6 @@ export const Container = styled.div<IDashboardPageStyle>`
       }
     }
   }
-
-  ${media.mobile} {
-    display: ${(props) => (props.$visible ? "none" : "block")};
-  }
 `;
 
 export const Main = styled.main`
@@ -35,7 +31,9 @@ export const Main = styled.main`
   }
 
   ${media.mobile} {
-    padding: 10px;
+    padding: 10px 10px 74px;
+    max-width: 400px;
+    margin: 0 auto;
   }
 `;
 
@@ -66,7 +64,6 @@ export const ContainerTasks = styled.section`
 `;
 
 export const ButtonEditTask = styled.button`
-  top: -20px;
   width: 40px;
   height: 40px;
   border: none;
@@ -81,6 +78,13 @@ export const ButtonEditTask = styled.button`
     background-color: #80d854;
   }
 
+  /* ${media.desktop} {
+    position: fixed;
+    top: 90%;
+    right: 2%;
+    z-index: 20;
+  } */
+
   ${media.mobile} {
     display: none;
   }
@@ -94,9 +98,45 @@ export const ContainerCalendar = styled.section`
 
 export const ContainerNewTask = styled.div`
   position: relative;
+  max-width: 90px;
+  width: 100%;
+  height: 80px;
+  top: 20px;
 
   > ${ContainerTypeTask} {
-    left: -153%;
-    top: 43%;
+    position: absolute;
+    right: 73px;
+    top: 23px;
+    z-index: 20;
+    max-width: 180px;
+    max-height: 80px;
+  }
+
+  ${media.desktop} {
+    position: fixed;
+    z-index: 20;
+    top: auto;
+    bottom: 0px;
+    right: -30px;
+    > ${ContainerTypeTask} {
+      top: -64px;
+    }
+  }
+
+  ${media.mobile} {
+    top: auto;
+    bottom: 57px;
+    right: -71px;
+    max-width: 100%;
+    width: 100%;
+    height: 157px;
+    ${ContainerTypeTask} {
+      top: 0;
+      max-width: 400px;
+      max-height: 157px;
+      > p {
+        padding: 16px;
+      }
+    }
   }
 `;

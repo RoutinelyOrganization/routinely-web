@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../utils/functions/mediaQueries";
 import { Button as PopUpCloseButton } from "../buttons/PopUpCloseButton/styles";
 import { CustonCheckedBox as CheckBox } from "../CustonCheckedBox/styles";
 import { ErrorMessage } from "../ErrorMessage/styles";
@@ -10,10 +11,9 @@ interface ICustonCheckedBox {
 
 export const Form = styled.form`
   position: relative;
-  margin: 16px 0;
   max-width: 520px;
   width: 100%;
-  max-height: 100vh;
+  max-height: calc(100vh - 40px);
   overflow-y: auto;
   background-color: #fff;
   padding: 12px 24px 24px;
@@ -25,6 +25,12 @@ export const Form = styled.form`
 
   ${PopUpCloseButton} {
     top: 3%;
+  }
+
+  ${media.mobile} {
+    max-height: calc(100vh - 107px);
+    min-height: 82vh;
+    border-radius: 0px;
   }
 `;
 
@@ -152,9 +158,23 @@ export const ContainerCustonCheckedBox = styled.div<ICustonCheckedBox>`
 export const ContainerButtons = styled.div`
   display: flex;
   gap: 8px;
-  justify-content: end;
+  justify-content: space-between;
 
   > button {
     max-width: 150px;
+  }
+
+  ${media.mobile} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+    > button {
+      max-width: 100%;
+    }
+    .mobile {
+      grid-row: 1;
+      grid-column: span 2;
+    }
   }
 `;

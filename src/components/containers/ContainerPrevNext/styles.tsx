@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../../utils/functions/mediaQueries";
 
 export const Container = styled.div`
   max-width: 140px;
@@ -20,6 +21,15 @@ export const Container = styled.div`
     padding: 8px;
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  ${media.tablet} {
+    max-width: 200px;
+    max-height: 30px;
+    > img {
+      width: 36px;
+      padding: 5px;
     }
   }
 `;

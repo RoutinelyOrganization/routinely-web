@@ -24,17 +24,22 @@ export default function SectionCalendar() {
   }, [changePage]);
 
   return (
-    <S.Container>
-      <h1>
-        {weekDay}, {day} de {nameMonth} de {year}
-      </h1>
-      <S.ContainerIcons>
-        <img src={iconCalendar} alt="" onClick={() => setOpenCalendar(!openCalendar)} />
-        <ContainerPrevNext setChangePage={setChangePage} />
-        <S.ContainerCalendar openCalendar={openCalendar}>
-          <DateCalendar />
-        </S.ContainerCalendar>
-      </S.ContainerIcons>
-    </S.Container>
+    <>
+      <S.Container>
+        <h1>
+          {weekDay}, {day} de {nameMonth} de {year}
+        </h1>
+        <S.ContainerIcons>
+          <img src={iconCalendar} alt="" onClick={() => setOpenCalendar(!openCalendar)} />
+          <ContainerPrevNext setChangePage={setChangePage} />
+          <S.ContainerCalendar openCalendar={openCalendar}>
+            <DateCalendar />
+          </S.ContainerCalendar>
+        </S.ContainerIcons>
+      </S.Container>
+      <S.SecondContainerCalendar>
+        <DateCalendar />
+      </S.SecondContainerCalendar>
+    </>
   );
 }

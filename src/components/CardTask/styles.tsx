@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../utils/functions/mediaQueries";
 
 interface ICardTaskStyles {
   checked: boolean;
@@ -99,6 +100,10 @@ export const Container = styled.div<ICardTaskStyles>`
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.03);  
   }`}
+
+  ${media.mobile} {
+    max-width: 100%;
+  }
 `;
 
 export const ContainerBtnIcon = styled.div`

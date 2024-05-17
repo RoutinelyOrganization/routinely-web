@@ -172,6 +172,7 @@ export default function FormTask() {
           <S.QuantityPerWeekParagraph>
             Quantidade{" "}
             <InputComponent
+              hasError={!!errors.quantityPerWeek}
               placeholder="0"
               id="quantityPerWeek"
               type="text"
@@ -208,7 +209,7 @@ export default function FormTask() {
             <S.DuplicateButton>Duplicar</S.DuplicateButton>
           </>
         )}
-        <ButtonPrincipal>Salvar alterações</ButtonPrincipal>
+        <ButtonPrincipal className="mobile">Salvar Alterações</ButtonPrincipal>
       </S.ContainerButtons>
     </S.Form>
   );

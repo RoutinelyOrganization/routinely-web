@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "../../utils/functions/mediaQueries";
 
 export const Conteiner = styled.section``;
 
@@ -11,4 +12,12 @@ export const Select = styled.select`
   color: #5c59bb;
   max-width: 250px;
   width: 100%;
+
+  ${media.tablet} {
+    max-width: 200px;
+  }
+
+  ${media.mobile} {
+    max-width: 100%;
+  }
 `;

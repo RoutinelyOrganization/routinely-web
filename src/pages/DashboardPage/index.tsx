@@ -2,6 +2,7 @@ import * as S from "./styles";
 
 import { useContext, useState } from "react";
 import closeIcon from "../../assets/icons/closeIcon.svg";
+import newTask from "../../assets/imagens/nova tarefa.svg";
 import { IAddTaskForm } from "../../components/FormTask";
 import FormTask from "../../components/FormTaskNew";
 import Header from "../../components/Header";
@@ -10,6 +11,7 @@ import PopupAlert from "../../components/PopupAlert";
 import SectionCalendar from "../../components/SectionCalendar";
 import Task from "../../components/TaskNew";
 import TypeTask from "../../components/TypeTask";
+import ButtonFooter from "../../components/buttons/ButtonFooter";
 import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../../components/confirmAction";
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
@@ -134,6 +136,7 @@ export default function DashboardPage() {
             </S.ContainerNewTask>
           </S.ContainerCalendar>
           <Task tasks={tasks} />
+
           {/* <S.ContainerCalendar>
               <DateCalendar />
               <img className="desktop" src={ImageCompleteTask} alt="imagem da pagina complete Task" />
@@ -141,6 +144,9 @@ export default function DashboardPage() {
             </S.ContainerCalendar> */}
         </S.Main>
       </S.Container>
+      <ButtonFooter onClick={() => setSelectTypeTaskOpen((v) => !v)}>
+        <img src={newTask} alt="" />
+      </ButtonFooter>
     </CalendarProvider>
   );
 }

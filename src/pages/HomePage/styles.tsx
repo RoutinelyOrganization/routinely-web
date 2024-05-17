@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
-import { Wrapper } from "../../components/MenuHeader/styles";
 import { Button as ButtonStyle } from "../../components/buttons/ButtonPrincipal/styles";
 import { Container } from "../../components/containers/ContainerIcons/styles";
+import { Container as Logo } from "../../components/Logo/styles";
+import { Wrapper } from "../../components/MenuHeader/styles";
 import media from "../../utils/functions/mediaQueries";
 
 export const Header = styled.header`
@@ -11,6 +12,10 @@ export const Header = styled.header`
   justify-content: space-between;
   background-color: #5c59bb;
 
+  ${Logo} {
+    margin-right: 100px;
+  }
+
   & ${ButtonStyle} {
     max-width: 160px;
   }
@@ -19,11 +24,21 @@ export const Header = styled.header`
     padding: 15px 32px;
   }
 
+  ${media.tablet} {
+    ${Logo} {
+      margin-right: 45px;
+    }
+  }
+
   ${media.mobile} {
     padding: 4px 24px;
 
     & ${ButtonStyle} {
       margin-right: 8px;
+    }
+
+    .d-none-mobile {
+      display: none;
     }
   }
 `;

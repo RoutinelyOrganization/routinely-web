@@ -20,6 +20,25 @@ export const MobileChangeDisplay = styled.div<IChangeDisplayCalendar>`
   }
 `;
 
+export const Button = styled.button<IChangeDisplayCalendar>`
+  display: none;
+
+  ${media.mobile} {
+    display: block;
+    position: absolute;
+    top: ${(props) => (props.open ? "4%" : "30%")};
+    right: 5%;
+    border: none;
+    background-color: transparent;
+    transform: ${(props) => (props.open ? "rotate(180deg)" : "")};
+
+    > img {
+      width: 50px;
+      fill: #5c59bb;
+    }
+  }
+`;
+
 export const CustonExibitionCalendar = styled.div<IExibitionCalendar>`
   display: flex;
   justify-content: center;
@@ -47,28 +66,18 @@ export const CustonExibitionCalendar = styled.div<IExibitionCalendar>`
         display: none;
       }
     }
+
+    ${MobileChangeDisplay}{
+      opacity: 1;
+      height: auto;
+    }
+
+    ${Button} {
+      display: none;
+    }
   `}
 
   ${media.mobile} {
     position: relative;
-  }
-`;
-
-export const Button = styled.button<IChangeDisplayCalendar>`
-  display: none;
-
-  ${media.mobile} {
-    display: block;
-    position: absolute;
-    top: ${(props) => (props.open ? "4%" : "30%")};
-    right: 5%;
-    border: none;
-    background-color: transparent;
-    transform: ${(props) => (props.open ? "rotate(180deg)" : "")};
-
-    > img {
-      width: 50px;
-      fill: #5c59bb;
-    }
   }
 `;

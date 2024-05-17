@@ -17,11 +17,16 @@ export const Header = styled.header<IHeader>`
   z-index: 1;
 
   ${media.desktop} {
-    padding: ${(props) => (props.$header === "primary" ? "14px 140px" : "24px 32px;")};
+    padding: ${(props) => (props.$header === "primary" ? "14px 40px" : "24px 32px;")};
+  }
+
+  ${media.tablet} {
+    padding: ${(props) => (props.$header === "primary" ? "14px 32px" : "14px 24px;")};
+    gap: 50px;
   }
 
   ${media.mobile} {
-    padding: ${(props) => (props.$header === "primary" ? "14px 32px" : "14px 24px;")};
+    padding: ${(props) => (props.$header === "primary" ? "14px 24px" : "14px 24px;")};
     gap: 0;
 
     ${ButtonBackPage} {

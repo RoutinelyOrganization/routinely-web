@@ -14,7 +14,7 @@ export interface IHeader {
   setIsTaskOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ header = "primary", setIsTaskOpen }: IHeader) {
+export default function Header({ header = "primary" }: IHeader) {
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const { user } = useContext(UserContext);
   const token = localStorage.getItem("token");
@@ -59,7 +59,7 @@ export default function Header({ header = "primary", setIsTaskOpen }: IHeader) {
     <S.Header $header={header}>
       {header === "primary" ? (
         <>
-          <ButtonBackPage setIsTaskOpen={setIsTaskOpen} />
+          {/* <ButtonBackPage setIsTaskOpen={setIsTaskOpen} /> */}
           <Logo />
         </>
       ) : (

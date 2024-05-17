@@ -10,7 +10,8 @@ export const Modal = styled.div`
   z-index: 100;
   background-color: #0b0c0b3e;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  justify-content: center;
 
   ${Header} {
     display: none;
@@ -19,7 +20,7 @@ export const Modal = styled.div`
   ${media.mobile} {
     display: block;
     background: none;
-    position: static;
+    /* position: static; */
 
     ${Header} {
       display: flex;
