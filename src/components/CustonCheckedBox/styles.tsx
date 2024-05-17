@@ -13,6 +13,7 @@ export const CustonCheckedBox = styled.label`
     height: 25px;
     border-radius: 50%;
     border: 3px solid #5c59bb;
+    cursor: pointer;
 
     > img {
       display: none;

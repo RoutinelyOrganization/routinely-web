@@ -1,104 +1,164 @@
+import dayjs, { Dayjs } from "dayjs";
 import { useContext, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import arrow from "../../assets/icons/arrowDown.svg";
 import infoIcon from "../../assets/icons/informacao.svg";
 import { TasksContext } from "../../contexts/TasksContext";
+import { Task } from "../../types/task";
+import { DaysOfWeek } from "../../types/weekDays";
+import { dateFormat } from "../../utils/formats/dateAndTime";
+import { pastDate } from "../../utils/validators/pastDate";
 import ButtonDanger from "../buttons/ButtonDanger";
 import ButtonPrincipal from "../buttons/ButtonPrincipal";
 import PopUpCloseButton from "../buttons/PopUpCloseButton";
 import DateCalendar from "../Calendar";
-import CustonCheckedBox from "../CustonCheckedBox";
+import CategoryInputSelect from "../CategoryInputSelect";
+import ErrorMessage from "../ErrorMessage";
 import InputComponent from "../Input";
+import WeekDaysCheckBox from "../WeekDaysCheckBox";
 import * as S from "./styles";
 
-interface IWeekDay {
-  id: number;
-  name: string;
-  checked: boolean;
-  shortName: string;
-}
-const weekDaysOptions: IWeekDay[] = [
-  {
-    id: 0,
-    name: "Sunday",
-    checked: true,
-    shortName: "D",
-  },
-  {
-    id: 1,
-    name: "Monday",
-    checked: false,
-    shortName: "S",
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    checked: false,
-    shortName: "T",
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    checked: false,
-    shortName: "Q",
-  },
-  {
-    id: 4,
-    name: "Thursday",
-    checked: false,
-    shortName: "Q",
-  },
-  {
-    id: 5,
-    name: "Friday",
-    checked: false,
-    shortName: "S",
-  },
-  {
-    id: 6,
-    name: "Saturday",
-    checked: false,
-    shortName: "S",
-  },
-];
+type IFormData = Partial<Task>;
+
+// interface CustomFormEvent extends React.FormEvent {
+//   submitter: {
+//     name: string;
+//   };
+// }
 
 export default function FormTask() {
   const [isWeekFrequencyOpen, setIWeekFrequencyOpen] = useState(false);
-  const [weekDays, setWeekDays] = useState<IWeekDay[]>(weekDaysOptions);
-  const { formTypeTask, setFormTaskOpen, formTypeAndDescTask } = useContext(TasksContext);
+  const [weekDays, setWeekDays] = useState<DaysOfWeek[]>([]);
+  const { formTypeTask, setFormTaskOpen, formTypeAndDescTask, tempTask } = useContext(TasksContext);
+  const [finallyDate, setFinallyDate] = useState<Dayjs | null>(null);
+  const [categorySelected, setCategorySelected] = useState<string>("");
 
-  const handleWeekDays = (id: number, checked: boolean) => {
-    const newWeekDaysOptions: IWeekDay[] = weekDays.map((weekDay) => {
-      if (weekDay.id === id) {
-        return { ...weekDay, checked };
-      }
-      return weekDay;
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({
+    defaultValues: {
+      ...tempTask,
+      date: tempTask?.date as unknown as Date,
+    },
+  });
 
-    setWeekDays(newWeekDaysOptions);
+  const handleSubmitFormTask: SubmitHandler<IFormData> = async (data) => {
+    // const buttonSubmited = (event!.nativeEvent as CustomFormEvent).submitter.name;
+
+    const finallyDateTemp = dateFormat(dayjs(finallyDate).format("YYYY-MM-DD"));
+    data.finallyDate = (finallyDateTemp as unknown as string).match("/^[^a-zA-Z]*$/")
+      ? (finallyDateTemp as unknown as Date)
+      : undefined;
+    data.weekDays = weekDays;
+    data.category = categorySelected;
+
+    // switch (buttonSubmited) {
+    //   case "addTask":
+    //     setIsConfirmActionOpen(true);
+    //     setCrudTasksOptions("addTask");
+    //     setDataTask(data);
+
+    //     break;
+
+    //   case "duplicateTask":
+    //     setIsConfirmActionOpen(true);
+    //     setCrudTasksOptions("duplicateTask");
+    //     setDataTask(data);
+
+    //     break;
+
+    //   case "editTask":
+    //     setIsConfirmActionOpen(true);
+    //     setCrudTasksOptions("editTask");
+    //     setDataTask(data);
+
+    //     break;
+    //   case "deleteTask":
+    //     setIsConfirmActionOpen(true);
+    //     setCrudTasksOptions("deleteTask");
+    //     setDataTask(data);
+
+    //     break;
+    // }
   };
 
   const { type, description } = formTypeAndDescTask.find((task) => task.type === formTypeTask) || {};
 
   return (
-    <S.Form>
+    <S.Form onSubmit={handleSubmit(handleSubmitFormTask)}>
       <PopUpCloseButton setIsTaskOpen={() => setFormTaskOpen(false)} />
       <S.Title>
-        Adicionar {type}
+        {tempTask ? "Editar" : "Adicionar"} {type}
         <span>
           <img src={infoIcon} alt="icone de exclamação" />
           <S.Description>{description}</S.Description>
         </span>
       </S.Title>
 
-      <InputComponent label="Titulo" placeholder="Nome do Hábito" />
+      <InputComponent
+        label="Titulo"
+        placeholder="Nome do Hábito"
+        id="name"
+        hasError={!!errors.name}
+        register={register("name", {
+          required: "campo obrigatório",
+          maxLength: {
+            value: 50,
+            message: "Quantidade de caracteres máximo, 50!",
+          },
+        })}
+        errorMessage={errors.name && errors.name.message}
+      />
 
       <S.ContainerDateTime>
-        <InputComponent label="Data" type="date" />
-        <InputComponent label="Hora" type="time" />
+        <InputComponent
+          type="date"
+          id="date"
+          label="Data"
+          hasError={!!errors.date}
+          errorMessage={errors.date?.message}
+          register={register("date", {
+            required: "campo data é obrigatório",
+            setValueAs: (value) => dayjs(value).format("YYYY-MM-DD"),
+            validate: (value) => {
+              return pastDate(value!);
+            },
+          })}
+        ></InputComponent>
+        <InputComponent
+          label="Hora"
+          type="time"
+          id="hour"
+          errorMessage={errors.hour?.message}
+          hasError={!!errors.hour}
+          register={register("hour", { required: "Campo Hora é obrigatório" })}
+        />
       </S.ContainerDateTime>
 
-      <InputComponent label="Categoria" placeholder="Categoria" />
-      <InputComponent label="Descrição" placeholder="Descrição" />
+      <CategoryInputSelect
+        setReturnValue={setCategorySelected}
+        register={register("category", { required: "Campo categoria é obrigatório" })}
+        error={!!errors.category}
+        messageError={errors.category?.message}
+      />
+      <InputComponent
+        label="Descrição"
+        placeholder="Descrição"
+        as="textarea"
+        type="text"
+        id="description"
+        hasError={!!errors.description}
+        register={register("description", {
+          required: "campo obrigatório",
+          maxLength: {
+            value: 1000,
+            message: "Quantidade máxima de caracteres, 1000!",
+          },
+        })}
+        errorMessage={errors.description && errors.description.message}
+      />
 
       <S.ContainerOpenWeekFrequency>
         <p>Frequencia semanal</p>
@@ -110,36 +170,44 @@ export default function FormTask() {
       {isWeekFrequencyOpen && (
         <>
           <S.QuantityPerWeekParagraph>
-            Quantidade <InputComponent placeholder="0" /> Semana
+            Quantidade{" "}
+            <InputComponent
+              placeholder="0"
+              id="quantityPerWeek"
+              type="text"
+              register={register("quantityPerWeek", {
+                validate: (value) => {
+                  if (value) {
+                    console.log(typeof Number(value) === "number" && Number(value) > 0);
+                    return typeof Number(value) === "number" && Number(value) > 0;
+                  }
+                  return true;
+                },
+              })}
+            />
+            Semana
           </S.QuantityPerWeekParagraph>
+          {errors.quantityPerWeek && <ErrorMessage>Apenas numeros positivos</ErrorMessage>}
 
           <div>
             <p>Dias da semana</p>
-            <S.ContainerSelectWeekDays>
-              {weekDays.map((day) => (
-                <S.ContainerCustonCheckedBox key={day.id} checked={day.checked}>
-                  <CustonCheckedBox
-                    id={day.id}
-                    text={day.shortName}
-                    setValue={handleWeekDays}
-                    checked={day.checked}
-                    name={day.name}
-                  />
-                </S.ContainerCustonCheckedBox>
-              ))}
-            </S.ContainerSelectWeekDays>
+            <WeekDaysCheckBox setWeekDays={setWeekDays} />
           </div>
 
           <S.ContainerCalendar>
             <p>Finaliza em:</p>
-            <DateCalendar version="compact" />
+            <DateCalendar version="compact" setReturnDateValue={setFinallyDate} />
           </S.ContainerCalendar>
         </>
       )}
 
       <S.ContainerButtons>
-        <ButtonDanger>Excluir</ButtonDanger>
-        <S.DuplicateButton>Duplicar</S.DuplicateButton>
+        {!tempTask && (
+          <>
+            <ButtonDanger>Excluir</ButtonDanger>
+            <S.DuplicateButton>Duplicar</S.DuplicateButton>
+          </>
+        )}
         <ButtonPrincipal>Salvar alterações</ButtonPrincipal>
       </S.ContainerButtons>
     </S.Form>

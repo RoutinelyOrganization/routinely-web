@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { CustonCheckedBox as CheckBox } from "../CustonCheckedBox/styles";
-import { InputContainer, InputStyle } from "../Input/styles";
 import { Button as PopUpCloseButton } from "../buttons/PopUpCloseButton/styles";
+import { CustonCheckedBox as CheckBox } from "../CustonCheckedBox/styles";
+import { ErrorMessage } from "../ErrorMessage/styles";
+import { InputContainer, InputStyle } from "../Input/styles";
 
 interface ICustonCheckedBox {
   checked: boolean;
@@ -10,7 +11,7 @@ interface ICustonCheckedBox {
 export const Form = styled.form`
   position: relative;
   margin: 16px 0;
-  max-width: 500px;
+  max-width: 520px;
   width: 100%;
   max-height: 100vh;
   overflow-y: auto;
@@ -97,11 +98,15 @@ export const QuantityPerWeekParagraph = styled.p`
       }
     }
   }
+  ~ ${ErrorMessage} {
+    margin-top: -15px;
+  }
 `;
 
 export const ContainerCalendar = styled.div`
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 40% 60%;
+  /* max-height: 200px; */
 `;
 
 export const ContainerSelectWeekDays = styled.div`
@@ -147,4 +152,9 @@ export const ContainerCustonCheckedBox = styled.div<ICustonCheckedBox>`
 export const ContainerButtons = styled.div`
   display: flex;
   gap: 8px;
+  justify-content: end;
+
+  > button {
+    max-width: 150px;
+  }
 `;

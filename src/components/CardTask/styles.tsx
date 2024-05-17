@@ -23,7 +23,7 @@ const options: IOptionsStyles = {
   },
   project: {
     color: "#747400",
-    bgcolor: "#FFFFEB",
+    bgcolor: "#FFFFC9",
   },
   task: {
     color: "#115D9E",
@@ -45,10 +45,13 @@ export const Title = styled.h2`
 export const ContainerDescription = styled.div`
   max-width: 100%;
   width: 100%;
-  display: grid;
-  grid-template-columns: 87% 10%;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 16px 0;
+
+  &:last-child {
+  }
 
   > p {
     max-width: 100%;
@@ -71,6 +74,7 @@ export const Container = styled.div<ICardTaskStyles>`
   padding: 8px;
   position: relative;
   z-index: 1;
+  border: 1px solid ${({ category }) => options[category].color};
 
   ${Title} {
     color: ${({ category }) => options[category].color};

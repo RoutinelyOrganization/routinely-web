@@ -12,6 +12,7 @@ dayjs.locale("pt-br");
 
 interface ICalendar {
   version?: "expanded" | "compact";
+  setReturnDateValue?: React.Dispatch<React.SetStateAction<Dayjs | null>>;
 }
 
 const customDayOfWeekFormatter = (day: string) => {
@@ -28,7 +29,7 @@ const customDayOfWeekFormatter = (day: string) => {
   return daysMap[day];
 };
 
-export default function DateCalendar({ version = "expanded" }: ICalendar) {
+export default function DateCalendar({ version = "expanded", setReturnDateValue }: ICalendar) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const { setDate } = useContext(CalendarContext);
   const [valueDate, setValueDate] = useState<Dayjs>(dayjs());
@@ -36,6 +37,7 @@ export default function DateCalendar({ version = "expanded" }: ICalendar) {
   const handleChangeDate = (selectedValue: Dayjs) => {
     version === "expanded" && setDate(selectedValue);
     setValueDate(selectedValue);
+    setReturnDateValue && setReturnDateValue(selectedValue);
   };
 
   return (
@@ -52,6 +54,7 @@ export default function DateCalendar({ version = "expanded" }: ICalendar) {
               value={valueDate}
               views={["day", "month", "year"]}
               dayOfWeekFormatter={customDayOfWeekFormatter}
+              disablePast
             />
           </SComponents.MobileChangeDisplay>
         </SCalendar.CustomDemoItem>

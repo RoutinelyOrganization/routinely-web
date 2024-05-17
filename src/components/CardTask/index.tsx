@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { TasksContext } from "../../contexts/TasksContext";
+import { Task } from "../../types/task";
 import ButtonEdit from "../buttons/ButtonEdit";
 import CustonCheckedBox from "../CustonCheckedBox";
 import * as S from "./styles";
@@ -16,13 +17,10 @@ interface IOptionsProps {
 }
 
 interface ICardTask {
-  category: "habit" | "project" | "task";
-  titleTask: string;
-  checked: boolean;
-  idTask: number;
+  task: Task;
 }
 
-export default function CardTask({ category, titleTask, idTask, checked }: ICardTask) {
+export default function CardTask({ task }: ICardTask) {
   const options: IOptionsProps = {
     habit: {
       title: "Hábitos",
@@ -38,31 +36,27 @@ export default function CardTask({ category, titleTask, idTask, checked }: ICard
     },
   };
 
-  const [isChecked, setChecked] = useState<boolean>(checked);
+  const { id, name, type, checked } = task;
 
-  const { icon, title } = options[category];
-  const descrptionFormated = titleTask.length > 91 ? titleTask.slice(0, 90) + "..." : titleTask;
+  const [isChecked, setChecked] = useState<boolean>(checked);
+  const { icon, title } = options[type];
+  const descrptionFormated = name.length > 91 ? name.slice(0, 90) + "..." : name;
 
   const { setFormTaskOpen, setTempTask } = useContext(TasksContext);
   const handleEditTask = () => {
-    setTempTask({
-      id: idTask,
-      name: titleTask,
-      type: category,
-      checked,
-    });
+    setTempTask({ ...task, checked: isChecked });
 
     setFormTaskOpen(true);
   };
   return (
-    <S.Container category={category} checked={isChecked}>
+    <S.Container category={type} checked={isChecked}>
       <S.Title>
         <i>{icon}</i>
         {title}
       </S.Title>
       <S.ContainerDescription>
         <p>{descrptionFormated}</p>
-        <CustonCheckedBox checked={isChecked} id={idTask} setChecked={setChecked} />
+        <CustonCheckedBox checked={isChecked} id={id} setChecked={setChecked} />
       </S.ContainerDescription>
       <S.ContainerBtnIcon>
         <S.Button>Carreira</S.Button>

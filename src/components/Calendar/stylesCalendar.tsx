@@ -52,8 +52,6 @@ const StyledDemoItemWrapper = styled("div")({
   backgroundColor: "#F6F7F8",
   maxWidth: "450px",
   width: "100%",
-  // border: "2px solid #5C59BB",
-  // borderRadius: "8px",
 
   "> p": {
     color: "#5C59BB",

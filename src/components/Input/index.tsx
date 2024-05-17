@@ -13,7 +13,10 @@ interface IInput {
   errorMessage?: string;
   autoComplete?: string;
   as?: React.ElementType;
-  value?: string;
+  value?: Date | string;
+  defaultValue?: Date | string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function InputComponent({
@@ -28,6 +31,9 @@ export default function InputComponent({
   autoComplete,
   as,
   value,
+  defaultValue,
+  onChange,
+  onFocus,
 }: IInput) {
   return (
     <>
@@ -41,14 +47,17 @@ export default function InputComponent({
           id={id}
           autoComplete={autoComplete}
           value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          onFocus={onFocus}
         />
         <S.LabelInput $hasErro={hasError}>
           <S.BorderWhite></S.BorderWhite>
           <S.Label htmlFor={id}>{label}</S.Label>
         </S.LabelInput>
         {children}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </S.InputContainer>
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </>
   );
 }

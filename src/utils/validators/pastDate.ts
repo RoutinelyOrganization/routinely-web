@@ -1,4 +1,5 @@
-export function pastDate(date: Date) {
+export function pastDate(date: Date | string) {
+  
   const dateFormatted = new Date(date);
   const today = new Date();
   

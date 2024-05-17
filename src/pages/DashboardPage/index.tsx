@@ -14,6 +14,7 @@ import ConfirmAction, { AddTaskProps, DeleteTaskProps, EditTaskProps } from "../
 import { CalendarProvider } from "../../contexts/CalendarContext";
 import { TasksContext } from "../../contexts/TasksContext";
 import { UseCRUD } from "../../hooks/useCrud";
+import { tasks } from "../../mocks/task";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 
 export interface Itasks {
@@ -132,7 +133,7 @@ export default function DashboardPage() {
               {selectTypeTaskOpen && <TypeTask />}
             </S.ContainerNewTask>
           </S.ContainerCalendar>
-          <Task />
+          <Task tasks={tasks} />
           {/* <S.ContainerCalendar>
               <DateCalendar />
               <img className="desktop" src={ImageCompleteTask} alt="imagem da pagina complete Task" />
