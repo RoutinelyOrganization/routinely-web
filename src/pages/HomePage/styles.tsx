@@ -32,7 +32,7 @@ export const ContainerButtonsHeader = styled.div`
   display: flex;
   align-items: center;
   max-width: 800px;
-  width: 100%;
+  width: min(100%, 160px);
   justify-content: space-between;
 
   ${Container} {
@@ -48,7 +48,7 @@ export const ContainerButtonsHeader = styled.div`
 
   ${media.desktop} {
     max-width: 408px;
-    width: 70%;
+    width: min(100%, 120px);
     gap: 24px;
   }
 
