@@ -52,7 +52,6 @@ export default function HomePage() {
               Simplifique sua vida, alcance seus objetivos e encontre equilíbrio com nossa ferramenta de organização de
               rotina pessoal.
             </S.Caption>
-            <S.Button>Teste de graça</S.Button>
           </div>
           <img className="desktop" src={homePageBanner} alt="imagem inicial da home page" />
           <img className="tablet-horizontal" src={completedTasks} alt="tarefas concluídas" />
