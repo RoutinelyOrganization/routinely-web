@@ -3,6 +3,7 @@ import { Wrapper } from "../../components/MenuHeader/styles";
 import { Button as ButtonStyle } from "../../components/buttons/ButtonPrincipal/styles";
 import { Container } from "../../components/containers/ContainerIcons/styles";
 import media from "../../utils/functions/mediaQueries";
+import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
 
 export const Header = styled.header`
   display: flex;
@@ -25,6 +26,22 @@ export const Header = styled.header`
     & ${ButtonStyle} {
       margin-right: 8px;
     }
+  }
+`;
+
+export const HomeButton = styled(ButtonPrincipal)`
+  width: min(100%, 160px);
+
+  ${media.desktop} {
+    width: min(100%, 120px);
+  }
+
+  ${media.tablet} {
+    width: min(100%, 82px);
+  }
+
+  ${media.mobile} {
+    background: none;
   }
 `;
 
@@ -64,6 +81,10 @@ export const ContainerButtonsHeader = styled.div`
     & .resources,
     & .plans {
       display: none;
+    }
+
+    ${"ButtonPrincipal"} {
+      background-color: crimson;
     }
   }
 `;

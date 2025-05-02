@@ -1,45 +1,23 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import completedTasks from "../../assets/imagens/homePage/completed_tasks.svg";
 import completedTasksLitlle from "../../assets/imagens/homePage/completed_tasks_menor.svg";
 import homePageBanner from "../../assets/imagens/homePage/homePageBanner.svg";
 import Logo from "../../components/Logo";
-import MenuHeader from "../../components/MenuHeader";
 import ButtonDownloadApp from "../../components/buttons/ButtonApp";
-import ButtonPrincipal from "../../components/buttons/ButtonPrincipal";
-import ContainerIcons from "../../components/containers/ContainerIcons";
 import { ScrollToTop } from "../../utils/ScrollToTop";
 import * as S from "./styles";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-
-  const menuItems = [
-    {
-      name: "Recursos",
-      url: "#",
-      id: 1,
-    },
-    {
-      name: "Planos",
-      url: "#",
-      id: 2,
-    },
-  ];
 
   return (
     <>
       <ScrollToTop />
       <S.Header>
         <Logo />
-        <S.ContainerButtonsHeader>
-          <ButtonPrincipal secondaryColor={true} onClick={() => navigate("/welcomePage")}>
+          <S.HomeButton secondaryColor={true} onClick={() => navigate("/welcomePage")}>
             Acesse
-          </ButtonPrincipal>
-          <ContainerIcons setIsShowMenu={setIsOpenMenu} />
-          {isOpenMenu && <MenuHeader setIsShowMenu={setIsOpenMenu} menuItems={menuItems} />}
-        </S.ContainerButtonsHeader>
+          </S.HomeButton>
       </S.Header>
 
       <S.Main>
