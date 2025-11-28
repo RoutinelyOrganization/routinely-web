@@ -56,23 +56,30 @@ export const InputStyle = styled.input<InputProps>`
   color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#333333")};
   resize: none;
 
+  &:focus {
+    border: 1px solid ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#5c59bb")};
+  }
+
   &:focus ~ ${LabelInput} {
     top: -15px;
     font-size: 0.85rem;
     background-color: transparent;
     padding: 0.2rem;
     transition: all 0.4s ease;
+    color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#5c59bb")} !important;
   }
 
   &::placeholder {
     color: transparent;
   }
+
   &:not(:placeholder-shown) ~ ${LabelInput} {
     top: -15px;
     font-size: 0.85rem;
     padding: 0.2rem;
     color: ${({ $hasErro }) => ($hasErro ? "#B3261b" : "#333333")};
   }
+
   &::-ms-reveal,
   ::-ms-clear {
     display: none;
